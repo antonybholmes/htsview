@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+	<!-- How many pixels to skip during dragging to minimize refreshes -->
+	<setting name="sequencing.tracks.mouse.drag.x-gap" value="20" />
+</settings>
