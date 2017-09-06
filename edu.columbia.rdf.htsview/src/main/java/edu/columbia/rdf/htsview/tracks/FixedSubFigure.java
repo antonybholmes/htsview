@@ -18,7 +18,7 @@ package edu.columbia.rdf.htsview.tracks;
 import java.awt.Color;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import org.jebtk.graphplot.figure.Axes2D;
+import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.PlotStyle;
 
 // TODO: Auto-generated Javadoc
@@ -54,8 +54,8 @@ public abstract class FixedSubFigure extends TrackSubFigure {
 				fillColor,
 				style);
 		
-		Axes2D.disableAllFeatures(getCurrentAxes());
+		Axes.disableAllFeatures(currentAxes());
 		
-		getCurrentAxes().getTitle().getFontStyle().setVisible(true);
+		currentAxes().getTitle().getFontStyle().setVisible(true);
 	}
 }

@@ -16,16 +16,13 @@
 package edu.columbia.rdf.htsview.tracks.ext.ucsc;
 
 import java.awt.Color;
-import java.util.List;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.Axes;
-import org.jebtk.graphplot.figure.GridLocation;
-import org.jebtk.graphplot.figure.LayerType;
-import org.jebtk.graphplot.figure.MovableLayer;
 import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.graphplot.figure.series.XYSeries;
+import org.jebtk.graphplot.plotbox.PlotBox;
 
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.Track;
@@ -61,17 +58,18 @@ public class BedGraphSubFigure extends TrackSubFigure {
 			TitleProperties titlePosition) {
 		BedGraphSubFigure subFigure = new BedGraphSubFigure();
 
-		Axes axes = subFigure.getCurrentAxes();
+		Axes axes = subFigure.currentAxes();
 		
 		Plot plot = new BedGraphPlot("BedGraph Plot 1"); //axes.getCurrentPlot();
 		
 		plot.getAllSeries().add(XYSeries.createXYSeries("Points", Color.BLACK));
 		plot.getAllSeries().getCurrent().getMarker().setVisible(false);
 		plot.setStyle(style);
-		axes.addPlot(plot);
-		
-		Track.setTitle(name, titlePosition, axes);
 
+		axes.addChild(plot);
+
+		Track.setTitle(name, titlePosition, axes);
+		
 		return subFigure;
 	}
 	
@@ -122,7 +120,7 @@ public class BedGraphSubFigure extends TrackSubFigure {
 			styleNotSet = false;
 		}
 		
-		getCurrentAxes().getX1Axis().startEndTicksOnly();
+		currentAxes().getX1Axis().startEndTicksOnly();
 		
 		//System.err.println("regions " + start + " " + end + " " + getCurrentAxes().toPlotX(end));
 		
@@ -132,13 +130,10 @@ public class BedGraphSubFigure extends TrackSubFigure {
 
 		// Create a series for each bedgraph in the group
 		
-		List<MovableLayer> layers = getCurrentAxes()
-				.getPlotZModel()
-				.get(GridLocation.CENTER)
-				.getByType(LayerType.PLOT);
+		Iterable<Plot> layers = currentAxes().getPlots();
 		
 		
-		for (MovableLayer layer : layers) {
+		for (PlotBox layer : layers) {
 			if (layer instanceof BedGraphPlot) {
 				BedGraphPlot p = (BedGraphPlot)layer;
 				

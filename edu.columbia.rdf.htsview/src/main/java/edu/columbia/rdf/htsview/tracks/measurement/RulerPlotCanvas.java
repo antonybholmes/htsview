@@ -49,12 +49,12 @@ public class RulerPlotCanvas extends MeasurementSubFigure {
 	public RulerPlotCanvas(TitleProperties titlePosition) {
 		mLayer = new RulerCanvasLayer();
 		
-		getCurrentAxes().getX1Axis().getTitle().setVisible(false);
-		getCurrentAxes().getY1Axis().setLimits(0, 1);
+		currentAxes().getX1Axis().getTitle().setVisible(false);
+		currentAxes().getY1Axis().setLimits(0, 1);
 		
-		getCurrentAxes().putZ(mLayer);
+		currentAxes().putZ(mLayer);
 		
-		Track.setTitle("Ruler", titlePosition, getCurrentAxes());
+		Track.setTitle("Ruler", titlePosition, currentAxes());
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class RulerPlotCanvas extends MeasurementSubFigure {
 
 		RulerPlotCanvas canvas = new RulerPlotCanvas(titlePosition);
 
-		Axes axes = canvas.getCurrentAxes();
+		Axes axes = canvas.currentAxes();
 		
 		// set the graph limits
 		axes.getX1Axis().getTitle().setVisible(false);
@@ -79,7 +79,7 @@ public class RulerPlotCanvas extends MeasurementSubFigure {
 		axes.getY1Axis().getTitle().setVisible(false);
 		axes.getY1Axis().startEndTicksOnly();
 
-		axes.setInternalPlotSize(Track.MEDIUM_TRACK_SIZE);
+		axes.setInternalSize(Track.MEDIUM_TRACK_SIZE);
 		//canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
 
 		

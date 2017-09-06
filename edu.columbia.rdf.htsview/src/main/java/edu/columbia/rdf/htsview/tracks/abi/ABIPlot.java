@@ -16,15 +16,11 @@
 package edu.columbia.rdf.htsview.tracks.abi;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.graphplot.figure.PlotStyle;
-import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.series.XYSeries;
-import org.jebtk.modern.graphics.DrawingContext;
 
 import edu.columbia.rdf.htsview.ext.abi.ABITrace;
 
@@ -113,16 +109,5 @@ public class ABIPlot extends Plot {
 		//series.addRegex("y");
 		
 		setMatrix(new ABIMatrix(mTrace, mBase, displayRegion));
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.graphplot.figure.Plot#plot(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
-	 */
-	@Override
-	public void plot(Graphics2D g2, 
-			DrawingContext context,
-			SubFigure figure, 
-			Axes axes) {
-		aaPlot(g2, context, figure, axes);
 	}
 }

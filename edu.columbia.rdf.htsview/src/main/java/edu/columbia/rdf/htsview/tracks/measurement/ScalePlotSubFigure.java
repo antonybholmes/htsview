@@ -45,9 +45,9 @@ public class ScalePlotSubFigure extends MeasurementSubFigure {
 	public ScalePlotSubFigure(TitleProperties titlePosition) {
 		mLayer = new ScaleCanvasLayer();
 		
-		getCurrentAxes().putZ(mLayer);
+		currentAxes().putZ(mLayer);
 
-		Track.setTitle(ScalePlotTrack.TITLE, titlePosition, getCurrentAxes());
+		Track.setTitle(ScalePlotTrack.TITLE, titlePosition, currentAxes());
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class ScalePlotSubFigure extends MeasurementSubFigure {
 
 		ScalePlotSubFigure canvas = new ScalePlotSubFigure(titlePosition);
 
-		Axes axes = canvas.getCurrentAxes();
+		Axes axes = canvas.currentAxes();
 		
 		// set the graph limits
 		axes.getX1Axis().getTitle().setVisible(false);
@@ -72,7 +72,7 @@ public class ScalePlotSubFigure extends MeasurementSubFigure {
 		axes.getY1Axis().getTitle().setVisible(false);
 		axes.getY1Axis().startEndTicksOnly();
 
-		axes.setInternalPlotSize(Track.MEDIUM_TRACK_SIZE);
+		axes.setInternalSize(Track.MEDIUM_TRACK_SIZE);
 		//canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
 
 		

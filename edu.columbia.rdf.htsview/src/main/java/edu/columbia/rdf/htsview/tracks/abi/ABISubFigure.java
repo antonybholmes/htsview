@@ -22,10 +22,10 @@ import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.GridLocation;
 import org.jebtk.graphplot.figure.LayerType;
-import org.jebtk.graphplot.figure.MovableLayer;
 import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.graphplot.figure.series.XYSeries;
+import org.jebtk.graphplot.plotbox.PlotBox;
 
 import edu.columbia.rdf.htsview.ext.abi.ABITrace;
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
@@ -64,7 +64,7 @@ public class ABISubFigure extends TrackSubFigure {
 			TitleProperties titlePosition) {
 		ABISubFigure subFigure = new ABISubFigure();
 
-		Axes axes = subFigure.getCurrentAxes();
+		Axes axes = subFigure.currentAxes();
 
 		for (char base : ABITrace.BASES) {
 			Color color;
@@ -89,7 +89,7 @@ public class ABISubFigure extends TrackSubFigure {
 			plot.getAllSeries().add(XYSeries.createXYSeries("Points", Color.BLACK));
 			plot.getAllSeries().getCurrent().getMarker().setVisible(false);
 			plot.setStyle(style);
-			axes.addPlot(plot);
+			axes.addChild(plot);
 		}
 
 
@@ -145,7 +145,7 @@ public class ABISubFigure extends TrackSubFigure {
 			styleNotSet = false;
 		}
 
-		getCurrentAxes().getX1Axis().startEndTicksOnly();
+		currentAxes().getX1Axis().startEndTicksOnly();
 
 		//System.err.println("regions " + start + " " + end + " " + getCurrentAxes().toPlotX(end));
 
@@ -155,13 +155,12 @@ public class ABISubFigure extends TrackSubFigure {
 
 		// Create a series for each bedgraph in the group
 
-		List<MovableLayer> layers = getCurrentAxes()
-				.getPlotZModel()
-				.get(GridLocation.CENTER)
+		List<PlotBox> layers = currentAxes()
+				.getChild(GridLocation.CENTER)
 				.getByType(LayerType.PLOT);
 
 
-		for (MovableLayer layer : layers) {
+		for (PlotBox layer : layers) {
 			if (layer instanceof ABIPlot) {
 				ABIPlot p = (ABIPlot)layer;
 

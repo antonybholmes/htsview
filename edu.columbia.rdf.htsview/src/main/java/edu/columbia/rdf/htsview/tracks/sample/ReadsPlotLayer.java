@@ -26,8 +26,11 @@ import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.collections.ListMultiMap;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.AxesClippedLayer;
+import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.modern.graphics.DrawingContext;
+
+import edu.columbia.rdf.htsview.tracks.measurement.ScalePlotTrack;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -120,7 +123,12 @@ public class ReadsPlotLayer extends AxesClippedLayer {
 	 * @param readLength the read length
 	 */
 	public ReadsPlotLayer(int readLength) {
-		super("Regions");
+		
+	}
+	
+	@Override
+	public String getType() {
+		return "Reads Layer";
 	}
 
 	/**
@@ -164,16 +172,17 @@ public class ReadsPlotLayer extends AxesClippedLayer {
 		mReadHeight = readHeight;
 		mBlockHeight = readHeight + gap;
 
-		fireCanvasRedraw();
+		fireChanged();
 	}
 
 	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.lib.bioinformatics.plot.figure.AxesClippedLayer#plotClipped(java.awt.Graphics2D, org.abh.common.ui.ui.graphics.DrawingContext, edu.columbia.rdf.lib.bioinformatics.plot.figure.SubFigure, edu.columbia.rdf.lib.bioinformatics.plot.figure.Axes)
+	 * @see edu.columbia.rdf.lib.bioinformatics.plot.figure.AxesClippedLayer#plotLayer(java.awt.Graphics2D, org.abh.common.ui.ui.graphics.DrawingContext, edu.columbia.rdf.lib.bioinformatics.plot.figure.SubFigure, edu.columbia.rdf.lib.bioinformatics.plot.figure.Axes)
 	 */
 	@Override
-	public void plotClipped(Graphics2D g2, 
+	public void plotLayer(Graphics2D g2, 
 			DrawingContext context, 
-			SubFigure figure, 
+			Figure figure, 
+			SubFigure subFigure, 
 			Axes axes) {
 
 		if (CollectionUtils.isNullOrEmpty(mStarts)) {

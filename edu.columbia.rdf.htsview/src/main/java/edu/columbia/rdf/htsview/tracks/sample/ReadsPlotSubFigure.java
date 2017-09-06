@@ -22,7 +22,7 @@ import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.Strand;
 import org.jebtk.core.collections.ArrayListMultiMap;
 import org.jebtk.core.collections.ListMultiMap;
-import org.jebtk.graphplot.figure.Axes2D;
+import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.PlotStyle;
 
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
@@ -75,11 +75,11 @@ public class ReadsPlotSubFigure extends TrackSubFigure {
 		mLayer = new ReadsPlotLayer(readLength);
 
 		// set the graph limits
-		getCurrentAxes().getX1Axis().getTitle().setText(null);
-		getCurrentAxes().getY1Axis().setLimits(0, 1);
-		getCurrentAxes().putZ(mLayer);
+		currentAxes().getX1Axis().getTitle().setText(null);
+		currentAxes().getY1Axis().setLimits(0, 1);
+		currentAxes().putZ(mLayer);
 
-		Track.setTitle(name, titlePosition, getCurrentAxes());
+		Track.setTitle(name, titlePosition, currentAxes());
 	}
 
 	/**
@@ -132,10 +132,10 @@ public class ReadsPlotSubFigure extends TrackSubFigure {
 				style);
 
 
-		Axes2D.disableAllFeatures(getCurrentAxes());
+		Axes.disableAllFeatures(currentAxes());
 
 		// Need to make the title visible
-		getCurrentAxes().getTitle().getFontStyle().setVisible(true);
+		currentAxes().getTitle().getFontStyle().setVisible(true);
 	}
 
 	/**
@@ -179,8 +179,8 @@ public class ReadsPlotSubFigure extends TrackSubFigure {
 				continue;
 			}
 
-			int x1 = getCurrentAxes().toPlotX1(start);
-			int x2 = getCurrentAxes().toPlotX1(start + mReadLength);
+			int x1 = currentAxes().toPlotX1(start);
+			int x2 = currentAxes().toPlotX1(start + mReadLength);
 
 			if (w == -1) {
 				w = Math.max(1, x2 - x1);
@@ -232,6 +232,6 @@ public class ReadsPlotSubFigure extends TrackSubFigure {
 		
 		int height = (readHeight + gap) * (1 + mStrandMap.size());
 
-		getCurrentAxes().setInternalPlotHeight(height);
+		currentAxes().setInternalHeight(height);
 	}
 }

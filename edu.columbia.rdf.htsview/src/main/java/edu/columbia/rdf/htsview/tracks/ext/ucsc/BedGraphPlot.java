@@ -24,6 +24,7 @@ import org.jebtk.bioinformatics.ext.ucsc.UCSCTrackRegion;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrackRegions;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.Axes;
+import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.graphplot.figure.SubFigure;
@@ -118,13 +119,13 @@ public class BedGraphPlot extends Plot {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.graphplot.figure.Plot#plot(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
-	 */
 	@Override
-	public void plot(Graphics2D g2, 
+	public void drawPlot(Graphics2D g2, 
 			DrawingContext context,
-			SubFigure figure, 
+			Figure figure, 
+			SubFigure subFigure, 
 			Axes axes) {
-		aaPlot(g2, context, figure, axes);
+		aaPlot(g2, context, figure, subFigure, axes);
 	}
+	*/
 }

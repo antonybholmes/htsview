@@ -49,7 +49,7 @@ public class RangePlotCanvas extends MeasurementSubFigure {
 	public RangePlotCanvas(TitleProperties titlePosition) {
 		mLayer = new RangeCanvasLayer();
 		
-		getCurrentAxes().putZ(mLayer);
+		currentAxes().putZ(mLayer);
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class RangePlotCanvas extends MeasurementSubFigure {
 
 		RangePlotCanvas canvas = new RangePlotCanvas(titlePosition);
 
-		Axes axes = canvas.getCurrentAxes();
+		Axes axes = canvas.currentAxes();
 		
 		// set the graph limits
 		axes.getX1Axis().getTitle().setVisible(false);
@@ -74,7 +74,7 @@ public class RangePlotCanvas extends MeasurementSubFigure {
 		axes.getY1Axis().getTitle().setVisible(false);
 		axes.getY1Axis().startEndTicksOnly();
 
-		axes.setInternalPlotSize(Track.MEDIUM_TRACK_SIZE);
+		axes.setInternalSize(Track.MEDIUM_TRACK_SIZE);
 		//canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
 
 		

@@ -22,10 +22,11 @@ import java.text.ParseException;
 
 import javax.swing.Box;
 
+import org.jebtk.bioinformatics.ui.external.samtools.BamGuiFileFilter;
+import org.jebtk.core.Mathematics;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.json.JsonParser;
 import org.jebtk.core.settings.SettingsService;
-import org.jebtk.bioinformatics.ui.external.samtools.BamGuiFileFilter;
 import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.UIService;
@@ -51,13 +52,13 @@ import org.jebtk.modern.text.ModernTextBorderPanel;
 import org.jebtk.modern.text.ModernTextField;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
 import org.jebtk.modern.window.ModernWindow;
-import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dStyleButton;
 
 import edu.columbia.rdf.edb.Sample;
 import edu.columbia.rdf.htsview.chipseq.ChipSeqSamplesDialog;
 import edu.columbia.rdf.htsview.ngs.Brt2GuiFileFilter;
 import edu.columbia.rdf.htsview.ngs.BvtGuiFileFilter;
 import edu.columbia.rdf.htsview.tracks.SampleAssembly;
+import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dStyleButton;
 
 
 // TODO: Auto-generated Javadoc
@@ -175,7 +176,8 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
 		mInputAssembly = track.getInputAssembly();
 		
 		mHeightField.setValue(track.getHeight());
-		mMaxYField.setValue(Math.round(track.getYMax(track.getNormalizeY())));
+		
+		mMaxYField.setValue(Mathematics.dp(track.getYMax(track.getNormalizeY()), 2)); //Math.ceil(track.getYMax(track.getNormalizeY())));
 		
 		if (track.getCommonY()) {
 			mCheckCommonY.setSelected(true);

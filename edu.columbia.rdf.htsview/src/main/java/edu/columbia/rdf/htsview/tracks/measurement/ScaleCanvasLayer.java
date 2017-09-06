@@ -22,6 +22,7 @@ import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.Mathematics;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.AxesLayer;
+import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.widget.ModernWidget;
@@ -46,11 +47,10 @@ public class ScaleCanvasLayer extends AxesLayer {
 	/** The m gap. */
 	private int mGap;
 
-	/**
-	 * Instantiates a new scale canvas layer.
-	 */
-	public ScaleCanvasLayer() {
-		super(ScalePlotTrack.TITLE);
+
+	@Override
+	public String getType() {
+		return "Scale Layer";
 	}
 	
 	/**
@@ -66,20 +66,21 @@ public class ScaleCanvasLayer extends AxesLayer {
 	 * @see org.graphplot.figure.AxesLayer#plot(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
 	 */
 	@Override
-	public void plot(Graphics2D g2,
+	public void drawPlot(Graphics2D g2,
 			DrawingContext context,
-			SubFigure figure,
+			Figure figure, 
+			SubFigure subFigure, 
 			Axes axes) {
 		// Use the graph properties and subplot layout to
 		// create the graph space mapper
 
-		int h = axes.getInternalPlotSize().getH();
+		int h = axes.getInternalSize().getH();
 		
-		int y = axes.getInternalPlotSize().getH() / 2;
+		int y = axes.getInternalSize().getH() / 2;
 		
 		int w = axes.toPlotX1(axes.getX1Axis().getMin() + mGap) - axes.toPlotX1(axes.getX1Axis().getMin());
 		
-		int x1 = (axes.getInternalPlotSize().getW() - w) / 2;
+		int x1 = (axes.getInternalSize().getW() - w) / 2;
 		
 		int x2 = x1 + w;
 		

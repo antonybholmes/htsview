@@ -35,6 +35,7 @@ import org.jebtk.core.geom.IntRect;
 import org.jebtk.core.network.UrlUtils;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.AxesClippedLayer;
+import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.modern.UIService;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -46,6 +47,8 @@ import org.jebtk.modern.menu.ModernIconMenuItem;
 import org.jebtk.modern.menu.ModernMenuItem;
 import org.jebtk.modern.menu.ModernPopupMenu;
 import org.jebtk.modern.widget.ModernWidget;
+
+import edu.columbia.rdf.htsview.tracks.measurement.ScalePlotTrack;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -173,8 +176,6 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
 	 * @param color the color
 	 */
 	public BedPlotLayer(Color color) {
-		super("Regions");
-
 		mColor = color;
 		
 		//
@@ -191,7 +192,12 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
 		menuItem.addClickListener(this);
 		mMenu.add(menuItem);
 
-		addCanvasMouseListener(new CanvasEvents());
+		//addCanvasMouseListener(new CanvasEvents());
+	}
+	
+	@Override
+	public String getType() {
+		return "Regions Layer";
 	}
 
 	/**
@@ -212,12 +218,13 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
 	}
 
 	/* (non-Javadoc)
-	 * @see org.graphplot.figure.AxesClippedLayer#plotClipped(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
+	 * @see org.graphplot.figure.AxesClippedLayer#plotLayer(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
 	 */
 	@Override
-	public void plotClipped(Graphics2D g2, 
+	public void plotLayer(Graphics2D g2, 
 			DrawingContext context, 
-			SubFigure figure, 
+			Figure figure, 
+			SubFigure subFigure, 
 			Axes axes) {
 
 		if (CollectionUtils.isNullOrEmpty(mRegions)) {

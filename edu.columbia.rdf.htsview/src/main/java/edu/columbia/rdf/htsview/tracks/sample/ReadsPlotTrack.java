@@ -353,7 +353,7 @@ public class ReadsPlotTrack extends SamplePlotTrack {
 				mReadLength,
 				titlePosition);
 		
-		Axes axes = mSubFigure.getCurrentAxes();
+		Axes axes = mSubFigure.currentAxes();
 		
 		//axes.setInternalPlotSize(PLOT_SIZE);
 		

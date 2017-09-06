@@ -370,9 +370,9 @@ public class ABIPlotTrack extends GraphPlotTrack {
 				mStyle,
 				titlePosition);
 
-		Axes axes = mSubFigure.getCurrentAxes();
+		Axes axes = mSubFigure.currentAxes();
 
-		axes.setInternalPlotSize(PLOT_SIZE);
+		axes.setInternalSize(PLOT_SIZE);
 
 
 		int right;
@@ -425,7 +425,7 @@ public class ABIPlotTrack extends GraphPlotTrack {
 				mFillColor,
 				mStyle);
 		
-		mSubFigure.getCurrentAxes().getTitle().setText(mName);
+		mSubFigure.currentAxes().getTitle().setText(mName);
 
 		return mSubFigure;
 	}

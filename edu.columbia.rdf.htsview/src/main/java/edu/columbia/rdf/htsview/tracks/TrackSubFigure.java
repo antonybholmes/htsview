@@ -134,10 +134,12 @@ public abstract class TrackSubFigure extends SubFigure {
 			Color lineColor,
 			Color fillColor,
 			PlotStyle style) {
-		getCurrentAxes().setInternalPlotSize(width, height);
-		getCurrentAxes().setLeftMargin(margin);
 		
-		getCurrentAxes().getX1Axis().setLimits(displayRegion.getStart(), displayRegion.getEnd());
-		getCurrentAxes().getY1Axis().setLimits(0, yMax);
+		currentAxes().setInternalSize(width, height);
+		
+		currentAxes().setLeftMargin(margin);
+		
+		currentAxes().getX1Axis().setLimits(displayRegion.getStart(), displayRegion.getEnd());
+		currentAxes().getY1Axis().setLimits(0, yMax);
 	}
 }

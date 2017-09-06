@@ -435,7 +435,7 @@ public abstract class Track implements Comparable<Track>, XmlRepresentation, ToJ
 		axes.getTitle().setText(name);
 
 		// Remove any existing titles
-		axes.removeByName("Title");
+		axes.removeByName("Axes Title");
 
 		if (titlePosition.getVisible()) {
 			switch(titlePosition.getPosition()) {
@@ -458,7 +458,7 @@ public abstract class Track implements Comparable<Track>, XmlRepresentation, ToJ
 	 */
 	protected static void setStandardMargins(String name, 
 			TrackSubFigure mPlot) {
-		mPlot.getCurrentAxes().setMargins(MARGINS);
+		mPlot.currentAxes().setMargins(MARGINS);
 
 		System.err.println("standard margins " + mPlot.getName() + " " + mPlot.getMargins());
 	}
@@ -473,12 +473,12 @@ public abstract class Track implements Comparable<Track>, XmlRepresentation, ToJ
 			TrackSubFigure mPlot) {
 		int right = rightTitleWidth(name);
 
-		mPlot.getCurrentAxes().setMargins(SMALL_MARGIN, 
+		mPlot.currentAxes().setMargins(SMALL_MARGIN, 
 				MARGINS.getLeft(), 
 				SMALL_MARGIN, 
 				right);
 
-		System.err.println("small margins " + mPlot.getName() + " " + mPlot.getCurrentAxes().getMargins());
+		System.err.println("small margins " + mPlot.getName() + " " + mPlot.currentAxes().getMargins());
 	}
 	
 	/**

@@ -23,7 +23,7 @@ import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrackRegion;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrackRegions;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import org.jebtk.graphplot.figure.Axes2D;
+import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.PlotStyle;
 
 import edu.columbia.rdf.htsview.tracks.FixedSubFigure;
@@ -64,11 +64,11 @@ public class BedPlotSubFigure extends FixedSubFigure {
 		mBedLayer = new BedPlotLayer(color);
 		
 		// set the graph limits
-		getCurrentAxes().getX1Axis().getTitle().setText(null);
-		getCurrentAxes().getY1Axis().setLimits(0, 1);
-		getCurrentAxes().putZ(mBedLayer);
+		currentAxes().getX1Axis().getTitle().setText(null);
+		currentAxes().getY1Axis().setLimits(0, 1);
+		currentAxes().putZ(mBedLayer);
 	
-		Track.setTitle(mBed.getName(), titlePosition, getCurrentAxes());
+		Track.setTitle(mBed.getName(), titlePosition, currentAxes());
 	}
 
 	/**
@@ -147,10 +147,10 @@ public class BedPlotSubFigure extends FixedSubFigure {
 
 		 //GenesPlotCanvasLayer.GAP;
 		
-		Axes2D.disableAllFeatures(getCurrentAxes());
+		Axes.disableAllFeatures(currentAxes());
 		
 		// Need to make the title visible
-		getCurrentAxes().getTitle().getFontStyle().setVisible(true);
+		currentAxes().getTitle().getFontStyle().setVisible(true);
 	}
 	
 	/*

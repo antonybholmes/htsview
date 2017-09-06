@@ -56,7 +56,7 @@ public class AnnotationBedPlotTrack extends AnnotationPlotTrack {
 		
 		//mPlot.getGraphSpace().setPlotSize(PLOT_SIZE);
 		
-		mSubFigure.getCurrentAxes().setInternalPlotSize(Track.MEDIUM_TRACK_SIZE);
+		mSubFigure.currentAxes().setInternalSize(Track.MEDIUM_TRACK_SIZE);
 		
 		setMargins(getName(), titlePosition, mSubFigure);
 		

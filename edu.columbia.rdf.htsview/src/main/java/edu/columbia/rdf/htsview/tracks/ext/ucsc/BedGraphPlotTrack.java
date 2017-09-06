@@ -135,23 +135,23 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
 				mStyle,
 				titlePosition);
 
-		((BedGraphPlot)mSubFigure.getCurrentAxes().getCurrentPlot()).setBedGraph(mBedGraph);
+		((BedGraphPlot)mSubFigure.currentAxes().currentPlot()).setBedGraph(mBedGraph);
 
-		mSubFigure.getCurrentAxes().setInternalPlotSize(PLOT_SIZE);
+		mSubFigure.currentAxes().setInternalSize(PLOT_SIZE);
 
 		switch(titlePosition.getPosition()) {
 		case RIGHT:
 		case COMPACT_RIGHT:
 			int right = rightTitleWidth(getName());
 
-			mSubFigure.getCurrentAxes().setMargins(MEDIUM_MARGIN, 
+			mSubFigure.currentAxes().setMargins(MEDIUM_MARGIN, 
 					MARGINS.getLeft(), 
 					LARGE_MARGIN, 
 					right);
 
 			break;
 		default:
-			mSubFigure.getCurrentAxes().setMargins(MARGINS);
+			mSubFigure.currentAxes().setMargins(MARGINS);
 
 			break;
 		}

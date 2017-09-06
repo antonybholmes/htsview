@@ -62,7 +62,7 @@ public class RangePlotTrack extends AnnotationPlotTrack {
 		
 		setMargins(getName(), titlePosition, mSubFigure);
 
-		Axes.disableAllFeatures(mSubFigure.getCurrentAxes());
+		Axes.disableAllFeatures(mSubFigure.currentAxes());
 		
 		return mSubFigure;
 	}

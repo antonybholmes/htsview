@@ -17,7 +17,6 @@ package edu.columbia.rdf.htsview.tracks.sample;
 
 import java.awt.Color;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.List;
 
 import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
@@ -137,7 +136,7 @@ public class SamplePlotTrack extends GraphPlotTrack {
 		this(sample, 
 				assembly, 
 				color, 
-				ColorUtils.getTransparentColor50(color),
+				ColorUtils.tint(color, 0.5),
 				PLOT_SIZE.height);
 	}
 
@@ -288,7 +287,8 @@ public class SamplePlotTrack extends GraphPlotTrack {
 		}
 
 		List<UCSCTrackRegion> regions = 
-				UCSCTrackRegions.getFixedGapSearch(bedGraph.getRegions()).getFeatureSet(mRegion);
+				UCSCTrackRegions.getFixedGapSearch(bedGraph.getRegions())
+				.getFeatureSet(mRegion);
 
 		double y = 0;
 
@@ -465,14 +465,14 @@ public class SamplePlotTrack extends GraphPlotTrack {
 				mStyle,
 				titlePosition);
 
-		Axes axes = mSubFigure.getCurrentAxes();
+		Axes axes = mSubFigure.currentAxes();
 
 		// Keep track of the current plot we have created
 		mPlot = (BedGraphPlot)axes.findByName("Plot 1");
 
 		//mPlot.getPlotLayers().putZ(new MouseHighlightPeakPlotLayer(mPlot.getAllSeries().getCurrent().getName()), 1000);
 
-		axes.setInternalPlotSize(PLOT_SIZE);
+		axes.setInternalSize(PLOT_SIZE);
 
 
 		int right;
@@ -496,6 +496,8 @@ public class SamplePlotTrack extends GraphPlotTrack {
 			axes.setMargins(MARGINS);
 			break;
 		}
+		
+		System.err.println("sample sub figure " + axes.getPreferredSize() + " " + axes.getInternalSize() + " " + axes.getMargins());
 
 		return mSubFigure;
 	}
@@ -531,7 +533,7 @@ public class SamplePlotTrack extends GraphPlotTrack {
 				mFillColor,
 				mStyle);
 		
-		mSubFigure.getCurrentAxes().getTitle().setText(mName);
+		//mSubFigure.getCurrentAxes().getTitle().setText(mName);
 
 		return mSubFigure;
 	}
@@ -597,13 +599,13 @@ public class SamplePlotTrack extends GraphPlotTrack {
 		int start = displayRegion.getStart() / resolution * resolution;
 
 		double normalizedCount;
-
+		
 		for (int count : counts) {
 			normalizedCount = count * scaleFactor;
 
 			BedGraphRegion br = new BedGraphRegion(displayRegion.getChr(), 
 					start, 
-					start + resolution, 
+					start + resolution - 1, 
 					normalizedCount);
 
 			bedGraph.getRegions().add(br);
@@ -629,15 +631,23 @@ public class SamplePlotTrack extends GraphPlotTrack {
 			return;
 		}
 
+		
 		setName(dialog.getName());
 		setLineColor(dialog.getLineColor());
 		setFillColor(dialog.getFillColor());
 		setHeight(dialog.getTrackHeight());
 		setYMax(dialog.getYMax());
+		
+		//TODO test
 		setAutoY(dialog.getAutoY());
+		
 		setNormalizeY(dialog.getNormalizeY());
+		
+		
 		setCommonY(dialog.getCommonY());
 		setCommonHeight(dialog.getCommonHeight());
+		
+		
 		setStyle(dialog.getStyle());
 
 		setInput(dialog.getInputSample(), dialog.getInputAssembly());

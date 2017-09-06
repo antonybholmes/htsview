@@ -23,6 +23,7 @@ import org.jebtk.core.Mathematics;
 import org.jebtk.core.text.Formatter;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.AxesClippedLayer;
+import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.modern.graphics.DrawingContext;
 
@@ -41,12 +42,10 @@ public class RulerCanvasLayer extends AxesClippedLayer {
 	/** The m start. */
 	private int mStart;
 
-
-	/**
-	 * Instantiates a new ruler canvas layer.
-	 */
-	public RulerCanvasLayer() {
-		super("Ruler");
+	
+	@Override
+	public String getType() {
+		return "Ruler Layer";
 	}
 
 	/**
@@ -61,26 +60,27 @@ public class RulerCanvasLayer extends AxesClippedLayer {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.graphplot.figure.AxesClippedLayer#plotClipped(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
+	 * @see org.graphplot.figure.AxesClippedLayer#plotLayer(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
 	 */
 	@Override
-	public void plotClipped(Graphics2D g2,
+	public void plotLayer(Graphics2D g2,
 			DrawingContext context,
-			SubFigure figure,
+			Figure figure, 
+			SubFigure subFigure, 
 			Axes axes) {
 		// Use the graph properties and subplot layout to
 		// create the graph space mapper
 
 		int x1;
 		int y = 0;
-		int h = axes.getInternalPlotSize().getH();
+		int h = axes.getInternalSize().getH();
 		int h4 = h / 4;
 
 		g2.setColor(Color.BLACK);
 
 		g2.drawLine(0, 
 				y, 
-				axes.getInternalPlotSize().getW(), 
+				axes.getInternalSize().getW(), 
 				y);
 
 		int s = mStart;
