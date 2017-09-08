@@ -50,6 +50,8 @@ public class BedGraphPlot extends Plot {
 	 */
 	public BedGraphPlot(String name) {
 		super(name);
+		
+		//setAAMode(true);
 	}
 
 	/**

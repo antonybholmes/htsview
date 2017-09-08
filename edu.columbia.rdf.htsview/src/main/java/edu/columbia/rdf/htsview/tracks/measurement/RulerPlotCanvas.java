@@ -52,7 +52,7 @@ public class RulerPlotCanvas extends MeasurementSubFigure {
 		currentAxes().getX1Axis().getTitle().setVisible(false);
 		currentAxes().getY1Axis().setLimits(0, 1);
 		
-		currentAxes().putZ(mLayer);
+		currentAxes().addChild(mLayer);
 		
 		Track.setTitle("Ruler", titlePosition, currentAxes());
 	}

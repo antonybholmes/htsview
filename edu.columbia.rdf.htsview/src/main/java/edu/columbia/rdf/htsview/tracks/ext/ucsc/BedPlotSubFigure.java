@@ -66,7 +66,7 @@ public class BedPlotSubFigure extends FixedSubFigure {
 		// set the graph limits
 		currentAxes().getX1Axis().getTitle().setText(null);
 		currentAxes().getY1Axis().setLimits(0, 1);
-		currentAxes().putZ(mBedLayer);
+		currentAxes().addChild(mBedLayer);
 	
 		Track.setTitle(mBed.getName(), titlePosition, currentAxes());
 	}

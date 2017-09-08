@@ -24,8 +24,10 @@ import org.jebtk.core.tree.TreeNode;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Axis;
 import org.jebtk.graphplot.figure.Figure;
+import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.graphplot.figure.SubFigure;
+import org.jebtk.graphplot.plotbox.PlotBox;
 import org.jebtk.graphplot.plotbox.PlotBoxRowLayout;
 
 
@@ -127,7 +129,7 @@ public class TracksFigure extends Figure { //Figure { // PlotBoxColumn {
 				.setVisible(titlePosition.getPosition() != TitlePosition.COMPACT_RIGHT);
 
 			List<TreeNode<Track>> children = node.getChildrenAsList();
-
+	
 			// Add all children as sub plots
 			for (TreeNode<Track> child : children) {
 				TrackSubFigure subFigure = child.getValue().createGraph(genome,
@@ -142,7 +144,9 @@ public class TracksFigure extends Figure { //Figure { // PlotBoxColumn {
 
 				// Add the plots from this sub figure to the axis of the
 				// current figure
-				axes.putZ(subFigure.currentAxes().currentPlot());
+				Plot plot = subFigure.currentAxes().currentPlot();
+				
+				axes.addChild(plot);
 			}
 
 			//
@@ -169,7 +173,7 @@ public class TracksFigure extends Figure { //Figure { // PlotBoxColumn {
 
 		// TODO: do we need these?
 		//getSubFigureZModel().clearUnreservedLayers();
-		//getSubFigureZModel().putZ(subFigures);
+		//getSubFigureZModel().addChild(subFigures);
 
 		setChildren(subFigures);
 	}
@@ -291,13 +295,16 @@ public class TracksFigure extends Figure { //Figure { // PlotBoxColumn {
 
 			// update the children of this plot
 			for (TreeNode<Track> child : children) {
+				
 				TrackSubFigure cf = child.getValue().updateGraph(displayRegion, 
 						resolution,
 						width,
 						height,
 						margin);
 
-				cf.currentAxes().getTitle().getFontStyle().setVisible(false);
+				cf.currentAxes().getTitle().setVisible(false);
+				
+				System.err.println("child " + cf.getName());
 			}
 		}
 

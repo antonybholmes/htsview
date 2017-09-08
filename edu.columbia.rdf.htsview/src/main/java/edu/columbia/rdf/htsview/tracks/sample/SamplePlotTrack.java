@@ -470,7 +470,7 @@ public class SamplePlotTrack extends GraphPlotTrack {
 		// Keep track of the current plot we have created
 		mPlot = (BedGraphPlot)axes.findByName("Plot 1");
 
-		//mPlot.getPlotLayers().putZ(new MouseHighlightPeakPlotLayer(mPlot.getAllSeries().getCurrent().getName()), 1000);
+		//mPlot.getPlotLayers().addChild(new MouseHighlightPeakPlotLayer(mPlot.getAllSeries().getCurrent().getName()), 1000);
 
 		axes.setInternalSize(PLOT_SIZE);
 
@@ -497,8 +497,6 @@ public class SamplePlotTrack extends GraphPlotTrack {
 			break;
 		}
 		
-		System.err.println("sample sub figure " + axes.getPreferredSize() + " " + axes.getInternalSize() + " " + axes.getMargins());
-
 		return mSubFigure;
 	}
 

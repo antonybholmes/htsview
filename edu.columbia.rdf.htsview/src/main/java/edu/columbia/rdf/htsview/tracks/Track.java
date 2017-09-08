@@ -31,6 +31,7 @@ import org.jebtk.core.text.Formatter;
 import org.jebtk.core.xml.XmlRepresentation;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.AxesTitleLayer;
+import org.jebtk.graphplot.figure.GridLocation;
 import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.graphplot.figure.TitleRightPlotLayer;
 import org.jebtk.graphplot.figure.properties.MarginProperties;
@@ -55,7 +56,7 @@ public abstract class Track implements Comparable<Track>, XmlRepresentation, ToJ
 	public static final int MARGIN = 10;
 
 	/** The Constant MEDIUM_MARGIN. */
-	public static final int MEDIUM_MARGIN = 40;
+	public static final int MEDIUM_MARGIN = 50;
 
 	/** The Constant LARGE_MARGIN. */
 	public static final int LARGE_MARGIN = 100;
@@ -74,9 +75,9 @@ public abstract class Track implements Comparable<Track>, XmlRepresentation, ToJ
 
 	/** The Constant MARGINS. */
 	public static final MarginProperties MARGINS = 
-			new MarginProperties(LARGE_MARGIN, 
+			new MarginProperties(MEDIUM_MARGIN, 
 					LEFT_MARGIN, 
-					LARGE_MARGIN, 
+					MEDIUM_MARGIN, 
 					RIGHT_MARGIN);
 
 
@@ -435,16 +436,18 @@ public abstract class Track implements Comparable<Track>, XmlRepresentation, ToJ
 		axes.getTitle().setText(name);
 
 		// Remove any existing titles
-		axes.removeByName("Axes Title");
+		//axes.removeByName("Axes Title");
 
 		if (titlePosition.getVisible()) {
 			switch(titlePosition.getPosition()) {
 			case RIGHT:
 			case COMPACT_RIGHT:
-				axes.putZ(new TitleRightPlotLayer());
+				//axes.addChild(new TitleRightPlotLayer());
+				axes.getTitle().setPosition(GridLocation.E);
 				break;
 			default:
-				axes.putZ(new AxesTitleLayer());
+				//axes.addChild(new AxesTitleLayer());
+				axes.getTitle().setPosition(GridLocation.N);
 				break;
 			}
 		}

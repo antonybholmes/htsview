@@ -22,6 +22,7 @@ import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.graphplot.figure.series.XYSeries;
+import org.jebtk.graphplot.plotbox.ApplyFunc;
 import org.jebtk.graphplot.plotbox.PlotBox;
 
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
@@ -64,7 +65,9 @@ public class BedGraphSubFigure extends TrackSubFigure {
 		
 		plot.getAllSeries().add(XYSeries.createXYSeries("Points", Color.BLACK));
 		plot.getAllSeries().getCurrent().getMarker().setVisible(false);
-		plot.setStyle(style);
+		//plot.setStyle(style);
+		
+		
 
 		axes.addChild(plot);
 
@@ -116,6 +119,16 @@ public class BedGraphSubFigure extends TrackSubFigure {
 		
 		if (styleNotSet || mStyle != style) {
 			setStyle(style);
+			
+			// Find all lines and make them antialiased
+			applyByName(new ApplyFunc() {
+				@Override
+				public void apply(PlotBox plot) {
+					plot.setAAMode(true);
+				}},
+					"Spline Line", 
+					"Lines");
+		
 			mStyle = style;
 			styleNotSet = false;
 		}

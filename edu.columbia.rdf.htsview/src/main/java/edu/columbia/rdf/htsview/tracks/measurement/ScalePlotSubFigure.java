@@ -45,7 +45,7 @@ public class ScalePlotSubFigure extends MeasurementSubFigure {
 	public ScalePlotSubFigure(TitleProperties titlePosition) {
 		mLayer = new ScaleCanvasLayer();
 		
-		currentAxes().putZ(mLayer);
+		currentAxes().addChild(mLayer);
 
 		Track.setTitle(ScalePlotTrack.TITLE, titlePosition, currentAxes());
 	}

@@ -49,7 +49,7 @@ public class RangePlotCanvas extends MeasurementSubFigure {
 	public RangePlotCanvas(TitleProperties titlePosition) {
 		mLayer = new RangeCanvasLayer();
 		
-		currentAxes().putZ(mLayer);
+		currentAxes().addChild(mLayer);
 	}
 
 	/**

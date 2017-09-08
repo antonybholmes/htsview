@@ -77,7 +77,7 @@ public class ReadsPlotSubFigure extends TrackSubFigure {
 		// set the graph limits
 		currentAxes().getX1Axis().getTitle().setText(null);
 		currentAxes().getY1Axis().setLimits(0, 1);
-		currentAxes().putZ(mLayer);
+		currentAxes().addChild(mLayer);
 
 		Track.setTitle(name, titlePosition, currentAxes());
 	}
