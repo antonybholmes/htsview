@@ -30,6 +30,7 @@ package edu.columbia.rdf.htsview.ext.samtools;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.jebtk.bioinformatics.genomic.Chromosome;
@@ -53,10 +54,10 @@ public class ReadCountsFileBam extends ReadCountsFile {
 
 	/** The m file. */
 	private Path mFile;
-	
+
 	/** The m reads. */
 	private int mReads = -1;
-	
+
 	/** The m read length. */
 	private int mReadLength = -1;
 
@@ -69,13 +70,13 @@ public class ReadCountsFileBam extends ReadCountsFile {
 	 */
 	public ReadCountsFileBam(Path file) {
 		mFile = file;
-		
+
 		try {
 			mReads = SamUtils.getTotalReadsFromIndexedBam(file);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		try {
 			mReadLength = SamUtils.getReadLengthFromBam(file);
 		} catch (IOException e) {
@@ -143,26 +144,28 @@ public class ReadCountsFileBam extends ReadCountsFile {
 
 		SamReader inputSam = 
 				SamReaderFactory.makeDefault().open(mFile.toFile());
-		
+
 		try {
 			iter = inputSam.queryContained(chr.toString(), start, end);
 		} catch (Exception e1) {
 			//e1.printStackTrace();
-			
+
 			inputSam.close();
 
 			inputSam = SamReaderFactory.makeDefault().open(mFile.toFile());
-			
+
 			try {
 				// In cases where chromosome are called 1, 2, 3 etc rather than
 				// chr1, chr2, chr3 etc.
 				iter = inputSam.queryContained(chr.toString().substring(3), start, end);
 			} catch (Exception e2) {
-				//e2.printStackTrace();
+				inputSam.close();
+
+				return Collections.emptyList();
 			}
 		}
 
-		if (iter != null) {
+		try {
 			SAMRecord record;
 
 			while(iter.hasNext()) {
@@ -170,6 +173,8 @@ public class ReadCountsFileBam extends ReadCountsFile {
 
 				starts.add(record.getStart());
 			}
+		} finally {
+			inputSam.close();
 		}
 
 		return starts;
@@ -204,22 +209,24 @@ public class ReadCountsFileBam extends ReadCountsFile {
 
 		SamReader inputSam = 
 				SamReaderFactory.makeDefault().open(mFile.toFile());
-		
+
 		try {
 			iter = inputSam.queryContained(chr.toString(), start, end);
 		} catch (Exception e1) {
 			//e1.printStackTrace();
-			
+
 			inputSam.close();
-			
+
 			inputSam = SamReaderFactory.makeDefault().open(mFile.toFile());
-			
+
 			try {
 				// In cases where chromosome are called 1, 2, 3 etc rather than
 				// chr1, chr2, chr3 etc.
 				iter = inputSam.queryContained(chr.toString().substring(3), start, end);
 			} catch (Exception e2) {
-				//e2.printStackTrace();
+				inputSam.close();
+
+				return Collections.emptyList();
 			}
 		}
 
@@ -227,17 +234,21 @@ public class ReadCountsFileBam extends ReadCountsFile {
 
 		List<Strand> strands = new ArrayList<Strand>();
 
-		if (iter != null) {
-			while(iter.hasNext()) {
-				record = iter.next();
+		try {
+			if (iter != null) {
+				while(iter.hasNext()) {
+					record = iter.next();
 
-				strands.add(SamUtils.strand(record.getFlags()));
+					strands.add(SamUtils.strand(record.getFlags()));
+				}
 			}
+		} finally {
+			inputSam.close();
 		}
 
 		return strands;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see edu.columbia.rdf.htsview.ngs.CountAssembly#getReadCount()
 	 */
@@ -245,12 +256,54 @@ public class ReadCountsFileBam extends ReadCountsFile {
 	public int getReadCount() {
 		return mReads;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see edu.columbia.rdf.htsview.ngs.CountAssembly#getReadLength()
 	 */
 	@Override
 	public int getReadLength() {
 		return mReadLength;
+	}
+	
+	private static SAMRecordIterator openSam(Path file,
+			Chromosome chr,
+			int start,
+			int end,
+			int window) {
+		SamReader inputSam = 
+				SamReaderFactory.makeDefault().open(file.toFile());
+
+		SAMRecordIterator iter = null;
+		
+		try {
+			iter = inputSam.queryContained(chr.toString(), start, end);
+		} catch (Exception e1) {
+			//e1.printStackTrace();
+
+			try {
+				inputSam.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			iter = null;
+			inputSam = SamReaderFactory.makeDefault().open(file.toFile());
+
+			try {
+				// In cases where chromosome are called 1, 2, 3 etc rather than
+				// chr1, chr2, chr3 etc.
+				iter = inputSam.queryContained(chr.toString().substring(3), start, end);
+			} catch (Exception e2) {
+				try {
+					inputSam.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				iter = null;
+			}
+		}
+		
+		return iter;
 	}
 }

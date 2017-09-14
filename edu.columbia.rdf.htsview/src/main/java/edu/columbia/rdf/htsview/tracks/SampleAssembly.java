@@ -16,7 +16,6 @@
 package edu.columbia.rdf.htsview.tracks;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.List;
 
 import org.jebtk.bioinformatics.genomic.Genome;
@@ -105,7 +104,7 @@ public abstract class SampleAssembly {
 			int window) throws IOException;
 	
 	/**
-	 * Gets the normalized counts.
+	 * Gets the Reads per million mapped reads.
 	 *
 	 * @param sample the sample
 	 * @param region the region
@@ -113,22 +112,10 @@ public abstract class SampleAssembly {
 	 * @return the normalized counts
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public List<Double> getNormalizedCounts(Sample sample,
+	public List<Double> getRPM(Sample sample,
 			GenomicRegion region,
 			int window) throws IOException {
-		double scaleFactor;
-		
-		int mappedReads = getMappedReads(sample);
-		
-		//System.err.println("mapped reads " + mappedReads);
-		
-		if (mappedReads != -1) {
-			scaleFactor = 1000000.0 / (double)mappedReads;
-		} else {
-			scaleFactor = 1;
-		}
-		
-		return Mathematics.multiply(getCounts(sample, region, window), scaleFactor);
+		return getRPM(sample, this, region, window);
 	}
 
 	/**
@@ -199,5 +186,25 @@ public abstract class SampleAssembly {
 	 */
 	public String getGenome(Sample sample) throws IOException {
 		return Genome.HG19;
+	}
+	
+	
+	public static List<Double> getRPM(Sample sample,
+			SampleAssembly assembly,
+			GenomicRegion region,
+			int window) throws IOException {
+		double scaleFactor;
+		
+		double mappedReads = assembly.getMappedReads(sample);
+		
+		//System.err.println("mapped reads " + mappedReads);
+		
+		if (mappedReads > 0) {
+			scaleFactor = 1000000 / mappedReads;
+		} else {
+			scaleFactor = 1;
+		}
+		
+		return Mathematics.multiply(assembly.getCounts(sample, region, window), scaleFactor);
 	}
 }
