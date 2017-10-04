@@ -343,6 +343,11 @@ public class ReadsPlotTrack extends SamplePlotTrack {
 		return mGap;
 	}
 	
+	@Override
+	public double getYMax(boolean normalize) {
+		return -1;
+	}
+	
 	/* (non-Javadoc)
 	 * @see edu.columbia.rdf.apps.edb.reads.tracks.SamplePlotTrack#getGraph(java.lang.String, edu.columbia.rdf.lib.bioinformatics.plot.figure.FigureStyle, edu.columbia.rdf.apps.edb.reads.TitlePosition)
 	 */
