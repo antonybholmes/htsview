@@ -19,14 +19,14 @@ import java.util.List;
 
 import org.jebtk.bioinformatics.ext.ucsc.BedGraphRegion;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrackRegion;
-import org.jebtk.math.matrix.AnnotatableMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.EmptyMatrix;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class BedGraphRegionMatrix.
  */
-public class BedGraphRegionMatrix extends AnnotatableMatrix {
+public class BedGraphRegionMatrix extends DataFrame {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;

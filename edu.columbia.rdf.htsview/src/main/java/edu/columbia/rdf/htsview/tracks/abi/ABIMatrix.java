@@ -16,7 +16,7 @@
 package edu.columbia.rdf.htsview.tracks.abi;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import org.jebtk.math.matrix.AnnotatableMatrix;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.EmptyMatrix;
 
 import edu.columbia.rdf.htsview.ext.abi.ABITrace;
@@ -25,7 +25,7 @@ import edu.columbia.rdf.htsview.ext.abi.ABITrace;
 /**
  * The Class ABIMatrix.
  */
-public class ABIMatrix extends AnnotatableMatrix {
+public class ABIMatrix extends DataFrame {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;

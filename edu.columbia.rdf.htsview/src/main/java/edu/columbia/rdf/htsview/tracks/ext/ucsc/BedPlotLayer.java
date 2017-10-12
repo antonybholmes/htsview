@@ -416,7 +416,7 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
 		} 
 		/*
 		else if (e.getMessage().equals("DNA")) {
-			AnnotationMatrix m = AnnotatableMatrix.createAnnotatableMatrix(1, 1);
+			DataFrame m = AnnotatableMatrix.createAnnotatableMatrix(1, 1);
 			
 			m.setName("DNA");
 			m.setColumnName(0, "Location");
