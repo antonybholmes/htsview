@@ -21,7 +21,8 @@ import javax.swing.Box;
 
 import org.jebtk.modern.BorderService;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.button.ModernCheckBox;
+import org.jebtk.modern.button.CheckBox;
+import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.dialog.ModernDialogTaskWindow;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.color.ColorSwatchButton;
@@ -59,28 +60,28 @@ public class ReadsPlotTrackEditDialog extends ModernDialogTaskWindow implements 
 	private ReadsPlotTrack mTrack;
 
 	/** The m check forward. */
-	private ModernCheckBox mCheckForward = 
-			new ModernCheckBox("Forward Strand", true);
+	private CheckBox mCheckForward = 
+			new ModernCheckSwitch("Forward Strand", true);
 	
 	/** The m check line color. */
-	private ModernCheckBox mCheckLineColor =
-			new ModernCheckBox("Line color");
+	private CheckBox mCheckLineColor =
+			new ModernCheckSwitch("Line color");
 	
 	/** The m check fill color. */
-	private ModernCheckBox mCheckFillColor =
-			new ModernCheckBox("Fill color");
+	private CheckBox mCheckFillColor =
+			new ModernCheckSwitch("Fill color");
 	
 	/** The m check neg. */
-	private ModernCheckBox mCheckNeg = 
-			new ModernCheckBox("Negative Strand", true);
+	private CheckBox mCheckNeg = 
+			new ModernCheckSwitch("Negative Strand", true);
 	
 	/** The m check neg line color. */
-	private ModernCheckBox mCheckNegLineColor =
-			new ModernCheckBox("Line color");
+	private CheckBox mCheckNegLineColor =
+			new ModernCheckSwitch("Line color");
 	
 	/** The m check neg fill color. */
-	private ModernCheckBox mCheckNegFillColor =
-			new ModernCheckBox("Fill color");
+	private CheckBox mCheckNegFillColor =
+			new ModernCheckSwitch("Fill color");
 	
 	/** The m spinner read height. */
 	private ModernCompactSpinner mSpinnerReadHeight =
@@ -132,7 +133,7 @@ public class ReadsPlotTrackEditDialog extends ModernDialogTaskWindow implements 
 		mSpinnerReadHeight.setValue(mTrack.getReadHeight());
 		mSpinnerGap.setValue(mTrack.getGap());
 	
-		setSize(480, 400);
+		setSize(480, 460);
 		
 		UI.centerWindowToScreen(this);
 	}
@@ -244,7 +245,7 @@ public class ReadsPlotTrackEditDialog extends ModernDialogTaskWindow implements 
 		box2.add(mSpinnerGap);
 		box.add(box2);
 		
-		setContent(box);
+		setDialogCardContent(box);
 	}
 
 	/* (non-Javadoc)

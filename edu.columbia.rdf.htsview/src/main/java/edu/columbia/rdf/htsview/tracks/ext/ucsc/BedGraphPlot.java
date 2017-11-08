@@ -113,9 +113,7 @@ public class BedGraphPlot extends Plot {
 		//series.addRegex("x");
 		//series.addRegex("y");
 		
-		List<UCSCTrackRegion> regions = UCSCTrackRegions.getFixedGapSearch(mBedGraph.getRegions()).getFeatureSet(displayRegion.getChr(), 
-				displayRegion.getStart(), 
-				displayRegion.getEnd());
+		List<UCSCTrackRegion> regions = UCSCTrackRegions.getFixedGapSearch(mBedGraph.getRegions()).getFeatureSet(displayRegion);
 		
 		setMatrix(new BedGraphRegionMatrix(regions));
 	}

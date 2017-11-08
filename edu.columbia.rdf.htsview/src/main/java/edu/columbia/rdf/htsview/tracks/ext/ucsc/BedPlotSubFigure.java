@@ -117,9 +117,7 @@ public class BedPlotSubFigure extends FixedSubFigure {
 			Color fillColor,
 			PlotStyle style) {
 		
-		List<UCSCTrackRegion> regions = UCSCTrackRegions.getFixedGapSearch(mBed.getRegions()).getFeatureSet(displayRegion.getChr(), 
-				displayRegion.getStart(), 
-				displayRegion.getEnd());
+		List<UCSCTrackRegion> regions = UCSCTrackRegions.getFixedGapSearch(mBed.getRegions()).getFeatureSet(displayRegion);
 		
 		int n = 1;
 		

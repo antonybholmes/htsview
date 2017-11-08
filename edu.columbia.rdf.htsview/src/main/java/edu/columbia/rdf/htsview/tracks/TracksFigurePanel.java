@@ -134,6 +134,8 @@ public class TracksFigurePanel extends PlotBoxPanel { //Figure { // PlotBoxColum
 			if (e.isControlDown()) {
 				int x = e.getScaledPos().getX();
 				mSelectionEnd = Math.max(Track.LEFT_MARGIN, Math.min(Track.END, x));
+				
+				fireCanvasRedraw();
 			} else {
 				mDragEnd = e.getScaledPos().getX();
 
@@ -142,7 +144,7 @@ public class TracksFigurePanel extends PlotBoxPanel { //Figure { // PlotBoxColum
 				dragMove();
 			}
 
-			//fireCanvasRedraw();
+			
 		}
 
 	}

@@ -418,7 +418,10 @@ public class LocationsPanel extends ModernComponent implements ModernClickListen
 		} else {
 			// assume its a gene
 			
-			region = GenesService.getInstance().getGenes(mGenomeModel.get(), "refseq").findMainVariant(text);
+			region = GenesService.getInstance()
+					.getGenes(mGenomeModel.get(), "refseq")
+					.findMainVariant(text)
+					.getRegion();
 		}
 		
 		return region;

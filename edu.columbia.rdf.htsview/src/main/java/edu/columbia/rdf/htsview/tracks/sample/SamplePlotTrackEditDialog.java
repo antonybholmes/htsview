@@ -252,7 +252,7 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
 		mCheckFillColor.setSelected(mTrack.getFillColor() != null);
 		
 	
-		setSize(720, 640);
+		setSize(720, 700);
 		
 		UI.centerWindowToScreen(this);
 	}

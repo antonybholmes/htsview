@@ -77,7 +77,7 @@ public class AnnotationTracksDialog extends ModernDialogMultiCardWindow {
 		
 		setResizable(true);
 		
-		setSize(640, 420);
+		setSize(640, 480);
 		
 		mTabsModel.changeTab(0);
 		
