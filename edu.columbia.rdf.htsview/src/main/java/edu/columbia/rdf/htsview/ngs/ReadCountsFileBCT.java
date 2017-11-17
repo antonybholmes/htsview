@@ -40,6 +40,7 @@ import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.collections.DefaultHashMap;
 import org.jebtk.core.collections.HashMapCreator;
+import org.jebtk.core.collections.IterMap;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.sys.SysUtils;
 
@@ -93,7 +94,7 @@ public class ReadCountsFileBCT extends ReadCountsFileBinTree {
 			new HashMap<Path, Integer>();
 	
 	/** The m file map. */
-	protected Map<Chromosome, Map<Integer, Path>> mFileMap = 
+	protected Map<Chromosome, IterMap<Integer, Path>> mFileMap = 
 			DefaultHashMap.create(new HashMapCreator<Integer, Path>());
 
 	/** The m genome. */

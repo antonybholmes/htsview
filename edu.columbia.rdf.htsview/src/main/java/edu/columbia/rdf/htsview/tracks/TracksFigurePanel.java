@@ -197,7 +197,7 @@ public class TracksFigurePanel extends PlotBoxPanel { //Figure { // PlotBoxColum
 			DrawingContext context, 
 			Object... params) {
 
-		int h = this.getParent().getHeight();
+		int h = getParent().getHeight();
 
 		if (mSelectionStart != -1 && mSelectionEnd != -1) {
 			int minX = Math.min(mSelectionStart, mSelectionEnd);

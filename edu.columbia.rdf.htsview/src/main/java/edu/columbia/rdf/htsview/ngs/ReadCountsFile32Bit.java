@@ -29,7 +29,6 @@ package edu.columbia.rdf.htsview.ngs;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -40,9 +39,8 @@ import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.collections.DefaultHashMap;
 import org.jebtk.core.collections.HashMapCreator;
-import org.jebtk.core.io.FileIsNotADirException;
+import org.jebtk.core.collections.IterMap;
 import org.jebtk.core.io.FileUtils;
-import org.jebtk.core.io.PathUtils;
 
 
 // TODO: Auto-generated Javadoc
@@ -62,10 +60,10 @@ public class ReadCountsFile32Bit extends ReadCountsFile {
 	/**
 	 * The member file map.
 	 */
-	private Map<Chromosome, Map<Integer, Path>> mFileMap = 
+	private Map<Chromosome, IterMap<Integer, Path>> mFileMap = 
 			DefaultHashMap.create(new HashMapCreator<Integer, Path>());
 
-	private Map<Chromosome, Map<Integer, Integer>> mBitMap = 
+	private Map<Chromosome, IterMap<Integer, Integer>> mBitMap = 
 			DefaultHashMap.create(new HashMapCreator<Integer, Integer>());
 
 

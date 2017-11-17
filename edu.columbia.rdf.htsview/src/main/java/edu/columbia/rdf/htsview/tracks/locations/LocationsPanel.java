@@ -400,7 +400,10 @@ public class LocationsPanel extends ModernComponent implements ModernClickListen
 			
 			Chromosome chromosome = Chromosome.parse(text);
 			
-			int size = ChromosomeSizesService.getInstance().getSizes(mGenomeModel.get()).getSize(chromosome);
+			int size = ChromosomeSizesService
+					.getInstance()
+					.getSizes(mGenomeModel.get())
+					.getSize(chromosome);
 			
 			region = new GenomicRegion(chromosome, 1, size);
 			
@@ -409,7 +412,10 @@ public class LocationsPanel extends ModernComponent implements ModernClickListen
 			
 			// Make sure region is within the bounds of the chromosome
 			
-			int size = ChromosomeSizesService.getInstance().getSizes(mGenomeModel.get()).getSize(region.getChr());
+			int size = ChromosomeSizesService
+					.getInstance()
+					.getSizes(mGenomeModel.get())
+					.getSize(region.getChr());
 			
 			region = new GenomicRegion(region.getChr(), 
 					Math.max(1, region.getStart()), 
@@ -420,8 +426,7 @@ public class LocationsPanel extends ModernComponent implements ModernClickListen
 			
 			region = GenesService.getInstance()
 					.getGenes(mGenomeModel.get(), "refseq")
-					.findMainVariant(text)
-					.getRegion();
+					.getGene(text);
 		}
 		
 		return region;
