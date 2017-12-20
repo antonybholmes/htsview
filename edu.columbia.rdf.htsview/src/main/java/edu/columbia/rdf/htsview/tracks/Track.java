@@ -24,13 +24,13 @@ import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.genomic.Dna;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.Mathematics;
+import org.jebtk.core.event.ChangeListeners;
 import org.jebtk.core.json.JsonBuilder;
 import org.jebtk.core.json.ToJson;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.core.text.Formatter;
 import org.jebtk.core.xml.XmlRepresentation;
 import org.jebtk.graphplot.figure.Axes;
-import org.jebtk.graphplot.figure.AxesTitleLayer;
 import org.jebtk.graphplot.figure.GridLocation;
 import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.graphplot.figure.TitleRightPlotLayer;
@@ -43,8 +43,10 @@ import org.w3c.dom.Element;
 /**
  * The Class Track.
  */
-public abstract class Track implements Comparable<Track>, XmlRepresentation, ToJson {
+public abstract class Track extends ChangeListeners implements Comparable<Track>, XmlRepresentation, ToJson {
 	
+	private static final long serialVersionUID = 1L;
+
 	/** The Constant PLOT_WIDTH. */
 	public static final int PLOT_WIDTH = 
 			SettingsService.getInstance().getAsInt("htsview.plot.width");

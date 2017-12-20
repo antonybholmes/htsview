@@ -25,6 +25,8 @@ import org.w3c.dom.Element;
  */
 public abstract class AnnotationPlotTrack extends Track {
 	
+	private static final long serialVersionUID = 1L;
+
 	/** The m name. */
 	protected String mName;
 

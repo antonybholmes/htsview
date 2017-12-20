@@ -30,6 +30,7 @@ import javax.swing.Box;
 import javax.swing.KeyStroke;
 
 import org.jebtk.bioinformatics.genomic.Chromosome;
+import org.jebtk.bioinformatics.genomic.ChromosomeService;
 import org.jebtk.bioinformatics.genomic.ChromosomeSizesService;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
@@ -64,7 +65,7 @@ import org.jebtk.modern.window.ModernRibbonWindow;
  * The Class LocationsPanel.
  */
 public class LocationsPanel extends ModernComponent implements ModernClickListener {
-	
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
@@ -98,7 +99,7 @@ public class LocationsPanel extends ModernComponent implements ModernClickListen
 	 * The Class DeleteEvents.
 	 */
 	private class DeleteEvents implements DialogEventListener {
-		
+
 		/* (non-Javadoc)
 		 * @see org.abh.common.ui.dialog.DialogEventListener#statusChanged(org.abh.common.ui.dialog.DialogEvent)
 		 */
@@ -109,7 +110,7 @@ public class LocationsPanel extends ModernComponent implements ModernClickListen
 
 				for (int i : mLocationList.getSelectionModel()) {
 					indices.add(i);
-					
+
 					mUsed.remove(mLocationList.getValueAt(i));
 				}
 
@@ -122,7 +123,7 @@ public class LocationsPanel extends ModernComponent implements ModernClickListen
 	 * The Class PasteAction.
 	 */
 	private class PasteAction extends AbstractAction  {
-		
+
 		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
@@ -148,15 +149,11 @@ public class LocationsPanel extends ModernComponent implements ModernClickListen
 		 */
 		@Override
 		public void selectionChanged(ChangeEvent e) {
-			try {
-				GenomicRegion region = parse(mLocationList.getSelectedItem());
-				
-				if (region != null) {
-					mModel.set(region);
-				}
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}	
+			GenomicRegion region = parse(mLocationList.getSelectedItem());
+
+			if (region != null) {
+				mModel.set(region);
+			}
 		}
 	}
 
@@ -180,15 +177,15 @@ public class LocationsPanel extends ModernComponent implements ModernClickListen
 		createUi();
 
 		mLocationList.addSelectionListener(new SelectionEvents());
-		
+
 		//mModel.addChangeListener(new GenomicEvents());
 
 
 		getInputMap(WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_MASK), "paste");
 
 		getActionMap().put("paste", new PasteAction());
-		
-		
+
+
 		mModel.addChangeListener(new ChangeListener(){
 
 			@Override
@@ -216,7 +213,7 @@ public class LocationsPanel extends ModernComponent implements ModernClickListen
 		scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
 		//scrollPane.setBorder(LARGE_BORDER);
 		setBody(scrollPane);
-		
+
 		setBorder(LARGE_BORDER);
 
 		/*
@@ -241,7 +238,7 @@ public class LocationsPanel extends ModernComponent implements ModernClickListen
 		add(box, BorderLayout.PAGE_END);
 		 */
 
-		
+
 
 	}
 
@@ -279,7 +276,7 @@ public class LocationsPanel extends ModernComponent implements ModernClickListen
 	private void refresh() {
 		addValue(mModel.get().getLocation());
 	}
-	
+
 
 	/**
 	 * Load locations.
@@ -298,7 +295,7 @@ public class LocationsPanel extends ModernComponent implements ModernClickListen
 
 		addValues(entries); //ArrayUtils.toString(ArrayUtils.sort(mLocationsModel)));
 	}
-	
+
 	/**
 	 * Adds the values.
 	 *
@@ -308,9 +305,9 @@ public class LocationsPanel extends ModernComponent implements ModernClickListen
 		for (String l : locations) {
 			addValue(l);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Adds the value.
 	 *
@@ -366,10 +363,10 @@ public class LocationsPanel extends ModernComponent implements ModernClickListen
 			List<String> lines = Excel.getTextFromFile(file, true);
 
 			addValues(lines);
-			
+
 			//for (String location : lines) {
 			//	GenomicRegion region = GenomicRegion.parse(location);
-//
+			//
 			//	if (region != null) {
 			//		locations.add(region);
 			//	}
@@ -377,10 +374,10 @@ public class LocationsPanel extends ModernComponent implements ModernClickListen
 		}
 
 		//mListModel.addValues(locations);
-		
+
 		//mListModel.addValues(ArrayUtils.toString(ArrayUtils.sort(mLocationsModel)));
 	}
-	
+
 	/**
 	 * Parses the.
 	 *
@@ -388,47 +385,49 @@ public class LocationsPanel extends ModernComponent implements ModernClickListen
 	 * @return the genomic region
 	 * @throws ParseException the parse exception
 	 */
-	private GenomicRegion parse(String text) throws ParseException {
+	private GenomicRegion parse(String text) {
 		if (TextUtils.isNullOrEmpty(text)) {
 			return null;
 		}
-		
+
 		GenomicRegion region = null;
-		
+
 		if (text.matches("^chr(\\d+|[xymXYM])$")) {
 			// use the whole chromosome
-			
-			Chromosome chromosome = Chromosome.parse(text);
-			
+
+			Chromosome chromosome = ChromosomeService
+					.getInstance()
+					.parse(mGenomeModel.get(), text);
+
 			int size = ChromosomeSizesService
 					.getInstance()
 					.getSizes(mGenomeModel.get())
 					.getSize(chromosome);
-			
+
 			region = new GenomicRegion(chromosome, 1, size);
-			
+
 		} else if (text.startsWith("chr")) { // remove commas
 			region = GenomicRegion.parse(text);
-			
+
 			// Make sure region is within the bounds of the chromosome
-			
+
 			int size = ChromosomeSizesService
 					.getInstance()
 					.getSizes(mGenomeModel.get())
 					.getSize(region.getChr());
-			
+
 			region = new GenomicRegion(region.getChr(), 
 					Math.max(1, region.getStart()), 
 					Math.min(region.getEnd(), size));
-			
+
 		} else {
 			// assume its a gene
-			
+
 			region = GenesService.getInstance()
 					.getGenes(mGenomeModel.get(), "refseq")
 					.getGene(text);
 		}
-		
+
 		return region;
 	}
 }
