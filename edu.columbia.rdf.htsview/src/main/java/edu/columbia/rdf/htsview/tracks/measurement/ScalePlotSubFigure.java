@@ -29,79 +29,69 @@ import edu.columbia.rdf.htsview.tracks.Track;
  * The Class ScalePlotSubFigure.
  */
 public class ScalePlotSubFigure extends MeasurementSubFigure {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The m layer. */
-	private ScaleCanvasLayer mLayer;
-	
-	/**
-	 * Instantiates a new scale plot sub figure.
-	 *
-	 * @param titlePosition the title position
-	 */
-	public ScalePlotSubFigure(TitleProperties titlePosition) {
-		mLayer = new ScaleCanvasLayer();
-		
-		currentAxes().addChild(mLayer);
+  /** The m layer. */
+  private ScaleCanvasLayer mLayer;
 
-		Track.setTitle(ScalePlotTrack.TITLE, titlePosition, currentAxes());
-	}
+  /**
+   * Instantiates a new scale plot sub figure.
+   *
+   * @param titlePosition
+   *          the title position
+   */
+  public ScalePlotSubFigure(TitleProperties titlePosition) {
+    mLayer = new ScaleCanvasLayer();
 
-	/**
-	 * Creates the.
-	 *
-	 * @param titlePosition the title position
-	 * @return the scale plot sub figure
-	 */
-	public static ScalePlotSubFigure create(TitleProperties titlePosition) {
+    currentAxes().addChild(mLayer);
 
-		//mBedGraphGroup = bedGraphGroup;
-		//mGenomicModel = genomicModel;
+    Track.setTitle(ScalePlotTrack.TITLE, titlePosition, currentAxes());
+  }
 
-		ScalePlotSubFigure canvas = new ScalePlotSubFigure(titlePosition);
+  /**
+   * Creates the.
+   *
+   * @param titlePosition
+   *          the title position
+   * @return the scale plot sub figure
+   */
+  public static ScalePlotSubFigure create(TitleProperties titlePosition) {
 
-		Axes axes = canvas.currentAxes();
-		
-		// set the graph limits
-		axes.getX1Axis().getTitle().setVisible(false);
-		axes.getX1Axis().startEndTicksOnly();
+    // mBedGraphGroup = bedGraphGroup;
+    // mGenomicModel = genomicModel;
 
-		axes.getY1Axis().getTitle().setVisible(false);
-		axes.getY1Axis().startEndTicksOnly();
+    ScalePlotSubFigure canvas = new ScalePlotSubFigure(titlePosition);
 
-		axes.setInternalSize(Track.MEDIUM_TRACK_SIZE);
-		//canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
+    Axes axes = canvas.currentAxes();
 
-		
-		return canvas;
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.measurement.MeasurementSubFigure#update(org.jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int, java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
-	 */
-	@Override
-	public void update(GenomicRegion displayRegion, 
-			int resolution,
-			double yMax,
-			int width,
-			int height,
-			int margin,
-			Color lineColor,
-			Color fillColor,
-			PlotStyle style) {
-		super.update(displayRegion, 
-				resolution, 
-				yMax, 
-				width, 
-				height, 
-				margin, 
-				lineColor, 
-				fillColor,
-				style);
-		
-		mLayer.update(displayRegion);
-	}
+    // set the graph limits
+    axes.getX1Axis().getTitle().setVisible(false);
+    axes.getX1Axis().startEndTicksOnly();
+
+    axes.getY1Axis().getTitle().setVisible(false);
+    axes.getY1Axis().startEndTicksOnly();
+
+    axes.setInternalSize(Track.MEDIUM_TRACK_SIZE);
+    // canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
+
+    return canvas;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.measurement.MeasurementSubFigure#update(org.
+   * jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int,
+   * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
+   */
+  @Override
+  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
+      Color lineColor, Color fillColor, PlotStyle style) {
+    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+
+    mLayer.update(displayRegion);
+  }
 }

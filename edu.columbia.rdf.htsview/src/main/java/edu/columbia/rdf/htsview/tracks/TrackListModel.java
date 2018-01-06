@@ -21,5 +21,5 @@ import org.jebtk.modern.list.ModernListModel;
  * The Class TrackListModel.
  */
 public class TrackListModel extends ModernListModel<Track> {
-	
+
 }

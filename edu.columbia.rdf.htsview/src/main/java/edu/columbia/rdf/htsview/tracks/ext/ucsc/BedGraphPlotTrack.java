@@ -38,190 +38,207 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  */
 public class BedGraphPlotTrack extends GraphPlotTrack {
 
-	/** The m bed graph. */
-	private UCSCTrack mBedGraph;
-	
-	/** The m file. */
-	private Path mFile;
-	
-	/** The m Y max. */
-	private int mYMax = 1;
-	
-	/** The m style. */
-	private PlotStyle mStyle = PlotStyle.FILLED_SMOOTH;
+  /** The m bed graph. */
+  private UCSCTrack mBedGraph;
 
-	/**
-	 * Instantiates a new bed graph plot track.
-	 *
-	 * @param bedGraph the bed graph
-	 * @param file the file
-	 */
-	public BedGraphPlotTrack(UCSCTrack bedGraph, Path file) {
-		mBedGraph = bedGraph;
-		mFile = file;
-	}
+  /** The m file. */
+  private Path mFile;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#getType()
-	 */
-	@Override
-	public String getType() {
-		return "BedGraph";
-	}
+  /** The m Y max. */
+  private int mYMax = 1;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#getName()
-	 */
-	@Override
-	public String getName() {
-		return mBedGraph.getName();
-	}
+  /** The m style. */
+  private PlotStyle mStyle = PlotStyle.FILLED_SMOOTH;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#setFillColor(java.awt.Color)
-	 */
-	@Override
-	public void setFillColor(Color color) {
-		mBedGraph.setColor(color);
-	}
+  /**
+   * Instantiates a new bed graph plot track.
+   *
+   * @param bedGraph
+   *          the bed graph
+   * @param file
+   *          the file
+   */
+  public BedGraphPlotTrack(UCSCTrack bedGraph, Path file) {
+    mBedGraph = bedGraph;
+    mFile = file;
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#getFillColor()
-	 */
-	@Override
-	public Color getFillColor() {
-		return mBedGraph.getColor();
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#getType()
+   */
+  @Override
+  public String getType() {
+    return "BedGraph";
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#getYMax(boolean)
-	 */
-	@Override
-	public double getYMax(boolean normalize) {
-		return mYMax;
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#getName()
+   */
+  @Override
+  public String getName() {
+    return mBedGraph.getName();
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#setYMax(double)
-	 */
-	@Override
-	public void setYMax(double yMax) {
-		mYMax = (int)yMax;
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#setFillColor(java.awt.Color)
+   */
+  @Override
+  public void setFillColor(Color color) {
+    mBedGraph.setColor(color);
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#setStyle(org.graphplot.figure.PlotStyle)
-	 */
-	@Override
-	public void setStyle(PlotStyle style) {
-		mStyle = style;
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#getFillColor()
+   */
+  @Override
+  public Color getFillColor() {
+    return mBedGraph.getColor();
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#getStyle()
-	 */
-	@Override
-	public PlotStyle getStyle() {
-		return mStyle;
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#getYMax(boolean)
+   */
+  @Override
+  public double getYMax(boolean normalize) {
+    return mYMax;
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#createGraph(java.lang.String, edu.columbia.rdf.htsview.tracks.TitleProperties)
-	 */
-	@Override
-	public TrackSubFigure createGraph(String genome,
-			TitleProperties titlePosition) throws IOException {
-		mSubFigure = BedGraphSubFigure.create(mBedGraph.getName(), 
-				mStyle,
-				titlePosition);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#setYMax(double)
+   */
+  @Override
+  public void setYMax(double yMax) {
+    mYMax = (int) yMax;
+  }
 
-		((BedGraphPlot)mSubFigure.currentAxes().currentPlot()).setBedGraph(mBedGraph);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#setStyle(org.graphplot.figure.
+   * PlotStyle)
+   */
+  @Override
+  public void setStyle(PlotStyle style) {
+    mStyle = style;
+  }
 
-		mSubFigure.currentAxes().setInternalSize(PLOT_SIZE);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#getStyle()
+   */
+  @Override
+  public PlotStyle getStyle() {
+    return mStyle;
+  }
 
-		switch(titlePosition.getPosition()) {
-		case RIGHT:
-		case COMPACT_RIGHT:
-			int right = rightTitleWidth(getName());
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#createGraph(java.lang.String,
+   * edu.columbia.rdf.htsview.tracks.TitleProperties)
+   */
+  @Override
+  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
+    mSubFigure = BedGraphSubFigure.create(mBedGraph.getName(), mStyle, titlePosition);
 
-			mSubFigure.currentAxes().setMargins(MEDIUM_MARGIN, 
-					MARGINS.getLeft(), 
-					LARGE_MARGIN, 
-					right);
+    ((BedGraphPlot) mSubFigure.currentAxes().currentPlot()).setBedGraph(mBedGraph);
 
-			break;
-		default:
-			mSubFigure.currentAxes().setMargins(MARGINS);
+    mSubFigure.currentAxes().setInternalSize(PLOT_SIZE);
 
-			break;
-		}
+    switch (titlePosition.getPosition()) {
+    case RIGHT:
+    case COMPACT_RIGHT:
+      int right = rightTitleWidth(getName());
 
-		return mSubFigure;
-	}
+      mSubFigure.currentAxes().setMargins(MEDIUM_MARGIN, MARGINS.getLeft(), LARGE_MARGIN, right);
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#updateGraph(org.jebtk.bioinformatics.genome.GenomicRegion, int, int, int, int)
-	 */
-	@Override
-	public TrackSubFigure updateGraph(GenomicRegion displayRegion, 
-			int resolution,
-			int width,
-			int height,
-			int margin) throws IOException {
-		// Turn off updating so that we reduce drawing events
-		//mPlot.setForwardCanvasEventsEnabled(false);
-		mSubFigure.update(displayRegion, 
-				resolution, 
-				mYMax, 
-				width, 
-				height, 
-				margin, 
-				getFillColor(), 
-				getFillColor(),
-				getStyle());
-		//mPlot.setForwardCanvasEventsEnabled(true);
+      break;
+    default:
+      mSubFigure.currentAxes().setMargins(MARGINS);
 
-		return mSubFigure;
-	}
+      break;
+    }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#getBedGraph(org.jebtk.bioinformatics.genome.GenomicRegion, int, boolean)
-	 */
-	public UCSCTrack getBedGraph(GenomicRegion displayRegion, 
-			int resolution, 
-			boolean normalize) {
-		return mBedGraph;
-	}
+    return mSubFigure;
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#toXml(org.w3c.dom.Document)
-	 */
-	@Override
-	public Element toXml(Document doc) {
-		Element trackElement = doc.createElement("track");
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.Track#updateGraph(org.jebtk.bioinformatics.
+   * genome.GenomicRegion, int, int, int, int)
+   */
+  @Override
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin)
+      throws IOException {
+    // Turn off updating so that we reduce drawing events
+    // mPlot.setForwardCanvasEventsEnabled(false);
+    mSubFigure.update(displayRegion, resolution, mYMax, width, height, margin, getFillColor(), getFillColor(),
+        getStyle());
+    // mPlot.setForwardCanvasEventsEnabled(true);
 
-		trackElement.setAttribute("type", "bedgraph");
-		trackElement.setAttribute("name", getName());
-		trackElement.setAttribute("file", PathUtils.toString(mFile));
-		trackElement.setAttribute("color", ColorUtils.toHtml(getLineColor()));
-		trackElement.setAttribute("fill-color", ColorUtils.toHtml(getFillColor()));
+    return mSubFigure;
+  }
 
-		return trackElement;
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.Track#getBedGraph(org.jebtk.bioinformatics.
+   * genome.GenomicRegion, int, boolean)
+   */
+  public UCSCTrack getBedGraph(GenomicRegion displayRegion, int resolution, boolean normalize) {
+    return mBedGraph;
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#toJson(org.abh.common.json.JsonBuilder)
-	 */
-	@Override
-	public void toJson(JsonBuilder json) {
-		json.startObject();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#toXml(org.w3c.dom.Document)
+   */
+  @Override
+  public Element toXml(Document doc) {
+    Element trackElement = doc.createElement("track");
 
-		json.add("type", "bedgraph");
-		json.add("name", getName());
-		json.add("file", PathUtils.toString(mFile));
-		json.add("color", ColorUtils.toHtml(getLineColor()));
-		json.add("fill-color", ColorUtils.toHtml(getFillColor()));
+    trackElement.setAttribute("type", "bedgraph");
+    trackElement.setAttribute("name", getName());
+    trackElement.setAttribute("file", PathUtils.toString(mFile));
+    trackElement.setAttribute("color", ColorUtils.toHtml(getLineColor()));
+    trackElement.setAttribute("fill-color", ColorUtils.toHtml(getFillColor()));
 
-		json.endObject();
-	}
+    return trackElement;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.Track#toJson(org.abh.common.json.JsonBuilder)
+   */
+  @Override
+  public void toJson(JsonBuilder json) {
+    json.startObject();
+
+    json.add("type", "bedgraph");
+    json.add("name", getName());
+    json.add("file", PathUtils.toString(mFile));
+    json.add("color", ColorUtils.toHtml(getLineColor()));
+    json.add("fill-color", ColorUtils.toHtml(getFillColor()));
+
+    json.endObject();
+  }
 }

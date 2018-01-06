@@ -42,93 +42,100 @@ import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.io.Io;
 import org.jebtk.core.io.PathUtils;
 
-
 // TODO: Auto-generated Javadoc
 /**
- * Fast search of genome sequence files to get get actual genomic data.
- * This file reads 4bit encoded genomes (i.e. 2 bases per byte).
+ * Fast search of genome sequence files to get get actual genomic data. This
+ * file reads 4bit encoded genomes (i.e. 2 bases per byte).
  *
  * @author Antony Holmes Holmes
  *
  */
 public class ReadCountsFile8Bit extends ReadCountsFile {
-	
-	/**
-	 * The member directory.
-	 */
-	protected Path mDirectory;
 
-	/**
-	 * The member file map.
-	 */
-	protected Map<Chromosome, Path> mFileMap = 
-			new HashMap<Chromosome, Path>();
+  /**
+   * The member directory.
+   */
+  protected Path mDirectory;
 
-	/**
-	 * Directory containing genome files which must be of the form
-	 * chr.n.txt. Each file must contain exactly one line consisting
-	 * of the entire chromosome.
-	 *
-	 * @param directory the directory
-	 */
-	public ReadCountsFile8Bit(Path directory) {
-		mDirectory = directory;
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.lib.bioinformatics.reads.CountAssembly#getCounts(edu.columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
-	 */
-	@Override
-	public List<Integer> getCounts(GenomicRegion region, int window) throws IOException {
-		Chromosome chr = region.getChr();
-		
-		if (!mFileMap.containsKey(chr)) {
-			mFileMap.put(chr, mDirectory.resolve(chr + ".counts.win." + window + ".8bit"));
-		}
+  /**
+   * The member file map.
+   */
+  protected Map<Chromosome, Path> mFileMap = new HashMap<Chromosome, Path>();
 
-		return getCounts(mFileMap.get(chr), region.getStart(), region.getEnd(), window);
-	}
-	
-	/**
-	 * Gets the counts.
-	 *
-	 * @param file the file
-	 * @param start the start
-	 * @param end the end
-	 * @param window the window
-	 * @return the counts
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	private static List<Integer> getCounts(final Path file,
-			int start,
-			int end,
-			int window) throws IOException {
-		
-		int s = (start - 1) / window;
-		int e = (end - 1) / window;
-		int l = e - s + 1;
-		
-		byte[] buf = GenomeAssemblyDir.getBytes(file, s, e);
+  /**
+   * Directory containing genome files which must be of the form chr.n.txt. Each
+   * file must contain exactly one line consisting of the entire chromosome.
+   *
+   * @param directory
+   *          the directory
+   */
+  public ReadCountsFile8Bit(Path directory) {
+    mDirectory = directory;
+  }
 
-		List<Integer> scores = new ArrayList<Integer>(l);
-		
-		for (int i = 0; i < l; ++i) {
-			scores.add((int)buf[i]);
-		}
-		
-		return scores;
-	}
-	
-	/**
-	 * The main method.
-	 *
-	 * @param args the arguments
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws ParseException the parse exception
-	 */
-	public static void main(String[] args) throws IOException, ParseException {
-		CountAssembly a = new ReadCountsFile8Bit(PathUtils.getPath("/ifs/scratch/cancer/Lab_RDF/abh2138/ChIP_seq/rdf/samples/transcription_factors/bcl6/CB4_BCL6_RK040/hg19/align_2_mismatches/reads/"));
-		
-		System.err.println(a.getCounts("chr1:1000000-1100000", 10));
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.lib.bioinformatics.reads.CountAssembly#getCounts(edu.
+   * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
+   */
+  @Override
+  public List<Integer> getCounts(GenomicRegion region, int window) throws IOException {
+    Chromosome chr = region.getChr();
+
+    if (!mFileMap.containsKey(chr)) {
+      mFileMap.put(chr, mDirectory.resolve(chr + ".counts.win." + window + ".8bit"));
+    }
+
+    return getCounts(mFileMap.get(chr), region.getStart(), region.getEnd(), window);
+  }
+
+  /**
+   * Gets the counts.
+   *
+   * @param file
+   *          the file
+   * @param start
+   *          the start
+   * @param end
+   *          the end
+   * @param window
+   *          the window
+   * @return the counts
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  private static List<Integer> getCounts(final Path file, int start, int end, int window) throws IOException {
+
+    int s = (start - 1) / window;
+    int e = (end - 1) / window;
+    int l = e - s + 1;
+
+    byte[] buf = GenomeAssemblyDir.getBytes(file, s, e);
+
+    List<Integer> scores = new ArrayList<Integer>(l);
+
+    for (int i = 0; i < l; ++i) {
+      scores.add((int) buf[i]);
+    }
+
+    return scores;
+  }
+
+  /**
+   * The main method.
+   *
+   * @param args
+   *          the arguments
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   * @throws ParseException
+   *           the parse exception
+   */
+  public static void main(String[] args) throws IOException, ParseException {
+    CountAssembly a = new ReadCountsFile8Bit(PathUtils.getPath(
+        "/ifs/scratch/cancer/Lab_RDF/abh2138/ChIP_seq/rdf/samples/transcription_factors/bcl6/CB4_BCL6_RK040/hg19/align_2_mismatches/reads/"));
+
+    System.err.println(a.getCounts("chr1:1000000-1100000", 10));
+  }
 }

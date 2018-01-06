@@ -29,93 +29,90 @@ import org.jebtk.modern.tree.ModernTree;
 import org.jebtk.modern.window.ModernWindow;
 import org.jebtk.modern.window.WindowWidgetFocusEvents;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class AnnotationTracksDialog.
  */
 public class AnnotationTracksDialog extends ModernDialogMultiCardWindow {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	//private AnnotationTracksTreePanel mTracksPanel;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The m tree. */
-	private ModernTree<Track> mTree;
-	
-	/** The m boxes. */
-	private List<AnnotationTracksBox> mBoxes = 
-			new ArrayList<AnnotationTracksBox>();
-	
-	/**
-	 * Instantiates a new annotation tracks dialog.
-	 *
-	 * @param parent the parent
-	 * @param tree the tree
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public AnnotationTracksDialog(ModernWindow parent,
-			ModernTree<Track> tree) throws IOException {
-		super(parent, 
-				"Annotations", 
-				"htsview.annotations.help.url", 
-				ModernDialogTaskType.OK_CANCEL);
-		
-		mTree = tree;
+  // private AnnotationTracksTreePanel mTracksPanel;
 
-		createUi();
-		
-		setup();
-	}
+  /** The m tree. */
+  private ModernTree<Track> mTree;
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		addWindowListener(new WindowWidgetFocusEvents(mOkButton));
-		
-		setResizable(true);
-		
-		setSize(640, 480);
-		
-		mTabsModel.changeTab(0);
-		
-		UI.centerWindowToScreen(this);
-		
-		
-	}
+  /** The m boxes. */
+  private List<AnnotationTracksBox> mBoxes = new ArrayList<AnnotationTracksBox>();
 
-	/**
-	 * Creates the ui.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	private final void createUi() throws IOException {
-		for (TreeNode<Track> child : mTree) {
-			AnnotationTracksBox box = new AnnotationTracksBox(child);
-			
-			ModernScrollPane scrollPane = new ModernScrollPane(box);
-			scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
-			
-			addTab(child.getName(), scrollPane);
-			
-			mBoxes.add(box);
-		}
-	}
-	
-	/**
-	 * Gets the tracks.
-	 *
-	 * @return the tracks
-	 */
-	public List<Track> getTracks() {
-		List<Track> tracks = new ArrayList<Track>();
-		
-		for (AnnotationTracksBox box : mBoxes) {
-			tracks.addAll(box.getTracks());
-		}
-		
-		return tracks;
-	}
+  /**
+   * Instantiates a new annotation tracks dialog.
+   *
+   * @param parent
+   *          the parent
+   * @param tree
+   *          the tree
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public AnnotationTracksDialog(ModernWindow parent, ModernTree<Track> tree) throws IOException {
+    super(parent, "Annotations", "htsview.annotations.help.url", ModernDialogTaskType.OK_CANCEL);
+
+    mTree = tree;
+
+    createUi();
+
+    setup();
+  }
+
+  /**
+   * Setup.
+   */
+  private void setup() {
+    addWindowListener(new WindowWidgetFocusEvents(mOkButton));
+
+    setResizable(true);
+
+    setSize(640, 480);
+
+    mTabsModel.changeTab(0);
+
+    UI.centerWindowToScreen(this);
+
+  }
+
+  /**
+   * Creates the ui.
+   *
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  private final void createUi() throws IOException {
+    for (TreeNode<Track> child : mTree) {
+      AnnotationTracksBox box = new AnnotationTracksBox(child);
+
+      ModernScrollPane scrollPane = new ModernScrollPane(box);
+      scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
+
+      addTab(child.getName(), scrollPane);
+
+      mBoxes.add(box);
+    }
+  }
+
+  /**
+   * Gets the tracks.
+   *
+   * @return the tracks
+   */
+  public List<Track> getTracks() {
+    List<Track> tracks = new ArrayList<Track>();
+
+    for (AnnotationTracksBox box : mBoxes) {
+      tracks.addAll(box.getTracks());
+    }
+
+    return tracks;
+  }
 }

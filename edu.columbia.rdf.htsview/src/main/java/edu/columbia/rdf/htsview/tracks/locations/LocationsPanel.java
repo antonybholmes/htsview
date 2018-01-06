@@ -66,368 +66,373 @@ import org.jebtk.modern.window.ModernRibbonWindow;
  */
 public class LocationsPanel extends ModernComponent implements ModernClickListener {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-
-	/** The m location list. */
-	private LocationList mLocationList = new LocationList();
-
-	/** The m list model. */
-	private LocationListModel mListModel = new LocationListModel();
-
-	/** The m open button. */
-	private ModernButton mOpenButton = 
-			new ModernDialogFlatButton(UIService.getInstance().loadIcon(FolderBwVectorIcon.class, 16));
-
-	/** The m delete button. */
-	private ModernButton mDeleteButton = 
-			new ModernDialogFlatButton(UIService.getInstance().loadIcon("trash_bw", 16));
-
-	/** The m model. */
-	private GenomicRegionModel mModel;
-
-	/** The m parent. */
-	private ModernRibbonWindow mParent;
-
-	/** The m genome model. */
-	private GenomeModel mGenomeModel;
-
-	/** The m used. */
-	private Set<String> mUsed = new HashSet<String>();
-
-	/**
-	 * The Class DeleteEvents.
-	 */
-	private class DeleteEvents implements DialogEventListener {
-
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.dialog.DialogEventListener#statusChanged(org.abh.common.ui.dialog.DialogEvent)
-		 */
-		@Override
-		public void statusChanged(DialogEvent e) {
-			if (e.getStatus() == ModernDialogStatus.OK) {
-				ArrayList<Integer> indices = new ArrayList<Integer>();
-
-				for (int i : mLocationList.getSelectionModel()) {
-					indices.add(i);
-
-					mUsed.remove(mLocationList.getValueAt(i));
-				}
-
-				mListModel.removeValuesAt(indices);
-			}
-		}
-	}
-
-	/**
-	 * The Class PasteAction.
-	 */
-	private class PasteAction extends AbstractAction  {
-
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
-
-		/* (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			loadLocations(TextUtils.tabSplit(UIService.getClipboardText().replaceAll("[\\r\\n]+",  TextUtils.TAB_DELIMITER)));
-		}
-
-
-
-	}
-
-	/**
-	 * The Class SelectionEvents.
-	 */
-	private class SelectionEvents implements ModernSelectionListener {
-
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.event.ModernSelectionListener#selectionChanged(org.abh.common.event.ChangeEvent)
-		 */
-		@Override
-		public void selectionChanged(ChangeEvent e) {
-			GenomicRegion region = parse(mLocationList.getSelectedItem());
-
-			if (region != null) {
-				mModel.set(region);
-			}
-		}
-	}
-
-	/**
-	 * Instantiates a new locations panel.
-	 *
-	 * @param parent the parent
-	 * @param genomeModel the genome model
-	 * @param model the model
-	 */
-	public LocationsPanel(ModernRibbonWindow parent,
-			GenomeModel genomeModel,
-			GenomicRegionModel model) {
-
-		mParent = parent;
-		mGenomeModel = genomeModel;
-		mModel = model;
-
-		setup();
-
-		createUi();
-
-		mLocationList.addSelectionListener(new SelectionEvents());
-
-		//mModel.addChangeListener(new GenomicEvents());
-
-
-		getInputMap(WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_MASK), "paste");
-
-		getActionMap().put("paste", new PasteAction());
-
-
-		mModel.addChangeListener(new ChangeListener(){
-
-			@Override
-			public void changed(ChangeEvent e) {
-				refresh();
-			}});
-	}
-
-	/**
-	 * Creates the ui.
-	 */
-	public void createUi() {
-		Box box = HBox.create();
-
-		mOpenButton.setToolTip("Load", "Load locations from a file.");
-		box.add(mOpenButton);
-		box.add(createHGap());
-		mDeleteButton.setToolTip("Delete", "Delete selected locations.");
-		box.add(mDeleteButton);
-		box.setBorder(BOTTOM_BORDER);
-
-		setHeader(box);
-
-		ModernScrollPane scrollPane = new ModernScrollPane(mLocationList);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
-		//scrollPane.setBorder(LARGE_BORDER);
-		setBody(scrollPane);
-
-		setBorder(LARGE_BORDER);
-
-		/*
-		Box box = new ToolbarBottomBox();
-
-		mSamplesButton.setToolTip("Samples Database", "Load ChIP-seq samples from database.");
-		box.add(mSamplesButton);
-		box.add(ModernTheme.createHorizontalGap());
-		mTracksButton.setToolTip("Load Annotation Tracks", "Load additional annotation tracks.");
-		box.add(mTracksButton);
-		box.add(ModernTheme.createHorizontalGap());
-		mEditButton.setToolTip("Edit Tracks", "Edit track properties.");
-		box.add(mEditButton);
-		box.add(ModernTheme.createHorizontalGap());
-		//box.add(Box.createHorizontalGlue());
-		mDeleteButton.setToolTip("Delete", "Delete selected tracks.");
-		box.add(mDeleteButton);
-		//box.add(ModernTheme.createHorizontalGap());
-		//mClearButton.setToolTip("Clear", "Remove all tracks.");
-		//box.add(mClearButton);
-
-		add(box, BorderLayout.PAGE_END);
-		 */
-
-
-
-	}
-
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		mLocationList.setModel(mListModel);
-
-		mOpenButton.addClickListener(this);
-		mDeleteButton.addClickListener(this);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		if (e.getSource().equals(mOpenButton)) {
-			try {
-				browseForFile();
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		} else if (e.getSource().equals(mDeleteButton)) {
-			deleteTracks();
-		} else {
-			// do nothing
-		}
-	}
-
-	/**
-	 * Refresh.
-	 */
-	private void refresh() {
-		addValue(mModel.get().getLocation());
-	}
-
-
-	/**
-	 * Load locations.
-	 *
-	 * @param entries the entries
-	 */
-	private void loadLocations(List<String> entries) {
-
-		//for (String location : entries) {
-		//	GenomicRegion region = GenomicRegion.parse(location);
-		//
-		//	if (region != null) {
-		//		mLocationsModel.add(region);
-		//	}
-		//}
-
-		addValues(entries); //ArrayUtils.toString(ArrayUtils.sort(mLocationsModel)));
-	}
-
-	/**
-	 * Adds the values.
-	 *
-	 * @param locations the locations
-	 */
-	private void addValues(List<String> locations) {
-		for (String l : locations) {
-			addValue(l);
-		}
-
-	}
-
-	/**
-	 * Adds the value.
-	 *
-	 * @param location the location
-	 */
-	private void addValue(String location) {
-		if (!mUsed.contains(location)) {
-			mListModel.addValue(location);
-			mUsed.add(location);
-		}
-	}
-
-	/**
-	 * Delete tracks.
-	 */
-	private void deleteTracks() {
-		ModernMessageDialog.createOkCancelWarningDialog(mParent, 
-				"Are you sure you want to delete the selected locations?", 
-				new DeleteEvents());
-	}
-
-	/**
-	 * Browse for file.
-	 *
-	 * @throws Exception the exception
-	 */
-	public void browseForFile() throws Exception {
-		browseForFile(RecentFilesService.getInstance().getPwd());
-	}
-
-	/**
-	 * Browse for file.
-	 *
-	 * @param pwd the pwd
-	 * @throws Exception the exception
-	 */
-	public void browseForFile(Path pwd) throws Exception {
-		openFiles(ExcelDialog.open(mParent).xlsx().getFiles(pwd));
-	}
-
-	/**
-	 * Open files.
-	 *
-	 * @param files the files
-	 * @throws Exception the exception
-	 */
-	public void openFiles(List<Path> files) throws Exception {
-		if (CollectionUtils.isNullOrEmpty(files)) {
-			return;
-		}
-
-		for (Path file : files) {
-			List<String> lines = Excel.getTextFromFile(file, true);
-
-			addValues(lines);
-
-			//for (String location : lines) {
-			//	GenomicRegion region = GenomicRegion.parse(location);
-			//
-			//	if (region != null) {
-			//		locations.add(region);
-			//	}
-			//}
-		}
-
-		//mListModel.addValues(locations);
-
-		//mListModel.addValues(ArrayUtils.toString(ArrayUtils.sort(mLocationsModel)));
-	}
-
-	/**
-	 * Parses the.
-	 *
-	 * @param text the text
-	 * @return the genomic region
-	 * @throws ParseException the parse exception
-	 */
-	private GenomicRegion parse(String text) {
-		if (TextUtils.isNullOrEmpty(text)) {
-			return null;
-		}
-
-		GenomicRegion region = null;
-
-		if (text.matches("^chr(\\d+|[xymXYM])$")) {
-			// use the whole chromosome
-
-			Chromosome chromosome = ChromosomeService
-					.getInstance()
-					.parse(mGenomeModel.get(), text);
-
-			int size = ChromosomeSizesService
-					.getInstance()
-					.getSizes(mGenomeModel.get())
-					.getSize(chromosome);
-
-			region = new GenomicRegion(chromosome, 1, size);
-
-		} else if (text.startsWith("chr")) { // remove commas
-			region = GenomicRegion.parse(text);
-
-			// Make sure region is within the bounds of the chromosome
-
-			int size = ChromosomeSizesService
-					.getInstance()
-					.getSizes(mGenomeModel.get())
-					.getSize(region.getChr());
-
-			region = new GenomicRegion(region.getChr(), 
-					Math.max(1, region.getStart()), 
-					Math.min(region.getEnd(), size));
-
-		} else {
-			// assume its a gene
-
-			region = GenesService.getInstance()
-					.getGenes(mGenomeModel.get(), "refseq")
-					.getGene(text);
-		}
-
-		return region;
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
+
+  /** The m location list. */
+  private LocationList mLocationList = new LocationList();
+
+  /** The m list model. */
+  private LocationListModel mListModel = new LocationListModel();
+
+  /** The m open button. */
+  private ModernButton mOpenButton = new ModernDialogFlatButton(
+      UIService.getInstance().loadIcon(FolderBwVectorIcon.class, 16));
+
+  /** The m delete button. */
+  private ModernButton mDeleteButton = new ModernDialogFlatButton(UIService.getInstance().loadIcon("trash_bw", 16));
+
+  /** The m model. */
+  private GenomicRegionModel mModel;
+
+  /** The m parent. */
+  private ModernRibbonWindow mParent;
+
+  /** The m genome model. */
+  private GenomeModel mGenomeModel;
+
+  /** The m used. */
+  private Set<String> mUsed = new HashSet<String>();
+
+  /**
+   * The Class DeleteEvents.
+   */
+  private class DeleteEvents implements DialogEventListener {
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.dialog.DialogEventListener#statusChanged(org.abh.common.ui.
+     * dialog.DialogEvent)
+     */
+    @Override
+    public void statusChanged(DialogEvent e) {
+      if (e.getStatus() == ModernDialogStatus.OK) {
+        ArrayList<Integer> indices = new ArrayList<Integer>();
+
+        for (int i : mLocationList.getSelectionModel()) {
+          indices.add(i);
+
+          mUsed.remove(mLocationList.getValueAt(i));
+        }
+
+        mListModel.removeValuesAt(indices);
+      }
+    }
+  }
+
+  /**
+   * The Class PasteAction.
+   */
+  private class PasteAction extends AbstractAction {
+
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 1L;
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      loadLocations(TextUtils.tabSplit(UIService.getClipboardText().replaceAll("[\\r\\n]+", TextUtils.TAB_DELIMITER)));
+    }
+
+  }
+
+  /**
+   * The Class SelectionEvents.
+   */
+  private class SelectionEvents implements ModernSelectionListener {
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.event.ModernSelectionListener#selectionChanged(org.abh.
+     * common.event.ChangeEvent)
+     */
+    @Override
+    public void selectionChanged(ChangeEvent e) {
+      GenomicRegion region = parse(mLocationList.getSelectedItem());
+
+      if (region != null) {
+        mModel.set(region);
+      }
+    }
+  }
+
+  /**
+   * Instantiates a new locations panel.
+   *
+   * @param parent
+   *          the parent
+   * @param genomeModel
+   *          the genome model
+   * @param model
+   *          the model
+   */
+  public LocationsPanel(ModernRibbonWindow parent, GenomeModel genomeModel, GenomicRegionModel model) {
+
+    mParent = parent;
+    mGenomeModel = genomeModel;
+    mModel = model;
+
+    setup();
+
+    createUi();
+
+    mLocationList.addSelectionListener(new SelectionEvents());
+
+    // mModel.addChangeListener(new GenomicEvents());
+
+    getInputMap(WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_MASK),
+        "paste");
+
+    getActionMap().put("paste", new PasteAction());
+
+    mModel.addChangeListener(new ChangeListener() {
+
+      @Override
+      public void changed(ChangeEvent e) {
+        refresh();
+      }
+    });
+  }
+
+  /**
+   * Creates the ui.
+   */
+  public void createUi() {
+    Box box = HBox.create();
+
+    mOpenButton.setToolTip("Load", "Load locations from a file.");
+    box.add(mOpenButton);
+    box.add(createHGap());
+    mDeleteButton.setToolTip("Delete", "Delete selected locations.");
+    box.add(mDeleteButton);
+    box.setBorder(BOTTOM_BORDER);
+
+    setHeader(box);
+
+    ModernScrollPane scrollPane = new ModernScrollPane(mLocationList);
+    scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
+    // scrollPane.setBorder(LARGE_BORDER);
+    setBody(scrollPane);
+
+    setBorder(LARGE_BORDER);
+
+    /*
+     * Box box = new ToolbarBottomBox();
+     * 
+     * mSamplesButton.setToolTip("Samples Database",
+     * "Load ChIP-seq samples from database."); box.add(mSamplesButton);
+     * box.add(ModernTheme.createHorizontalGap());
+     * mTracksButton.setToolTip("Load Annotation Tracks",
+     * "Load additional annotation tracks."); box.add(mTracksButton);
+     * box.add(ModernTheme.createHorizontalGap());
+     * mEditButton.setToolTip("Edit Tracks", "Edit track properties.");
+     * box.add(mEditButton); box.add(ModernTheme.createHorizontalGap());
+     * //box.add(Box.createHorizontalGlue()); mDeleteButton.setToolTip("Delete",
+     * "Delete selected tracks."); box.add(mDeleteButton);
+     * //box.add(ModernTheme.createHorizontalGap());
+     * //mClearButton.setToolTip("Clear", "Remove all tracks.");
+     * //box.add(mClearButton);
+     * 
+     * add(box, BorderLayout.PAGE_END);
+     */
+
+  }
+
+  /**
+   * Setup.
+   */
+  private void setup() {
+    mLocationList.setModel(mListModel);
+
+    mOpenButton.addClickListener(this);
+    mDeleteButton.addClickListener(this);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
+   * ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    if (e.getSource().equals(mOpenButton)) {
+      try {
+        browseForFile();
+      } catch (Exception e1) {
+        e1.printStackTrace();
+      }
+    } else if (e.getSource().equals(mDeleteButton)) {
+      deleteTracks();
+    } else {
+      // do nothing
+    }
+  }
+
+  /**
+   * Refresh.
+   */
+  private void refresh() {
+    addValue(mModel.get().getLocation());
+  }
+
+  /**
+   * Load locations.
+   *
+   * @param entries
+   *          the entries
+   */
+  private void loadLocations(List<String> entries) {
+
+    // for (String location : entries) {
+    // GenomicRegion region = GenomicRegion.parse(location);
+    //
+    // if (region != null) {
+    // mLocationsModel.add(region);
+    // }
+    // }
+
+    addValues(entries); // ArrayUtils.toString(ArrayUtils.sort(mLocationsModel)));
+  }
+
+  /**
+   * Adds the values.
+   *
+   * @param locations
+   *          the locations
+   */
+  private void addValues(List<String> locations) {
+    for (String l : locations) {
+      addValue(l);
+    }
+
+  }
+
+  /**
+   * Adds the value.
+   *
+   * @param location
+   *          the location
+   */
+  private void addValue(String location) {
+    if (!mUsed.contains(location)) {
+      mListModel.addValue(location);
+      mUsed.add(location);
+    }
+  }
+
+  /**
+   * Delete tracks.
+   */
+  private void deleteTracks() {
+    ModernMessageDialog.createOkCancelWarningDialog(mParent, "Are you sure you want to delete the selected locations?",
+        new DeleteEvents());
+  }
+
+  /**
+   * Browse for file.
+   *
+   * @throws Exception
+   *           the exception
+   */
+  public void browseForFile() throws Exception {
+    browseForFile(RecentFilesService.getInstance().getPwd());
+  }
+
+  /**
+   * Browse for file.
+   *
+   * @param pwd
+   *          the pwd
+   * @throws Exception
+   *           the exception
+   */
+  public void browseForFile(Path pwd) throws Exception {
+    openFiles(ExcelDialog.open(mParent).xlsx().getFiles(pwd));
+  }
+
+  /**
+   * Open files.
+   *
+   * @param files
+   *          the files
+   * @throws Exception
+   *           the exception
+   */
+  public void openFiles(List<Path> files) throws Exception {
+    if (CollectionUtils.isNullOrEmpty(files)) {
+      return;
+    }
+
+    for (Path file : files) {
+      List<String> lines = Excel.getTextFromFile(file, true);
+
+      addValues(lines);
+
+      // for (String location : lines) {
+      // GenomicRegion region = GenomicRegion.parse(location);
+      //
+      // if (region != null) {
+      // locations.add(region);
+      // }
+      // }
+    }
+
+    // mListModel.addValues(locations);
+
+    // mListModel.addValues(ArrayUtils.toString(ArrayUtils.sort(mLocationsModel)));
+  }
+
+  /**
+   * Parses the.
+   *
+   * @param text
+   *          the text
+   * @return the genomic region
+   * @throws ParseException
+   *           the parse exception
+   */
+  private GenomicRegion parse(String text) {
+    if (TextUtils.isNullOrEmpty(text)) {
+      return null;
+    }
+
+    GenomicRegion region = null;
+
+    if (text.matches("^chr(\\d+|[xymXYM])$")) {
+      // use the whole chromosome
+
+      Chromosome chromosome = ChromosomeService.getInstance().parse(mGenomeModel.get(), text);
+
+      int size = ChromosomeSizesService.getInstance().getSizes(mGenomeModel.get()).getSize(chromosome);
+
+      region = new GenomicRegion(chromosome, 1, size);
+
+    } else if (text.startsWith("chr")) { // remove commas
+      region = GenomicRegion.parse(text);
+
+      // Make sure region is within the bounds of the chromosome
+
+      int size = ChromosomeSizesService.getInstance().getSizes(mGenomeModel.get()).getSize(region.getChr());
+
+      region = new GenomicRegion(region.getChr(), Math.max(1, region.getStart()), Math.min(region.getEnd(), size));
+
+    } else {
+      // assume its a gene
+
+      region = GenesService.getInstance().getGenes(mGenomeModel.get(), "refseq").getGene(text);
+    }
+
+    return region;
+  }
 }

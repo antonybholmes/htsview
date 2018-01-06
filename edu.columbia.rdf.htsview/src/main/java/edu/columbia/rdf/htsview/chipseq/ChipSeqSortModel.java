@@ -23,34 +23,33 @@ import edu.columbia.rdf.edb.ui.sort.SortSamplesByName;
 import edu.columbia.rdf.edb.ui.sort.SortSamplesByOrganism;
 import edu.columbia.rdf.edb.ui.sort.SortSamplesByPerson;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class ChipSeqSortModel.
  */
 public class ChipSeqSortModel extends SampleSortModel {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new chip seq sort model.
-	 */
-	public ChipSeqSortModel() {
-		add(new SortSamplesByExperiment());
-		add(new SortSamplesByName());
-		add(new SortSamplesBySeqId());
-		add(new SortSamplesByOrganism());
-		
-		add(new SortSamplesByCellType());
-		add(new SortSamplesByClassification());
-		add(new SortSamplesByTreatment());
-		add(new SortSamplesByDate());
-		
-		add(new SortSamplesByGenome());
-		add(new SortSamplesByPerson());
-		add(new SortSamplesByGroup());
-		
-		setDefault("Sample Name");
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new chip seq sort model.
+   */
+  public ChipSeqSortModel() {
+    add(new SortSamplesByExperiment());
+    add(new SortSamplesByName());
+    add(new SortSamplesBySeqId());
+    add(new SortSamplesByOrganism());
+
+    add(new SortSamplesByCellType());
+    add(new SortSamplesByClassification());
+    add(new SortSamplesByTreatment());
+    add(new SortSamplesByDate());
+
+    add(new SortSamplesByGenome());
+    add(new SortSamplesByPerson());
+    add(new SortSamplesByGroup());
+
+    setDefault("Sample Name");
+  }
 }

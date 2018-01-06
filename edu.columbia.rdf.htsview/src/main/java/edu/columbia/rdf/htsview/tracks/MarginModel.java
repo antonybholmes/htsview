@@ -20,34 +20,35 @@ import org.jebtk.core.settings.SettingsService;
 
 // TODO: Auto-generated Javadoc
 /**
- * Centrally keep track of selected experiments in the order they were
- * selected.
+ * Centrally keep track of selected experiments in the order they were selected.
  * 
  * @author Antony Holmes Holmes
  *
  */
 public class MarginModel extends ItemModel<Integer> {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new title position model.
-	 */
-	public MarginModel() {
-		set(SettingsService.getInstance().getAsInt("htsview.plot.left-margin"));
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.lib.model.ItemModel#set(java.lang.Object)
-	 */
-	@Override
-	public void set(Integer position) {
-		super.set(position);
-		
-		// Store the setting
-		SettingsService.getInstance().update("htsview.plot.left-margin", get());
-	}
+  /**
+   * Instantiates a new title position model.
+   */
+  public MarginModel() {
+    set(SettingsService.getInstance().getAsInt("htsview.plot.left-margin"));
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.model.ItemModel#set(java.lang.Object)
+   */
+  @Override
+  public void set(Integer position) {
+    super.set(position);
+
+    // Store the setting
+    SettingsService.getInstance().update("htsview.plot.left-margin", get());
+  }
 }

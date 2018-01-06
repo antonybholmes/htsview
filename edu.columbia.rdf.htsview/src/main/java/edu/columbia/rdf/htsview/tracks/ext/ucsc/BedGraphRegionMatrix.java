@@ -28,42 +28,45 @@ import org.jebtk.math.matrix.EmptyMatrix;
  */
 public class BedGraphRegionMatrix extends DataFrame {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m regions. */
-	private List<UCSCTrackRegion> mRegions;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new bed graph region matrix. Each region forms two
-	 * points, the start and end of a line, so the matrix must be double the
-	 * size of the number of regions.
-	 *
-	 * @param regions the regions
-	 */
-	public BedGraphRegionMatrix(List<UCSCTrackRegion> regions) {
-		super(new EmptyMatrix(regions.size() * 2, 2));
-		
-		setColumnNames("Points x", "Points y");
-		
-		mRegions = regions;
-	}
+  /** The m regions. */
+  private List<UCSCTrackRegion> mRegions;
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.math.matrix.AnnotatableMatrix#getValue(int, int)
-	 */
-	@Override
-	public double getValue(int row, int column) {
-		int r2 = row / 2;
-		
-		if (column == 0) {
-			if (row % 2 == 0) {
-				return mRegions.get(r2).getStart();
-			} else {
-				return mRegions.get(r2).getEnd();
-			}
-		} else {
-			return ((BedGraphRegion)mRegions.get(r2)).getValue();
-		}
-	}
+  /**
+   * Instantiates a new bed graph region matrix. Each region forms two points, the
+   * start and end of a line, so the matrix must be double the size of the number
+   * of regions.
+   *
+   * @param regions
+   *          the regions
+   */
+  public BedGraphRegionMatrix(List<UCSCTrackRegion> regions) {
+    super(new EmptyMatrix(regions.size() * 2, 2));
+
+    setColumnNames("Points x", "Points y");
+
+    mRegions = regions;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.math.matrix.AnnotatableMatrix#getValue(int, int)
+   */
+  @Override
+  public double getValue(int row, int column) {
+    int r2 = row / 2;
+
+    if (column == 0) {
+      if (row % 2 == 0) {
+        return mRegions.get(r2).getStart();
+      } else {
+        return mRegions.get(r2).getEnd();
+      }
+    } else {
+      return ((BedGraphRegion) mRegions.get(r2)).getValue();
+    }
+  }
 }

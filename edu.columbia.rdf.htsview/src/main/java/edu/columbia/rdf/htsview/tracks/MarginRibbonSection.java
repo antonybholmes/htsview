@@ -24,8 +24,6 @@ import org.jebtk.modern.ribbon.RibbonSection;
 import org.jebtk.modern.ribbon.RibbonStripContainer;
 import org.jebtk.modern.spinner.ModernCompactSpinner;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
  * Allows user to select a color map.
@@ -34,64 +32,65 @@ import org.jebtk.modern.spinner.ModernCompactSpinner;
  *
  */
 public class MarginRibbonSection extends RibbonSection {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The m text y min.
-	 */
-	private ModernCompactSpinner mWidthField = 
-			new ModernCompactSpinner(1, 10000, 400);
 
-	/** The m model. */
-	private MarginModel mModel;
-	
-	
-	/**
-	 * The class KeyEvents.
-	 */
-	private class KeyEvents implements ChangeListener {
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
-		 */
-		@Override
-		public void changed(ChangeEvent e) {
-			mModel.set(mWidthField.getIntValue());
-		}
-	}
-	
-	
-	/**
-	 * Instantiates a new scale ribbon section2.
-	 *
-	 * @param ribbon the ribbon
-	 * @param model the model
-	 */
-	public MarginRibbonSection(Ribbon ribbon, MarginModel model) {
-		super(ribbon, "Margin");
-		
-		mModel = model;
-			
-		Box box = new RibbonStripContainer();
+  /**
+   * The m text y min.
+   */
+  private ModernCompactSpinner mWidthField = new ModernCompactSpinner(1, 10000, 400);
 
-		box.add(mWidthField);
-		
-		mWidthField.setValue(model.get());
-		
-		add(box);
+  /** The m model. */
+  private MarginModel mModel;
 
-		mWidthField.addChangeListener(new KeyEvents());
-		
-		
-		model.addChangeListener(new ChangeListener() {
+  /**
+   * The class KeyEvents.
+   */
+  private class KeyEvents implements ChangeListener {
 
-			@Override
-			public void changed(ChangeEvent e) {
-				mWidthField.updateValue(mModel.get());
-			}});
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
+     */
+    @Override
+    public void changed(ChangeEvent e) {
+      mModel.set(mWidthField.getIntValue());
+    }
+  }
+
+  /**
+   * Instantiates a new scale ribbon section2.
+   *
+   * @param ribbon
+   *          the ribbon
+   * @param model
+   *          the model
+   */
+  public MarginRibbonSection(Ribbon ribbon, MarginModel model) {
+    super(ribbon, "Margin");
+
+    mModel = model;
+
+    Box box = new RibbonStripContainer();
+
+    box.add(mWidthField);
+
+    mWidthField.setValue(model.get());
+
+    add(box);
+
+    mWidthField.addChangeListener(new KeyEvents());
+
+    model.addChangeListener(new ChangeListener() {
+
+      @Override
+      public void changed(ChangeEvent e) {
+        mWidthField.updateValue(mModel.get());
+      }
+    });
+  }
 }

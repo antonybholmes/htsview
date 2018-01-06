@@ -25,33 +25,30 @@ import edu.columbia.rdf.edb.ui.SamplesDialog;
  * The Class ChipSeqSamplesDialog.
  */
 public class ChipSeqSamplesDialog extends SamplesDialog {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new chip seq samples dialog.
-	 *
-	 * @param parent the parent
-	 */
-	public ChipSeqSamplesDialog(ModernWindow parent) {
-		this(parent, new SearchModel());
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new chip seq samples dialog.
-	 *
-	 * @param parent the parent
-	 * @param searchModel the search model
-	 */
-	public ChipSeqSamplesDialog(ModernWindow parent,
-			SearchModel searchModel) {
-		
-		super(parent, 
-				"ChIP-seq Samples", 
-				"htsview.samples.help.url",
-				"chipseq",
-				new ChipSeqSortModel(),
-				searchModel);
-	}
+  /**
+   * Instantiates a new chip seq samples dialog.
+   *
+   * @param parent
+   *          the parent
+   */
+  public ChipSeqSamplesDialog(ModernWindow parent) {
+    this(parent, new SearchModel());
+  }
+
+  /**
+   * Instantiates a new chip seq samples dialog.
+   *
+   * @param parent
+   *          the parent
+   * @param searchModel
+   *          the search model
+   */
+  public ChipSeqSamplesDialog(ModernWindow parent, SearchModel searchModel) {
+
+    super(parent, "ChIP-seq Samples", "htsview.samples.help.url", "chipseq", new ChipSeqSortModel(), searchModel);
+  }
 }

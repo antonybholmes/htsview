@@ -26,8 +26,6 @@ import org.jebtk.modern.ribbon.RibbonLargeRadioButton;
 import org.jebtk.modern.ribbon.RibbonSection;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
  * Allows user to select the resolution to view sequences.
@@ -35,121 +33,121 @@ import org.jebtk.modern.widget.ModernTwoStateWidget;
  * @author Antony Holmes Holmes
  */
 public class LayoutRibbonSection extends RibbonSection implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The m top button.
-	 */
-	private RibbonLargeRadioButton mTopButton = 
-			new RibbonLargeRadioButton("Titles Top", UIService.getInstance().loadIcon("title_top", 32));
-	
-	/**
-	 * The m right button.
-	 */
-	private RibbonLargeRadioButton mRightButton = 
-			new RibbonLargeRadioButton("Titles Right", UIService.getInstance().loadIcon("title_right", 32));
-	
-	/**
-	 * The m compact right button.
-	 */
-	private RibbonLargeRadioButton mCompactRightButton = 
-			new RibbonLargeRadioButton("Compact Right Titles", UIService.getInstance().loadIcon("title_compact_right", 32));
-	
-	/** The m check visible. */
-	private ModernTwoStateWidget mCheckVisible = 
-			new ModernCheckSwitch("Show");
-	
-	/**
-	 * The m model.
-	 */
-	private TitlePositionModel mModel;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new title position ribbon section2.
-	 *
-	 * @param ribbon the ribbon
-	 * @param model the model
-	 */
-	public LayoutRibbonSection(Ribbon ribbon, TitlePositionModel model) {
-		super(ribbon, "Titles");
-		
-		mModel = model;
-		
-		add(mCheckVisible);
-		add(UI.createHGap(2));
-		
-		mTopButton.setToolTip("Vertical", 
-				"Title are positioned on top of plots.");
-		mTopButton.setShowText(false);
-		add(mTopButton);
-		
-		mRightButton.setToolTip("Wide", 
-				"Title are positioned on the right of plots to save vertical space.");
-		mRightButton.setShowText(false);
-		add(UI.createHGap(2));
-		add(mRightButton);
-		
-		mCompactRightButton.setToolTip("Compact", 
-				"Title are positioned on the right of plots to save vertical space.");
-		mCompactRightButton.setShowText(false);
-		add(UI.createHGap(2));
-		add(mCompactRightButton);
-		
-		
-		
-		
-		ModernButtonGroup group = new ModernButtonGroup();
+  /**
+   * The m top button.
+   */
+  private RibbonLargeRadioButton mTopButton = new RibbonLargeRadioButton("Titles Top",
+      UIService.getInstance().loadIcon("title_top", 32));
 
-		group.add(mTopButton);
-		group.add(mRightButton);
-		group.add(mCompactRightButton);
+  /**
+   * The m right button.
+   */
+  private RibbonLargeRadioButton mRightButton = new RibbonLargeRadioButton("Titles Right",
+      UIService.getInstance().loadIcon("title_right", 32));
 
-		mTopButton.addClickListener(this);
-		mRightButton.addClickListener(this);
-		mCompactRightButton.addClickListener(this);
-		mCheckVisible.addClickListener(this);
+  /**
+   * The m compact right button.
+   */
+  private RibbonLargeRadioButton mCompactRightButton = new RibbonLargeRadioButton("Compact Right Titles",
+      UIService.getInstance().loadIcon("title_compact_right", 32));
 
-		switch(mModel.get().getPosition()) {
-		case COMPACT_RIGHT:
-			mCompactRightButton.setSelected(true);
-			break;
-		case RIGHT:
-			mRightButton.setSelected(true);
-			break;
-		default:
-			mTopButton.setSelected(true);
-			break;
-		}
-		
-		mCheckVisible.setSelected(mModel.get().getVisible());
-	}
-	
-	/**
-	 * Change.
-	 *
-	 * @param e the e
-	 */
-	private void change(ModernClickEvent e) {
-		if (mTopButton.isSelected()) {
-			mModel.set(new TitleProperties(TitlePosition.TOP, mCheckVisible.isSelected()));
-		} else if (mRightButton.isSelected()) {
-			mModel.set(new TitleProperties(TitlePosition.RIGHT, mCheckVisible.isSelected()));
-		} else if (mCompactRightButton.isSelected()) {
-			mModel.set(new TitleProperties(TitlePosition.COMPACT_RIGHT, mCheckVisible.isSelected()));
-		} else {
-			
-		}
-	}
+  /** The m check visible. */
+  private ModernTwoStateWidget mCheckVisible = new ModernCheckSwitch("Show");
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		change(e);
-	}
+  /**
+   * The m model.
+   */
+  private TitlePositionModel mModel;
+
+  /**
+   * Instantiates a new title position ribbon section2.
+   *
+   * @param ribbon
+   *          the ribbon
+   * @param model
+   *          the model
+   */
+  public LayoutRibbonSection(Ribbon ribbon, TitlePositionModel model) {
+    super(ribbon, "Titles");
+
+    mModel = model;
+
+    add(mCheckVisible);
+    add(UI.createHGap(2));
+
+    mTopButton.setToolTip("Vertical", "Title are positioned on top of plots.");
+    mTopButton.setShowText(false);
+    add(mTopButton);
+
+    mRightButton.setToolTip("Wide", "Title are positioned on the right of plots to save vertical space.");
+    mRightButton.setShowText(false);
+    add(UI.createHGap(2));
+    add(mRightButton);
+
+    mCompactRightButton.setToolTip("Compact", "Title are positioned on the right of plots to save vertical space.");
+    mCompactRightButton.setShowText(false);
+    add(UI.createHGap(2));
+    add(mCompactRightButton);
+
+    ModernButtonGroup group = new ModernButtonGroup();
+
+    group.add(mTopButton);
+    group.add(mRightButton);
+    group.add(mCompactRightButton);
+
+    mTopButton.addClickListener(this);
+    mRightButton.addClickListener(this);
+    mCompactRightButton.addClickListener(this);
+    mCheckVisible.addClickListener(this);
+
+    switch (mModel.get().getPosition()) {
+    case COMPACT_RIGHT:
+      mCompactRightButton.setSelected(true);
+      break;
+    case RIGHT:
+      mRightButton.setSelected(true);
+      break;
+    default:
+      mTopButton.setSelected(true);
+      break;
+    }
+
+    mCheckVisible.setSelected(mModel.get().getVisible());
+  }
+
+  /**
+   * Change.
+   *
+   * @param e
+   *          the e
+   */
+  private void change(ModernClickEvent e) {
+    if (mTopButton.isSelected()) {
+      mModel.set(new TitleProperties(TitlePosition.TOP, mCheckVisible.isSelected()));
+    } else if (mRightButton.isSelected()) {
+      mModel.set(new TitleProperties(TitlePosition.RIGHT, mCheckVisible.isSelected()));
+    } else if (mCompactRightButton.isSelected()) {
+      mModel.set(new TitleProperties(TitlePosition.COMPACT_RIGHT, mCheckVisible.isSelected()));
+    } else {
+
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+   * event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    change(e);
+  }
 }

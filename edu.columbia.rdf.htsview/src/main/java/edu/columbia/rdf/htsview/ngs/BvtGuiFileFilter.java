@@ -32,32 +32,35 @@ import java.io.FilenameFilter;
 
 import org.jebtk.modern.io.GuiFileExtFilter;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The class BedGuiFileFilter.
  */
 public class BvtGuiFileFilter extends GuiFileExtFilter implements FilenameFilter {
-	
-	/**
-	 * Instantiates a new bed gui file filter.
-	 */
-	public BvtGuiFileFilter() {
-		super("bvtj");
-	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.filechooser.FileFilter#getDescription()
-	 */
-	public final String getDescription() {
-		return "BVT (*.bvtj)";
-	}
+  /**
+   * Instantiates a new bed gui file filter.
+   */
+  public BvtGuiFileFilter() {
+    super("bvtj");
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.FilenameFilter#accept(java.io.File, java.lang.String)
-	 */
-	@Override
-	public boolean accept(File arg0, String name) {
-		return name.endsWith(".bvtj");
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see javax.swing.filechooser.FileFilter#getDescription()
+   */
+  public final String getDescription() {
+    return "BVT (*.bvtj)";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.io.FilenameFilter#accept(java.io.File, java.lang.String)
+   */
+  @Override
+  public boolean accept(File arg0, String name) {
+    return name.endsWith(".bvtj");
+  }
 }

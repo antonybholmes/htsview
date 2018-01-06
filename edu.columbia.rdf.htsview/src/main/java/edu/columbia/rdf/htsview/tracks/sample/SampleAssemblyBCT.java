@@ -27,13 +27,14 @@ import edu.columbia.rdf.htsview.tracks.SampleAssemblyFile;
  * @author Antony Holmes Holmes
  */
 public class SampleAssemblyBCT extends SampleAssemblyFile {
-	
-	/**
-	 * Instantiates a new track assembly web.
-	 *
-	 * @param metaFile the meta file
-	 */
-	public SampleAssemblyBCT(Path metaFile) {
-		super(new ReadCountsFileBCT(metaFile));
-	}
+
+  /**
+   * Instantiates a new track assembly web.
+   *
+   * @param metaFile
+   *          the meta file
+   */
+  public SampleAssemblyBCT(Path metaFile) {
+    super(new ReadCountsFileBCT(metaFile));
+  }
 }

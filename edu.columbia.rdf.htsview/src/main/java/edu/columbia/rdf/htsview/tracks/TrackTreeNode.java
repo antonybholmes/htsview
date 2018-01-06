@@ -22,17 +22,18 @@ import org.jebtk.core.tree.TreeNode;
  * The Class TrackTreeNode.
  */
 public class TrackTreeNode extends TreeNode<Track> {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new track tree node.
-	 *
-	 * @param track the track
-	 */
-	public TrackTreeNode(Track track) {
-		super(track.getName(), track);
-	}
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Instantiates a new track tree node.
+   *
+   * @param track
+   *          the track
+   */
+  public TrackTreeNode(Track track) {
+    super(track.getName(), track);
+  }
 
 }

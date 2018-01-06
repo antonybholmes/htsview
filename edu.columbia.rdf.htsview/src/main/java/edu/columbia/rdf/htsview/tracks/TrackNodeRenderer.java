@@ -25,142 +25,128 @@ import org.jebtk.modern.tree.ModernTreeBranchNodeRenderer;
 import org.jebtk.modern.tree.ModernTreeNodeRenderer;
 import org.jebtk.modern.tree.Tree;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class TrackNodeRenderer.
  */
 public class TrackNodeRenderer extends ModernTreeBranchNodeRenderer {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The Constant ORB_WIDTH. */
-	private static final IntDim ORB_SIZE = new IntDim(12, 6);
-	
-	/** The Constant ORB_HEIGHT. */
-	//private static final int ORB_HEIGHT = 8;
-	
-	/** The m text. */
-	private String mText = "";
-	
-	/** The m fill color. */
-	private Color mFillColor;
 
-	private Color mLineColor;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The Constant LINE_COLOR. */
-	public static final Color LINE_COLOR = 
-			ThemeService.getInstance().colors().getHighlight(2);
-	
-	/** The Constant COLOR. */
-	public static final Color COLOR = 
-			ThemeService.getInstance().colors().getHighlight(6);
-	
-	
+  /** The Constant ORB_WIDTH. */
+  private static final IntDim ORB_SIZE = new IntDim(12, 6);
 
-	/**
-	 * Instantiates a new track node renderer.
-	 */
-	public TrackNodeRenderer() {
-		setBranchHeight(36);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.tree.ModernTreeNodeRenderer#drawForegroundAAText(java.awt.Graphics2D)
-	 */
-	@Override
-	public void drawForegroundAAText(Graphics2D g2) {
-		super.drawForegroundAAText(g2);
-		
-		int x = getCumulativeXDepthOffset() + BRANCH_OPEN_ICON.getWidth() + PADDING;
-		
-		int y = (getHeight() - ORB_SIZE.getH()) / 2;
-		int x2 = getWidth() - ORB_SIZE.getW() - DOUBLE_PADDING;
-		
-		//fill(g2, mFillColor);
-		
-		//g2.setColor(COLOR);
-		g2.setColor(TEXT_COLOR);
-		
-		//String t = (mRow + 1) + ".";
-		
-		//g2.drawString(t, 
-		//		x + NUM_WIDTH - g2.getFontMetrics().stringWidth(t) - PADDING, 
-		//		getTextYPosCenter(g2, getHeight()));
-		
-		//x += NUM_WIDTH;
+  /** The Constant ORB_HEIGHT. */
+  // private static final int ORB_HEIGHT = 8;
 
-		//int tw = x2 - x - PADDING;
+  /** The m text. */
+  private String mText = "";
 
-		
+  /** The m fill color. */
+  private Color mFillColor;
 
-		// Keep truncating the text until it fits into the available space.
-		//for (int i = mText.length(); i >= 0; --i) {
-		//	t = TextUtils.truncate(mText, i);
-		//	
-		//	if (g2.getFontMetrics().stringWidth(t) <= tw) {
-		//		break;
-		//	}
-		//}
+  private Color mLineColor;
 
-		
-		//g2.setColor(mFillColor);
-		g2.drawString(truncate(g2, mText, x2 - x - PADDING), x, getTextYPosCenter(g2, getHeight()));
+  /** The Constant LINE_COLOR. */
+  public static final Color LINE_COLOR = ThemeService.getInstance().colors().getHighlight(2);
 
+  /** The Constant COLOR. */
+  public static final Color COLOR = ThemeService.getInstance().colors().getHighlight(6);
 
-		//g2.setColor(mFillColor);
-		//g2.fillOval(x2, y, ORB_WIDTH, ORB_WIDTH);
-		//
-		//g2.drawLine(x2, y, x2 + ORB_WIDTH, y);
-		//g2.drawLine(x2, y + ORB_WIDTH / 2, x2 + ORB_WIDTH, y + ORB_WIDTH / 2);
-		//g2.drawLine(x2, y+ ORB_WIDTH, x2 + ORB_WIDTH, y + ORB_WIDTH);
-		
-		if (mFillColor != null) {
-			g2.setColor(mFillColor);
-		} else {
-			g2.setColor(Color.GRAY);
-		}
-		
-		g2.fillRect(x2, y, ORB_SIZE.getW(), ORB_SIZE.getH());
-		
-		if (mLineColor != null) {
-			g2.setColor(mFillColor);
-		} else {
-			g2.setColor(mLineColor);
-		}
-		
-		g2.drawRect(x2, y, ORB_SIZE.getW() - 1, ORB_SIZE.getH() - 1);
-	}
+  /**
+   * Instantiates a new track node renderer.
+   */
+  public TrackNodeRenderer() {
+    setBranchHeight(36);
+  }
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.tree.ModernTreeNodeRenderer#getRenderer(org.abh.common.ui.tree.Tree, org.abh.common.tree.TreeNode, boolean, boolean, boolean, boolean, int, int)
-	 */
-	@Override
-	public ModernTreeNodeRenderer getRenderer(Tree<?> tree,
-			TreeNode<?> node,
-			boolean nodeIsHighlighted,
-			boolean nodeIsSelected,
-			boolean hasFocus,
-			boolean isDragToNode,
-			int depth,
-			int row) {
-		super.getRenderer(tree, 
-				node, 
-				nodeIsHighlighted, 
-				nodeIsSelected, 
-				hasFocus, 
-				isDragToNode, 
-				depth, 
-				row);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.tree.ModernTreeNodeRenderer#drawForegroundAAText(java.awt.
+   * Graphics2D)
+   */
+  @Override
+  public void drawForegroundAAText(Graphics2D g2) {
+    super.drawForegroundAAText(g2);
 
-		Track t = (Track)node.getValue();
-		
-		mText = t.getName();
-		mFillColor = t.getFillColor(); 
-		mLineColor = t.getLineColor();
+    int x = getCumulativeXDepthOffset() + BRANCH_OPEN_ICON.getWidth() + PADDING;
 
-		return this;
-	}
+    int y = (getHeight() - ORB_SIZE.getH()) / 2;
+    int x2 = getWidth() - ORB_SIZE.getW() - DOUBLE_PADDING;
+
+    // fill(g2, mFillColor);
+
+    // g2.setColor(COLOR);
+    g2.setColor(TEXT_COLOR);
+
+    // String t = (mRow + 1) + ".";
+
+    // g2.drawString(t,
+    // x + NUM_WIDTH - g2.getFontMetrics().stringWidth(t) - PADDING,
+    // getTextYPosCenter(g2, getHeight()));
+
+    // x += NUM_WIDTH;
+
+    // int tw = x2 - x - PADDING;
+
+    // Keep truncating the text until it fits into the available space.
+    // for (int i = mText.length(); i >= 0; --i) {
+    // t = TextUtils.truncate(mText, i);
+    //
+    // if (g2.getFontMetrics().stringWidth(t) <= tw) {
+    // break;
+    // }
+    // }
+
+    // g2.setColor(mFillColor);
+    g2.drawString(truncate(g2, mText, x2 - x - PADDING), x, getTextYPosCenter(g2, getHeight()));
+
+    // g2.setColor(mFillColor);
+    // g2.fillOval(x2, y, ORB_WIDTH, ORB_WIDTH);
+    //
+    // g2.drawLine(x2, y, x2 + ORB_WIDTH, y);
+    // g2.drawLine(x2, y + ORB_WIDTH / 2, x2 + ORB_WIDTH, y + ORB_WIDTH / 2);
+    // g2.drawLine(x2, y+ ORB_WIDTH, x2 + ORB_WIDTH, y + ORB_WIDTH);
+
+    if (mFillColor != null) {
+      g2.setColor(mFillColor);
+    } else {
+      g2.setColor(Color.GRAY);
+    }
+
+    g2.fillRect(x2, y, ORB_SIZE.getW(), ORB_SIZE.getH());
+
+    if (mLineColor != null) {
+      g2.setColor(mFillColor);
+    } else {
+      g2.setColor(mLineColor);
+    }
+
+    g2.drawRect(x2, y, ORB_SIZE.getW() - 1, ORB_SIZE.getH() - 1);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.tree.ModernTreeNodeRenderer#getRenderer(org.abh.common.ui.
+   * tree.Tree, org.abh.common.tree.TreeNode, boolean, boolean, boolean, boolean,
+   * int, int)
+   */
+  @Override
+  public ModernTreeNodeRenderer getRenderer(Tree<?> tree, TreeNode<?> node, boolean nodeIsHighlighted,
+      boolean nodeIsSelected, boolean hasFocus, boolean isDragToNode, int depth, int row) {
+    super.getRenderer(tree, node, nodeIsHighlighted, nodeIsSelected, hasFocus, isDragToNode, depth, row);
+
+    Track t = (Track) node.getValue();
+
+    mText = t.getName();
+    mFillColor = t.getFillColor();
+    mLineColor = t.getLineColor();
+
+    return this;
+  }
 }

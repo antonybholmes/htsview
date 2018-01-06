@@ -24,30 +24,34 @@ import edu.columbia.rdf.edb.ui.sort.SortSamplesByTag;
  * The Class SortSamplesByChipSeqField.
  */
 public abstract class SortSamplesByChipSeqField extends SortSamplesByTag {
-	
-	/**
-	 * Instantiates a new sort samples by chip seq field.
-	 *
-	 * @param path the path
-	 */
-	public SortSamplesByChipSeqField(String path) {
-		this(new Path(path));
-	}
-	
-	/**
-	 * Instantiates a new sort samples by chip seq field.
-	 *
-	 * @param path the path
-	 */
-	public SortSamplesByChipSeqField(Path path) {
-		super(path);
-	}
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.edb.ui.sort.SampleSorter#getType()
-	 */
-	@Override
-	public String getType() {
-		return "ChIP-Seq Properties";
-	}
+  /**
+   * Instantiates a new sort samples by chip seq field.
+   *
+   * @param path
+   *          the path
+   */
+  public SortSamplesByChipSeqField(String path) {
+    this(new Path(path));
+  }
+
+  /**
+   * Instantiates a new sort samples by chip seq field.
+   *
+   * @param path
+   *          the path
+   */
+  public SortSamplesByChipSeqField(Path path) {
+    super(path);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.edb.ui.sort.SampleSorter#getType()
+   */
+  @Override
+  public String getType() {
+    return "ChIP-Seq Properties";
+  }
 }

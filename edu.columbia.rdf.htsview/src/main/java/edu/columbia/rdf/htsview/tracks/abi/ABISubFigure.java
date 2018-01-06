@@ -38,173 +38,148 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  */
 public class ABISubFigure extends TrackSubFigure {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	//private UCSCTrack mBedGraph;
+  // private UCSCTrack mBedGraph;
 
-	/** The m style. */
-	private PlotStyle mStyle = null;
+  /** The m style. */
+  private PlotStyle mStyle = null;
 
-	/** The style not set. */
-	private boolean styleNotSet = false;
+  /** The style not set. */
+  private boolean styleNotSet = false;
 
-	/**
-	 * Creates the.
-	 *
-	 * @param name the name
-	 * @param trace the trace
-	 * @param style the style
-	 * @param titlePosition the title position
-	 * @return the ABI sub figure
-	 */
-	public static ABISubFigure create(String name,
-			ABITrace trace,
-			PlotStyle style,
-			TitleProperties titlePosition) {
-		ABISubFigure subFigure = new ABISubFigure();
+  /**
+   * Creates the.
+   *
+   * @param name
+   *          the name
+   * @param trace
+   *          the trace
+   * @param style
+   *          the style
+   * @param titlePosition
+   *          the title position
+   * @return the ABI sub figure
+   */
+  public static ABISubFigure create(String name, ABITrace trace, PlotStyle style, TitleProperties titlePosition) {
+    ABISubFigure subFigure = new ABISubFigure();
 
-		Axes axes = subFigure.currentAxes();
+    Axes axes = subFigure.currentAxes();
 
-		for (char base : ABITrace.BASES) {
-			Color color;
-			
-			switch (base) {
-			case 'C':
-				color = Color.BLUE;
-				break;
-			case 'G':
-				color = Color.BLACK;
-				break;
-			case 'T':
-				color = Color.RED;
-				break;
-			default:
-				color = Color.GREEN;
-				break;
-			}
-			
-			Plot plot = new ABIPlot("ABI " + base, trace, base, color);
+    for (char base : ABITrace.BASES) {
+      Color color;
 
-			plot.getAllSeries().add(XYSeries.createXYSeries("Points", Color.BLACK));
-			plot.getAllSeries().getCurrent().getMarker().setVisible(false);
-			plot.setStyle(style);
-			axes.addChild(plot);
-		}
+      switch (base) {
+      case 'C':
+        color = Color.BLUE;
+        break;
+      case 'G':
+        color = Color.BLACK;
+        break;
+      case 'T':
+        color = Color.RED;
+        break;
+      default:
+        color = Color.GREEN;
+        break;
+      }
 
+      Plot plot = new ABIPlot("ABI " + base, trace, base, color);
 
-		Track.setTitle(name, titlePosition, axes);
+      plot.getAllSeries().add(XYSeries.createXYSeries("Points", Color.BLACK));
+      plot.getAllSeries().getCurrent().getMarker().setVisible(false);
+      plot.setStyle(style);
+      axes.addChild(plot);
+    }
 
-		return subFigure;
-	}
+    Track.setTitle(name, titlePosition, axes);
 
-	//public void setBedGraph(UCSCTrack bedGraph) {
-	//	mBedGraph = bedGraph;
-	//}
+    return subFigure;
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.TrackSubFigure#update(org.jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int, java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
-	 */
-	@Override
-	public void update(GenomicRegion displayRegion, 
-			int resolution,
-			double yMax,
-			int width,
-			int height,
-			int margin,
-			Color lineColor, 
-			Color fillColor,
-			PlotStyle style) {
+  // public void setBedGraph(UCSCTrack bedGraph) {
+  // mBedGraph = bedGraph;
+  // }
 
-		//int start = displayRegion.getStart();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.TrackSubFigure#update(org.jebtk.
+   * bioinformatics.genome.GenomicRegion, int, double, int, int, int,
+   * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
+   */
+  @Override
+  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
+      Color lineColor, Color fillColor, PlotStyle style) {
 
-		//int end = displayRegion.getEnd();
+    // int start = displayRegion.getStart();
 
-		// The end cannot be equal to the start for display purposes
-		//if (end == start) {
-		//	++end;
-		//}
+    // int end = displayRegion.getEnd();
 
-		// set the graph limits and limit to the size of the chromosome
-		//getCurrentAxes().getXAxis().setLimits(start, end);
-		//getCurrentAxes().getXAxis().startEndTicksOnly();
+    // The end cannot be equal to the start for display purposes
+    // if (end == start) {
+    // ++end;
+    // }
 
-		super.update(displayRegion, 
-				resolution, 
-				yMax, 
-				width, 
-				height, 
-				margin, 
-				lineColor, 
-				fillColor,
-				style);
+    // set the graph limits and limit to the size of the chromosome
+    // getCurrentAxes().getXAxis().setLimits(start, end);
+    // getCurrentAxes().getXAxis().startEndTicksOnly();
 
-		if (styleNotSet || mStyle != style) {
-			setStyle(style);
-			mStyle = style;
-			styleNotSet = false;
-		}
+    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
 
-		currentAxes().getX1Axis().startEndTicksOnly();
+    if (styleNotSet || mStyle != style) {
+      setStyle(style);
+      mStyle = style;
+      styleNotSet = false;
+    }
 
-		//System.err.println("regions " + start + " " + end + " " + getCurrentAxes().toPlotX(end));
+    currentAxes().getX1Axis().startEndTicksOnly();
 
-		//if (mBedGraph == null) {
-		//	return;
-		//}
+    // System.err.println("regions " + start + " " + end + " " +
+    // getCurrentAxes().toPlotX(end));
 
-		// Create a series for each bedgraph in the group
+    // if (mBedGraph == null) {
+    // return;
+    // }
 
-		List<PlotBox> layers = currentAxes()
-				.getChild(GridLocation.CENTER)
-				.getByType(LayerType.PLOT);
+    // Create a series for each bedgraph in the group
 
+    List<PlotBox> layers = currentAxes().getChild(GridLocation.CENTER).getByType(LayerType.PLOT);
 
-		for (PlotBox layer : layers) {
-			if (layer instanceof ABIPlot) {
-				ABIPlot p = (ABIPlot)layer;
+    for (PlotBox layer : layers) {
+      if (layer instanceof ABIPlot) {
+        ABIPlot p = (ABIPlot) layer;
 
-				p.update(displayRegion, 
-						resolution, 
-						yMax, 
-						width, 
-						height,
-						margin,
-						lineColor,
-						fillColor,
-						style);
-			}
-		}
+        p.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+      }
+    }
 
-		/*
-		mPlot.setBarWidth(1);
-
-		// Use the default series for plotting.
-		XYSeries series = mPlot.getAllSeries().getCurrent();
-
-		// Use the bedgraph to set the series color
-		if (!lineColor.equals(series.getStyle().getLineStyle().getColor())) {
-			series.getStyle().getLineStyle().setColor(lineColor);
-		}
-
-		if (!fillColor.equals(series.getStyle().getFillStyle().getColor())) {
-			series.getStyle().getFillStyle().setColor(fillColor);
-		}
-
-		//series.addRegex("x");
-		//series.addRegex("y");
-
-		List<UCSCTrackRegion> regions = UCSCTrackRegions.getFixedGapSearch(mBedGraph.getRegions()).getFeatureSet(displayRegion.getChr(), 
-				displayRegion.getStart(), 
-				displayRegion.getEnd());
-
-		mPlot.setMatrix(new BedGraphRegionMatrix(regions));
-
-		for (MovableLayer l : plots) {
-			Plot p = (Plot)l;
-
-			System.err.println("sdfsdf " + p.getId() + " " + p.getName() + " " + (p.getMatrix() == null) + " " + p.getAllSeries().getCurrent().getColor());
-		}
-		 */
-	}
+    /*
+     * mPlot.setBarWidth(1);
+     * 
+     * // Use the default series for plotting. XYSeries series =
+     * mPlot.getAllSeries().getCurrent();
+     * 
+     * // Use the bedgraph to set the series color if
+     * (!lineColor.equals(series.getStyle().getLineStyle().getColor())) {
+     * series.getStyle().getLineStyle().setColor(lineColor); }
+     * 
+     * if (!fillColor.equals(series.getStyle().getFillStyle().getColor())) {
+     * series.getStyle().getFillStyle().setColor(fillColor); }
+     * 
+     * //series.addRegex("x"); //series.addRegex("y");
+     * 
+     * List<UCSCTrackRegion> regions =
+     * UCSCTrackRegions.getFixedGapSearch(mBedGraph.getRegions()).getFeatureSet(
+     * displayRegion.getChr(), displayRegion.getStart(), displayRegion.getEnd());
+     * 
+     * mPlot.setMatrix(new BedGraphRegionMatrix(regions));
+     * 
+     * for (MovableLayer l : plots) { Plot p = (Plot)l;
+     * 
+     * System.err.println("sdfsdf " + p.getId() + " " + p.getName() + " " +
+     * (p.getMatrix() == null) + " " + p.getAllSeries().getCurrent().getColor()); }
+     */
+  }
 }

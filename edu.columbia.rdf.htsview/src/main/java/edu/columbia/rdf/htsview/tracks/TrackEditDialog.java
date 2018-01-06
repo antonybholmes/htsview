@@ -40,168 +40,159 @@ import org.jebtk.modern.text.ModernTextField;
 import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class TrackEditDialog.
  */
 public class TrackEditDialog extends ModernDialogWindow implements ModernClickListener {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m ok button. */
-	private ModernButton mOkButton = 
-			new ModernDialogButton(UI.BUTTON_OK);
-	
-	/** The m cancel button. */
-	private ModernButton mCancelButton = 
-			new ModernDialogButton(UI.BUTTON_CANCEL);
-	
 
-	/** The m line color button. */
-	private ColorSwatchButton mLineColorButton;
-	
-	/** The m fill color button. */
-	private ColorSwatchButton mFillColorButton;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The m name field. */
-	private ModernTextField mNameField = 
-			new ModernClipboardTextField("Name");
+  /** The m ok button. */
+  private ModernButton mOkButton = new ModernDialogButton(UI.BUTTON_OK);
 
-	/** The m track. */
-	private Track mTrack;
+  /** The m cancel button. */
+  private ModernButton mCancelButton = new ModernDialogButton(UI.BUTTON_CANCEL);
 
-	/** The m check line color. */
-	private ModernCheckBox mCheckLineColor =
-			new ModernCheckBox("Line color");
-	
-	/** The m check fill color. */
-	private ModernCheckBox mCheckFillColor =
-			new ModernCheckBox("Fill color");
+  /** The m line color button. */
+  private ColorSwatchButton mLineColorButton;
 
+  /** The m fill color button. */
+  private ColorSwatchButton mFillColorButton;
 
-	/**
-	 * Instantiates a new track edit dialog.
-	 *
-	 * @param parent the parent
-	 * @param track the track
-	 */
-	public TrackEditDialog(ModernWindow parent, Track track) {
-		super(parent);
-		
-		mTrack = track;
-		
-		setTitle("Track Editor", track.getName());
-		
-		createUi();
-		
-		setup();
+  /** The m name field. */
+  private ModernTextField mNameField = new ModernClipboardTextField("Name");
 
-		
-	}
+  /** The m track. */
+  private Track mTrack;
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		mNameField.setEditable(false);
-		
-		mOkButton.addClickListener(this);
-		mCancelButton.addClickListener(this);
-		
-		mCheckLineColor.setSelected(mTrack.getLineColor() != null);
-		mCheckFillColor.setSelected(mTrack.getFillColor() != null);
-	
-		setSize(new Dimension(480, 240));
-		
-		UI.centerWindowToScreen(this);
-	}
+  /** The m check line color. */
+  private ModernCheckBox mCheckLineColor = new ModernCheckBox("Line color");
 
+  /** The m check fill color. */
+  private ModernCheckBox mCheckFillColor = new ModernCheckBox("Fill color");
 
-	/**
-	 * Creates the ui.
-	 */
-	private final void createUi() {
-		mNameField.setText(mTrack.getName());
-		
-		int[] rows = {ModernWidget.WIDGET_HEIGHT};
-		int[] cols = {100, 300};
-		
-		MatrixPanel matrixPanel = new MatrixPanel(rows, 
-				cols, 
-				ModernWidget.PADDING, 
-				ModernWidget.PADDING);
-		
-		matrixPanel.add(new ModernAutoSizeLabel("Name"));
-		matrixPanel.add(new ModernTextBorderPanel(mNameField));
-		
-		matrixPanel.add(mCheckLineColor );
-		
-		mLineColorButton = new ColorSwatchButton(mParent, 
-				mTrack.getLineColor());
-		
-		Box box2 = HBox.create();
-		box2.add(mLineColorButton);
-		
-		matrixPanel.add(box2);
-		
-		matrixPanel.add(mCheckFillColor);
-		
-		mFillColorButton = new ColorSwatchButton(mParent, 
-				mTrack.getFillColor());
-		
-		
-		
-		box2 = HBox.create();
-		box2.add(mFillColorButton);
-		
-		matrixPanel.add(box2);
-		
-		setContent(matrixPanel);
+  /**
+   * Instantiates a new track edit dialog.
+   *
+   * @param parent
+   *          the parent
+   * @param track
+   *          the track
+   */
+  public TrackEditDialog(ModernWindow parent, Track track) {
+    super(parent);
 
-		Box buttonPanel = new ButtonsBox();
+    mTrack = track;
 
-		buttonPanel.add(mOkButton);
-		buttonPanel.add(ModernPanel.createHGap());
-		buttonPanel.add(mCancelButton);
+    setTitle("Track Editor", track.getName());
 
-		setButtons(buttonPanel);
-	}
+    createUi();
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.ModernClickEvent)
-	 */
-	public final void clicked(ModernClickEvent e) {
-		if (e.getSource().equals(mOkButton)) {
-			setStatus(ModernDialogStatus.OK);
-		}
+    setup();
 
-		close();
-	}
+  }
 
-	/* (non-Javadoc)
-	 * @see java.awt.Component#getName()
-	 */
-	public String getName() {
-		return mNameField.getText();
-	}
-	
-	/**
-	 * Gets the line color.
-	 *
-	 * @return the line color
-	 */
-	public Color getLineColor() {
-		return mCheckLineColor.isSelected() ? mLineColorButton.getSelectedColor() : null;
-	}
-	
-	/**
-	 * Gets the fill color.
-	 *
-	 * @return the fill color
-	 */
-	public Color getFillColor() {
-		return mCheckFillColor.isSelected() ? mFillColorButton.getSelectedColor() : null;
-	}
+  /**
+   * Setup.
+   */
+  private void setup() {
+    mNameField.setEditable(false);
+
+    mOkButton.addClickListener(this);
+    mCancelButton.addClickListener(this);
+
+    mCheckLineColor.setSelected(mTrack.getLineColor() != null);
+    mCheckFillColor.setSelected(mTrack.getFillColor() != null);
+
+    setSize(new Dimension(480, 240));
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private final void createUi() {
+    mNameField.setText(mTrack.getName());
+
+    int[] rows = { ModernWidget.WIDGET_HEIGHT };
+    int[] cols = { 100, 300 };
+
+    MatrixPanel matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING, ModernWidget.PADDING);
+
+    matrixPanel.add(new ModernAutoSizeLabel("Name"));
+    matrixPanel.add(new ModernTextBorderPanel(mNameField));
+
+    matrixPanel.add(mCheckLineColor);
+
+    mLineColorButton = new ColorSwatchButton(mParent, mTrack.getLineColor());
+
+    Box box2 = HBox.create();
+    box2.add(mLineColorButton);
+
+    matrixPanel.add(box2);
+
+    matrixPanel.add(mCheckFillColor);
+
+    mFillColorButton = new ColorSwatchButton(mParent, mTrack.getFillColor());
+
+    box2 = HBox.create();
+    box2.add(mFillColorButton);
+
+    matrixPanel.add(box2);
+
+    setContent(matrixPanel);
+
+    Box buttonPanel = new ButtonsBox();
+
+    buttonPanel.add(mOkButton);
+    buttonPanel.add(ModernPanel.createHGap());
+    buttonPanel.add(mCancelButton);
+
+    setButtons(buttonPanel);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
+   * ModernClickEvent)
+   */
+  public final void clicked(ModernClickEvent e) {
+    if (e.getSource().equals(mOkButton)) {
+      setStatus(ModernDialogStatus.OK);
+    }
+
+    close();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.awt.Component#getName()
+   */
+  public String getName() {
+    return mNameField.getText();
+  }
+
+  /**
+   * Gets the line color.
+   *
+   * @return the line color
+   */
+  public Color getLineColor() {
+    return mCheckLineColor.isSelected() ? mLineColorButton.getSelectedColor() : null;
+  }
+
+  /**
+   * Gets the fill color.
+   *
+   * @return the fill color
+   */
+  public Color getFillColor() {
+    return mCheckFillColor.isSelected() ? mFillColorButton.getSelectedColor() : null;
+  }
 }

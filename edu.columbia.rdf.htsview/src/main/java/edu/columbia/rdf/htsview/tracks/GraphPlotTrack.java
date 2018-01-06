@@ -25,41 +25,42 @@ import org.jebtk.modern.window.ModernWindow;
  * The Class GraphPlotTrack.
  */
 public abstract class GraphPlotTrack extends Track {
-	
-	/** The Constant PLOT_SIZE. */
-	public static final Dimension PLOT_SIZE = new Dimension(PLOT_WIDTH, 100);
-	
-	/** The m sub figure. */
-	protected TrackSubFigure mSubFigure;
-	
-	/**
-	 * Should enable a UI dialog or similar to allow the track to be
-	 * edited.
-	 *
-	 * @param parent the parent
-	 */
-	@Override
-	public void edit(ModernWindow parent) {
-		TrackEditDialog dialog = new TrackEditDialog(parent, this);
-		
-		dialog.setVisible(true);
-		
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
-		
-		setName(dialog.getName());
-		setLineColor(dialog.getLineColor());
-		setFillColor(dialog.getFillColor());
-	}
 
+  /** The Constant PLOT_SIZE. */
+  public static final Dimension PLOT_SIZE = new Dimension(PLOT_WIDTH, 100);
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#getGraph()
-	 */
-	@Override
-	public TrackSubFigure getGraph() {
-		return mSubFigure;
-	}
-	
+  /** The m sub figure. */
+  protected TrackSubFigure mSubFigure;
+
+  /**
+   * Should enable a UI dialog or similar to allow the track to be edited.
+   *
+   * @param parent
+   *          the parent
+   */
+  @Override
+  public void edit(ModernWindow parent) {
+    TrackEditDialog dialog = new TrackEditDialog(parent, this);
+
+    dialog.setVisible(true);
+
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
+
+    setName(dialog.getName());
+    setLineColor(dialog.getLineColor());
+    setFillColor(dialog.getFillColor());
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#getGraph()
+   */
+  @Override
+  public TrackSubFigure getGraph() {
+    return mSubFigure;
+  }
+
 }

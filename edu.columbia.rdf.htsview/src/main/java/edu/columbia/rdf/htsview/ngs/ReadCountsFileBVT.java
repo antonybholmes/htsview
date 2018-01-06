@@ -40,7 +40,6 @@ import org.jebtk.core.Mathematics;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.collections.DefaultTreeMap;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Decodes values stored at positions in a tree.
@@ -49,313 +48,325 @@ import org.jebtk.core.collections.DefaultTreeMap;
  */
 public class ReadCountsFileBVT extends ReadCountsFileBinTree {
 
-	/**
-	 * The constant READ_START_WIDTH_BYTES.
-	 */
-	public static final int READ_START_WIDTH_BYTES = 4;
-	
-	/** The Constant READ_VALUE_WIDTH_BYTES. */
-	public static final int READ_VALUE_WIDTH_BYTES = 4;
-	
-	/** The Constant READ_FLAG_WIDTH_BYTES. */
-	public static final int READ_FLAG_WIDTH_BYTES = 1;
+  /**
+   * The constant READ_START_WIDTH_BYTES.
+   */
+  public static final int READ_START_WIDTH_BYTES = 4;
 
-	/** The Constant READ_WIDTH_BYTES. */
-	public static final int READ_WIDTH_BYTES = READ_START_WIDTH_BYTES + 
-			READ_VALUE_WIDTH_BYTES + 
-			READ_FLAG_WIDTH_BYTES;
-	
-	/**
-	 * The constant FILE_EXT.
-	 */
-	public static final String FILE_EXT = "bvt";
+  /** The Constant READ_VALUE_WIDTH_BYTES. */
+  public static final int READ_VALUE_WIDTH_BYTES = 4;
 
+  /** The Constant READ_FLAG_WIDTH_BYTES. */
+  public static final int READ_FLAG_WIDTH_BYTES = 1;
 
-	/**
-	 * Directory containing genome files which must be of the form
-	 * chr.n.txt. Each file must contain exactly one line consisting
-	 * of the entire chromosome.
-	 *
-	 * @param metaFile the directory
-	 */
-	public ReadCountsFileBVT(Path metaFile) {
-		super(metaFile);
-	}
+  /** The Constant READ_WIDTH_BYTES. */
+  public static final int READ_WIDTH_BYTES = READ_START_WIDTH_BYTES + READ_VALUE_WIDTH_BYTES + READ_FLAG_WIDTH_BYTES;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.ngs.CountAssembly#getCounts(org.jebtk.bioinformatics.genome.GenomicRegion, int)
-	 */
-	@Override
-	public List<Integer> getCounts(GenomicRegion region, int window) throws IOException {
-		return CollectionUtils.double2Int(getValues(region, window));
-	}
+  /**
+   * The constant FILE_EXT.
+   */
+  public static final String FILE_EXT = "bvt";
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.lib.bioinformatics.reads.CountAssembly#getStarts(edu.columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
-	 */
-	@Override
-	public List<Integer> getStarts(GenomicRegion region, int window) throws IOException {
-		return getStarts(region.getChr(), region.getStart(), region.getEnd(), window);
-	}
-	
-	/**
-	 * Gets the starts.
-	 *
-	 * @param chr the chr
-	 * @param start the start
-	 * @param end the end
-	 * @param window the window
-	 * @return the starts
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<Integer> getStarts(Chromosome chr, int start, int end, int window) throws IOException {
-		ArrayList<Integer> starts = new ArrayList<Integer>();
+  /**
+   * Directory containing genome files which must be of the form chr.n.txt. Each
+   * file must contain exactly one line consisting of the entire chromosome.
+   *
+   * @param metaFile
+   *          the directory
+   */
+  public ReadCountsFileBVT(Path metaFile) {
+    super(metaFile);
+  }
 
-		Path file = getFile(chr, window, FILE_EXT);
-		
-		int dataOffset = mOffsetMap.get(chr);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.ngs.CountAssembly#getCounts(org.jebtk.bioinformatics
+   * .genome.GenomicRegion, int)
+   */
+  @Override
+  public List<Integer> getCounts(GenomicRegion region, int window) throws IOException {
+    return CollectionUtils.double2Int(getValues(region, window));
+  }
 
-		RandomAccessFile in = new RandomAccessFile(file.toFile(), "r");
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.lib.bioinformatics.reads.CountAssembly#getStarts(edu.
+   * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
+   */
+  @Override
+  public List<Integer> getStarts(GenomicRegion region, int window) throws IOException {
+    return getStarts(region.getChr(), region.getStart(), region.getEnd(), window);
+  }
 
-		try {
-			// first get the buffer offset of the start
+  /**
+   * Gets the starts.
+   *
+   * @param chr
+   *          the chr
+   * @param start
+   *          the start
+   * @param end
+   *          the end
+   * @param window
+   *          the window
+   * @return the starts
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<Integer> getStarts(Chromosome chr, int start, int end, int window) throws IOException {
+    ArrayList<Integer> starts = new ArrayList<Integer>();
 
-			Block so = getDataOffset(in, start, window);
-			Block eo = getDataOffset(in, end, window);
-			
-			int l = eo.end - so.start + 1;
-			
-			in.seek(dataOffset + RAW_OFFSET + so.startOffset * READ_WIDTH_BYTES);
+    Path file = getFile(chr, window, FILE_EXT);
 
-			int s;
-			
-			for (int i = 0; i < l; ++i) {
-				//System.err.println("ha " + i + " " + Arrays.toString(e));
+    int dataOffset = mOffsetMap.get(chr);
 
-				// Skip start
-				s = in.readInt();
-				
-				// skip value
-				in.readFloat();
+    RandomAccessFile in = new RandomAccessFile(file.toFile(), "r");
 
-				//Skip flags
-				in.readByte();
+    try {
+      // first get the buffer offset of the start
 
-				if (s >= start && s <= end) {
-					starts.add(s);
-				}
-			}
-		} finally {
-			in.close();
-		}
+      Block so = getDataOffset(in, start, window);
+      Block eo = getDataOffset(in, end, window);
 
-		return starts;
-	}
+      int l = eo.end - so.start + 1;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.ngs.CountAssembly#getValues(org.jebtk.bioinformatics.genome.GenomicRegion, int)
-	 */
-	@Override
-	public List<Double> getValues(GenomicRegion region, int window) throws IOException {
-		return getValues(region.getChr(), region.getStart(), region.getEnd(), window);
-	}
+      in.seek(dataOffset + RAW_OFFSET + so.startOffset * READ_WIDTH_BYTES);
 
+      int s;
 
-	/**
-	 * Get the counts from the file,.
-	 *
-	 * @param chr the chr
-	 * @param start 		The 1 based genomic start coordinate.
-	 * @param end 		The 1 based genomic end coordinate.
-	 * @param window 	The size of the window being viewed.
-	 * @return the starts
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<Double> getValues(Chromosome chr,
-			int start,
-			int end,
-			int window) throws IOException {
+      for (int i = 0; i < l; ++i) {
+        // System.err.println("ha " + i + " " + Arrays.toString(e));
 
-		Path file = getFile(chr, window, FILE_EXT);
-		
-		int dataOffset = mOffsetMap.get(chr);
-		
-		RandomAccessFile in = new RandomAccessFile(file.toFile(), "r");
+        // Skip start
+        s = in.readInt();
 
-		List<Double> values = new ArrayList<Double>();
-		
-		try {
-			// first get the buffer offset of the start
+        // skip value
+        in.readFloat();
 
-			Block so = getDataOffset(in, start, window);
-			Block eo = getDataOffset(in, end, window);
+        // Skip flags
+        in.readByte();
 
-			int l = eo.endOffset - so.startOffset + 1;
+        if (s >= start && s <= end) {
+          starts.add(s);
+        }
+      }
+    } finally {
+      in.close();
+    }
 
-			//System.err.println("starts " + start + " " + so.level + " " + eo.level + " " + window);
+    return starts;
+  }
 
-			if (window >= MIN_BIN_WIDTH) {
-				// Skip to structured block
-				in.seek(dataOffset + multiResOffset(so));
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.ngs.CountAssembly#getValues(org.jebtk.bioinformatics
+   * .genome.GenomicRegion, int)
+   */
+  @Override
+  public List<Double> getValues(GenomicRegion region, int window) throws IOException {
+    return getValues(region.getChr(), region.getStart(), region.getEnd(), window);
+  }
 
-				int b = so.bin;
+  /**
+   * Get the counts from the file,.
+   *
+   * @param chr
+   *          the chr
+   * @param start
+   *          The 1 based genomic start coordinate.
+   * @param end
+   *          The 1 based genomic end coordinate.
+   * @param window
+   *          The size of the window being viewed.
+   * @return the starts
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<Double> getValues(Chromosome chr, int start, int end, int window) throws IOException {
 
-				while (b <= eo.bin) {
-					double v = in.readFloat();
+    Path file = getFile(chr, window, FILE_EXT);
 
-					//System.err.println("s " + b + " " + so.bin + " " + s + " " + v);
+    int dataOffset = mOffsetMap.get(chr);
 
-					values.add(v);
+    RandomAccessFile in = new RandomAccessFile(file.toFile(), "r");
 
-					++b;
-				}
-				
-				values = getValues(values,
-						so,
-						start,
-						end,
-						window);
-			} else {
-				// Higher resolution so slower to access.
-				
-				// To read the starts, first skip to dataOffset (the byte position
-				// after the R Tree where the counts are written sequentially), 
-				// then skip to the array index (i * 4 bytes (width of int)).
-				in.seek(dataOffset + RAW_OFFSET + so.startOffset * READ_WIDTH_BYTES);
+    List<Double> values = new ArrayList<Double>();
 
-				int s;
-				double v;
-				
-				List<Integer> starts = new ArrayList<Integer>(l);
-				
-				for (int i = 0; i < l; ++i) {
-					// Skip start
-					s = in.readInt();
-					
-					v = in.readFloat();
+    try {
+      // first get the buffer offset of the start
 
-					//Skip flags
-					in.readByte();
+      Block so = getDataOffset(in, start, window);
+      Block eo = getDataOffset(in, end, window);
 
-					if (s >= start && s <= end) {
-						starts.add(s);
-						values.add(v);
-					}
-				}
-				
-				// Group by window size
-				
-				values = getValues(starts,
-						values,
-						start,
-						end,
-						window);
-			}
-		} finally {
-			in.close();
-		}
+      int l = eo.endOffset - so.startOffset + 1;
 
-		return values;
-	}
+      // System.err.println("starts " + start + " " + so.level + " " + eo.level + " "
+      // + window);
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.ngs.ReadCountsFileBinTree#multiResOffset(edu.columbia.rdf.htsview.ngs.Block)
-	 */
-	@Override
-	public int multiResOffset(Block b) {
-		return (CUM_BIN_COUNTS[b.level] + b.bin) * MULTI_RES_WIDTH_BYTES;
-	}
+      if (window >= MIN_BIN_WIDTH) {
+        // Skip to structured block
+        in.seek(dataOffset + multiResOffset(so));
 
-	/**
-	 * Gets the counts.
-	 *
-	 * @param starts the starts
-	 * @param values the values
-	 * @param start the start
-	 * @param end the end
-	 * @param window the bin size
-	 * @return the counts
-	 */
-	private static List<Double> getValues(final List<Integer> starts,
-			final List<Double> values,
-			int start,
-			int end,
-			int window) {
-		int startBin = start / window;
-		int endBin = end / window;
-		int l = endBin - startBin + 1;
+        int b = so.bin;
 
-		//System.err.println(start + " " + end + " " + s + " " + e + " " + l);
+        while (b <= eo.bin) {
+          double v = in.readFloat();
 
-		Map<Integer, Double> map = DefaultTreeMap.create(0.0);
+          // System.err.println("s " + b + " " + so.bin + " " + s + " " + v);
 
-		for (int i = 0; i < starts.size(); ++i) {
-			int rs = starts.get(i);
-			double value = values.get(i);
+          values.add(v);
 
-			int sbin = rs / window - startBin;
-			
-			map.put(sbin, map.get(sbin) + value);
-			
-			/*
-			int ebin = (rs + readLength) / binSize - startBin;
+          ++b;
+        }
 
-			map.put(bin, map.get(bin) + value);
-			
-			for (int bin = sbin; bin <= ebin; ++bin) {
-				map.put(bin, map.get(bin) + value);
-			}
-			*/
-		}
+        values = getValues(values, so, start, end, window);
+      } else {
+        // Higher resolution so slower to access.
 
-		List<Double> ret = Mathematics.zeros(l);
+        // To read the starts, first skip to dataOffset (the byte position
+        // after the R Tree where the counts are written sequentially),
+        // then skip to the array index (i * 4 bytes (width of int)).
+        in.seek(dataOffset + RAW_OFFSET + so.startOffset * READ_WIDTH_BYTES);
 
-		for (int bin : map.keySet()) {
-			ret.set(bin, map.get(bin));
-		}
+        int s;
+        double v;
 
-		return ret;
-	}
-	
-	/**
-	 * Gets the values.
-	 *
-	 * @param values the values
-	 * @param startBlock the start block
-	 * @param start the start
-	 * @param end the end
-	 * @param window the window
-	 * @return the values
-	 */
-	private static List<Double> getValues(final List<Double> values,
-			Block startBlock,
-			int start,
-			int end,
-			int window) {
-		int startBin = start / window;
-		int endBin = end / window;
-		int l = endBin - startBin + 1;
+        List<Integer> starts = new ArrayList<Integer>(l);
 
-		//System.err.println(start + " " + end + " " + s + " " + e + " " + l);
+        for (int i = 0; i < l; ++i) {
+          // Skip start
+          s = in.readInt();
 
-		Map<Integer, Double> map = DefaultTreeMap.create(0.0);
+          v = in.readFloat();
 
-		int rs = startBlock.bin; // - startBin;
-		
-		for (double value : values) {
-			map.put(rs, map.get(rs) + value);
-			
-			++rs;
-		}
+          // Skip flags
+          in.readByte();
 
-		List<Double> ret = Mathematics.zeros(l);
+          if (s >= start && s <= end) {
+            starts.add(s);
+            values.add(v);
+          }
+        }
 
-		for (int bin : map.keySet()) {
-			if (bin >= startBin && bin <= endBin) {
-				ret.set(bin - startBin, map.get(bin));
-			}
-		}
+        // Group by window size
 
-		return ret;
-	}
+        values = getValues(starts, values, start, end, window);
+      }
+    } finally {
+      in.close();
+    }
+
+    return values;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.ngs.ReadCountsFileBinTree#multiResOffset(edu.
+   * columbia.rdf.htsview.ngs.Block)
+   */
+  @Override
+  public int multiResOffset(Block b) {
+    return (CUM_BIN_COUNTS[b.level] + b.bin) * MULTI_RES_WIDTH_BYTES;
+  }
+
+  /**
+   * Gets the counts.
+   *
+   * @param starts
+   *          the starts
+   * @param values
+   *          the values
+   * @param start
+   *          the start
+   * @param end
+   *          the end
+   * @param window
+   *          the bin size
+   * @return the counts
+   */
+  private static List<Double> getValues(final List<Integer> starts, final List<Double> values, int start, int end,
+      int window) {
+    int startBin = start / window;
+    int endBin = end / window;
+    int l = endBin - startBin + 1;
+
+    // System.err.println(start + " " + end + " " + s + " " + e + " " + l);
+
+    Map<Integer, Double> map = DefaultTreeMap.create(0.0);
+
+    for (int i = 0; i < starts.size(); ++i) {
+      int rs = starts.get(i);
+      double value = values.get(i);
+
+      int sbin = rs / window - startBin;
+
+      map.put(sbin, map.get(sbin) + value);
+
+      /*
+       * int ebin = (rs + readLength) / binSize - startBin;
+       * 
+       * map.put(bin, map.get(bin) + value);
+       * 
+       * for (int bin = sbin; bin <= ebin; ++bin) { map.put(bin, map.get(bin) +
+       * value); }
+       */
+    }
+
+    List<Double> ret = Mathematics.zeros(l);
+
+    for (int bin : map.keySet()) {
+      ret.set(bin, map.get(bin));
+    }
+
+    return ret;
+  }
+
+  /**
+   * Gets the values.
+   *
+   * @param values
+   *          the values
+   * @param startBlock
+   *          the start block
+   * @param start
+   *          the start
+   * @param end
+   *          the end
+   * @param window
+   *          the window
+   * @return the values
+   */
+  private static List<Double> getValues(final List<Double> values, Block startBlock, int start, int end, int window) {
+    int startBin = start / window;
+    int endBin = end / window;
+    int l = endBin - startBin + 1;
+
+    // System.err.println(start + " " + end + " " + s + " " + e + " " + l);
+
+    Map<Integer, Double> map = DefaultTreeMap.create(0.0);
+
+    int rs = startBlock.bin; // - startBin;
+
+    for (double value : values) {
+      map.put(rs, map.get(rs) + value);
+
+      ++rs;
+    }
+
+    List<Double> ret = Mathematics.zeros(l);
+
+    for (int bin : map.keySet()) {
+      if (bin >= startBin && bin <= endBin) {
+        ret.set(bin - startBin, map.get(bin));
+      }
+    }
+
+    return ret;
+  }
 }

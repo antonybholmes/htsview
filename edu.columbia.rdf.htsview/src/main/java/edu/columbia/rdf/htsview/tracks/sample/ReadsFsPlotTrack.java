@@ -26,68 +26,72 @@ import org.w3c.dom.Element;
 import edu.columbia.rdf.edb.Sample;
 import edu.columbia.rdf.htsview.tracks.SampleAssembly;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The class ReadsPlotTrack.
  */
 public class ReadsFsPlotTrack extends ReadsPlotTrack {
 
-	/** The m meta file. */
-	private Path mMetaFile;
+  /** The m meta file. */
+  private Path mMetaFile;
 
-	/**
-	 * Instantiates a new reads plot track.
-	 *
-	 * @param sample the sample
-	 * @param assembly the assembly
-	 * @param metaFile the meta file
-	 */
-	public ReadsFsPlotTrack(Sample sample, 
-			SampleAssembly assembly,
-			Path metaFile) {
-		super(sample, assembly);
-		
-		mMetaFile = metaFile;
-	}
+  /**
+   * Instantiates a new reads plot track.
+   *
+   * @param sample
+   *          the sample
+   * @param assembly
+   *          the assembly
+   * @param metaFile
+   *          the meta file
+   */
+  public ReadsFsPlotTrack(Sample sample, SampleAssembly assembly, Path metaFile) {
+    super(sample, assembly);
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.edb.reads.tracks.SamplePlotTrack#toXml()
-	 */
-	@Override
-	public Element toXml(Document doc) {
-		Element trackElement = doc.createElement("track");
+    mMetaFile = metaFile;
+  }
 
-		trackElement.setAttribute("type", "reads-fs");
-		trackElement.setAttribute("meta-file", PathUtils.toString(mMetaFile));
-		trackElement.setAttribute("name", getName());
-		trackElement.setAttribute("id", Integer.toString(mSample.getId()));
-		trackElement.setAttribute("line-color", ColorUtils.toHtml(getLineColor()));
-		trackElement.setAttribute("fill-color", ColorUtils.toHtml(getFillColor()));
-		
-		return trackElement;
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.edb.reads.tracks.SamplePlotTrack#toJson()
-	 */
-	@Override
-	public void toJson(JsonBuilder json) {
-		json.startObject();
-		
-		json.add("type", "reads-fs");
-		json.add("meta-file", PathUtils.toString(mMetaFile));
-		json.add("name", getName());
-		json.add("id", mSample.getId());
-		json.add("visible", getForwardVisible());
-		json.add("color", ColorUtils.toHtml(getLineColor()));
-		json.add("fill-color", ColorUtils.toHtml(getFillColor()));
-		json.add("anti-sense-visible", getNegVisible());
-		json.add("anti-sense-color", ColorUtils.toHtml(getNegLineColor()));
-		json.add("anti-sense-fill-color", ColorUtils.toHtml(getNegFillColor()));
-		json.add("read-height", mReadHeight);
-		json.add("gap", mGap);
-		
-		json.endObject();
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.edb.reads.tracks.SamplePlotTrack#toXml()
+   */
+  @Override
+  public Element toXml(Document doc) {
+    Element trackElement = doc.createElement("track");
+
+    trackElement.setAttribute("type", "reads-fs");
+    trackElement.setAttribute("meta-file", PathUtils.toString(mMetaFile));
+    trackElement.setAttribute("name", getName());
+    trackElement.setAttribute("id", Integer.toString(mSample.getId()));
+    trackElement.setAttribute("line-color", ColorUtils.toHtml(getLineColor()));
+    trackElement.setAttribute("fill-color", ColorUtils.toHtml(getFillColor()));
+
+    return trackElement;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.apps.edb.reads.tracks.SamplePlotTrack#toJson()
+   */
+  @Override
+  public void toJson(JsonBuilder json) {
+    json.startObject();
+
+    json.add("type", "reads-fs");
+    json.add("meta-file", PathUtils.toString(mMetaFile));
+    json.add("name", getName());
+    json.add("id", mSample.getId());
+    json.add("visible", getForwardVisible());
+    json.add("color", ColorUtils.toHtml(getLineColor()));
+    json.add("fill-color", ColorUtils.toHtml(getFillColor()));
+    json.add("anti-sense-visible", getNegVisible());
+    json.add("anti-sense-color", ColorUtils.toHtml(getNegLineColor()));
+    json.add("anti-sense-fill-color", ColorUtils.toHtml(getNegFillColor()));
+    json.add("read-height", mReadHeight);
+    json.add("gap", mGap);
+
+    json.endObject();
+  }
 }

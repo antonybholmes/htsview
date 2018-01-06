@@ -20,22 +20,23 @@ package edu.columbia.rdf.htsview.ngs;
  * The Class Offsets.
  */
 public class Offsets {
-	
-	/** The start offset. */
-	public int startOffset = -1;
-	
-	/** The end offset. */
-	public int endOffset = -1;
 
-	/**
-	 * Instantiates a new offsets.
-	 *
-	 * @param so the so
-	 * @param eo the eo
-	 */
-	public Offsets(int so, 
-			int eo) {
-		this.startOffset = so;
-		this.endOffset = eo;
-	}
+  /** The start offset. */
+  public int startOffset = -1;
+
+  /** The end offset. */
+  public int endOffset = -1;
+
+  /**
+   * Instantiates a new offsets.
+   *
+   * @param so
+   *          the so
+   * @param eo
+   *          the eo
+   */
+  public Offsets(int so, int eo) {
+    this.startOffset = so;
+    this.endOffset = eo;
+  }
 }

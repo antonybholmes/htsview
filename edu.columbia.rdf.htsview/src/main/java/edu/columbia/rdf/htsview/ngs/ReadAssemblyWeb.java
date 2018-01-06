@@ -46,175 +46,192 @@ import org.jebtk.core.network.UrlBuilder;
  * @author Antony Holmes Holmes
  */
 public class ReadAssemblyWeb extends ReadAssembly {
-	/**
-	 * The member url.
-	 */
-	private UrlBuilder mUrl;
-	
-	/**
-	 * The member samples url.
-	 */
-	private UrlBuilder mSamplesUrl;
-	
-	/**
-	 * The member counts url.
-	 */
-	private UrlBuilder mCountsUrl;
-	
-	/**
-	 * The member groups url.
-	 */
-	private URL mGroupsUrl;
-	
-	/**
-	 * The member sub groups url.
-	 */
-	private UrlBuilder mSubGroupsUrl;
-	
-	/**
-	 * The member mapped url.
-	 */
-	private UrlBuilder mMappedUrl;
-	
-	/**
-	 * The member parser.
-	 */
-	private JsonParser mParser;
+  /**
+   * The member url.
+   */
+  private UrlBuilder mUrl;
 
-	/**
-	 * Instantiates a new read assembly web.
-	 *
-	 * @param url the url
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public ReadAssemblyWeb(URL url) throws IOException {
-		mUrl = new UrlBuilder(url);
+  /**
+   * The member samples url.
+   */
+  private UrlBuilder mSamplesUrl;
 
-		mGroupsUrl = new UrlBuilder(mUrl).resolve("groups").toUrl();
+  /**
+   * The member counts url.
+   */
+  private UrlBuilder mCountsUrl;
 
-		mSubGroupsUrl = new UrlBuilder(mUrl).resolve("subgroups");
+  /**
+   * The member groups url.
+   */
+  private URL mGroupsUrl;
 
-		mSamplesUrl = new UrlBuilder(mUrl).resolve("samples");
+  /**
+   * The member sub groups url.
+   */
+  private UrlBuilder mSubGroupsUrl;
 
-		mCountsUrl = new UrlBuilder(mUrl).resolve("counts");
+  /**
+   * The member mapped url.
+   */
+  private UrlBuilder mMappedUrl;
 
-		mMappedUrl = new UrlBuilder(mUrl).resolve("mapped");
-		
-		mParser = new JsonParser();
-	}
+  /**
+   * The member parser.
+   */
+  private JsonParser mParser;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.lib.bioinformatics.reads.ReadAssembly#getGroups()
-	 */
-	@Override
-	public List<String> getGroups() throws IOException, ParseException {
-		List<String> groups = new ArrayList<String>();
+  /**
+   * Instantiates a new read assembly web.
+   *
+   * @param url
+   *          the url
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public ReadAssemblyWeb(URL url) throws IOException {
+    mUrl = new UrlBuilder(url);
 
-		Json json = mParser.parse(mGroupsUrl);
+    mGroupsUrl = new UrlBuilder(mUrl).resolve("groups").toUrl();
 
-		for (int i = 0; i < json.size(); ++i) {
-			groups.add(json.get(i).getAsString());
-		}
+    mSubGroupsUrl = new UrlBuilder(mUrl).resolve("subgroups");
 
-		return groups;
-	}
+    mSamplesUrl = new UrlBuilder(mUrl).resolve("samples");
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.lib.bioinformatics.reads.ReadAssembly#getSubGroups(java.lang.String)
-	 */
-	@Override
-	public List<String> getSubGroups(String group) throws IOException, ParseException {
-		List<String> samples = new ArrayList<String>();
+    mCountsUrl = new UrlBuilder(mUrl).resolve("counts");
 
-		try {
-			URL url = new UrlBuilder(mSubGroupsUrl).resolve(group).toUrl();
+    mMappedUrl = new UrlBuilder(mUrl).resolve("mapped");
 
-			Json json = mParser.parse(url);
+    mParser = new JsonParser();
+  }
 
-			for (int i = 0; i < json.size(); ++i) {
-				samples.add(json.get(i).getAsString());
-			}
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.lib.bioinformatics.reads.ReadAssembly#getGroups()
+   */
+  @Override
+  public List<String> getGroups() throws IOException, ParseException {
+    List<String> groups = new ArrayList<String>();
 
-		return samples;
-	}
+    Json json = mParser.parse(mGroupsUrl);
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.lib.bioinformatics.reads.ReadAssembly#getSamples(java.lang.String, java.lang.String)
-	 */
-	@Override
-	public List<String> getSamples(String group, String subGroup) throws IOException, ParseException {
-		List<String> samples = new ArrayList<String>();
+    for (int i = 0; i < json.size(); ++i) {
+      groups.add(json.get(i).getAsString());
+    }
 
-		try {
-			URL url = new UrlBuilder(mSamplesUrl).resolve(group).resolve(subGroup).toUrl();
+    return groups;
+  }
 
-			Json json = mParser.parse(url);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.lib.bioinformatics.reads.ReadAssembly#getSubGroups(java.lang
+   * .String)
+   */
+  @Override
+  public List<String> getSubGroups(String group) throws IOException, ParseException {
+    List<String> samples = new ArrayList<String>();
 
-			for (int i = 0; i < json.size(); ++i) {
-				samples.add(json.get(i).getAsString());
-			}
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+    try {
+      URL url = new UrlBuilder(mSubGroupsUrl).resolve(group).toUrl();
 
-		return samples;
-	}
+      Json json = mParser.parse(url);
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.lib.bioinformatics.reads.ReadAssembly#getCounts(java.lang.String, java.lang.String, java.lang.String, int, edu.columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
-	 */
-	@Override
-	public List<Integer> getCounts(String group,
-			String subGroup,
-			String sample, 
-			int window,
-			GenomicRegion region) throws IOException, ParseException {
-		List<Integer> ret = new ArrayList<Integer>();
+      for (int i = 0; i < json.size(); ++i) {
+        samples.add(json.get(i).getAsString());
+      }
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+    }
 
-		try {
-			URL url = new UrlBuilder(mCountsUrl).resolve(group).resolve(subGroup).resolve(sample).resolve(window).resolve(region.getChr().toString()).resolve(region.getStart()).resolve(region.getEnd()).toUrl();
+    return samples;
+  }
 
-			//System.err.println(url);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.lib.bioinformatics.reads.ReadAssembly#getSamples(java.lang.
+   * String, java.lang.String)
+   */
+  @Override
+  public List<String> getSamples(String group, String subGroup) throws IOException, ParseException {
+    List<String> samples = new ArrayList<String>();
 
-			Json json = mParser.parse(url);
+    try {
+      URL url = new UrlBuilder(mSamplesUrl).resolve(group).resolve(subGroup).toUrl();
 
-			Json scoresJson = json.get(0).get("counts");
+      Json json = mParser.parse(url);
 
-			for (int i = 0; i < scoresJson.size(); ++i) {
-				ret.add(scoresJson.get(i).getAsInt());
-			}
+      for (int i = 0; i < json.size(); ++i) {
+        samples.add(json.get(i).getAsString());
+      }
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+    }
 
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+    return samples;
+  }
 
-		return ret;
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.lib.bioinformatics.reads.ReadAssembly#getCounts(java.lang.
+   * String, java.lang.String, java.lang.String, int,
+   * edu.columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
+   */
+  @Override
+  public List<Integer> getCounts(String group, String subGroup, String sample, int window, GenomicRegion region)
+      throws IOException, ParseException {
+    List<Integer> ret = new ArrayList<Integer>();
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.lib.bioinformatics.reads.ReadAssembly#getMappedReads(java.lang.String, java.lang.String, java.lang.String)
-	 */
-	@Override
-	public int getMappedReads(String group,
-			String subGroup,
-			String sample) throws IOException, ParseException {
-		int ret = -1;
+    try {
+      URL url = new UrlBuilder(mCountsUrl).resolve(group).resolve(subGroup).resolve(sample).resolve(window)
+          .resolve(region.getChr().toString()).resolve(region.getStart()).resolve(region.getEnd()).toUrl();
 
-		try {
-			URL url = new UrlBuilder(mMappedUrl).resolve(group).resolve(subGroup).resolve(sample).toUrl();
+      // System.err.println(url);
 
-			//System.err.println(url);
+      Json json = mParser.parse(url);
 
-			Json json = mParser.parse(url);
+      Json scoresJson = json.get(0).get("counts");
 
-			ret = json.get(0).get("mapped_reads").getAsInt();			
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+      for (int i = 0; i < scoresJson.size(); ++i) {
+        ret.add(scoresJson.get(i).getAsInt());
+      }
 
-		return ret;
-	}
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+    }
+
+    return ret;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.lib.bioinformatics.reads.ReadAssembly#getMappedReads(java.
+   * lang.String, java.lang.String, java.lang.String)
+   */
+  @Override
+  public int getMappedReads(String group, String subGroup, String sample) throws IOException, ParseException {
+    int ret = -1;
+
+    try {
+      URL url = new UrlBuilder(mMappedUrl).resolve(group).resolve(subGroup).resolve(sample).toUrl();
+
+      // System.err.println(url);
+
+      Json json = mParser.parse(url);
+
+      ret = json.get(0).get("mapped_reads").getAsInt();
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+    }
+
+    return ret;
+  }
 }

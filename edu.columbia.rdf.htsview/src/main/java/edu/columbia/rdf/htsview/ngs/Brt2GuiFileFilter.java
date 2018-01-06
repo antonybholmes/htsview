@@ -32,32 +32,35 @@ import java.io.FilenameFilter;
 
 import org.jebtk.modern.io.GuiFileExtFilter;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The class BedGuiFileFilter.
  */
 public class Brt2GuiFileFilter extends GuiFileExtFilter implements FilenameFilter {
-	
-	/**
-	 * Instantiates a new bed gui file filter.
-	 */
-	public Brt2GuiFileFilter() {
-		super("brt2j");
-	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.filechooser.FileFilter#getDescription()
-	 */
-	public final String getDescription() {
-		return "BRT2 (*.brt2j)";
-	}
+  /**
+   * Instantiates a new bed gui file filter.
+   */
+  public Brt2GuiFileFilter() {
+    super("brt2j");
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.FilenameFilter#accept(java.io.File, java.lang.String)
-	 */
-	@Override
-	public boolean accept(File arg0, String name) {
-		return name.endsWith(".brt2j");
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see javax.swing.filechooser.FileFilter#getDescription()
+   */
+  public final String getDescription() {
+    return "BRT2 (*.brt2j)";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.io.FilenameFilter#accept(java.io.File, java.lang.String)
+   */
+  @Override
+  public boolean accept(File arg0, String name) {
+    return name.endsWith(".brt2j");
+  }
 }

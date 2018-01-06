@@ -20,35 +20,36 @@ package edu.columbia.rdf.htsview.tracks;
  * The enum TitlePosition.
  */
 public enum TitlePosition {
-	
-	/**
-	 * The top.
-	 */
-	TOP,
-	
-	/**
-	 * The right.
-	 */
-	RIGHT,
-	
-	/**
-	 * The compact right.
-	 */
-	COMPACT_RIGHT;
-	
-	/**
-	 * Parses the.
-	 *
-	 * @param text the text
-	 * @return the title position
-	 */
-	public static TitlePosition parse(String text) {
-		if (text.equals("compact_right")) {
-			return TitlePosition.COMPACT_RIGHT;
-		} else if (text.equals("right")) {
-			return TitlePosition.RIGHT;
-		} else {
-			return TitlePosition.TOP;
-		}
-	}
+
+  /**
+   * The top.
+   */
+  TOP,
+
+  /**
+   * The right.
+   */
+  RIGHT,
+
+  /**
+   * The compact right.
+   */
+  COMPACT_RIGHT;
+
+  /**
+   * Parses the.
+   *
+   * @param text
+   *          the text
+   * @return the title position
+   */
+  public static TitlePosition parse(String text) {
+    if (text.equals("compact_right")) {
+      return TitlePosition.COMPACT_RIGHT;
+    } else if (text.equals("right")) {
+      return TitlePosition.RIGHT;
+    } else {
+      return TitlePosition.TOP;
+    }
+  }
 }

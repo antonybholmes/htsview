@@ -20,49 +20,52 @@ package edu.columbia.rdf.htsview.tracks;
  * The enum TitlePosition.
  */
 public class TitleProperties {
-	
-	/** The m pos. */
-	private TitlePosition mPos;
-	
-	/** The m visible. */
-	private boolean mVisible;
 
-	/**
-	 * Instantiates a new title properties.
-	 *
-	 * @param position the position
-	 */
-	public TitleProperties(TitlePosition position) {
-		this(position, true);
-	}
-	
-	/**
-	 * Instantiates a new title properties.
-	 *
-	 * @param position the position
-	 * @param visible the visible
-	 */
-	public TitleProperties(TitlePosition position, boolean visible) {
-		mPos = position;
-		mVisible = visible;
-	}
+  /** The m pos. */
+  private TitlePosition mPos;
 
-	/**
-	 * Gets the position.
-	 *
-	 * @return the position
-	 */
-	public TitlePosition getPosition() {
-		return mPos;
-	}
-	
-	/**
-	 * Gets the visible.
-	 *
-	 * @return the visible
-	 */
-	public boolean getVisible() {
-		return mVisible;
-	}
-	
+  /** The m visible. */
+  private boolean mVisible;
+
+  /**
+   * Instantiates a new title properties.
+   *
+   * @param position
+   *          the position
+   */
+  public TitleProperties(TitlePosition position) {
+    this(position, true);
+  }
+
+  /**
+   * Instantiates a new title properties.
+   *
+   * @param position
+   *          the position
+   * @param visible
+   *          the visible
+   */
+  public TitleProperties(TitlePosition position, boolean visible) {
+    mPos = position;
+    mVisible = visible;
+  }
+
+  /**
+   * Gets the position.
+   *
+   * @return the position
+   */
+  public TitlePosition getPosition() {
+    return mPos;
+  }
+
+  /**
+   * Gets the visible.
+   *
+   * @return the visible
+   */
+  public boolean getVisible() {
+    return mVisible;
+  }
+
 }

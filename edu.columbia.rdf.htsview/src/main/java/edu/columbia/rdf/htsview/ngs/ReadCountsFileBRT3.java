@@ -39,7 +39,6 @@ import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.sys.SysUtils;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Decodes counts using a multi resolution file.
@@ -48,233 +47,231 @@ import org.jebtk.core.sys.SysUtils;
  */
 public class ReadCountsFileBRT3 extends ReadCountsFileBinTree {
 
-	/**
-	 * The constant READ_START_WIDTH_BYTES.
-	 */
-	
-	public static final int COUNT_BLOCK_SIZE_BYTES = 4 + 4;
+  /**
+   * The constant READ_START_WIDTH_BYTES.
+   */
 
+  public static final int COUNT_BLOCK_SIZE_BYTES = 4 + 4;
 
+  /**
+   * The constant FILE_EXT.
+   */
+  public static final String FILE_EXT = "brt3";
 
+  /** The Constant GROUP_SIZE_BYTES. */
+  // start width, count array index, level, block count
+  public static final int GROUP_SIZE_BYTES = 4 + 4 + 4 + 4 + 1;
 
-	/**
-	 * The constant FILE_EXT.
-	 */
-	public static final String FILE_EXT = "brt3";
+  /** The Constant BLOCK_SIZE_BYTES. */
+  public static final int BLOCK_SIZE_BYTES = 4 + 4;
 
-	/** The Constant GROUP_SIZE_BYTES. */
-	// start width, count array index, level, block count
-	public static final int GROUP_SIZE_BYTES = 4 + 4 + 4 + 4 + 1;
+  /** The Constant HEADER_SIZE_BYTES. */
+  // count, readlength, genome
+  public static final int HEADER_SIZE_BYTES = 4 + 2 + 1 + 8;
 
-	/** The Constant BLOCK_SIZE_BYTES. */
-	public static final int BLOCK_SIZE_BYTES = 4 + 4;
+  /** The m reads. */
+  private int mReads = -1;
 
-	/** The Constant HEADER_SIZE_BYTES. */
-	// count, readlength, genome
-	public static final int HEADER_SIZE_BYTES = 4 + 2 + 1 + 8;
+  /**
+   * Directory containing genome files which must be of the form chr.n.txt. Each
+   * file must contain exactly one line consisting of the entire chromosome.
+   *
+   * @param metaFile
+   *          the directory
+   */
+  public ReadCountsFileBRT3(Path metaFile) {
+    super(metaFile);
 
-	/** The m reads. */
-	private int mReads = -1;
+    try {
+      mReads = Json.fromJson(mMetaFile).getAsInt("Mapped Reads");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
-	/**
-	 * Directory containing genome files which must be of the form
-	 * chr.n.txt. Each file must contain exactly one line consisting
-	 * of the entire chromosome.
-	 *
-	 * @param metaFile the directory
-	 */
-	public ReadCountsFileBRT3(Path metaFile) {
-		super(metaFile);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.lib.bioinformatics.reads.CountAssembly#getCounts(edu.
+   * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
+   */
+  @Override
+  public List<Integer> getCounts(GenomicRegion region, int window) throws IOException {
+    return getCounts(region.getChr(), region.getStart(), region.getEnd(), window);
+  }
 
-		try {
-			mReads = Json.fromJson(mMetaFile).getAsInt("Mapped Reads");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+  /**
+   * Gets the counts.
+   *
+   * @param chr
+   *          the chr
+   * @param start
+   *          the start
+   * @param end
+   *          the end
+   * @param window
+   *          the window
+   * @return the counts
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<Integer> getCounts(Chromosome chr, int start, int end, int window) throws IOException {
+    Path file = getFile(chr, window, FILE_EXT);
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.lib.bioinformatics.reads.CountAssembly#getCounts(edu.columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
-	 */
-	@Override
-	public List<Integer> getCounts(GenomicRegion region, int window) throws IOException {
-		return getCounts(region.getChr(),
-				region.getStart(),
-				region.getEnd(),
-				window);
-	}
+    RandomAccessFile in = FileUtils.newRandomAccess(file);
 
-	/**
-	 * Gets the counts.
-	 *
-	 * @param chr the chr
-	 * @param start the start
-	 * @param end the end
-	 * @param window the window
-	 * @return the counts
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<Integer> getCounts(Chromosome chr,
-			int start,
-			int end,
-			int window) throws IOException {
-		Path file = getFile(chr, window, FILE_EXT);
+    List<Integer> counts = new ArrayList<Integer>(1000);
 
-		RandomAccessFile in = FileUtils.newRandomAccess(file);
+    // int level = getLevel(window);
 
-		List<Integer> counts = new ArrayList<Integer>(1000);
+    try {
+      Offsets so = getCountOffset(in, start, window);
+      Offsets eo = getCountOffset(in, end, window);
 
-		//int level = getLevel(window);
-		
-		try {
-			Offsets so = getCountOffset(in, start, window);
-			Offsets eo = getCountOffset(in, end, window);
+      // int l = eo - so + 1;
 
-			//int l = eo - so + 1;
+      // Skip to structured block
+      in.seek(so.startOffset);
 
-			// Skip to structured block
-			in.seek(so.startOffset);
+      int b = so.startOffset;
 
-			int b = so.startOffset;
+      int s;
+      int v;
 
-			int s;
-			int v;
-			
-			SysUtils.err().println("eh", so.startOffset, eo.endOffset);
+      SysUtils.err().println("eh", so.startOffset, eo.endOffset);
 
-			//s = in.readInt();
-			//v = in.readInt();
-			//SysUtils.err().println("count", s, v);
-			
-			while (b <= eo.endOffset) {
-				s = in.readInt();
-				v = in.readInt();
-				
-				SysUtils.err().println("count", s, v, start, end);
+      // s = in.readInt();
+      // v = in.readInt();
+      // SysUtils.err().println("count", s, v);
 
-				if (s >= start && s < end) {
-					counts.add(v);
-				}
-				
-				b += COUNT_BLOCK_SIZE_BYTES;
-			}
-		} finally {
-			in.close();
-		}
+      while (b <= eo.endOffset) {
+        s = in.readInt();
+        v = in.readInt();
 
-		return counts;
-	}
+        SysUtils.err().println("count", s, v, start, end);
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.ngs.CountAssembly#getReadCount()
-	 */
-	@Override
-	public int getReadCount() {
-		return mReads;
-	}
+        if (s >= start && s < end) {
+          counts.add(v);
+        }
 
-	/**
-	 * Gets the count offset.
-	 *
-	 * @param in the in
-	 * @param p the p
-	 * @param window the window
-	 * @return the count offset
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static Offsets getCountOffset(RandomAccessFile in, 
-			int p,
-			int window) throws IOException {
-		boolean found = false;
-		int bin = -1;
-		int width = -1;
-		int start = -1;
+        b += COUNT_BLOCK_SIZE_BYTES;
+      }
+    } finally {
+      in.close();
+    }
 
-		// Skip to where the tree starts
-		in.seek(HEADER_SIZE_BYTES);
+    return counts;
+  }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.ngs.CountAssembly#getReadCount()
+   */
+  @Override
+  public int getReadCount() {
+    return mReads;
+  }
 
-		//int binSize = MAX_BIN_WIDTH; 
+  /**
+   * Gets the count offset.
+   *
+   * @param in
+   *          the in
+   * @param p
+   *          the p
+   * @param window
+   *          the window
+   * @return the count offset
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public static Offsets getCountOffset(RandomAccessFile in, int p, int window) throws IOException {
+    boolean found = false;
+    int bin = -1;
+    int width = -1;
+    int start = -1;
 
-		// The bin in the current level that this position would fall into
-		
+    // Skip to where the tree starts
+    in.seek(HEADER_SIZE_BYTES);
 
-		// Which bin level we are on.
-		//int l = -1;
-		int coMin = -1;
-		int coMax = -1;
-		
-		int binCount = -1;
-		int go = -1;
-		//int ret = -1;
+    // int binSize = MAX_BIN_WIDTH;
 
-		while (!found) {
-			start = in.readInt();
-			width = in.readInt();
-			coMin = in.readInt();
-			coMax = in.readInt();
-			//l = in.read();
-			
-			
-			// If we are at the desired level then return the memory address
-			// of the count index
-			if (width == window) {
-				break;
-			}
-			
-			
-			
-			binCount = in.read();
-			
-			SysUtils.err().println(p, start, width, coMin, coMax, window, binCount);
-			//System.exit(0);
-			
-			switch(binCount) {
-			case 0:
-				break;
-			case 10:
-				// Jump directly to bin
-				
-				bin = p / width;
-				
-				// Jump from the offset to the position bin * BLOCK_SIZE
-				// the skip ahead 1 int (4 bytes) to read the offset since
-				// we don't care about the start
-				in.skipBytes((bin * BLOCK_SIZE_BYTES) + 4);
-				
-				// Read the go offset
-				in.seek(in.readInt()); //seek(offset);
-				
-				break;
-			default:
-				// Manual search
-				
-				found = true;
-				
-				for (int i = 0; i < binCount; ++i) {
-					start = in.readInt();
-					
-					go = in.readInt();
-					
-					SysUtils.err().println("test", start, width, go, width, p);
-					
-					if (p >= start && p < start + width) {
+    // The bin in the current level that this position would fall into
 
-						//offset = go;
-						in.seek(go); //seek(offset);
-						
-						found = false;
-						
-						break;
-					}
-				}
-				
-				break;
-			}
-		}
-		
-		SysUtils.err().println("co", coMin, coMax);
+    // Which bin level we are on.
+    // int l = -1;
+    int coMin = -1;
+    int coMax = -1;
 
-		return new Offsets(coMin, coMax);
-	}
+    int binCount = -1;
+    int go = -1;
+    // int ret = -1;
+
+    while (!found) {
+      start = in.readInt();
+      width = in.readInt();
+      coMin = in.readInt();
+      coMax = in.readInt();
+      // l = in.read();
+
+      // If we are at the desired level then return the memory address
+      // of the count index
+      if (width == window) {
+        break;
+      }
+
+      binCount = in.read();
+
+      SysUtils.err().println(p, start, width, coMin, coMax, window, binCount);
+      // System.exit(0);
+
+      switch (binCount) {
+      case 0:
+        break;
+      case 10:
+        // Jump directly to bin
+
+        bin = p / width;
+
+        // Jump from the offset to the position bin * BLOCK_SIZE
+        // the skip ahead 1 int (4 bytes) to read the offset since
+        // we don't care about the start
+        in.skipBytes((bin * BLOCK_SIZE_BYTES) + 4);
+
+        // Read the go offset
+        in.seek(in.readInt()); // seek(offset);
+
+        break;
+      default:
+        // Manual search
+
+        found = true;
+
+        for (int i = 0; i < binCount; ++i) {
+          start = in.readInt();
+
+          go = in.readInt();
+
+          SysUtils.err().println("test", start, width, go, width, p);
+
+          if (p >= start && p < start + width) {
+
+            // offset = go;
+            in.seek(go); // seek(offset);
+
+            found = false;
+
+            break;
+          }
+        }
+
+        break;
+      }
+    }
+
+    SysUtils.err().println("co", coMin, coMax);
+
+    return new Offsets(coMin, coMax);
+  }
 }

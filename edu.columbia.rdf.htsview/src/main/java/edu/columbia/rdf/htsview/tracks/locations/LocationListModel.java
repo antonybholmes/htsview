@@ -21,5 +21,5 @@ import org.jebtk.modern.list.ModernListModel;
  * The Class LocationListModel.
  */
 public class LocationListModel extends ModernListModel<String> {
-	
+
 }

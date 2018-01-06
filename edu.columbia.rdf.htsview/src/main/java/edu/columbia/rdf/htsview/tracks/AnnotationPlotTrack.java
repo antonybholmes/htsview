@@ -24,79 +24,93 @@ import org.w3c.dom.Element;
  * The Class AnnotationPlotTrack.
  */
 public abstract class AnnotationPlotTrack extends Track {
-	
-	private static final long serialVersionUID = 1L;
 
-	/** The m name. */
-	protected String mName;
+  private static final long serialVersionUID = 1L;
 
-	/** The m sub figure. */
-	protected TrackSubFigure mSubFigure = null;
-	
-	/**
-	 * Instantiates a new annotation plot track.
-	 *
-	 * @param name the name
-	 */
-	public AnnotationPlotTrack(String name) {
-		setName(name);
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#getGraph()
-	 */
-	@Override
-	public TrackSubFigure getGraph() {
-		return mSubFigure;
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#getType()
-	 */
-	@Override
-	public String getType() {
-		return "Annotation";
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#setName(java.lang.String)
-	 */
-	@Override
-	public void setName(String name) {
-		mName = name;
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#getName()
-	 */
-	@Override
-	public String getName() {
-		return mName;
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#toXml(org.w3c.dom.Document)
-	 */
-	@Override
-	public Element toXml(Document doc) {
-		Element trackElement = doc.createElement("track");
-		
-		trackElement.setAttribute("type", "annotation");
-		trackElement.setAttribute("name", getName());
-		
-		return trackElement;
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#toJson(org.abh.common.json.JsonBuilder)
-	 */
-	@Override
-	public void toJson(JsonBuilder json) {
-		json.startObject();
-		
-		json.add("type", "annotation");
-		json.add("name", getName());
-		
-		json.endObject();
-	}
+  /** The m name. */
+  protected String mName;
+
+  /** The m sub figure. */
+  protected TrackSubFigure mSubFigure = null;
+
+  /**
+   * Instantiates a new annotation plot track.
+   *
+   * @param name
+   *          the name
+   */
+  public AnnotationPlotTrack(String name) {
+    setName(name);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#getGraph()
+   */
+  @Override
+  public TrackSubFigure getGraph() {
+    return mSubFigure;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#getType()
+   */
+  @Override
+  public String getType() {
+    return "Annotation";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#setName(java.lang.String)
+   */
+  @Override
+  public void setName(String name) {
+    mName = name;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#getName()
+   */
+  @Override
+  public String getName() {
+    return mName;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#toXml(org.w3c.dom.Document)
+   */
+  @Override
+  public Element toXml(Document doc) {
+    Element trackElement = doc.createElement("track");
+
+    trackElement.setAttribute("type", "annotation");
+    trackElement.setAttribute("name", getName());
+
+    return trackElement;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.Track#toJson(org.abh.common.json.JsonBuilder)
+   */
+  @Override
+  public void toJson(JsonBuilder json) {
+    json.startObject();
+
+    json.add("type", "annotation");
+    json.add("name", getName());
+
+    json.endObject();
+  }
 }

@@ -20,19 +20,21 @@ package edu.columbia.rdf.htsview.chipseq;
  * The Class SortSamplesByGenome.
  */
 public class SortSamplesByGenome extends SortSamplesByChipSeqField {
-	
-	/**
-	 * Instantiates a new sort samples by genome.
-	 */
-	public SortSamplesByGenome() {
-		super("/ChIP-Seq/Sample/Genome");
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.edb.ui.sort.SampleSorter#getName()
-	 */
-	@Override
-	public final String getName() {
-		return "Genome";
-	}
+
+  /**
+   * Instantiates a new sort samples by genome.
+   */
+  public SortSamplesByGenome() {
+    super("/ChIP-Seq/Sample/Genome");
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.edb.ui.sort.SampleSorter#getName()
+   */
+  @Override
+  public final String getName() {
+    return "Genome";
+  }
 }

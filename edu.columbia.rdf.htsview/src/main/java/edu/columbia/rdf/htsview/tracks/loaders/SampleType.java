@@ -23,13 +23,13 @@ package edu.columbia.rdf.htsview.tracks.loaders;
  *
  */
 public enum SampleType {
-	
-	/** The sample only. */
-	SAMPLE_ONLY,
-	
-	/** The reads only. */
-	READS_ONLY,
-	
-	/** The all. */
-	ALL
+
+  /** The sample only. */
+  SAMPLE_ONLY,
+
+  /** The reads only. */
+  READS_ONLY,
+
+  /** The all. */
+  ALL
 }

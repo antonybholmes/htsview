@@ -33,53 +33,56 @@ import edu.columbia.rdf.htsview.tracks.Track;
  */
 public abstract class TrackJsonParser implements NameProperty {
 
-	/**
-	 * Creates a new track from the json.
-	 *
-	 * @param window the window
-	 * @param name the name
-	 * @param id the id
-	 * @param annotationTree the annotation tree
-	 * @param trackJson the track json
-	 * @param rootNode the root node
-	 * @return true, if successful
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public abstract boolean parse(ModernWindow window,
-			String name, 
-			int id,
-			ModernTree<Track> annotationTree,
-			Json trackJson, 
-			TreeNode<Track> rootNode) throws IOException;
+  /**
+   * Creates a new track from the json.
+   *
+   * @param window
+   *          the window
+   * @param name
+   *          the name
+   * @param id
+   *          the id
+   * @param annotationTree
+   *          the annotation tree
+   * @param trackJson
+   *          the track json
+   * @param rootNode
+   *          the root node
+   * @return true, if successful
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public abstract boolean parse(ModernWindow window, String name, int id, ModernTree<Track> annotationTree,
+      Json trackJson, TreeNode<Track> rootNode) throws IOException;
 
-	/**
-	 * Returns the type this parser is designed to deal with.
-	 *
-	 * @return the type
-	 */
-	public abstract String getType();
-	
-	
-	/**
-	 * Gets the file.
-	 *
-	 * @param json the json
-	 * @return the file
-	 */
-	protected static Path getFile(Json json) {
-		String path = json.getAsString("file");
+  /**
+   * Returns the type this parser is designed to deal with.
+   *
+   * @return the type
+   */
+  public abstract String getType();
 
-		if (path != null) {
-			return PathUtils.getPath(path);
-		}
+  /**
+   * Gets the file.
+   *
+   * @param json
+   *          the json
+   * @return the file
+   */
+  protected static Path getFile(Json json) {
+    String path = json.getAsString("file");
 
-		path = json.getAsString("meta-file");
+    if (path != null) {
+      return PathUtils.getPath(path);
+    }
 
-		if (path != null) {
-			return PathUtils.getPath(path);
-		}
+    path = json.getAsString("meta-file");
 
-		return null;
-	}
+    if (path != null) {
+      return PathUtils.getPath(path);
+    }
+
+    return null;
+  }
 
 }

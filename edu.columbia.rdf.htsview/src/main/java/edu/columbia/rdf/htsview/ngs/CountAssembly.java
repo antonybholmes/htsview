@@ -35,173 +35,202 @@ import java.util.List;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.Strand;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The class CountAssembly.
  */
 public abstract class CountAssembly {
 
-	/**
-	 * Gets the starts.
-	 *
-	 * @param region the region
-	 * @param window the window
-	 * @return the starts
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<Integer> getStarts(String region, int window) throws IOException {
-		return getStarts(GenomicRegion.parse(region), window);
-	}
-	
-	/**
-	 * Gets the starts.
-	 *
-	 * @param region the region
-	 * @param window the window
-	 * @return the starts
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<Integer> getStarts(GenomicRegion region, int window) throws IOException {
-		return Collections.emptyList();
-	}
-	
-	/**
-	 * Gets the strands.
-	 *
-	 * @param region the region
-	 * @param window the window
-	 * @return the strands
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<Strand> getStrands(String region, int window) throws IOException {
-		return getStrands(GenomicRegion.parse(region), window);
-	}
-	
-	/**
-	 * Gets the strands.
-	 *
-	 * @param region the region
-	 * @param window the window
-	 * @return the strands
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<Strand> getStrands(GenomicRegion region, int window) throws IOException {
-		return Collections.emptyList();
-	}
-	
-	/**
-	 * Gets the counts.
-	 *
-	 * @param region the region
-	 * @return the counts
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<Integer> getCounts(String region) throws IOException {
-		return getCounts(region, 1);
-	}
-	
-	/**
-	 * Gets the counts.
-	 *
-	 * @param region the region
-	 * @param window the window
-	 * @return the counts
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<Integer> getCounts(String region, int window) throws IOException {
-		return getCounts(GenomicRegion.parse(region), window);
-	}
-	
-	/**
-	 * Gets the counts.
-	 *
-	 * @param region the region
-	 * @return the counts
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<Integer> getCounts(GenomicRegion region) throws IOException {
-		return getCounts(region, 1);
-	}
-	
-	/**
-	 * Gets the counts.
-	 *
-	 * @param region the region
-	 * @param window the window
-	 * @return the counts
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public abstract List<Integer> getCounts(GenomicRegion region, int window) throws IOException;
-	
-	/**
-	 * Gets the values.
-	 *
-	 * @param region the region
-	 * @param window the window
-	 * @return the values
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<Double> getValues(String region, int window) throws IOException {
-		return getValues(GenomicRegion.parse(region), window);
-	}
-	
-	/**
-	 * Gets the values.
-	 *
-	 * @param region the region
-	 * @return the values
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<Double> getValues(GenomicRegion region) throws IOException {
-		return getValues(region, 1);
-	}
-	
-	/**
-	 * Returns values in a position range.
-	 *
-	 * @param region the region
-	 * @param window the window
-	 * @return the counts
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<Double> getValues(GenomicRegion region, int window) throws IOException {
-		return Collections.emptyList();
-	}
-	
+  /**
+   * Gets the starts.
+   *
+   * @param region
+   *          the region
+   * @param window
+   *          the window
+   * @return the starts
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<Integer> getStarts(String region, int window) throws IOException {
+    return getStarts(GenomicRegion.parse(region), window);
+  }
 
-	/**
-	 * Optional method for closing file handles if necessary.
-	 */
-	public void close() {
-		// Do nothing
-	}
+  /**
+   * Gets the starts.
+   *
+   * @param region
+   *          the region
+   * @param window
+   *          the window
+   * @return the starts
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<Integer> getStarts(GenomicRegion region, int window) throws IOException {
+    return Collections.emptyList();
+  }
 
-	/**
-	 * Gets the read length.
-	 *
-	 * @return the read length
-	 */
-	public int getReadLength() {
-		return -1;
-	}
-	
-	/**
-	 * Should return the number of reads in the library.
-	 *
-	 * @return the read count
-	 */
-	public int getReadCount() {
-		return -1;
-	}
+  /**
+   * Gets the strands.
+   *
+   * @param region
+   *          the region
+   * @param window
+   *          the window
+   * @return the strands
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<Strand> getStrands(String region, int window) throws IOException {
+    return getStrands(GenomicRegion.parse(region), window);
+  }
 
-	/**
-	 * Gets the genome.
-	 *
-	 * @return the genome
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public String getGenome() throws IOException {
-		return null;
-	}
+  /**
+   * Gets the strands.
+   *
+   * @param region
+   *          the region
+   * @param window
+   *          the window
+   * @return the strands
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<Strand> getStrands(GenomicRegion region, int window) throws IOException {
+    return Collections.emptyList();
+  }
+
+  /**
+   * Gets the counts.
+   *
+   * @param region
+   *          the region
+   * @return the counts
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<Integer> getCounts(String region) throws IOException {
+    return getCounts(region, 1);
+  }
+
+  /**
+   * Gets the counts.
+   *
+   * @param region
+   *          the region
+   * @param window
+   *          the window
+   * @return the counts
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<Integer> getCounts(String region, int window) throws IOException {
+    return getCounts(GenomicRegion.parse(region), window);
+  }
+
+  /**
+   * Gets the counts.
+   *
+   * @param region
+   *          the region
+   * @return the counts
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<Integer> getCounts(GenomicRegion region) throws IOException {
+    return getCounts(region, 1);
+  }
+
+  /**
+   * Gets the counts.
+   *
+   * @param region
+   *          the region
+   * @param window
+   *          the window
+   * @return the counts
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public abstract List<Integer> getCounts(GenomicRegion region, int window) throws IOException;
+
+  /**
+   * Gets the values.
+   *
+   * @param region
+   *          the region
+   * @param window
+   *          the window
+   * @return the values
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<Double> getValues(String region, int window) throws IOException {
+    return getValues(GenomicRegion.parse(region), window);
+  }
+
+  /**
+   * Gets the values.
+   *
+   * @param region
+   *          the region
+   * @return the values
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<Double> getValues(GenomicRegion region) throws IOException {
+    return getValues(region, 1);
+  }
+
+  /**
+   * Returns values in a position range.
+   *
+   * @param region
+   *          the region
+   * @param window
+   *          the window
+   * @return the counts
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<Double> getValues(GenomicRegion region, int window) throws IOException {
+    return Collections.emptyList();
+  }
+
+  /**
+   * Optional method for closing file handles if necessary.
+   */
+  public void close() {
+    // Do nothing
+  }
+
+  /**
+   * Gets the read length.
+   *
+   * @return the read length
+   */
+  public int getReadLength() {
+    return -1;
+  }
+
+  /**
+   * Should return the number of reads in the library.
+   *
+   * @return the read count
+   */
+  public int getReadCount() {
+    return -1;
+  }
+
+  /**
+   * Gets the genome.
+   *
+   * @return the genome
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public String getGenome() throws IOException {
+    return null;
+  }
 }

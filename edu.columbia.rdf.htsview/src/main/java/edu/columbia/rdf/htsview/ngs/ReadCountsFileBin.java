@@ -37,7 +37,6 @@ import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.json.Json;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Decodes values stored at positions in a tree.
@@ -45,137 +44,141 @@ import org.jebtk.core.json.Json;
  * @author Antony Holmes Holmes
  */
 public abstract class ReadCountsFileBin extends ReadCountsFile {
-	
-	/** The Constant GENOME. */
-	protected static final byte[] GENOME = new byte[8];
-	
-	/**
-	 * The member directory.
-	 */
-	protected Path mDirectory;
 
-	/**
-	 * The member file map.
-	 */
-	protected Map<Chromosome, Path> mFileMap = 
-			new HashMap<Chromosome, Path>();
+  /** The Constant GENOME. */
+  protected static final byte[] GENOME = new byte[8];
 
-	/**
-	 * The member offset map.
-	 */
-	protected Map<Chromosome, Integer> mOffsetMap = 
-			new HashMap<Chromosome, Integer>();
+  /**
+   * The member directory.
+   */
+  protected Path mDirectory;
 
-	/**
-	 * The member read length map.
-	 */
-	protected Map<Chromosome, Integer> mReadLengthMap = 
-			new HashMap<Chromosome, Integer>();
+  /**
+   * The member file map.
+   */
+  protected Map<Chromosome, Path> mFileMap = new HashMap<Chromosome, Path>();
 
-	/** The m genome. */
-	protected String mGenome;
+  /**
+   * The member offset map.
+   */
+  protected Map<Chromosome, Integer> mOffsetMap = new HashMap<Chromosome, Integer>();
 
+  /**
+   * The member read length map.
+   */
+  protected Map<Chromosome, Integer> mReadLengthMap = new HashMap<Chromosome, Integer>();
 
-	/** The m meta file. */
-	protected Path mMetaFile;
+  /** The m genome. */
+  protected String mGenome;
 
-	/** The m read length. */
-	private int mReadLength;
+  /** The m meta file. */
+  protected Path mMetaFile;
 
+  /** The m read length. */
+  private int mReadLength;
 
-	/**
-	 * Directory containing genome files which must be of the form
-	 * chr.n.txt. Each file must contain exactly one line consisting
-	 * of the entire chromosome.
-	 *
-	 * @param metaFile the meta file
-	 */
-	public ReadCountsFileBin(Path metaFile) {
-		mMetaFile = metaFile;
-		mDirectory = metaFile.getParent();
-		
-		try {
-			mGenome = Json.fromJson(metaFile).getAsString("Genome");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+  /**
+   * Directory containing genome files which must be of the form chr.n.txt. Each
+   * file must contain exactly one line consisting of the entire chromosome.
+   *
+   * @param metaFile
+   *          the meta file
+   */
+  public ReadCountsFileBin(Path metaFile) {
+    mMetaFile = metaFile;
+    mDirectory = metaFile.getParent();
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.ngs.CountAssembly#getReadLength()
-	 */
-	@Override
-	public int getReadLength() {
-		return mReadLength; //Map.values().iterator().next();
-	}
+    try {
+      mGenome = Json.fromJson(metaFile).getAsString("Genome");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.ngs.CountAssembly#getGenome()
-	 */
-	@Override
-	public String getGenome() throws IOException {
-		return mGenome; //Json.parse(mMetaFile).getAsString("Genome");
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.ngs.CountAssembly#getReadLength()
+   */
+  @Override
+  public int getReadLength() {
+    return mReadLength; // Map.values().iterator().next();
+  }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.ngs.CountAssembly#getGenome()
+   */
+  @Override
+  public String getGenome() throws IOException {
+    return mGenome; // Json.parse(mMetaFile).getAsString("Genome");
+  }
 
-	/**
-	 * Gets the file.
-	 *
-	 * @param chr the chr
-	 * @param window the window
-	 * @param ext the ext
-	 * @return the file
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	protected Path getFile(Chromosome chr, int window, String ext) throws IOException {
-		if (!mFileMap.containsKey(chr)) {
-			Path file = mDirectory.resolve(chr + "." + ext);
-			
-			mFileMap.put(chr, file);
+  /**
+   * Gets the file.
+   *
+   * @param chr
+   *          the chr
+   * @param window
+   *          the window
+   * @param ext
+   *          the ext
+   * @return the file
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  protected Path getFile(Chromosome chr, int window, String ext) throws IOException {
+    if (!mFileMap.containsKey(chr)) {
+      Path file = mDirectory.resolve(chr + "." + ext);
 
-			RandomAccessFile in = FileUtils.newRandomAccess(file);
-			
-			//System.err.println("load file " + file);
+      mFileMap.put(chr, file);
 
-			try {
-				mReadLength = in.readInt(); //mReadLengthMap.put(chr, in.readInt());
+      RandomAccessFile in = FileUtils.newRandomAccess(file);
 
-				// The second 4 bytes tells us where in the file to go to
-				// find the read data
-				mOffsetMap.put(chr, in.readInt());
+      // System.err.println("load file " + file);
 
-				if (mGenome == null) {
-					// Read the genome
-					
-					mGenome = readGenome(in);
-				}
-			} finally {
-				in.close();
-			}
-		}
+      try {
+        mReadLength = in.readInt(); // mReadLengthMap.put(chr, in.readInt());
 
-		return mFileMap.get(chr);
-	}
-	
-	/**
-	 * Read genome.
-	 *
-	 * @param in the in
-	 * @return the string
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public String readGenome(RandomAccessFile in) throws IOException {
-		in.read(GENOME);
-		
-		// find the first null
-		int c = 0;
-		
-		while (c < 8) {
-			if (GENOME[c++] == 0) {
-				break;
-			}
-		}
+        // The second 4 bytes tells us where in the file to go to
+        // find the read data
+        mOffsetMap.put(chr, in.readInt());
 
-		return new String(GENOME, 0, c);
-	}
+        if (mGenome == null) {
+          // Read the genome
+
+          mGenome = readGenome(in);
+        }
+      } finally {
+        in.close();
+      }
+    }
+
+    return mFileMap.get(chr);
+  }
+
+  /**
+   * Read genome.
+   *
+   * @param in
+   *          the in
+   * @return the string
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public String readGenome(RandomAccessFile in) throws IOException {
+    in.read(GENOME);
+
+    // find the first null
+    int c = 0;
+
+    while (c < 8) {
+      if (GENOME[c++] == 0) {
+        break;
+      }
+    }
+
+    return new String(GENOME, 0, c);
+  }
 }

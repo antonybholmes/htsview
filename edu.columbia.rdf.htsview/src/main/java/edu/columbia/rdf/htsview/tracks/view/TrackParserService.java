@@ -23,63 +23,65 @@ import java.util.Map;
  * The Class TrackParserService.
  */
 public class TrackParserService {
-	
-	/**
-	 * The Class TrackServiceLoader.
-	 */
-	private static class TrackServiceLoader {
-		
-		/** The Constant INSTANCE. */
-		private static final TrackParserService INSTANCE = 
-				new TrackParserService();
-	}
 
-	/**
-	 * Gets the single instance of TrackParserService.
-	 *
-	 * @return single instance of TrackParserService
-	 */
-	public static TrackParserService getInstance() {
-		return TrackServiceLoader.INSTANCE;
-	}
+  /**
+   * The Class TrackServiceLoader.
+   */
+  private static class TrackServiceLoader {
 
-	/** The m parser map. */
-	private Map<String, TrackJsonParser> mParserMap =
-			new HashMap<String, TrackJsonParser>();
+    /** The Constant INSTANCE. */
+    private static final TrackParserService INSTANCE = new TrackParserService();
+  }
 
-	/**
-	 * Instantiates a new track parser service.
-	 */
-	private TrackParserService() {
-		//autoLoad();
-	}
+  /**
+   * Gets the single instance of TrackParserService.
+   *
+   * @return single instance of TrackParserService
+   */
+  public static TrackParserService getInstance() {
+    return TrackServiceLoader.INSTANCE;
+  }
 
-	/**
-	 * Register.
-	 *
-	 * @param parser the parser
-	 */
-	public void register(TrackJsonParser parser) {
-		register(parser.getType(), parser);
-	}
+  /** The m parser map. */
+  private Map<String, TrackJsonParser> mParserMap = new HashMap<String, TrackJsonParser>();
 
-	/**
-	 * Register.
-	 *
-	 * @param type the type
-	 * @param parser the parser
-	 */
-	private void register(String type, TrackJsonParser parser) {
-		mParserMap.put(type, parser);
-	}
+  /**
+   * Instantiates a new track parser service.
+   */
+  private TrackParserService() {
+    // autoLoad();
+  }
 
-	/**
-	 * Gets the.
-	 *
-	 * @param type the type
-	 * @return the track json parser
-	 */
-	public TrackJsonParser get(String type) {
-		return mParserMap.get(type);
-	}
+  /**
+   * Register.
+   *
+   * @param parser
+   *          the parser
+   */
+  public void register(TrackJsonParser parser) {
+    register(parser.getType(), parser);
+  }
+
+  /**
+   * Register.
+   *
+   * @param type
+   *          the type
+   * @param parser
+   *          the parser
+   */
+  private void register(String type, TrackJsonParser parser) {
+    mParserMap.put(type, parser);
+  }
+
+  /**
+   * Gets the.
+   *
+   * @param type
+   *          the type
+   * @return the track json parser
+   */
+  public TrackJsonParser get(String type) {
+    return mParserMap.get(type);
+  }
 }

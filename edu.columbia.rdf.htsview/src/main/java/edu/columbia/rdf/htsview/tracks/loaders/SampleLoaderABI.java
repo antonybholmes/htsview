@@ -30,35 +30,41 @@ import edu.columbia.rdf.htsview.tracks.abi.ABIPlotTrack;
  * The Class SampleLoaderABI.
  */
 public class SampleLoaderABI extends SampleLoaderFS {
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "AB1";
-	}
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#getExt()
-	 */
-	@Override
-	public String getExt() {
-		return "ab1";
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.common.ui.window.ModernWindow, java.nio.file.Path, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public Track openSample(ModernWindow parent,
-			Path file, 
-			TreeNode<Track> root) throws IOException {
-		
-		ABITrace trace = ABITrace.parse(file);
-		
-		Track ret = load(new ABIPlotTrack(trace), root);
-		
-		return ret;
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "AB1";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#getExt()
+   */
+  @Override
+  public String getExt() {
+    return "ab1";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.
+   * common.ui.window.ModernWindow, java.nio.file.Path,
+   * org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public Track openSample(ModernWindow parent, Path file, TreeNode<Track> root) throws IOException {
+
+    ABITrace trace = ABITrace.parse(file);
+
+    Track ret = load(new ABIPlotTrack(trace), root);
+
+    return ret;
+  }
 }

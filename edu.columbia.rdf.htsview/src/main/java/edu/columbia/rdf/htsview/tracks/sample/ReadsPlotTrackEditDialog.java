@@ -36,294 +36,281 @@ import org.jebtk.modern.text.ModernTextField;
 import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class ReadsPlotTrackEditDialog.
  */
 public class ReadsPlotTrackEditDialog extends ModernDialogTaskWindow implements ModernClickListener {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m line color button. */
-	private ColorSwatchButton mLineColorButton;
-	
-	/** The m fill color button. */
-	private ColorSwatchButton mFillColorButton;
 
-	/** The m name field. */
-	private ModernTextField mNameField = 
-			new ModernClipboardTextField("Name");
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The m track. */
-	private ReadsPlotTrack mTrack;
+  /** The m line color button. */
+  private ColorSwatchButton mLineColorButton;
 
-	/** The m check forward. */
-	private CheckBox mCheckForward = 
-			new ModernCheckSwitch("Forward Strand", true);
-	
-	/** The m check line color. */
-	private CheckBox mCheckLineColor =
-			new ModernCheckSwitch("Line color");
-	
-	/** The m check fill color. */
-	private CheckBox mCheckFillColor =
-			new ModernCheckSwitch("Fill color");
-	
-	/** The m check neg. */
-	private CheckBox mCheckNeg = 
-			new ModernCheckSwitch("Negative Strand", true);
-	
-	/** The m check neg line color. */
-	private CheckBox mCheckNegLineColor =
-			new ModernCheckSwitch("Line color");
-	
-	/** The m check neg fill color. */
-	private CheckBox mCheckNegFillColor =
-			new ModernCheckSwitch("Fill color");
-	
-	/** The m spinner read height. */
-	private ModernCompactSpinner mSpinnerReadHeight =
-			new ModernCompactSpinner(1, 32, 1);
-	
-	/** The m spinner gap. */
-	private ModernCompactSpinner mSpinnerGap =
-			new ModernCompactSpinner(0, 32, 1);
-	
-	/** The m neg line color button. */
-	private ColorSwatchButton mNegLineColorButton;
-	
-	/** The m neg fill color button. */
-	private ColorSwatchButton mNegFillColorButton;
+  /** The m fill color button. */
+  private ColorSwatchButton mFillColorButton;
 
+  /** The m name field. */
+  private ModernTextField mNameField = new ModernClipboardTextField("Name");
 
-	/**
-	 * Instantiates a new reads plot track edit dialog.
-	 *
-	 * @param parent the parent
-	 * @param track the track
-	 */
-	public ReadsPlotTrackEditDialog(ModernWindow parent, ReadsPlotTrack track) {
-		super(parent);
-		
-		mTrack = track;
-		
-		setTitle("Reads Plot Track Editor", track.getName());
-		
-		createUi();
-		
-		setup();
-	}
+  /** The m track. */
+  private ReadsPlotTrack mTrack;
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		mNameField.setEditable(false);
-		
-		mCheckForward.setSelected(mTrack.getForwardVisible());
-		mCheckLineColor.setSelected(mTrack.getLineColor() != null);
-		mCheckFillColor.setSelected(mTrack.getFillColor() != null);
-		
-		mCheckNeg.setSelected(mTrack.getNegVisible());
-		mCheckNegLineColor.setSelected(mTrack.getNegLineColor() != null);
-		mCheckNegFillColor.setSelected(mTrack.getNegFillColor() != null);
-		
-		mSpinnerReadHeight.setValue(mTrack.getReadHeight());
-		mSpinnerGap.setValue(mTrack.getGap());
-	
-		setSize(480, 460);
-		
-		UI.centerWindowToScreen(this);
-	}
+  /** The m check forward. */
+  private CheckBox mCheckForward = new ModernCheckSwitch("Forward Strand", true);
 
+  /** The m check line color. */
+  private CheckBox mCheckLineColor = new ModernCheckSwitch("Line color");
 
-	/**
-	 * Creates the ui.
-	 */
-	private final void createUi() {
-		mNameField.setText(mTrack.getName());
-		
-		
-		Box box = VBox.create();
-		
-		Box box2 = HBox.create();
-		
-		box2.add(new ModernAutoSizeLabel("Name", 50));
-		box2.add(new ModernTextBorderPanel(mNameField, 300));
-		
-		box.add(box2);
-		
-		box.add(UI.createVGap(10));
-		
-		box.add(mCheckForward);
-		
-		box.add(UI.createVGap(5));
-		
-		box2 = HBox.create();
-		
-		box2.setBorder(BorderService.getInstance().createLeftBorder(20));
-		
-		UI.setSize(mCheckLineColor, 100, ModernWidget.WIDGET_HEIGHT);
-		box2.add(mCheckLineColor);
-		
-		mLineColorButton = new ColorSwatchButton(mParent, 
-				mTrack.getLineColor());
-		
-		box2.add(mLineColorButton);
-		
-		box.add(box2);
-		
-		box.add(UI.createVGap(5));
-		
-		box2 = HBox.create();
-		
-		box2.setBorder(BorderService.getInstance().createLeftBorder(20));
-		
-		UI.setSize(mCheckFillColor, 100, ModernWidget.WIDGET_HEIGHT);
-		box2.add(mCheckFillColor);
-		
-		mFillColorButton = new ColorSwatchButton(mParent, 
-				mTrack.getFillColor());
-		
-		box2.add(mFillColorButton);
-		
-		box.add(box2);
-		
-		box.add(UI.createVGap(10));
-		
-		//
-		// Reverse
-		//
-		
-		box.add(mCheckNeg);
-		
-		box.add(UI.createVGap(5));
-		
-		box2 = HBox.create();
-		
-		box2.setBorder(BorderService.getInstance().createLeftBorder(20));
-		
-		UI.setSize(mCheckNegLineColor, 100, ModernWidget.WIDGET_HEIGHT);
-		box2.add(mCheckNegLineColor);
-		
-		mNegLineColorButton = new ColorSwatchButton(mParent, 
-				mTrack.getNegLineColor());
-		
-		box2.add(mNegLineColorButton);
-		
-		box.add(box2);
-		
-		box.add(UI.createVGap(5));
-		
-		box2 = HBox.create();
-		
-		box2.setBorder(BorderService.getInstance().createLeftBorder(20));
-		
-		UI.setSize(mCheckNegFillColor, 100, ModernWidget.WIDGET_HEIGHT);
-		box2.add(mCheckNegFillColor);
-		
-		mNegFillColorButton = new ColorSwatchButton(mParent, 
-				mTrack.getNegFillColor());
-		
-		box2.add(mNegFillColorButton);
-		
-		box.add(box2);
-		
-		box.add(UI.createVGap(20));
-		
-		box2 = HBox.create();
-		box2.add(new ModernAutoSizeLabel("Read height", 100));
-		box2.add(mSpinnerReadHeight);
-		box.add(box2);
-		
-		box.add(UI.createVGap(5));
-		
-		box2 = HBox.create();
-		box2.add(new ModernAutoSizeLabel("Gap", 100));
-		box2.add(mSpinnerGap);
-		box.add(box2);
-		
-		setDialogCardContent(box);
-	}
+  /** The m check fill color. */
+  private CheckBox mCheckFillColor = new ModernCheckSwitch("Fill color");
 
-	/* (non-Javadoc)
-	 * @see java.awt.Component#getName()
-	 */
-	public String getName() {
-		return mNameField.getText();
-	}
-	
-	/**
-	 * Gets the line color.
-	 *
-	 * @return the line color
-	 */
-	public Color getLineColor() {
-		return mCheckLineColor.isSelected() ? mLineColorButton.getSelectedColor() : null;
-	}
-	
-	/**
-	 * Gets the fill color.
-	 *
-	 * @return the fill color
-	 */
-	public Color getFillColor() {
-		return mCheckFillColor.isSelected() ? mFillColorButton.getSelectedColor() : null;
-	}
+  /** The m check neg. */
+  private CheckBox mCheckNeg = new ModernCheckSwitch("Negative Strand", true);
 
-	/**
-	 * Gets the neg line color.
-	 *
-	 * @return the neg line color
-	 */
-	public Color getNegLineColor() {
-		return mCheckNegLineColor.isSelected() ? mNegLineColorButton.getSelectedColor() : null;
-	}
-	
-	/**
-	 * Gets the neg fill color.
-	 *
-	 * @return the neg fill color
-	 */
-	public Color getNegFillColor() {
-		return mCheckNegFillColor.isSelected() ? mNegFillColorButton.getSelectedColor() : null;
-	}
+  /** The m check neg line color. */
+  private CheckBox mCheckNegLineColor = new ModernCheckSwitch("Line color");
 
-	/**
-	 * Gets the forward visible.
-	 *
-	 * @return the forward visible
-	 */
-	public boolean getForwardVisible() {
-		return mCheckForward.isSelected();
-	}
-	
-	/**
-	 * Gets the neg visible.
-	 *
-	 * @return the neg visible
-	 */
-	public boolean getNegVisible() {
-		return mCheckNeg.isSelected();
-	}
-	
-	/**
-	 * Gets the read height.
-	 *
-	 * @return the read height
-	 */
-	public int getReadHeight() {
-		return mSpinnerReadHeight.getIntValue();
-	}
-	
-	/**
-	 * Gets the gap.
-	 *
-	 * @return the gap
-	 */
-	public int getGap() {
-		return mSpinnerGap.getIntValue();
-	}
+  /** The m check neg fill color. */
+  private CheckBox mCheckNegFillColor = new ModernCheckSwitch("Fill color");
+
+  /** The m spinner read height. */
+  private ModernCompactSpinner mSpinnerReadHeight = new ModernCompactSpinner(1, 32, 1);
+
+  /** The m spinner gap. */
+  private ModernCompactSpinner mSpinnerGap = new ModernCompactSpinner(0, 32, 1);
+
+  /** The m neg line color button. */
+  private ColorSwatchButton mNegLineColorButton;
+
+  /** The m neg fill color button. */
+  private ColorSwatchButton mNegFillColorButton;
+
+  /**
+   * Instantiates a new reads plot track edit dialog.
+   *
+   * @param parent
+   *          the parent
+   * @param track
+   *          the track
+   */
+  public ReadsPlotTrackEditDialog(ModernWindow parent, ReadsPlotTrack track) {
+    super(parent);
+
+    mTrack = track;
+
+    setTitle("Reads Plot Track Editor", track.getName());
+
+    createUi();
+
+    setup();
+  }
+
+  /**
+   * Setup.
+   */
+  private void setup() {
+    mNameField.setEditable(false);
+
+    mCheckForward.setSelected(mTrack.getForwardVisible());
+    mCheckLineColor.setSelected(mTrack.getLineColor() != null);
+    mCheckFillColor.setSelected(mTrack.getFillColor() != null);
+
+    mCheckNeg.setSelected(mTrack.getNegVisible());
+    mCheckNegLineColor.setSelected(mTrack.getNegLineColor() != null);
+    mCheckNegFillColor.setSelected(mTrack.getNegFillColor() != null);
+
+    mSpinnerReadHeight.setValue(mTrack.getReadHeight());
+    mSpinnerGap.setValue(mTrack.getGap());
+
+    setSize(480, 460);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private final void createUi() {
+    mNameField.setText(mTrack.getName());
+
+    Box box = VBox.create();
+
+    Box box2 = HBox.create();
+
+    box2.add(new ModernAutoSizeLabel("Name", 50));
+    box2.add(new ModernTextBorderPanel(mNameField, 300));
+
+    box.add(box2);
+
+    box.add(UI.createVGap(10));
+
+    box.add(mCheckForward);
+
+    box.add(UI.createVGap(5));
+
+    box2 = HBox.create();
+
+    box2.setBorder(BorderService.getInstance().createLeftBorder(20));
+
+    UI.setSize(mCheckLineColor, 100, ModernWidget.WIDGET_HEIGHT);
+    box2.add(mCheckLineColor);
+
+    mLineColorButton = new ColorSwatchButton(mParent, mTrack.getLineColor());
+
+    box2.add(mLineColorButton);
+
+    box.add(box2);
+
+    box.add(UI.createVGap(5));
+
+    box2 = HBox.create();
+
+    box2.setBorder(BorderService.getInstance().createLeftBorder(20));
+
+    UI.setSize(mCheckFillColor, 100, ModernWidget.WIDGET_HEIGHT);
+    box2.add(mCheckFillColor);
+
+    mFillColorButton = new ColorSwatchButton(mParent, mTrack.getFillColor());
+
+    box2.add(mFillColorButton);
+
+    box.add(box2);
+
+    box.add(UI.createVGap(10));
+
+    //
+    // Reverse
+    //
+
+    box.add(mCheckNeg);
+
+    box.add(UI.createVGap(5));
+
+    box2 = HBox.create();
+
+    box2.setBorder(BorderService.getInstance().createLeftBorder(20));
+
+    UI.setSize(mCheckNegLineColor, 100, ModernWidget.WIDGET_HEIGHT);
+    box2.add(mCheckNegLineColor);
+
+    mNegLineColorButton = new ColorSwatchButton(mParent, mTrack.getNegLineColor());
+
+    box2.add(mNegLineColorButton);
+
+    box.add(box2);
+
+    box.add(UI.createVGap(5));
+
+    box2 = HBox.create();
+
+    box2.setBorder(BorderService.getInstance().createLeftBorder(20));
+
+    UI.setSize(mCheckNegFillColor, 100, ModernWidget.WIDGET_HEIGHT);
+    box2.add(mCheckNegFillColor);
+
+    mNegFillColorButton = new ColorSwatchButton(mParent, mTrack.getNegFillColor());
+
+    box2.add(mNegFillColorButton);
+
+    box.add(box2);
+
+    box.add(UI.createVGap(20));
+
+    box2 = HBox.create();
+    box2.add(new ModernAutoSizeLabel("Read height", 100));
+    box2.add(mSpinnerReadHeight);
+    box.add(box2);
+
+    box.add(UI.createVGap(5));
+
+    box2 = HBox.create();
+    box2.add(new ModernAutoSizeLabel("Gap", 100));
+    box2.add(mSpinnerGap);
+    box.add(box2);
+
+    setDialogCardContent(box);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.awt.Component#getName()
+   */
+  public String getName() {
+    return mNameField.getText();
+  }
+
+  /**
+   * Gets the line color.
+   *
+   * @return the line color
+   */
+  public Color getLineColor() {
+    return mCheckLineColor.isSelected() ? mLineColorButton.getSelectedColor() : null;
+  }
+
+  /**
+   * Gets the fill color.
+   *
+   * @return the fill color
+   */
+  public Color getFillColor() {
+    return mCheckFillColor.isSelected() ? mFillColorButton.getSelectedColor() : null;
+  }
+
+  /**
+   * Gets the neg line color.
+   *
+   * @return the neg line color
+   */
+  public Color getNegLineColor() {
+    return mCheckNegLineColor.isSelected() ? mNegLineColorButton.getSelectedColor() : null;
+  }
+
+  /**
+   * Gets the neg fill color.
+   *
+   * @return the neg fill color
+   */
+  public Color getNegFillColor() {
+    return mCheckNegFillColor.isSelected() ? mNegFillColorButton.getSelectedColor() : null;
+  }
+
+  /**
+   * Gets the forward visible.
+   *
+   * @return the forward visible
+   */
+  public boolean getForwardVisible() {
+    return mCheckForward.isSelected();
+  }
+
+  /**
+   * Gets the neg visible.
+   *
+   * @return the neg visible
+   */
+  public boolean getNegVisible() {
+    return mCheckNeg.isSelected();
+  }
+
+  /**
+   * Gets the read height.
+   *
+   * @return the read height
+   */
+  public int getReadHeight() {
+    return mSpinnerReadHeight.getIntValue();
+  }
+
+  /**
+   * Gets the gap.
+   *
+   * @return the gap
+   */
+  public int getGap() {
+    return mSpinnerGap.getIntValue();
+  }
 }

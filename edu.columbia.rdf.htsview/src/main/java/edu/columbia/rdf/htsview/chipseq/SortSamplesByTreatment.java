@@ -20,19 +20,21 @@ package edu.columbia.rdf.htsview.chipseq;
  * The Class SortSamplesByTreatment.
  */
 public class SortSamplesByTreatment extends SortSamplesByChipSeqField {
-	
-	/**
-	 * Instantiates a new sort samples by treatment.
-	 */
-	public SortSamplesByTreatment() {
-		super("/ChIP-Seq/Sample/Treatment");
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.edb.ui.sort.SampleSorter#getName()
-	 */
-	@Override
-	public final String getName() {
-		return "Treatment";
-	}
+
+  /**
+   * Instantiates a new sort samples by treatment.
+   */
+  public SortSamplesByTreatment() {
+    super("/ChIP-Seq/Sample/Treatment");
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.edb.ui.sort.SampleSorter#getName()
+   */
+  @Override
+  public final String getName() {
+    return "Treatment";
+  }
 }

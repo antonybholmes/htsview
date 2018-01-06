@@ -24,7 +24,7 @@ import org.jebtk.core.model.SetModel;
  */
 public class LocationsModel extends SetModel<GenomicRegion> {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
 }

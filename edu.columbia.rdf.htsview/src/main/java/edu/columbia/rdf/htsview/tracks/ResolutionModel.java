@@ -20,36 +20,37 @@ import org.jebtk.core.settings.SettingsService;
 
 // TODO: Auto-generated Javadoc
 /**
- * Centrally keep track of selected experiments in the order they were
- * selected.
+ * Centrally keep track of selected experiments in the order they were selected.
  * 
  * @author Antony Holmes Holmes
  *
  */
 public class ResolutionModel extends ItemModel<Integer> {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new resolution model.
-	 */
-	public ResolutionModel() {
-		set(SettingsService.getInstance().getAsInt("edb.reads.default-resolution"));
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.lib.model.ItemModel#set(java.lang.Object)
-	 */
-	@Override
-	public void set(Integer resolution) {
-		//System.err.println("resolution " + resolution);
-		
-		super.set(resolution);
-		
-		// Store the setting
-		SettingsService.getInstance().update("edb.reads.default-resolution", resolution);
-	}
+  /**
+   * Instantiates a new resolution model.
+   */
+  public ResolutionModel() {
+    set(SettingsService.getInstance().getAsInt("edb.reads.default-resolution"));
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.lib.model.ItemModel#set(java.lang.Object)
+   */
+  @Override
+  public void set(Integer resolution) {
+    // System.err.println("resolution " + resolution);
+
+    super.set(resolution);
+
+    // Store the setting
+    SettingsService.getInstance().update("edb.reads.default-resolution", resolution);
+  }
 }

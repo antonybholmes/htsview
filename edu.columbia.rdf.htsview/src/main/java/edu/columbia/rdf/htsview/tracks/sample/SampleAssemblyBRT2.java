@@ -29,21 +29,26 @@ import edu.columbia.rdf.htsview.tracks.SampleAssemblyFile;
  * @author Antony Holmes Holmes
  */
 public class SampleAssemblyBRT2 extends SampleAssemblyFile {
-	
-	/**
-	 * Instantiates a new track assembly web.
-	 *
-	 * @param metaFile the meta file
-	 */
-	public SampleAssemblyBRT2(Path metaFile) {
-		super(new ReadCountsFileBRT2(metaFile));
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.SampleAssembly#hasReadSupport(edu.columbia.rdf.edb.Sample)
-	 */
-	@Override
-	public boolean hasReadSupport(Sample sample) {
-		return true;
-	}
+
+  /**
+   * Instantiates a new track assembly web.
+   *
+   * @param metaFile
+   *          the meta file
+   */
+  public SampleAssemblyBRT2(Path metaFile) {
+    super(new ReadCountsFileBRT2(metaFile));
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.SampleAssembly#hasReadSupport(edu.columbia.
+   * rdf.edb.Sample)
+   */
+  @Override
+  public boolean hasReadSupport(Sample sample) {
+    return true;
+  }
 }

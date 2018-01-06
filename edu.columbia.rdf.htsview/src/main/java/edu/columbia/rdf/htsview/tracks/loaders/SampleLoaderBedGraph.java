@@ -36,62 +36,68 @@ import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedPlotTrack;
  */
 public class SampleLoaderBedGraph extends SampleLoaderFS {
 
-	/** The m apply to all. */
-	private boolean mApplyToAll = false;
-	
-	/** The m open as bed graph. */
-	private boolean mOpenAsBedGraph = false;
+  /** The m apply to all. */
+  private boolean mApplyToAll = false;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.common.ui.window.ModernWindow, java.nio.file.Path, org.abh.common.tree.TreeNode)
-	 */
-	@Override
-	public Track openSample(ModernWindow parent,
-			Path file, 
-			TreeNode<Track> root) throws IOException {
-		if (!mApplyToAll) {
-			BedGraphStyleDialog dialog = new BedGraphStyleDialog(parent);
+  /** The m open as bed graph. */
+  private boolean mOpenAsBedGraph = false;
 
-			dialog.setVisible(true);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.
+   * common.ui.window.ModernWindow, java.nio.file.Path,
+   * org.abh.common.tree.TreeNode)
+   */
+  @Override
+  public Track openSample(ModernWindow parent, Path file, TreeNode<Track> root) throws IOException {
+    if (!mApplyToAll) {
+      BedGraphStyleDialog dialog = new BedGraphStyleDialog(parent);
 
-			if (dialog.getStatus() == ModernDialogStatus.OK) {
+      dialog.setVisible(true);
 
-				mOpenAsBedGraph = dialog.isBedGraphStyle();
-				mApplyToAll = dialog.getApplyToAll();
-			} else {
-				return null;
-			}
-		}
+      if (dialog.getStatus() == ModernDialogStatus.OK) {
 
-		if (mOpenAsBedGraph) {
-			List<UCSCTrack> bedGraphs = BedGraph.parse(file);
+        mOpenAsBedGraph = dialog.isBedGraphStyle();
+        mApplyToAll = dialog.getApplyToAll();
+      } else {
+        return null;
+      }
+    }
 
-			Track ret = null;
-			
-			for (UCSCTrack bedGraph : bedGraphs) {
-				ret = load(new BedGraphPlotTrack(bedGraph, file), root);
-			}
-			
-			return ret;
-		} else {
-			// Open as bed plot
-			return load(new BedPlotTrack(Bed.parseBedGraph(file), file), root);
-		}
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.abh.common.NameProperty#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Bedgraph";
-	}
+    if (mOpenAsBedGraph) {
+      List<UCSCTrack> bedGraphs = BedGraph.parse(file);
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#getExt()
-	 */
-	@Override
-	public String getExt() {
-		return "bedgraph";
-	}
+      Track ret = null;
+
+      for (UCSCTrack bedGraph : bedGraphs) {
+        ret = load(new BedGraphPlotTrack(bedGraph, file), root);
+      }
+
+      return ret;
+    } else {
+      // Open as bed plot
+      return load(new BedPlotTrack(Bed.parseBedGraph(file), file), root);
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.NameProperty#getName()
+   */
+  @Override
+  public String getName() {
+    return "Bedgraph";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#getExt()
+   */
+  @Override
+  public String getExt() {
+    return "bedgraph";
+  }
 }

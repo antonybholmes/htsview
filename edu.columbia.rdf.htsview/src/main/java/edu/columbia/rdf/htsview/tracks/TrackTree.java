@@ -23,17 +23,17 @@ import org.jebtk.modern.tree.ModernTree;
  */
 public class TrackTree extends ModernTree<Track> {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new track tree.
-	 */
-	public TrackTree() {
-		setNodeRenderer(new TrackNodeRenderer());
-		
-		setDragEnabled(true);
-		
-		//setBorder(RIGHT_BORDER);
-	}
+  /**
+   * Instantiates a new track tree.
+   */
+  public TrackTree() {
+    setNodeRenderer(new TrackNodeRenderer());
+
+    setDragEnabled(true);
+
+    // setBorder(RIGHT_BORDER);
+  }
 }

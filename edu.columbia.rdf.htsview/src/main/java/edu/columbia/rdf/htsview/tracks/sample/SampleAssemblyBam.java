@@ -28,12 +28,13 @@ import edu.columbia.rdf.htsview.tracks.SampleAssemblyFile;
  */
 public class SampleAssemblyBam extends SampleAssemblyFile {
 
-	/**
-	 * Instantiates a new sample assembly bam.
-	 *
-	 * @param file the file
-	 */
-	public SampleAssemblyBam(Path file) {
-		super(new ReadCountsFileBam(file));
-	}
+  /**
+   * Instantiates a new sample assembly bam.
+   *
+   * @param file
+   *          the file
+   */
+  public SampleAssemblyBam(Path file) {
+    super(new ReadCountsFileBam(file));
+  }
 }

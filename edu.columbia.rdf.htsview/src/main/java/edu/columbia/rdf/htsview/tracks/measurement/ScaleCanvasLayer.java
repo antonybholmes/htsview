@@ -34,68 +34,68 @@ import edu.columbia.rdf.htsview.tracks.Track;
  * The Class ScaleCanvasLayer.
  */
 public class ScaleCanvasLayer extends AxesLayer {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/** The Constant BAR_SIZE. */
-	private static final int BAR_SIZE = 3;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The Constant GAP. */
-	private static final int GAP = 10;
-	
-	/** The m gap. */
-	private int mGap;
+  /** The Constant BAR_SIZE. */
+  private static final int BAR_SIZE = 3;
 
+  /** The Constant GAP. */
+  private static final int GAP = 10;
 
-	@Override
-	public String getType() {
-		return "Scale Layer";
-	}
-	
-	/**
-	 * Update.
-	 *
-	 * @param displayRegion the display region
-	 */
-	public void update(GenomicRegion displayRegion) {
-		mGap = (int)Math.pow(10, (int)Mathematics.log10(displayRegion.getLength()));
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.graphplot.figure.AxesLayer#plot(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
-	 */
-	@Override
-	public void drawPlot(Graphics2D g2,
-			DrawingContext context,
-			Figure figure, 
-			SubFigure subFigure, 
-			Axes axes) {
-		// Use the graph properties and subplot layout to
-		// create the graph space mapper
+  /** The m gap. */
+  private int mGap;
 
-		int h = axes.getInternalSize().getH();
-		
-		int y = axes.getInternalSize().getH() / 2;
-		
-		int w = axes.toPlotX1(axes.getX1Axis().getMin() + mGap) - axes.toPlotX1(axes.getX1Axis().getMin());
-		
-		int x1 = (axes.getInternalSize().getW() - w) / 2;
-		
-		int x2 = x1 + w;
-		
-		g2.setColor(Color.BLACK);
-		g2.drawLine(x1, y, x2, y);
-		g2.drawLine(x1, y - BAR_SIZE, x1, y + BAR_SIZE);
-		g2.drawLine(x2, y - BAR_SIZE, x2, y + BAR_SIZE);
-			
-		String label = Track.formatBp(mGap);
-			
-		x1 -= (g2.getFontMetrics().stringWidth(label) + GAP);
-			
-		g2.drawString(label, x1, ModernWidget.getTextYPosCenter(g2, h));
-			
-			//s += mGap;
-		//}
-	}
+  @Override
+  public String getType() {
+    return "Scale Layer";
+  }
+
+  /**
+   * Update.
+   *
+   * @param displayRegion
+   *          the display region
+   */
+  public void update(GenomicRegion displayRegion) {
+    mGap = (int) Math.pow(10, (int) Mathematics.log10(displayRegion.getLength()));
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.graphplot.figure.AxesLayer#plot(java.awt.Graphics2D,
+   * org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure,
+   * org.graphplot.figure.Axes)
+   */
+  @Override
+  public void drawPlot(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
+    // Use the graph properties and subplot layout to
+    // create the graph space mapper
+
+    int h = axes.getInternalSize().getH();
+
+    int y = axes.getInternalSize().getH() / 2;
+
+    int w = axes.toPlotX1(axes.getX1Axis().getMin() + mGap) - axes.toPlotX1(axes.getX1Axis().getMin());
+
+    int x1 = (axes.getInternalSize().getW() - w) / 2;
+
+    int x2 = x1 + w;
+
+    g2.setColor(Color.BLACK);
+    g2.drawLine(x1, y, x2, y);
+    g2.drawLine(x1, y - BAR_SIZE, x1, y + BAR_SIZE);
+    g2.drawLine(x2, y - BAR_SIZE, x2, y + BAR_SIZE);
+
+    String label = Track.formatBp(mGap);
+
+    x1 -= (g2.getFontMetrics().stringWidth(label) + GAP);
+
+    g2.drawString(label, x1, ModernWidget.getTextYPosCenter(g2, h));
+
+    // s += mGap;
+    // }
+  }
 }

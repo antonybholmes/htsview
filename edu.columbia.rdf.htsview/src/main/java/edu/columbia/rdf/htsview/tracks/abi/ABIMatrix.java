@@ -27,48 +27,51 @@ import edu.columbia.rdf.htsview.ext.abi.ABITrace;
  */
 public class ABIMatrix extends DataFrame {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m trace. */
-	private ABITrace mTrace;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The m region. */
-	private GenomicRegion mRegion;
+  /** The m trace. */
+  private ABITrace mTrace;
 
-	/** The m base. */
-	private char mBase;
+  /** The m region. */
+  private GenomicRegion mRegion;
 
-	/**
-	 * Instantiates a new ABI matrix.
-	 *
-	 * @param trace the trace
-	 * @param base the base
-	 * @param region the region
-	 */
-	public ABIMatrix(ABITrace trace, 
-			char base,
-			GenomicRegion region) {
-		super(new EmptyMatrix(trace.getNumBases(), 2));
-		
-		setColumnNames("Points x", "Points y");
-		
-		mTrace = trace;
-		mBase = base;
-		mRegion = region;
-	}
+  /** The m base. */
+  private char mBase;
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.math.matrix.AnnotatableMatrix#getValue(int, int)
-	 */
-	@Override
-	public double getValue(int row, int column) {
-		int s = mRegion.getStart() + row;
-		
-		if (column == 0) {
-			return s;
-		} else {
-			return mTrace.getColor(mBase, s);
-		}
-	}
+  /**
+   * Instantiates a new ABI matrix.
+   *
+   * @param trace
+   *          the trace
+   * @param base
+   *          the base
+   * @param region
+   *          the region
+   */
+  public ABIMatrix(ABITrace trace, char base, GenomicRegion region) {
+    super(new EmptyMatrix(trace.getNumBases(), 2));
+
+    setColumnNames("Points x", "Points y");
+
+    mTrace = trace;
+    mBase = base;
+    mRegion = region;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.abh.common.math.matrix.AnnotatableMatrix#getValue(int, int)
+   */
+  @Override
+  public double getValue(int row, int column) {
+    int s = mRegion.getStart() + row;
+
+    if (column == 0) {
+      return s;
+    } else {
+      return mTrace.getColor(mBase, s);
+    }
+  }
 }

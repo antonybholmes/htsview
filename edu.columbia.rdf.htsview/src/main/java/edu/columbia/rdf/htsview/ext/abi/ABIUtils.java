@@ -31,160 +31,156 @@ import org.jebtk.core.io.FileUtils;
  * The Class ABIUtils.
  */
 public class ABIUtils {
-	
-	/**
-	 * Instantiates a new ABI utils.
-	 */
-	private ABIUtils() {
-		// Do nothing
-	}
 
-	/**
-	 * Creates a DNA sequence using the bases with the greatest color values.
-	 *
-	 * @param trace the trace
-	 * @return the char[]
-	 */
-	public static char[] call(ABITrace trace) {
-		char[] ret = new char[trace.getNumBases()];
+  /**
+   * Instantiates a new ABI utils.
+   */
+  private ABIUtils() {
+    // Do nothing
+  }
 
-		for (int i = 0; i < ret.length; ++i) {
-			int max = Integer.MIN_VALUE;
-			for (char base : ABITrace.BASES) {
-				int v = trace.getColor(base, i);
+  /**
+   * Creates a DNA sequence using the bases with the greatest color values.
+   *
+   * @param trace
+   *          the trace
+   * @return the char[]
+   */
+  public static char[] call(ABITrace trace) {
+    char[] ret = new char[trace.getNumBases()];
 
-				if (v > max) {
-					ret[i] = base;
-					max = v;
-				}
-			}
-		}
+    for (int i = 0; i < ret.length; ++i) {
+      int max = Integer.MIN_VALUE;
+      for (char base : ABITrace.BASES) {
+        int v = trace.getColor(base, i);
 
-		return ret;
-	}
+        if (v > max) {
+          ret[i] = base;
+          max = v;
+        }
+      }
+    }
 
-	/**
-	 * Top two.
-	 *
-	 * @param trace the trace
-	 * @return the list
-	 */
-	public static List<StringBuilder> topTwo(ABITrace trace) {
-		char[] ret = new char[trace.getNumBases()];
+    return ret;
+  }
 
-		List<StringBuilder> seqs = new ArrayList<StringBuilder>();
+  /**
+   * Top two.
+   *
+   * @param trace
+   *          the trace
+   * @return the list
+   */
+  public static List<StringBuilder> topTwo(ABITrace trace) {
+    char[] ret = new char[trace.getNumBases()];
 
-		seqs.add(new StringBuilder());
+    List<StringBuilder> seqs = new ArrayList<StringBuilder>();
 
-		for (int i = 0; i < ret.length; ++i) {
-			IterMap<Integer, Character> countMap =
-					new IterHashMap<Integer, Character>();
+    seqs.add(new StringBuilder());
 
-			int c = 0;
+    for (int i = 0; i < ret.length; ++i) {
+      IterMap<Integer, Character> countMap = new IterHashMap<Integer, Character>();
 
-			for (char base : ABITrace.BASES) {
-				int v = trace.getColor(base, i);
+      int c = 0;
 
-				if (v > 100) {
-					countMap.put(v, base);
-					++c;
-				}
-			}
+      for (char base : ABITrace.BASES) {
+        int v = trace.getColor(base, i);
 
-			c = Math.min(4, c);
-			
-			char base;
-			
-			switch(c) {
-			case 0:
-				// Nothing appropriate so add N
-				for (StringBuilder seq : seqs) {
-					seq.append("N");
-				}
+        if (v > 100) {
+          countMap.put(v, base);
+          ++c;
+        }
+      }
 
-				break;
-			case 1:
-				base = countMap.values().iterator().next();
-				
-				for (StringBuilder seq : seqs) {
-					// Add the only character in the array
-					seq.append(base);
-				}
+      c = Math.min(4, c);
 
-				break;
-			default:
-				// More than one
+      char base;
 
-				// Add a new buffer as a copy of the current up to this
-				// point
+      switch (c) {
+      case 0:
+        // Nothing appropriate so add N
+        for (StringBuilder seq : seqs) {
+          seq.append("N");
+        }
 
-				while (seqs.size() < c) {
-					seqs.add(new StringBuilder(seqs.get(0)));
-				}
+        break;
+      case 1:
+        base = countMap.values().iterator().next();
 
-				// We want the highest counts first
-				List<Integer> counts = 
-						CollectionUtils.reverse(CollectionUtils.sortKeys(countMap));
-				
-				for (int si = 0; si < seqs.size(); ++si) {
-					// If the number of colors at this position is less than
-					// the number of sequences already created, use the
-					// lowest position closest to the desired index
-					int ci = Math.min(si, counts.size() - 1);
-					
-					System.err.println(i + " " + counts.size() + " " + si + " " + ci + " " + counts.get(ci));
-					
-					seqs.get(si).append(countMap.get(counts.get(ci)));
-				}
-				
-				/*
-				// Sort by the top two
-				for (int count : CollectionUtils.reverse(CollectionUtils.sortKeys(countMap))) {
-					for (char b : countMap.get(count)) {
-						if (bc == c) {
-							break;
-						}
+        for (StringBuilder seq : seqs) {
+          // Add the only character in the array
+          seq.append(base);
+        }
 
-						seqs.get(bc).append(b);
+        break;
+      default:
+        // More than one
 
-						++bc;
-					}
+        // Add a new buffer as a copy of the current up to this
+        // point
 
-					if (bc == c) {
-						break;
-					}
-				}
-				*/
+        while (seqs.size() < c) {
+          seqs.add(new StringBuilder(seqs.get(0)));
+        }
 
-			}
-		}
+        // We want the highest counts first
+        List<Integer> counts = CollectionUtils.reverse(CollectionUtils.sortKeys(countMap));
 
-		return seqs;
-	}
+        for (int si = 0; si < seqs.size(); ++si) {
+          // If the number of colors at this position is less than
+          // the number of sequences already created, use the
+          // lowest position closest to the desired index
+          int ci = Math.min(si, counts.size() - 1);
 
-	/**
-	 * Write fasta.
-	 *
-	 * @param file the file
-	 * @param seqs the seqs
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static void writeFasta(Path file, List<StringBuilder> seqs) throws IOException {
-		int c = 1;
+          System.err.println(i + " " + counts.size() + " " + si + " " + ci + " " + counts.get(ci));
 
-		BufferedWriter out = FileUtils.newBufferedWriter(file);
+          seqs.get(si).append(countMap.get(counts.get(ci)));
+        }
 
-		try {
-			for (StringBuilder seq : seqs) {
-				out.write(">seq_" + c);
-				out.newLine();
-				out.write(seq.toString());
-				out.newLine();
+        /*
+         * // Sort by the top two for (int count :
+         * CollectionUtils.reverse(CollectionUtils.sortKeys(countMap))) { for (char b :
+         * countMap.get(count)) { if (bc == c) { break; }
+         * 
+         * seqs.get(bc).append(b);
+         * 
+         * ++bc; }
+         * 
+         * if (bc == c) { break; } }
+         */
 
-				++c;
-			}
-		} finally {
-			out.close();
-		}
-	}
+      }
+    }
+
+    return seqs;
+  }
+
+  /**
+   * Write fasta.
+   *
+   * @param file
+   *          the file
+   * @param seqs
+   *          the seqs
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public static void writeFasta(Path file, List<StringBuilder> seqs) throws IOException {
+    int c = 1;
+
+    BufferedWriter out = FileUtils.newBufferedWriter(file);
+
+    try {
+      for (StringBuilder seq : seqs) {
+        out.write(">seq_" + c);
+        out.newLine();
+        out.write(seq.toString());
+        out.newLine();
+
+        ++c;
+      }
+    } finally {
+      out.close();
+    }
+  }
 }

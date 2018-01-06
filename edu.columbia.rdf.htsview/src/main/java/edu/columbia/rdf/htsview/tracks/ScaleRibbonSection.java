@@ -31,8 +31,6 @@ import org.jebtk.modern.spinner.ModernCompactSpinner;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
 import org.jebtk.modern.widget.ModernWidget;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
  * Allows user to select a color map.
@@ -41,214 +39,229 @@ import org.jebtk.modern.widget.ModernWidget;
  *
  */
 public class ScaleRibbonSection extends RibbonSection {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The m check auto y.
-	 */
-	private ModernTwoStateWidget mCheckAutoY =
-			new ModernCheckSwitch("Auto");
-	
-	//private ModernTwoStateWidget mCheckMaxY =
-	//		new RibbonLargeRadioButton("Max");
-	
-	/**
-	 * The m check common y scale.
-	 */
-	private ModernTwoStateWidget mCheckCommonYScale = 
-			new ModernCheckSwitch("Same");
-	
-	/**
-	 * The m check normalize.
-	 */
-	private ModernTwoStateWidget mCheckNormalize = 
-			new ModernCheckSwitch("Normalize", true);
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The m text y min.
-	 */
-	private ModernCompactSpinner mTextYMin = 
-			new ModernCompactSpinner(0, 10000, 0);
-	
-	/**
-	 * The m text y max.
-	 */
-	private ModernCompactSpinner mTextYMax = 
-			new ModernCompactSpinner(1, 10000, 1);
+  /**
+   * The m check auto y.
+   */
+  private ModernTwoStateWidget mCheckAutoY = new ModernCheckSwitch("Auto");
 
-	/**
-	 * The m y axis limit model.
-	 */
-	private AxisLimitsModel mYAxisLimitModel;
-	
-	
-	/**
-	 * The class AxisEvents.
-	 */
-	private class AxisEvents implements ChangeListener {
+  // private ModernTwoStateWidget mCheckMaxY =
+  // new RibbonLargeRadioButton("Max");
 
-		/* (non-Javadoc)
-		 * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
-		 */
-		@Override
-		public void changed(ChangeEvent e) {
-			mTextYMax.setText(Formatter.number().dp(2).format(mYAxisLimitModel.getMax()));
-		}
+  /**
+   * The m check common y scale.
+   */
+  private ModernTwoStateWidget mCheckCommonYScale = new ModernCheckSwitch("Same");
 
-	}
-	
-	/**
-	 * The class KeyEvents.
-	 */
-	private class KeyEvents implements KeyListener {
+  /**
+   * The m check normalize.
+   */
+  private ModernTwoStateWidget mCheckNormalize = new ModernCheckSwitch("Normalize", true);
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
-		 */
-		@Override
-		public void keyPressed(KeyEvent e) {
-			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-				setLimits();
-			}
-		}
+  /**
+   * The m text y min.
+   */
+  private ModernCompactSpinner mTextYMin = new ModernCompactSpinner(0, 10000, 0);
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
-		 */
-		@Override
-		public void keyReleased(KeyEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
+  /**
+   * The m text y max.
+   */
+  private ModernCompactSpinner mTextYMax = new ModernCompactSpinner(1, 10000, 1);
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
-		 */
-		@Override
-		public void keyTyped(KeyEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-	}
-	
-	/**
-	 * The class AutoYEvents.
-	 */
-	private class AutoYEvents implements ModernClickListener {
+  /**
+   * The m y axis limit model.
+   */
+  private AxisLimitsModel mYAxisLimitModel;
 
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-		 */
-		@Override
-		public void clicked(ModernClickEvent e) {
-			mYAxisLimitModel.setAutoLimits(mCheckAutoY.isSelected());
-		}
-	}
-	
-	/**
-	 * The class CommonYEvents.
-	 */
-	private class CommonYEvents implements ModernClickListener {
+  /**
+   * The class AxisEvents.
+   */
+  private class AxisEvents implements ChangeListener {
 
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-		 */
-		@Override
-		public void clicked(ModernClickEvent e) {
-			mYAxisLimitModel.setCommonYScale(mCheckCommonYScale.isSelected());
-		}
-	}
-	
-	/**
-	 * The class NormalizeEvents.
-	 */
-	private class NormalizeEvents implements ModernClickListener {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     */
+    @Override
+    public void changed(ChangeEvent e) {
+      mTextYMax.setText(Formatter.number().dp(2).format(mYAxisLimitModel.getMax()));
+    }
 
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-		 */
-		@Override
-		public void clicked(ModernClickEvent e) {
-			mYAxisLimitModel.setNormalize(mCheckNormalize.isSelected());
-		}
-	}
-	
-	
-	/**
-	 * Instantiates a new scale ribbon section2.
-	 *
-	 * @param ribbon the ribbon
-	 * @param name the name
-	 * @param yAxisLimitModel the y axis limit model
-	 */
-	public ScaleRibbonSection(Ribbon ribbon, 
-			String name, 
-			AxisLimitsModel yAxisLimitModel) {
-		super(ribbon, name);
-		
-		mYAxisLimitModel = yAxisLimitModel;
-		
-		add(mTextYMax);
-		add(UI.createHGap(5));
-		add(mCheckAutoY);
-		//add(UI.createHGap(2));
-		//add(createHGap());
-		//add(mCheckMaxY);
-		
-		//box.add(new ModernLabel("Max"));
-		//box.add(createHGap());
-		
-		//box.add(createHGap());
-		//box.add(new RibbonSubSectionSeparator());
-		//box.add(createHGap());
-		//box.add(mCheckCommonYScale);
-		add(mCheckNormalize);
-		//add(UI.createHGap(2));
-		add(mCheckCommonYScale);
-	
-		//new ModernButtonGroup(mCheckAutoY, mCheckMaxY);
-		
-		mCheckAutoY.setSelected(mYAxisLimitModel.getAutoSetLimits());
-		
-		//ModernWidget.setSize(mCheckAutoY, 60);
-		//ModernWidget.setSize(mCheckMaxY, 60);
-		
-		//ModernWidget.setSize(mCheckAutoY, 60);
-		//ModernWidget.setSize(mCheckNormalize, 100);
-		//ModernWidget.setSize(mCheckCommonYScale, 60);
-		
-		mCheckAutoY.addClickListener(new AutoYEvents());
-		//mCheckMaxY.addClickListener(new AutoYEvents());
-		
-		mCheckCommonYScale.setSelected(mYAxisLimitModel.getCommonScale());
-		mCheckCommonYScale.addClickListener(new CommonYEvents());
-		
-		mCheckNormalize.setSelected(mYAxisLimitModel.getNormalize());
-		mCheckNormalize.addClickListener(new NormalizeEvents());
-		
-		mTextYMin.setEnabled(false);
-		mTextYMax.addKeyListener(new KeyEvents());
-		mTextYMax.addChangeListener(new ChangeListener(){
+  }
 
-			@Override
-			public void changed(ChangeEvent e) {
-				setLimits();
-			}});
-		
-		mYAxisLimitModel.addChangeListener(new AxisEvents());
-		
-	}
+  /**
+   * The class KeyEvents.
+   */
+  private class KeyEvents implements KeyListener {
 
-	/**
-	 * Sets the limits.
-	 */
-	private void setLimits() {
-		mCheckAutoY.setSelected(false);
-		mYAxisLimitModel.setLimits(mTextYMin.getValue(), mTextYMax.getValue());
-	}
-	
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
+     */
+    @Override
+    public void keyPressed(KeyEvent e) {
+      if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+        setLimits();
+      }
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
+     */
+    @Override
+    public void keyReleased(KeyEvent arg0) {
+      // TODO Auto-generated method stub
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
+     */
+    @Override
+    public void keyTyped(KeyEvent arg0) {
+      // TODO Auto-generated method stub
+
+    }
+  }
+
+  /**
+   * The class AutoYEvents.
+   */
+  private class AutoYEvents implements ModernClickListener {
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+     * event.ModernClickEvent)
+     */
+    @Override
+    public void clicked(ModernClickEvent e) {
+      mYAxisLimitModel.setAutoLimits(mCheckAutoY.isSelected());
+    }
+  }
+
+  /**
+   * The class CommonYEvents.
+   */
+  private class CommonYEvents implements ModernClickListener {
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+     * event.ModernClickEvent)
+     */
+    @Override
+    public void clicked(ModernClickEvent e) {
+      mYAxisLimitModel.setCommonYScale(mCheckCommonYScale.isSelected());
+    }
+  }
+
+  /**
+   * The class NormalizeEvents.
+   */
+  private class NormalizeEvents implements ModernClickListener {
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+     * event.ModernClickEvent)
+     */
+    @Override
+    public void clicked(ModernClickEvent e) {
+      mYAxisLimitModel.setNormalize(mCheckNormalize.isSelected());
+    }
+  }
+
+  /**
+   * Instantiates a new scale ribbon section2.
+   *
+   * @param ribbon
+   *          the ribbon
+   * @param name
+   *          the name
+   * @param yAxisLimitModel
+   *          the y axis limit model
+   */
+  public ScaleRibbonSection(Ribbon ribbon, String name, AxisLimitsModel yAxisLimitModel) {
+    super(ribbon, name);
+
+    mYAxisLimitModel = yAxisLimitModel;
+
+    add(mTextYMax);
+    add(UI.createHGap(5));
+    add(mCheckAutoY);
+    // add(UI.createHGap(2));
+    // add(createHGap());
+    // add(mCheckMaxY);
+
+    // box.add(new ModernLabel("Max"));
+    // box.add(createHGap());
+
+    // box.add(createHGap());
+    // box.add(new RibbonSubSectionSeparator());
+    // box.add(createHGap());
+    // box.add(mCheckCommonYScale);
+    add(mCheckNormalize);
+    // add(UI.createHGap(2));
+    add(mCheckCommonYScale);
+
+    // new ModernButtonGroup(mCheckAutoY, mCheckMaxY);
+
+    mCheckAutoY.setSelected(mYAxisLimitModel.getAutoSetLimits());
+
+    // ModernWidget.setSize(mCheckAutoY, 60);
+    // ModernWidget.setSize(mCheckMaxY, 60);
+
+    // ModernWidget.setSize(mCheckAutoY, 60);
+    // ModernWidget.setSize(mCheckNormalize, 100);
+    // ModernWidget.setSize(mCheckCommonYScale, 60);
+
+    mCheckAutoY.addClickListener(new AutoYEvents());
+    // mCheckMaxY.addClickListener(new AutoYEvents());
+
+    mCheckCommonYScale.setSelected(mYAxisLimitModel.getCommonScale());
+    mCheckCommonYScale.addClickListener(new CommonYEvents());
+
+    mCheckNormalize.setSelected(mYAxisLimitModel.getNormalize());
+    mCheckNormalize.addClickListener(new NormalizeEvents());
+
+    mTextYMin.setEnabled(false);
+    mTextYMax.addKeyListener(new KeyEvents());
+    mTextYMax.addChangeListener(new ChangeListener() {
+
+      @Override
+      public void changed(ChangeEvent e) {
+        setLimits();
+      }
+    });
+
+    mYAxisLimitModel.addChangeListener(new AxisEvents());
+
+  }
+
+  /**
+   * Sets the limits.
+   */
+  private void setLimits() {
+    mCheckAutoY.setSelected(false);
+    mYAxisLimitModel.setLimits(mTextYMin.getValue(), mTextYMax.getValue());
+  }
+
 }

@@ -23,17 +23,17 @@ import org.jebtk.modern.list.ModernList;
  */
 public class TrackList extends ModernList<Track> {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new track list.
-	 */
-	public TrackList() {
-		setCellRenderer(new TrackListRenderer());
-		
-		setDragReorderEnabled(true);
-		
-		setRowHeight(42);
-	}
+  /**
+   * Instantiates a new track list.
+   */
+  public TrackList() {
+    setCellRenderer(new TrackListRenderer());
+
+    setDragReorderEnabled(true);
+
+    setRowHeight(42);
+  }
 }

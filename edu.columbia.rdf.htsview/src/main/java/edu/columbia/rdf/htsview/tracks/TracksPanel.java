@@ -50,291 +50,302 @@ import org.w3c.dom.Element;
  * The Class TracksPanel.
  */
 public abstract class TracksPanel extends ModernWidget {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	//private TrackList mTrackList = new TrackList();
-	//private TrackListModel mListModel = new TrackListModel();
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The m track list. */
-	protected TrackTree mTrackList = null;
-	//private TrackListModel mListModel = new TrackListModel();
+  // private TrackList mTrackList = new TrackList();
+  // private TrackListModel mListModel = new TrackListModel();
 
-	//private TracksModel mModel;
+  /** The m track list. */
+  protected TrackTree mTrackList = null;
+  // private TrackListModel mListModel = new TrackListModel();
 
-	/** The m parent. */
-	protected ModernRibbonWindow mParent;
+  // private TracksModel mModel;
 
-	/** The m tree. */
-	private ModernTree<Track> mTree;
+  /** The m parent. */
+  protected ModernRibbonWindow mParent;
 
-	//private Map<String, ChromosomeSizes> mChrMap;
+  /** The m tree. */
+  private ModernTree<Track> mTree;
 
-	/**
-	 * The Class TrackMouseEvents.
-	 */
-	private class TrackMouseEvents extends MouseAdapter {
+  // private Map<String, ChromosomeSizes> mChrMap;
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.MouseAdapter#mouseClicked(java.awt.event.MouseEvent)
-		 */
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			if (e.getClickCount() == 2) {
-				editTracks();
-			}
-		}
-	}
+  /**
+   * The Class TrackMouseEvents.
+   */
+  private class TrackMouseEvents extends MouseAdapter {
 
-	/**
-	 * The Class DeleteEvents.
-	 */
-	private class DeleteEvents implements DialogEventListener {
-		
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.dialog.DialogEventListener#statusChanged(org.abh.common.ui.dialog.DialogEvent)
-		 */
-		@Override
-		public void statusChanged(DialogEvent e) {
-			if (e.getStatus() == ModernDialogStatus.OK) {
-				ArrayList<Integer> indices = new ArrayList<Integer>();
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.MouseAdapter#mouseClicked(java.awt.event.MouseEvent)
+     */
+    @Override
+    public void mouseClicked(MouseEvent e) {
+      if (e.getClickCount() == 2) {
+        editTracks();
+      }
+    }
+  }
 
-				for (int i : mTrackList.getSelectionModel()) {
-					indices.add(i);
-				}
+  /**
+   * The Class DeleteEvents.
+   */
+  private class DeleteEvents implements DialogEventListener {
 
-				mTrackList.removeNodes(indices);
-			}
-		}
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.dialog.DialogEventListener#statusChanged(org.abh.common.ui.
+     * dialog.DialogEvent)
+     */
+    @Override
+    public void statusChanged(DialogEvent e) {
+      if (e.getStatus() == ModernDialogStatus.OK) {
+        ArrayList<Integer> indices = new ArrayList<Integer>();
 
-	/**
-	 * The Class ClearEvents.
-	 */
-	private class ClearEvents implements DialogEventListener {
-		
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.dialog.DialogEventListener#statusChanged(org.abh.common.ui.dialog.DialogEvent)
-		 */
-		@Override
-		public void statusChanged(DialogEvent e) {
-			if (e.getStatus() == ModernDialogStatus.OK) {
-				mTrackList.clear();
-			}
-		}
-	}
+        for (int i : mTrackList.getSelectionModel()) {
+          indices.add(i);
+        }
 
-	/**
-	 * Instantiates a new tracks panel.
-	 *
-	 * @param parent the parent
-	 * @param tree the tree
-	 * @param trackList the track list
-	 */
-	public TracksPanel(ModernRibbonWindow parent,
-			ModernTree<Track> tree, 
-			TrackTree trackList) {
+        mTrackList.removeNodes(indices);
+      }
+    }
+  }
 
-		mParent = parent;
-		mTree = tree;
-		mTrackList = trackList;
-		
-		createUi();
+  /**
+   * The Class ClearEvents.
+   */
+  private class ClearEvents implements DialogEventListener {
 
-		// Sync ui
-		//mTrackList.getModel().fireDataChanged();
-		mTrackList.fireTreeNodeChanged(new ChangeEvent(this));
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.dialog.DialogEventListener#statusChanged(org.abh.common.ui.
+     * dialog.DialogEvent)
+     */
+    @Override
+    public void statusChanged(DialogEvent e) {
+      if (e.getStatus() == ModernDialogStatus.OK) {
+        mTrackList.clear();
+      }
+    }
+  }
 
-	/**
-	 * Creates the ui.
-	 */
-	private void createUi() {
-		//mTrackList.setBorder(ModernWidget.RIGHT_BORDER);
-		ModernScrollPane scrollPane = new ModernScrollPane(mTrackList);
-		scrollPane.setVerticalScrollBarPolicy(ScrollBarPolicy.AUTO_SHOW);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
-		scrollPane.setBorder(ModernWidget.DOUBLE_BORDER);
+  /**
+   * Instantiates a new tracks panel.
+   *
+   * @param parent
+   *          the parent
+   * @param tree
+   *          the tree
+   * @param trackList
+   *          the track list
+   */
+  public TracksPanel(ModernRibbonWindow parent, ModernTree<Track> tree, TrackTree trackList) {
 
-		setBody(scrollPane);
-	}
+    mParent = parent;
+    mTree = tree;
+    mTrackList = trackList;
 
+    createUi();
 
-	// Allow user to edit tracks
+    // Sync ui
+    // mTrackList.getModel().fireDataChanged();
+    mTrackList.fireTreeNodeChanged(new ChangeEvent(this));
+  }
 
-	/**
-	 * Edits the tracks.
-	 */
-	protected void editTracks() {
-		// tmp disable drag
-		for (int i : mTrackList.getSelectionModel()) {
-			TreeNode<Track> node = mTrackList.getSelectedNode(i); //getValueAt(i);
+  /**
+   * Creates the ui.
+   */
+  private void createUi() {
+    // mTrackList.setBorder(ModernWidget.RIGHT_BORDER);
+    ModernScrollPane scrollPane = new ModernScrollPane(mTrackList);
+    scrollPane.setVerticalScrollBarPolicy(ScrollBarPolicy.AUTO_SHOW);
+    scrollPane.setHorizontalScrollBarPolicy(ScrollBarPolicy.NEVER);
+    scrollPane.setBorder(ModernWidget.DOUBLE_BORDER);
 
-			Track track = node.getValue();
+    setBody(scrollPane);
+  }
 
-			track.edit(mParent);
-		}
+  // Allow user to edit tracks
 
-		// Notify listeners that the tracks may have changed.
-		//mListModel.fireDataUpdated();
-		
-		mTrackList.fireTreeNodeUpdated();
-	}
+  /**
+   * Edits the tracks.
+   */
+  protected void editTracks() {
+    // tmp disable drag
+    for (int i : mTrackList.getSelectionModel()) {
+      TreeNode<Track> node = mTrackList.getSelectedNode(i); // getValueAt(i);
 
+      Track track = node.getValue();
 
-	/**
-	 * Load tracks.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	protected void loadTracks() throws IOException {
-		AnnotationTracksDialog dialog = new AnnotationTracksDialog(mParent,
-				mTree);
+      track.edit(mParent);
+    }
 
-		dialog.setVisible(true);
+    // Notify listeners that the tracks may have changed.
+    // mListModel.fireDataUpdated();
 
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
+    mTrackList.fireTreeNodeUpdated();
+  }
 
-		List<TreeNode<Track>> tracks = new ArrayList<TreeNode<Track>>();
+  /**
+   * Load tracks.
+   *
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  protected void loadTracks() throws IOException {
+    AnnotationTracksDialog dialog = new AnnotationTracksDialog(mParent, mTree);
 
-		for (Track track : dialog.getTracks()) {
-			tracks.add(new TreeNode<Track>(track.getName(), track));
-		}
+    dialog.setVisible(true);
 
-		mTrackList.getRoot().addChildren(tracks);
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
 
-		//mListModel.addValues(tracks);
-	}
+    List<TreeNode<Track>> tracks = new ArrayList<TreeNode<Track>>();
 
-	/**
-	 * Delete tracks.
-	 */
-	protected void deleteTracks() {
-		ModernMessageDialog.createOkCancelWarningDialog(mParent,
-				"Are you sure you want to delete the selected tracks?", 
-				new DeleteEvents());
-	}
+    for (Track track : dialog.getTracks()) {
+      tracks.add(new TreeNode<Track>(track.getName(), track));
+    }
 
-	/**
-	 * Clear tracks.
-	 */
-	protected void clearTracks() {
-		ModernMessageDialog.createOkCancelWarningDialog(mParent,
-				"Are you sure you want to delete all tracks?", 
-				new ClearEvents());
-	}
+    mTrackList.getRoot().addChildren(tracks);
 
-	/**
-	 * Save xml view.
-	 *
-	 * @param file the file
-	 * @param region the region
-	 * @param width the width
-	 * @param margin the margin
-	 * @throws TransformerException the transformer exception
-	 * @throws ParserConfigurationException the parser configuration exception
-	 */
-	public void saveXmlView(Path file, 
-			GenomicRegion region,
-			int width,
-			int margin) throws TransformerException, ParserConfigurationException {
-		if (file == null || region == null) {
-			return;
-		}
+    // mListModel.addValues(tracks);
+  }
 
-		Document doc = XmlUtils.createDoc();
+  /**
+   * Delete tracks.
+   */
+  protected void deleteTracks() {
+    ModernMessageDialog.createOkCancelWarningDialog(mParent, "Are you sure you want to delete the selected tracks?",
+        new DeleteEvents());
+  }
 
-		Element rootElement = doc.createElement("view");
-		rootElement.setAttribute("location", region.getLocation());
-		rootElement.setAttribute("width-px", Integer.toString(width));
-		rootElement.setAttribute("margin-px", Integer.toString(margin));
-		doc.appendChild(rootElement);
+  /**
+   * Clear tracks.
+   */
+  protected void clearTracks() {
+    ModernMessageDialog.createOkCancelWarningDialog(mParent, "Are you sure you want to delete all tracks?",
+        new ClearEvents());
+  }
 
-		//XmlElement tracksElement = new XmlElement("tracks");
-		//rootElement.appendChild(tracksElement);
+  /**
+   * Save xml view.
+   *
+   * @param file
+   *          the file
+   * @param region
+   *          the region
+   * @param width
+   *          the width
+   * @param margin
+   *          the margin
+   * @throws TransformerException
+   *           the transformer exception
+   * @throws ParserConfigurationException
+   *           the parser configuration exception
+   */
+  public void saveXmlView(Path file, GenomicRegion region, int width, int margin)
+      throws TransformerException, ParserConfigurationException {
+    if (file == null || region == null) {
+      return;
+    }
 
-		// now append each track
+    Document doc = XmlUtils.createDoc();
 
-		Deque<TreeNode<Track>> nodeQueue = new ArrayDeque<TreeNode<Track>>();
-		Deque<Element> xmlQueue = new ArrayDeque<Element>();
+    Element rootElement = doc.createElement("view");
+    rootElement.setAttribute("location", region.getLocation());
+    rootElement.setAttribute("width-px", Integer.toString(width));
+    rootElement.setAttribute("margin-px", Integer.toString(margin));
+    doc.appendChild(rootElement);
 
-		for (TreeNode<Track> child : CollectionUtils.reverse(mTrackList.getRoot())) {
-			nodeQueue.push(child);
-			xmlQueue.push(rootElement);
-		}
+    // XmlElement tracksElement = new XmlElement("tracks");
+    // rootElement.appendChild(tracksElement);
 
-		while (!nodeQueue.isEmpty()) {
-			TreeNode<Track> node = nodeQueue.pop();
-			Element xml = xmlQueue.pop();
+    // now append each track
 
-			Element childXml = node.getValue().toXml(doc);
+    Deque<TreeNode<Track>> nodeQueue = new ArrayDeque<TreeNode<Track>>();
+    Deque<Element> xmlQueue = new ArrayDeque<Element>();
 
-			xml.appendChild(childXml);
+    for (TreeNode<Track> child : CollectionUtils.reverse(mTrackList.getRoot())) {
+      nodeQueue.push(child);
+      xmlQueue.push(rootElement);
+    }
 
-			for (TreeNode<Track> child : CollectionUtils.reverse(node)) {
-				nodeQueue.push(child);
-				xmlQueue.push(childXml);
-			}
-		}
+    while (!nodeQueue.isEmpty()) {
+      TreeNode<Track> node = nodeQueue.pop();
+      Element xml = xmlQueue.pop();
 
-		//for (Track track : mListModel) {
-		//	tracksElement.appendChild(track.toXml());
-		//}
+      Element childXml = node.getValue().toXml(doc);
 
-		XmlUtils.writeXml(doc, file);
-	}
+      xml.appendChild(childXml);
 
+      for (TreeNode<Track> child : CollectionUtils.reverse(node)) {
+        nodeQueue.push(child);
+        xmlQueue.push(childXml);
+      }
+    }
 
+    // for (Track track : mListModel) {
+    // tracksElement.appendChild(track.toXml());
+    // }
 
-	/**
-	 * Sets the tracks.
-	 *
-	 * @param tracks the new tracks
-	 */
-	public void setTracks(List<Track> tracks) {
-		mTrackList.clear();
+    XmlUtils.writeXml(doc, file);
+  }
 
-		for (Track track : tracks) {
-			mTrackList.getRoot().addChild(new TreeNode<Track>(track.getName(), track));
-		}
-	}
+  /**
+   * Sets the tracks.
+   *
+   * @param tracks
+   *          the new tracks
+   */
+  public void setTracks(List<Track> tracks) {
+    mTrackList.clear();
 
-	/**
-	 * Sets the tracks.
-	 *
-	 * @param tracks the new tracks
-	 */
-	public void setTracks(TreeRootNode<Track> tracks) {
-		mTrackList.setRoot(tracks);
-	}
+    for (Track track : tracks) {
+      mTrackList.getRoot().addChild(new TreeNode<Track>(track.getName(), track));
+    }
+  }
 
-	/**
-	 * Gets the selected track.
-	 *
-	 * @return the selected track
-	 */
-	public Track getSelectedTrack() {
-		return mTrackList.getSelectedNode().getValue();
-	}
+  /**
+   * Sets the tracks.
+   *
+   * @param tracks
+   *          the new tracks
+   */
+  public void setTracks(TreeRootNode<Track> tracks) {
+    mTrackList.setRoot(tracks);
+  }
 
-	/**
-	 * Gets the selected tracks.
-	 *
-	 * @return the selected tracks
-	 */
-	public List<Track> getSelectedTracks() {
-		return mTrackList.getSelectedValues();
-	}
+  /**
+   * Gets the selected track.
+   *
+   * @return the selected track
+   */
+  public Track getSelectedTrack() {
+    return mTrackList.getSelectedNode().getValue();
+  }
 
-	/**
-	 * Gets the tree.
-	 *
-	 * @return the tree
-	 */
-	public TrackTree getTree() {
-		return mTrackList;
-	}
+  /**
+   * Gets the selected tracks.
+   *
+   * @return the selected tracks
+   */
+  public List<Track> getSelectedTracks() {
+    return mTrackList.getSelectedValues();
+  }
+
+  /**
+   * Gets the tree.
+   *
+   * @return the tree
+   */
+  public TrackTree getTree() {
+    return mTrackList;
+  }
 }

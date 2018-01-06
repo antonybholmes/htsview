@@ -22,19 +22,21 @@ import org.jebtk.core.path.Path;
  * The Class SortSamplesByClassification.
  */
 public class SortSamplesByClassification extends SortSamplesByChipSeqField {
-	
-	/**
-	 * Instantiates a new sort samples by classification.
-	 */
-	public SortSamplesByClassification() {
-		super(new Path("/ChIP-Seq/Sample/Classification"));
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.edb.ui.sort.SampleSorter#getName()
-	 */
-	@Override
-	public final String getName() {
-		return "Classification";
-	}
+
+  /**
+   * Instantiates a new sort samples by classification.
+   */
+  public SortSamplesByClassification() {
+    super(new Path("/ChIP-Seq/Sample/Classification"));
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.edb.ui.sort.SampleSorter#getName()
+   */
+  @Override
+  public final String getName() {
+    return "Classification";
+  }
 }

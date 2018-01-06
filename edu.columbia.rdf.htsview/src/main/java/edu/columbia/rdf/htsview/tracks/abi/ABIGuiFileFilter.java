@@ -32,32 +32,35 @@ import java.io.FilenameFilter;
 
 import org.jebtk.modern.io.GuiFileExtFilter;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The class BedGuiFileFilter.
  */
 public class ABIGuiFileFilter extends GuiFileExtFilter implements FilenameFilter {
-	
-	/**
-	 * Instantiates a new bed gui file filter.
-	 */
-	public ABIGuiFileFilter() {
-		super("ab1");
-	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.filechooser.FileFilter#getDescription()
-	 */
-	public final String getDescription() {
-		return "AB1 (*.abi)";
-	}
+  /**
+   * Instantiates a new bed gui file filter.
+   */
+  public ABIGuiFileFilter() {
+    super("ab1");
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.FilenameFilter#accept(java.io.File, java.lang.String)
-	 */
-	@Override
-	public boolean accept(File arg0, String name) {
-		return name.endsWith(".ab1");
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see javax.swing.filechooser.FileFilter#getDescription()
+   */
+  public final String getDescription() {
+    return "AB1 (*.abi)";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.io.FilenameFilter#accept(java.io.File, java.lang.String)
+   */
+  @Override
+  public boolean accept(File arg0, String name) {
+    return name.endsWith(".ab1");
+  }
 }

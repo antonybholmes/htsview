@@ -27,13 +27,14 @@ import edu.columbia.rdf.htsview.tracks.SampleAssemblyFile;
  * @author Antony Holmes Holmes
  */
 public class SampleAssemblyBVT extends SampleAssemblyFile {
-	
-	/**
-	 * Instantiates a new sample assembly BVT.
-	 *
-	 * @param metaFile the meta file
-	 */
-	public SampleAssemblyBVT(Path metaFile) {
-		super(new ReadCountsFileBVT(metaFile));
-	}
+
+  /**
+   * Instantiates a new sample assembly BVT.
+   *
+   * @param metaFile
+   *          the meta file
+   */
+  public SampleAssemblyBVT(Path metaFile) {
+    super(new ReadCountsFileBVT(metaFile));
+  }
 }

@@ -23,19 +23,21 @@ import org.jebtk.modern.io.GuiFileExtFilter;
  */
 public class AllSamplesGuiFileFilter extends GuiFileExtFilter {
 
-	/**
-	 * Instantiates a new reads all supported gui file filter.
-	 */
-	public AllSamplesGuiFileFilter() {
-		super("bam", "brt2j", "bvt");
-	}
+  /**
+   * Instantiates a new reads all supported gui file filter.
+   */
+  public AllSamplesGuiFileFilter() {
+    super("bam", "brt2j", "bvt");
+  }
 
-	/* (non-Javadoc)
-	 * @see javax.swing.filechooser.FileFilter#getDescription()
-	 */
-	@Override
-	public String getDescription() {
-		return "All Sample Files (*.bam;*.brt2j;*.bvtj)";
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see javax.swing.filechooser.FileFilter#getDescription()
+   */
+  @Override
+  public String getDescription() {
+    return "All Sample Files (*.bam;*.brt2j;*.bvtj)";
+  }
 
 }

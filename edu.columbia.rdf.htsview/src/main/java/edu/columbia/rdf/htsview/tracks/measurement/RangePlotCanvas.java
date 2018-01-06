@@ -30,72 +30,71 @@ import edu.columbia.rdf.htsview.tracks.Track;
  * The Class RangePlotCanvas.
  */
 public class RangePlotCanvas extends MeasurementSubFigure {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/** The Constant MARGINS. */
-	public static final MarginProperties MARGINS = 
-			new MarginProperties(Track.MARGINS.getTop(), Track.MARGINS.getLeft(), Track.MEDIUM_MARGIN, Track.SMALL_MARGIN);
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The m layer. */
-	private RangeCanvasLayer mLayer;
-	
-	/**
-	 * Instantiates a new range plot canvas.
-	 *
-	 * @param titlePosition the title position
-	 */
-	public RangePlotCanvas(TitleProperties titlePosition) {
-		mLayer = new RangeCanvasLayer();
-		
-		currentAxes().addChild(mLayer);
-	}
+  /** The Constant MARGINS. */
+  public static final MarginProperties MARGINS = new MarginProperties(Track.MARGINS.getTop(), Track.MARGINS.getLeft(),
+      Track.MEDIUM_MARGIN, Track.SMALL_MARGIN);
 
-	/**
-	 * Creates the.
-	 *
-	 * @param titlePosition the title position
-	 * @return the range plot canvas
-	 */
-	public static RangePlotCanvas create(TitleProperties titlePosition) {
+  /** The m layer. */
+  private RangeCanvasLayer mLayer;
 
-		//mBedGraphGroup = bedGraphGroup;
-		//mGenomicModel = genomicModel;
+  /**
+   * Instantiates a new range plot canvas.
+   *
+   * @param titlePosition
+   *          the title position
+   */
+  public RangePlotCanvas(TitleProperties titlePosition) {
+    mLayer = new RangeCanvasLayer();
 
-		RangePlotCanvas canvas = new RangePlotCanvas(titlePosition);
+    currentAxes().addChild(mLayer);
+  }
 
-		Axes axes = canvas.currentAxes();
-		
-		// set the graph limits
-		axes.getX1Axis().getTitle().setVisible(false);
-		axes.getX1Axis().startEndTicksOnly();
+  /**
+   * Creates the.
+   *
+   * @param titlePosition
+   *          the title position
+   * @return the range plot canvas
+   */
+  public static RangePlotCanvas create(TitleProperties titlePosition) {
 
-		axes.getY1Axis().getTitle().setVisible(false);
-		axes.getY1Axis().startEndTicksOnly();
+    // mBedGraphGroup = bedGraphGroup;
+    // mGenomicModel = genomicModel;
 
-		axes.setInternalSize(Track.MEDIUM_TRACK_SIZE);
-		//canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
+    RangePlotCanvas canvas = new RangePlotCanvas(titlePosition);
 
-		
-		return canvas;
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.measurement.MeasurementSubFigure#update(org.jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int, java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
-	 */
-	@Override
-	public void update(GenomicRegion displayRegion, 
-			int resolution,
-			double yMax,
-			int width,
-			int height,
-			int margin,
-			Color lineColor,
-			Color fillColor,
-			PlotStyle style) {
-		super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
-				
-		mLayer.update(displayRegion);
-	}
+    Axes axes = canvas.currentAxes();
+
+    // set the graph limits
+    axes.getX1Axis().getTitle().setVisible(false);
+    axes.getX1Axis().startEndTicksOnly();
+
+    axes.getY1Axis().getTitle().setVisible(false);
+    axes.getY1Axis().startEndTicksOnly();
+
+    axes.setInternalSize(Track.MEDIUM_TRACK_SIZE);
+    // canvas.getGraphSpace().getLayoutProperties().setMargins(MARGINS);
+
+    return canvas;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.measurement.MeasurementSubFigure#update(org.
+   * jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int,
+   * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
+   */
+  @Override
+  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
+      Color lineColor, Color fillColor, PlotStyle style) {
+    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+
+    mLayer.update(displayRegion);
+  }
 }

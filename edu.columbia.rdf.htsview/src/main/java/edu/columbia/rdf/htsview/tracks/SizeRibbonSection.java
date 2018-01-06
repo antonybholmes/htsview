@@ -26,8 +26,6 @@ import org.jebtk.modern.ribbon.RibbonStripContainer;
 import org.jebtk.modern.spinner.ModernCompactSpinner;
 import org.jebtk.modern.text.ModernAutoSizeLabel;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
  * Allows user to select a color map.
@@ -36,102 +34,105 @@ import org.jebtk.modern.text.ModernAutoSizeLabel;
  *
  */
 public class SizeRibbonSection extends RibbonSection {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The m text y min.
-	 */
-	private ModernCompactSpinner mWidthField = 
-			new ModernCompactSpinner(1, 10000, 1000);
-	
-	/** The m height field. */
-	private ModernCompactSpinner mHeightField = 
-			new ModernCompactSpinner(1, 10000, 1000);
 
-	/** The m width model. */
-	private WidthModel mWidthModel;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/** The m height model. */
-	private HeightModel mHeightModel;
-	
-	
-	/**
-	 * The class KeyEvents.
-	 */
-	private class HeightKeyEvents implements ChangeListener {
+  /**
+   * The m text y min.
+   */
+  private ModernCompactSpinner mWidthField = new ModernCompactSpinner(1, 10000, 1000);
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
-		 */
-		@Override
-		public void changed(ChangeEvent e) {
-			mHeightModel.set(mHeightField.getIntValue());
-		}
-	}
-	
-	/**
-	 * The Class WidthKeyEvents.
-	 */
-	private class WidthKeyEvents implements ChangeListener {
+  /** The m height field. */
+  private ModernCompactSpinner mHeightField = new ModernCompactSpinner(1, 10000, 1000);
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
-		 */
-		@Override
-		public void changed(ChangeEvent e) {
-			mWidthModel.set(mWidthField.getIntValue());
-		}
-	}
-	
-	
-	/**
-	 * Instantiates a new scale ribbon section2.
-	 *
-	 * @param ribbon the ribbon
-	 * @param widthModel the width model
-	 * @param heightModel the height model
-	 */
-	public SizeRibbonSection(Ribbon ribbon, WidthModel widthModel, HeightModel heightModel) {
-		super(ribbon, "Size");
-		
-		mWidthModel = widthModel;
-		mHeightModel = heightModel;
-		
-		
-		Box box = new RibbonStripContainer();
-		
-		box.add(new ModernAutoSizeLabel("W", 20));
-		box.add(mWidthField);
-		box.add(UI.createHGap(10));
-		box.add(new ModernAutoSizeLabel("H", 20));
-		box.add(mHeightField);
-		add(box);
-		
-		mWidthField.setValue(widthModel.get());
-		
-		mWidthField.addChangeListener(new WidthKeyEvents());
-		
-		mHeightField.setValue(heightModel.get());
+  /** The m width model. */
+  private WidthModel mWidthModel;
 
-		mHeightField.addChangeListener(new HeightKeyEvents());
-		
-		
-		widthModel.addChangeListener(new ChangeListener() {
+  /** The m height model. */
+  private HeightModel mHeightModel;
 
-			@Override
-			public void changed(ChangeEvent e) {
-				mWidthField.updateValue(mWidthModel.get());
-			}});
-		
-		heightModel.addChangeListener(new ChangeListener() {
+  /**
+   * The class KeyEvents.
+   */
+  private class HeightKeyEvents implements ChangeListener {
 
-			@Override
-			public void changed(ChangeEvent e) {
-				mHeightField.updateValue(mHeightModel.get());
-			}});
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
+     */
+    @Override
+    public void changed(ChangeEvent e) {
+      mHeightModel.set(mHeightField.getIntValue());
+    }
+  }
+
+  /**
+   * The Class WidthKeyEvents.
+   */
+  private class WidthKeyEvents implements ChangeListener {
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
+     */
+    @Override
+    public void changed(ChangeEvent e) {
+      mWidthModel.set(mWidthField.getIntValue());
+    }
+  }
+
+  /**
+   * Instantiates a new scale ribbon section2.
+   *
+   * @param ribbon
+   *          the ribbon
+   * @param widthModel
+   *          the width model
+   * @param heightModel
+   *          the height model
+   */
+  public SizeRibbonSection(Ribbon ribbon, WidthModel widthModel, HeightModel heightModel) {
+    super(ribbon, "Size");
+
+    mWidthModel = widthModel;
+    mHeightModel = heightModel;
+
+    Box box = new RibbonStripContainer();
+
+    box.add(new ModernAutoSizeLabel("W", 20));
+    box.add(mWidthField);
+    box.add(UI.createHGap(10));
+    box.add(new ModernAutoSizeLabel("H", 20));
+    box.add(mHeightField);
+    add(box);
+
+    mWidthField.setValue(widthModel.get());
+
+    mWidthField.addChangeListener(new WidthKeyEvents());
+
+    mHeightField.setValue(heightModel.get());
+
+    mHeightField.addChangeListener(new HeightKeyEvents());
+
+    widthModel.addChangeListener(new ChangeListener() {
+
+      @Override
+      public void changed(ChangeEvent e) {
+        mWidthField.updateValue(mWidthModel.get());
+      }
+    });
+
+    heightModel.addChangeListener(new ChangeListener() {
+
+      @Override
+      public void changed(ChangeEvent e) {
+        mHeightField.updateValue(mHeightModel.get());
+      }
+    });
+  }
 }

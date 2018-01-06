@@ -15,7 +15,6 @@ package edu.columbia.rdf.htsview.test;
  * limitations under the License.
  */
 
-
 import java.io.IOException;
 
 import org.jebtk.core.io.PathUtils;
@@ -25,11 +24,11 @@ import edu.columbia.rdf.htsview.ngs.CountAssembly;
 import edu.columbia.rdf.htsview.ngs.ReadCountsFile32Bit;
 
 public class Encode12BitTest {
-	@Test
-	public void encodeTest() throws IOException {
-		CountAssembly a = 
-				new ReadCountsFile32Bit(PathUtils.getPath("/ifs/scratch/cancer/Lab_RDF/abh2138/ChIP_seq/data/samples/hg19/bradner/Bradner_HBL1_H3K27AC_BD015/reads_hg19"));
+  @Test
+  public void encodeTest() throws IOException {
+    CountAssembly a = new ReadCountsFile32Bit(PathUtils.getPath(
+        "/ifs/scratch/cancer/Lab_RDF/abh2138/ChIP_seq/data/samples/hg19/bradner/Bradner_HBL1_H3K27AC_BD015/reads_hg19"));
 
-		System.err.println("12bit counts " + a.getCounts("chr1:1-50000", 1000));
-	}
+    System.err.println("12bit counts " + a.getCounts("chr1:1-50000", 1000));
+  }
 }

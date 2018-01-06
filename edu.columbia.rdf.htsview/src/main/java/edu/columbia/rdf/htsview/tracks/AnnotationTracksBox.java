@@ -30,98 +30,98 @@ import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class AnnotationTracksBox.
  */
 public class AnnotationTracksBox extends VBox {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/** The m check all. */
-	private ModernTwoStateWidget mCheckAll = 
-			new ModernCheckSwitch("Select All");
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The m track map. */
-	private Map<ModernTwoStateWidget, Track> mTrackMap =
-			new HashMap<ModernTwoStateWidget, Track>();
+  /** The m check all. */
+  private ModernTwoStateWidget mCheckAll = new ModernCheckSwitch("Select All");
 
-	/**
-	 * The Class CheckAllEvents.
-	 */
-	private class CheckAllEvents implements ModernClickListener {
+  /** The m track map. */
+  private Map<ModernTwoStateWidget, Track> mTrackMap = new HashMap<ModernTwoStateWidget, Track>();
 
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.ModernClickEvent)
-		 */
-		@Override
-		public void clicked(ModernClickEvent e) {
-			for (ModernTwoStateWidget c : mTrackMap.keySet()) {
-				c.setSelected(mCheckAll.isSelected());
-			}
-		}
+  /**
+   * The Class CheckAllEvents.
+   */
+  private class CheckAllEvents implements ModernClickListener {
 
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
+     * ModernClickEvent)
+     */
+    @Override
+    public void clicked(ModernClickEvent e) {
+      for (ModernTwoStateWidget c : mTrackMap.keySet()) {
+        c.setSelected(mCheckAll.isSelected());
+      }
+    }
 
-	/**
-	 * Instantiates a new annotation tracks box.
-	 *
-	 * @param node the node
-	 */
-	public AnnotationTracksBox(TreeNode<Track> node) {
-		add(mCheckAll);
+  }
 
-		add(ModernPanel.createVGap());
+  /**
+   * Instantiates a new annotation tracks box.
+   *
+   * @param node
+   *          the node
+   */
+  public AnnotationTracksBox(TreeNode<Track> node) {
+    add(mCheckAll);
 
-		for (TreeNode<Track> child : node) {
-			if (child.getChildCount() == 0) {
-				ModernTwoStateWidget checkBox = 
-						new ModernCheckSwitch(child.getName());
+    add(ModernPanel.createVGap());
 
-				//Ui.setSize(checkBox, ModernWidget.EXTRA_LARGE_SIZE);
+    for (TreeNode<Track> child : node) {
+      if (child.getChildCount() == 0) {
+        ModernTwoStateWidget checkBox = new ModernCheckSwitch(child.getName());
 
-				add(checkBox);
+        // Ui.setSize(checkBox, ModernWidget.EXTRA_LARGE_SIZE);
 
-				add(ModernPanel.createVGap());
+        add(checkBox);
 
-				mTrackMap.put(checkBox, child.getValue());
-			} else {
-				ModernDialogTaskWindow.midSectionHeader(child.getName(), this);
-				
-				for (TreeNode<Track> child2 : child) {
-					ModernTwoStateWidget checkBox = 
-							new ModernCheckSwitch(child2.getName());
+        add(ModernPanel.createVGap());
 
-					//Ui.setSize(checkBox, ModernWidget.EXTRA_LARGE_SIZE);
+        mTrackMap.put(checkBox, child.getValue());
+      } else {
+        ModernDialogTaskWindow.midSectionHeader(child.getName(), this);
 
-					add(checkBox);
+        for (TreeNode<Track> child2 : child) {
+          ModernTwoStateWidget checkBox = new ModernCheckSwitch(child2.getName());
 
-					add(ModernPanel.createVGap());
+          // Ui.setSize(checkBox, ModernWidget.EXTRA_LARGE_SIZE);
 
-					mTrackMap.put(checkBox, child2.getValue());
-				}
-			}
-		}
+          add(checkBox);
 
-		mCheckAll.addClickListener(new CheckAllEvents());
-	}
+          add(ModernPanel.createVGap());
 
-	/**
-	 * Gets the tracks.
-	 *
-	 * @return the tracks
-	 */
-	public List<Track> getTracks() {
-		List<Track> tracks = new ArrayList<Track>();
+          mTrackMap.put(checkBox, child2.getValue());
+        }
+      }
+    }
 
-		for (ModernTwoStateWidget c : mTrackMap.keySet()) {
-			if (c.isSelected()) {
-				tracks.add(mTrackMap.get(c));
-			}
-		}
+    mCheckAll.addClickListener(new CheckAllEvents());
+  }
 
-		return tracks;
-	}
+  /**
+   * Gets the tracks.
+   *
+   * @return the tracks
+   */
+  public List<Track> getTracks() {
+    List<Track> tracks = new ArrayList<Track>();
+
+    for (ModernTwoStateWidget c : mTrackMap.keySet()) {
+      if (c.isSelected()) {
+        tracks.add(mTrackMap.get(c));
+      }
+    }
+
+    return tracks;
+  }
 }

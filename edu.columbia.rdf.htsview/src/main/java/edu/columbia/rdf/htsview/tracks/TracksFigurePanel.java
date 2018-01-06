@@ -30,252 +30,252 @@ import org.jebtk.modern.graphics.ModernCanvasMouseAdapter;
 import org.jebtk.modern.theme.ModernTheme;
 import org.jebtk.modern.theme.ThemeService;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class TracksFigure.
  */
-public class TracksFigurePanel extends PlotBoxPanel { //Figure { // PlotBoxColumn {
+public class TracksFigurePanel extends PlotBoxPanel { // Figure { // PlotBoxColumn {
+
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The smallest value the max y can be (has to be non-zero).
+   */
+  public static final double MIN_MAX_Y = 0.1;
+
+  /** The Constant SELECTION_COLOR. */
+  private static final Color SELECTION_COLOR = ThemeService.getInstance().colors().getColorHighlight(5);
 
-	/**
-	 * The smallest value the max y can be (has to be non-zero).
-	 */
-	public static final double MIN_MAX_Y = 0.1;
+  /** The Constant SELECTION_COLOR_TRANS. */
+  private static final Color SELECTION_COLOR_TRANS = ColorUtils.getTransparentColor75(SELECTION_COLOR);
 
-	/** The Constant SELECTION_COLOR. */
-	private static final Color SELECTION_COLOR = 
-			ThemeService.getInstance().colors().getColorHighlight(5);
+  private static final int X_GAP = SettingsService.getInstance().getAsInt("sequencing.tracks.mouse.drag.x-gap");
 
-	/** The Constant SELECTION_COLOR_TRANS. */
-	private static final Color SELECTION_COLOR_TRANS = 
-			ColorUtils.getTransparentColor75(SELECTION_COLOR);
+  /** The m drag start. */
+  private int mDragStart = -1;
 
-	private static final int X_GAP =
-			SettingsService.getInstance().getAsInt("sequencing.tracks.mouse.drag.x-gap");
+  /** The m drag end. */
+  private int mDragEnd = -1;
 
-	/** The m drag start. */
-	private int mDragStart = -1;
+  /** The m dist. */
+  private int mDist = -1;
 
-	/** The m drag end. */
-	private int mDragEnd = -1;
+  /** The m genomic model. */
+  private GenomicRegionModel mGenomicModel;
+
+  /** The m drag start region. */
+  private GenomicRegion mDragStartRegion;
 
-	/** The m dist. */
-	private int mDist = -1;
+  /** The m selection X. */
+  private int mSelectionStart = -1;
+  private int mSelectionEnd = -1;
 
-	/** The m genomic model. */
-	private GenomicRegionModel mGenomicModel;
+  private int mDragBin = Integer.MIN_VALUE;
 
-	/** The m drag start region. */
-	private GenomicRegion mDragStartRegion;
+  private ChromosomeSizes mSizes;
 
-	/** The m selection X. */
-	private int mSelectionStart = -1;
-	private int mSelectionEnd = -1;
+  private TracksFigure mFigure;
 
-	private int mDragBin = Integer.MIN_VALUE;
+  /**
+   * The Class CanvasMouseEvents.
+   */
+  private class CanvasMouseEvents extends ModernCanvasMouseAdapter {
 
-	private ChromosomeSizes mSizes;
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.graphics.ModernCanvasMouseAdapter#canvasMousePressed(org.
+     * abh.common.ui.graphics.CanvasMouseEvent)
+     */
+    @Override
+    public void canvasMousePressed(CanvasMouseEvent e) {
+      int x = e.getScaledPos().getX();
 
-	private TracksFigure mFigure;
+      if (e.isControlDown()) {
+        mSelectionStart = Math.max(Track.LEFT_MARGIN, Math.min(Track.END, x));
+      } else {
+        mDragStart = x;
 
+        mDragStartRegion = mGenomicModel.get();
+      }
 
-	/**
-	 * The Class CanvasMouseEvents.
-	 */
-	private class CanvasMouseEvents extends ModernCanvasMouseAdapter {
+      // System.err.println(mSelectionX);
 
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.graphics.ModernCanvasMouseAdapter#canvasMousePressed(org.abh.common.ui.graphics.CanvasMouseEvent)
-		 */
-		@Override
-		public void canvasMousePressed(CanvasMouseEvent e) {
-			int x = e.getScaledPos().getX();
+      fireCanvasRedraw();
+    }
 
-			if (e.isControlDown()) {
-				mSelectionStart = Math.max(Track.LEFT_MARGIN, Math.min(Track.END, x));
-			} else {
-				mDragStart = x;
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.graphics.ModernCanvasMouseAdapter#canvasMouseReleased(org.
+     * abh.common.ui.graphics.CanvasMouseEvent)
+     */
+    @Override
+    public void canvasMouseReleased(CanvasMouseEvent e) {
+      if (e.isControlDown()) {
+        alterSelection();
+      }
 
-				mDragStartRegion = mGenomicModel.get();
-			}
+      mSelectionStart = -1;
+      mSelectionEnd = -1;
 
-			//System.err.println(mSelectionX);
+      mDragStart = -1;
+      mDragEnd = -1;
 
-			fireCanvasRedraw();
-		}
+      fireCanvasRedraw();
+    }
 
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.graphics.ModernCanvasMouseAdapter#canvasMouseReleased(org.abh.common.ui.graphics.CanvasMouseEvent)
-		 */
-		@Override
-		public void canvasMouseReleased(CanvasMouseEvent e) {
-			if (e.isControlDown()) {
-				alterSelection();
-			}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.abh.common.ui.graphics.ModernCanvasMouseAdapter#canvasMouseDragged(org.
+     * abh.common.ui.graphics.CanvasMouseEvent)
+     */
+    @Override
+    public void canvasMouseDragged(CanvasMouseEvent e) {
 
-			mSelectionStart = -1;
-			mSelectionEnd = -1;
+      if (e.isControlDown()) {
+        int x = e.getScaledPos().getX();
+        mSelectionEnd = Math.max(Track.LEFT_MARGIN, Math.min(Track.END, x));
 
-			mDragStart = -1;
-			mDragEnd = -1;
+        fireCanvasRedraw();
+      } else {
+        mDragEnd = e.getScaledPos().getX();
 
-			fireCanvasRedraw();
-		}
+        mDist = mDragEnd - mDragStart;
 
-		/* (non-Javadoc)
-		 * @see org.abh.common.ui.graphics.ModernCanvasMouseAdapter#canvasMouseDragged(org.abh.common.ui.graphics.CanvasMouseEvent)
-		 */
-		@Override
-		public void canvasMouseDragged(CanvasMouseEvent e) {
+        dragMove();
+      }
 
-			if (e.isControlDown()) {
-				int x = e.getScaledPos().getX();
-				mSelectionEnd = Math.max(Track.LEFT_MARGIN, Math.min(Track.END, x));
-				
-				fireCanvasRedraw();
-			} else {
-				mDragEnd = e.getScaledPos().getX();
+    }
 
-				mDist = mDragEnd - mDragStart;
+  }
 
-				dragMove();
-			}
+  /**
+   * Instantiates a new tracks figure.
+   *
+   * @param genomicModel
+   *          the genomic model
+   * @param sizes
+   *          the sizes
+   */
+  public TracksFigurePanel(TracksFigure figure, GenomicRegionModel genomicModel, ChromosomeSizes sizes) {
+    super(figure);
 
-			
-		}
+    mFigure = figure;
+    mGenomicModel = genomicModel;
+    mSizes = sizes;
 
-	}
+    // setLayout(new FigureLayoutVBox());
 
-	/**
-	 * Instantiates a new tracks figure.
-	 *
-	 * @param genomicModel the genomic model
-	 * @param sizes the sizes
-	 */
-	public TracksFigurePanel(TracksFigure figure, 
-			GenomicRegionModel genomicModel,
-			ChromosomeSizes sizes) {
-		super(figure);
+    // setMargins(50);
 
-		mFigure = figure;
-		mGenomicModel = genomicModel;
-		mSizes = sizes;
+    // getGraphSpace().getGraphProperties().addChangeListener(new PlotEvents());
 
-		//setLayout(new FigureLayoutVBox());
+    // the default plot size
+    // getSubPlotLayout().setPlotSize(new Dimension(1200, 100));
+    // getSubPlotLayout().setMargins(50, 250, 50, 50);
 
-		//setMargins(50);
+    // Maximize the space, but allow a margin for drawing genes
+    // getFigureProperties().setMargins(0, 0, 200, 0);
 
-		//getGraphSpace().getGraphProperties().addChangeListener(new PlotEvents());
+    // Don't draw grid lines
+    // getFigureProperties().getXAxis().getGrid().setVisible(false);
+    // getFigureProperties().getY1Axis().getGrid().setVisible(false);
 
-		// the default plot size
-		//getSubPlotLayout().setPlotSize(new Dimension(1200, 100));
-		//getSubPlotLayout().setMargins(50, 250, 50, 50);
+    addCanvasMouseListener(new CanvasMouseEvents());
+  }
 
-		// Maximize the space, but allow a margin for drawing genes
-		//getFigureProperties().setMargins(0, 0, 200, 0);
+  @Override
+  public final void plot(Graphics2D g2, DrawingContext context, Object... params) {
+    super.plot(g2, context, params);
 
-		// Don't draw grid lines
-		//getFigureProperties().getXAxis().getGrid().setVisible(false);
-		//getFigureProperties().getY1Axis().getGrid().setVisible(false);
+    plotSelection(g2, context, params);
+  }
 
-		addCanvasMouseListener(new CanvasMouseEvents());
-	}
+  public void plotSelection(Graphics2D g2, DrawingContext context, Object... params) {
 
-	@Override
-	public final void plot(Graphics2D g2, 
-			DrawingContext context, 
-			Object... params) {
-		super.plot(g2, context, params);
+    int h = getParent().getHeight();
 
-		plotSelection(g2, context, params);
-	}
+    if (mSelectionStart != -1 && mSelectionEnd != -1) {
+      int minX = Math.min(mSelectionStart, mSelectionEnd);
+      int maxX = Math.max(mSelectionStart, mSelectionEnd);
 
-	public void plotSelection(Graphics2D g2, 
-			DrawingContext context, 
-			Object... params) {
+      g2.setColor(SELECTION_COLOR_TRANS);
 
-		int h = getParent().getHeight();
+      g2.fillRect(minX + 1, 0, maxX - minX - 1, h);
+    }
 
-		if (mSelectionStart != -1 && mSelectionEnd != -1) {
-			int minX = Math.min(mSelectionStart, mSelectionEnd);
-			int maxX = Math.max(mSelectionStart, mSelectionEnd);
+    g2.setStroke(ModernTheme.DASHED_LINE_STROKE);
+    g2.setColor(SELECTION_COLOR);
 
-			g2.setColor(SELECTION_COLOR_TRANS);
+    if (mSelectionStart != -1) {
+      g2.drawLine(mSelectionStart, 0, mSelectionStart, h);
+    }
 
-			g2.fillRect(minX + 1, 0, maxX - minX - 1, h);
-		}
+    if (mSelectionEnd != -1) {
+      g2.drawLine(mSelectionEnd, 0, mSelectionEnd, h);
+    }
 
-		g2.setStroke(ModernTheme.DASHED_LINE_STROKE);
-		g2.setColor(SELECTION_COLOR);
+  }
 
+  /**
+   * Alter selection.
+   *
+   * @param x
+   *          the x
+   */
+  private void alterSelection() {
+    if (mSelectionStart == -1 || mSelectionEnd == -1) {
+      return;
+    }
 
-		if (mSelectionStart != -1) {
-			g2.drawLine(mSelectionStart, 0, mSelectionStart, h);
-		}
+    GenomicRegion region = mGenomicModel.get();
 
-		if (mSelectionEnd != -1) {
-			g2.drawLine(mSelectionEnd, 0, mSelectionEnd, h);
-		}
+    double p = Math.min(1, Math.max(0, (mSelectionStart - Track.LEFT_MARGIN) / (double) Track.PLOT_WIDTH));
 
-	}
+    int start = region.getStart() + (int) (p * region.getLength());
 
+    p = Math.min(1, Math.max(0, (mSelectionEnd - Track.LEFT_MARGIN) / (double) Track.PLOT_WIDTH));
 
-	/**
-	 * Alter selection.
-	 *
-	 * @param x the x
-	 */
-	private void alterSelection() {
-		if (mSelectionStart == -1 || mSelectionEnd == -1) {
-			return;
-		}
+    int end = region.getStart() + (int) (p * region.getLength());
 
-		GenomicRegion region = mGenomicModel.get();
+    GenomicRegion newRegion = new GenomicRegion(region.getChr(), start, end);
 
-		double p = Math.min(1, Math.max(0, (mSelectionStart - Track.LEFT_MARGIN) / (double)Track.PLOT_WIDTH));
+    mGenomicModel.set(newRegion);
+  }
 
-		int start = region.getStart() + (int)(p * region.getLength());
+  /**
+   * Drag move.
+   */
+  private void dragMove() {
+    if (mDragStartRegion == null) {
+      return;
+    }
 
-		p = Math.min(1, Math.max(0, (mSelectionEnd - Track.LEFT_MARGIN) / (double)Track.PLOT_WIDTH));
+    int bin = mDist / X_GAP;
 
-		int end = region.getStart() + (int)(p * region.getLength());
+    if (bin == mDragBin) {
+      return;
+    }
 
-		GenomicRegion newRegion = 
-				new GenomicRegion(region.getChr(), start, end);
+    mDragBin = bin;
 
-		mGenomicModel.set(newRegion);
-	}
+    double w = mFigure.currentSubFigure().currentAxes().getInternalSize().getW();
 
-	/**
-	 * Drag move.
-	 */
-	private void dragMove() {
-		if (mDragStartRegion == null) {
-			return;
-		}
+    double p = -mDist / w;
 
-		int bin = mDist / X_GAP;
+    int shift = (int) (p * mDragStartRegion.getLength());
 
-		if (bin == mDragBin) {
-			return;
-		}
+    GenomicRegion newRegion = GenomicRegion.shift(mDragStartRegion, shift, 10, mSizes);
 
-		mDragBin = bin;
+    // System.err.println("new " + mDragStartRegion + " " + newRegion + " " +
+    // mDragStartRegion.getLength() + " " + p);
 
-		double w = mFigure.currentSubFigure().currentAxes().getInternalSize().getW();
-
-		double p = -mDist / w;
-
-		int shift = (int)(p * mDragStartRegion.getLength());
-
-		GenomicRegion newRegion = 
-				GenomicRegion.shift(mDragStartRegion, shift, 10, mSizes);
-
-		//System.err.println("new " + mDragStartRegion + " " + newRegion + " " + mDragStartRegion.getLength() + " " + p);
-
-		mGenomicModel.set(newRegion);
-	}
+    mGenomicModel.set(newRegion);
+  }
 }

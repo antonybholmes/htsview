@@ -27,108 +27,126 @@ import org.jebtk.core.json.JsonBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class BedPlotTrack.
  */
 public class BedPlotTrack extends UcscPlotTrack {
 
-	
-	/** The m file. */
-	private Path mFile;
-	
-	/** The Constant BAR_HEIGHT. */
-	public static final int BAR_HEIGHT = 20;
-	
-	/** The Constant HALF_BAR_HEIGHT. */
-	public static final int HALF_BAR_HEIGHT = BAR_HEIGHT / 2;
-	
-	/** The gap. */
-	public static int GAP = HALF_BAR_HEIGHT / 2;
-	
-	/** The Constant BLOCK_HEIGHT. */
-	public static final int BLOCK_HEIGHT = BAR_HEIGHT + GAP;
+  /** The m file. */
+  private Path mFile;
 
-	/**
-	 * Instantiates a new bed plot track.
-	 *
-	 * @param file the file
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public BedPlotTrack(Path file) throws IOException {
-		this(Bed.parseTracks(file).get(0), file);
-	}
-	
-	/**
-	 * Instantiates a new bed plot track.
-	 *
-	 * @param bed the bed
-	 * @param file the file
-	 */
-	public BedPlotTrack(UCSCTrack bed, Path file) {
-		this(bed, file, TrackDisplayMode.COMPACT);
-	}
+  /** The Constant BAR_HEIGHT. */
+  public static final int BAR_HEIGHT = 20;
 
-	/**
-	 * Instantiates a new bed plot track.
-	 *
-	 * @param file the file
-	 * @param mode the mode
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public BedPlotTrack(Path file, TrackDisplayMode mode) throws IOException {
-		this(Bed.parseTracks(file).get(0), file, mode);
-	}
+  /** The Constant HALF_BAR_HEIGHT. */
+  public static final int HALF_BAR_HEIGHT = BAR_HEIGHT / 2;
 
-	/**
-	 * Instantiates a new bed plot track.
-	 *
-	 * @param bed the bed
-	 * @param file the file
-	 * @param mode the mode
-	 */
-	public BedPlotTrack(UCSCTrack bed, Path file, TrackDisplayMode mode) {
-		super(bed, mode);
-		
-		mFile = file;
-	}
+  /** The gap. */
+  public static int GAP = HALF_BAR_HEIGHT / 2;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.ext.ucsc.UcscPlotTrack#getType()
-	 */
-	@Override
-	public String getType() {
-		return "BED";
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.ext.ucsc.UcscPlotTrack#toXml(org.w3c.dom.Document)
-	 */
-	@Override
-	public Element toXml(Document doc) {
-		Element trackElement = doc.createElement("track");
-	
-		trackElement.setAttribute("type", "bed");
-		trackElement.setAttribute("name", getName());
-		trackElement.setAttribute("file", PathUtils.toString(mFile));
-		trackElement.setAttribute("color", ColorUtils.toHtml(getFillColor()));
-		
-		return trackElement;
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.ext.ucsc.UcscPlotTrack#toJson(org.abh.common.json.JsonBuilder)
-	 */
-	@Override
-	public void toJson(JsonBuilder json) {
-		json.startObject();
-		
-		json.add("type", "bed");
-		json.add("name", getName());
-		json.add("file", PathUtils.toString(mFile));
-		json.add("color", ColorUtils.toHtml(getFillColor()));
-		
-		json.endObject();
-	}
+  /** The Constant BLOCK_HEIGHT. */
+  public static final int BLOCK_HEIGHT = BAR_HEIGHT + GAP;
+
+  /**
+   * Instantiates a new bed plot track.
+   *
+   * @param file
+   *          the file
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public BedPlotTrack(Path file) throws IOException {
+    this(Bed.parseTracks(file).get(0), file);
+  }
+
+  /**
+   * Instantiates a new bed plot track.
+   *
+   * @param bed
+   *          the bed
+   * @param file
+   *          the file
+   */
+  public BedPlotTrack(UCSCTrack bed, Path file) {
+    this(bed, file, TrackDisplayMode.COMPACT);
+  }
+
+  /**
+   * Instantiates a new bed plot track.
+   *
+   * @param file
+   *          the file
+   * @param mode
+   *          the mode
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public BedPlotTrack(Path file, TrackDisplayMode mode) throws IOException {
+    this(Bed.parseTracks(file).get(0), file, mode);
+  }
+
+  /**
+   * Instantiates a new bed plot track.
+   *
+   * @param bed
+   *          the bed
+   * @param file
+   *          the file
+   * @param mode
+   *          the mode
+   */
+  public BedPlotTrack(UCSCTrack bed, Path file, TrackDisplayMode mode) {
+    super(bed, mode);
+
+    mFile = file;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.ext.ucsc.UcscPlotTrack#getType()
+   */
+  @Override
+  public String getType() {
+    return "BED";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.ext.ucsc.UcscPlotTrack#toXml(org.w3c.dom.
+   * Document)
+   */
+  @Override
+  public Element toXml(Document doc) {
+    Element trackElement = doc.createElement("track");
+
+    trackElement.setAttribute("type", "bed");
+    trackElement.setAttribute("name", getName());
+    trackElement.setAttribute("file", PathUtils.toString(mFile));
+    trackElement.setAttribute("color", ColorUtils.toHtml(getFillColor()));
+
+    return trackElement;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.ext.ucsc.UcscPlotTrack#toJson(org.abh.common.
+   * json.JsonBuilder)
+   */
+  @Override
+  public void toJson(JsonBuilder json) {
+    json.startObject();
+
+    json.add("type", "bed");
+    json.add("name", getName());
+    json.add("file", PathUtils.toString(mFile));
+    json.add("color", ColorUtils.toHtml(getFillColor()));
+
+    json.endObject();
+  }
 }

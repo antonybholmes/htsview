@@ -37,94 +37,96 @@ import org.jebtk.modern.window.WindowWidgetFocusEvents;
  *
  */
 public class BedGraphStyleDialog extends ModernDialogTaskWindow implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * The m bed graph button.
-	 */
-	private ModernRadioButton mBedGraphButton =
-			new ModernRadioButton("BedGraph", true);
-	
-	/**
-	 * The m bed button.
-	 */
-	private ModernRadioButton mBedButton =
-			new ModernRadioButton("BED");
-	
-	/**
-	 * The m check all.
-	 */
-	private ModernCheckBox mCheckAll =
-			new ModernCheckBox("Apply to all", true);
-	
-	/**
-	 * Instantiates a new bed graph style dialog.
-	 *
-	 * @param parent the parent
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public BedGraphStyleDialog(ModernWindow parent) throws IOException {
-		super(parent);
-		
-		setTitle("Display Style");
 
-		setup();
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-		createUi();
-	}
+  /**
+   * The m bed graph button.
+   */
+  private ModernRadioButton mBedGraphButton = new ModernRadioButton("BedGraph", true);
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		addWindowListener(new WindowWidgetFocusEvents(mOkButton));
-		
-		ModernButtonGroup group = new ModernButtonGroup();
-		
-		group.add(mBedGraphButton);
-		group.add(mBedButton);
-		
-		setSize(400, 180);
-		
-		UI.centerWindowToScreen(this);
-	}
+  /**
+   * The m bed button.
+   */
+  private ModernRadioButton mBedButton = new ModernRadioButton("BED");
 
-	/**
-	 * Creates the ui.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	private final void createUi() throws IOException {
-		//this.getContentPane().add(new JLabel("Change " + getProductDetails().getProductName() + " settings", JLabel.LEFT), BorderLayout.PAGE_START);
+  /**
+   * The m check all.
+   */
+  private ModernCheckBox mCheckAll = new ModernCheckBox("Apply to all", true);
 
-		Box box = Box.createVerticalBox();
-		
-		box.add(mBedGraphButton);
-		box.add(ModernPanel.createVGap());
-		box.add(mBedButton);
-		
-		setContent(box);
-	}
-	
-	/**
-	 * Checks if is bed graph style.
-	 *
-	 * @return true, if is bed graph style
-	 */
-	public boolean isBedGraphStyle() {
-		return mBedGraphButton.isSelected();
-	}
-	
-	/**
-	 * Gets the apply to all.
-	 *
-	 * @return the apply to all
-	 */
-	public boolean getApplyToAll() {
-		return mCheckAll.isSelected();
-	}
+  /**
+   * Instantiates a new bed graph style dialog.
+   *
+   * @param parent
+   *          the parent
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public BedGraphStyleDialog(ModernWindow parent) throws IOException {
+    super(parent);
+
+    setTitle("Display Style");
+
+    setup();
+
+    createUi();
+  }
+
+  /**
+   * Setup.
+   */
+  private void setup() {
+    addWindowListener(new WindowWidgetFocusEvents(mOkButton));
+
+    ModernButtonGroup group = new ModernButtonGroup();
+
+    group.add(mBedGraphButton);
+    group.add(mBedButton);
+
+    setSize(400, 180);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   *
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  private final void createUi() throws IOException {
+    // this.getContentPane().add(new JLabel("Change " +
+    // getProductDetails().getProductName() + " settings", JLabel.LEFT),
+    // BorderLayout.PAGE_START);
+
+    Box box = Box.createVerticalBox();
+
+    box.add(mBedGraphButton);
+    box.add(ModernPanel.createVGap());
+    box.add(mBedButton);
+
+    setContent(box);
+  }
+
+  /**
+   * Checks if is bed graph style.
+   *
+   * @return true, if is bed graph style
+   */
+  public boolean isBedGraphStyle() {
+    return mBedGraphButton.isSelected();
+  }
+
+  /**
+   * Gets the apply to all.
+   *
+   * @return the apply to all
+   */
+  public boolean getApplyToAll() {
+    return mCheckAll.isSelected();
+  }
 }

@@ -29,52 +29,54 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  */
 public class AnnotationBedPlotTrack extends AnnotationPlotTrack {
 
-	/** The m bed. */
-	private UCSCTrack mBed;
-	
-	/** The m sub figure. */
-	private BedPlotSubFigure mSubFigure = null;
+  /** The m bed. */
+  private UCSCTrack mBed;
 
-	/**
-	 * Instantiates a new annotation bed plot track.
-	 *
-	 * @param bed the bed
-	 */
-	public AnnotationBedPlotTrack(UCSCTrack bed) {
-		super(bed.getName());
-		
-		mBed = bed;
-	}
+  /** The m sub figure. */
+  private BedPlotSubFigure mSubFigure = null;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#createGraph(java.lang.String, edu.columbia.rdf.htsview.tracks.TitleProperties)
-	 */
-	@Override
-	public TrackSubFigure createGraph(String genome,
-			TitleProperties titlePosition) {
-		mSubFigure = BedPlotSubFigure.create(mBed, titlePosition);
-		
-		//mPlot.getGraphSpace().setPlotSize(PLOT_SIZE);
-		
-		mSubFigure.currentAxes().setInternalSize(Track.MEDIUM_TRACK_SIZE);
-		
-		setMargins(getName(), titlePosition, mSubFigure);
-		
-		
-		return mSubFigure;
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.Track#updateGraph(org.jebtk.bioinformatics.genome.GenomicRegion, int, int, int, int)
-	 */
-	@Override
-	public TrackSubFigure updateGraph(GenomicRegion displayRegion, 
-			int resolution,
-			int width,
-			int height,
-			int margin) {
-		mSubFigure.update(displayRegion, resolution, width, height, margin);
-		
-		return mSubFigure;
-	}
+  /**
+   * Instantiates a new annotation bed plot track.
+   *
+   * @param bed
+   *          the bed
+   */
+  public AnnotationBedPlotTrack(UCSCTrack bed) {
+    super(bed.getName());
+
+    mBed = bed;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#createGraph(java.lang.String,
+   * edu.columbia.rdf.htsview.tracks.TitleProperties)
+   */
+  @Override
+  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) {
+    mSubFigure = BedPlotSubFigure.create(mBed, titlePosition);
+
+    // mPlot.getGraphSpace().setPlotSize(PLOT_SIZE);
+
+    mSubFigure.currentAxes().setInternalSize(Track.MEDIUM_TRACK_SIZE);
+
+    setMargins(getName(), titlePosition, mSubFigure);
+
+    return mSubFigure;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.Track#updateGraph(org.jebtk.bioinformatics.
+   * genome.GenomicRegion, int, int, int, int)
+   */
+  @Override
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin) {
+    mSubFigure.update(displayRegion, resolution, width, height, margin);
+
+    return mSubFigure;
+  }
 }

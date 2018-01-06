@@ -27,119 +27,105 @@ import org.jebtk.graphplot.figure.SubFigure;
  */
 public abstract class TrackSubFigure extends SubFigure {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Update.
-	 *
-	 * @param displayRegion the display region
-	 * @param resolution the resolution
-	 * @param width the width
-	 * @param height the height
-	 * @param margin the margin
-	 */
-	public void update(GenomicRegion displayRegion, 
-			int resolution,
-			int width, 
-			int height,
-			int margin) {
-		update(displayRegion, 
-				resolution, 
-				-1, 
-				width, 
-				height,
-				margin);
-	}
-	
-	/**
-	 * Update.
-	 *
-	 * @param displayRegion the display region
-	 * @param resolution the resolution
-	 * @param yMax the y max
-	 * @param width the width
-	 * @param height the height
-	 * @param margin the margin
-	 */
-	public void update(GenomicRegion displayRegion, 
-			int resolution,
-			double yMax,
-			int width, 
-			int height,
-			int margin) {
-		update(displayRegion, 
-				resolution, 
-				yMax, 
-				width, 
-				height, 
-				margin, 
-				PlotStyle.FILLED_SMOOTH);
-	}
-	
-	/**
-	 * Update.
-	 *
-	 * @param displayRegion the display region
-	 * @param resolution the resolution
-	 * @param yMax the y max
-	 * @param width the width
-	 * @param height the height
-	 * @param margin the margin
-	 * @param style the style
-	 */
-	public void update(GenomicRegion displayRegion, 
-			int resolution,
-			double yMax,
-			int width, 
-			int height,
-			int margin,
-			PlotStyle style) {
-		update(displayRegion, 
-				resolution, 
-				yMax, 
-				width, 
-				height, 
-				margin, 
-				null, 
-				null,
-				style);
-	}
-	
-	
-	/**
-	 * Should update the figure to correspond to the coordinates being
-	 * looked at. Should also update colors and set the width and height
-	 * of the plot. All figures should observe the width property so that
-	 * the plots are vertically aligned and appear uniform going vertically.
-	 * The height parameter can be ignored if for example the figure
-	 * auto adjusts its height based on the number of features being displayed.
-	 *
-	 * @param displayRegion the display region
-	 * @param resolution the resolution
-	 * @param yMax the y max
-	 * @param width the width
-	 * @param height the height
-	 * @param margin 	The left margin.
-	 * @param lineColor the line color
-	 * @param fillColor the fill color
-	 * @param style the style
-	 */
-	public void update(GenomicRegion displayRegion, 
-			int resolution,
-			double yMax,
-			int width,
-			int height,
-			int margin,
-			Color lineColor,
-			Color fillColor,
-			PlotStyle style) {
-		
-		currentAxes().setInternalSize(width, height);
-		
-		currentAxes().setLeftMargin(margin);
-		
-		currentAxes().getX1Axis().setLimits(displayRegion.getStart(), displayRegion.getEnd());
-		currentAxes().getY1Axis().setLimits(0, yMax);
-	}
+  /**
+   * Update.
+   *
+   * @param displayRegion
+   *          the display region
+   * @param resolution
+   *          the resolution
+   * @param width
+   *          the width
+   * @param height
+   *          the height
+   * @param margin
+   *          the margin
+   */
+  public void update(GenomicRegion displayRegion, int resolution, int width, int height, int margin) {
+    update(displayRegion, resolution, -1, width, height, margin);
+  }
+
+  /**
+   * Update.
+   *
+   * @param displayRegion
+   *          the display region
+   * @param resolution
+   *          the resolution
+   * @param yMax
+   *          the y max
+   * @param width
+   *          the width
+   * @param height
+   *          the height
+   * @param margin
+   *          the margin
+   */
+  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin) {
+    update(displayRegion, resolution, yMax, width, height, margin, PlotStyle.FILLED_SMOOTH);
+  }
+
+  /**
+   * Update.
+   *
+   * @param displayRegion
+   *          the display region
+   * @param resolution
+   *          the resolution
+   * @param yMax
+   *          the y max
+   * @param width
+   *          the width
+   * @param height
+   *          the height
+   * @param margin
+   *          the margin
+   * @param style
+   *          the style
+   */
+  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
+      PlotStyle style) {
+    update(displayRegion, resolution, yMax, width, height, margin, null, null, style);
+  }
+
+  /**
+   * Should update the figure to correspond to the coordinates being looked at.
+   * Should also update colors and set the width and height of the plot. All
+   * figures should observe the width property so that the plots are vertically
+   * aligned and appear uniform going vertically. The height parameter can be
+   * ignored if for example the figure auto adjusts its height based on the number
+   * of features being displayed.
+   *
+   * @param displayRegion
+   *          the display region
+   * @param resolution
+   *          the resolution
+   * @param yMax
+   *          the y max
+   * @param width
+   *          the width
+   * @param height
+   *          the height
+   * @param margin
+   *          The left margin.
+   * @param lineColor
+   *          the line color
+   * @param fillColor
+   *          the fill color
+   * @param style
+   *          the style
+   */
+  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
+      Color lineColor, Color fillColor, PlotStyle style) {
+
+    currentAxes().setInternalSize(width, height);
+
+    currentAxes().setLeftMargin(margin);
+
+    currentAxes().getX1Axis().setLimits(displayRegion.getStart(), displayRegion.getEnd());
+    currentAxes().getY1Axis().setLimits(0, yMax);
+  }
 }

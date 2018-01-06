@@ -25,8 +25,6 @@ import org.jebtk.modern.ribbon.Ribbon;
 import org.jebtk.modern.ribbon.RibbonLargeRadioButton;
 import org.jebtk.modern.ribbon.RibbonSection;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
  * Allows user to select the resolution to view sequences.
@@ -34,83 +32,87 @@ import org.jebtk.modern.ribbon.RibbonSection;
  * @author Antony Holmes Holmes
  */
 public class TitlePositionRibbonSection extends RibbonSection implements ModernClickListener {
-	
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * The m top button.
-	 */
-	private ModernCheckButton mTopButton = 
-			new RibbonLargeRadioButton("Top", UIService.getInstance().loadIcon("title_top", 32));
-	
-	/**
-	 * The m right button.
-	 */
-	private ModernCheckButton mRightButton = 
-			new RibbonLargeRadioButton("Right", UIService.getInstance().loadIcon("title_right", 32));
-	
-	/** The m check visible. */
-	private ModernCheckButton mCheckVisible = 
-			new RibbonLargeRadioButton("Visible");
-	
-	
-	/**
-	 * The m model.
-	 */
-	private TitlePositionModel mModel;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new title position ribbon section.
-	 *
-	 * @param ribbon the ribbon
-	 * @param model the model
-	 */
-	public TitlePositionRibbonSection(Ribbon ribbon, TitlePositionModel model) {
-		super(ribbon, "Title Position");
-		
-		mModel = model;
+  /**
+   * The m top button.
+   */
+  private ModernCheckButton mTopButton = new RibbonLargeRadioButton("Top",
+      UIService.getInstance().loadIcon("title_top", 32));
 
-		add(mTopButton);
-		add(UI.createHGap(2));
-		add(mRightButton);
-		add(UI.createHGap(2));
-		
-		ModernButtonGroup group = new ModernButtonGroup();
+  /**
+   * The m right button.
+   */
+  private ModernCheckButton mRightButton = new RibbonLargeRadioButton("Right",
+      UIService.getInstance().loadIcon("title_right", 32));
 
-		group.add(mTopButton);
-		add(UI.createHGap(2));
-		group.add(mRightButton);
+  /** The m check visible. */
+  private ModernCheckButton mCheckVisible = new RibbonLargeRadioButton("Visible");
 
-		mTopButton.addClickListener(this);
-		mRightButton.addClickListener(this);
+  /**
+   * The m model.
+   */
+  private TitlePositionModel mModel;
 
-		mTopButton.setSelected(true);
-	}
-	
+  /**
+   * Instantiates a new title position ribbon section.
+   *
+   * @param ribbon
+   *          the ribbon
+   * @param model
+   *          the model
+   */
+  public TitlePositionRibbonSection(Ribbon ribbon, TitlePositionModel model) {
+    super(ribbon, "Title Position");
 
-	/**
-	 * Change.
-	 *
-	 * @param e the e
-	 */
-	private void change(ModernClickEvent e) {
-		if (mTopButton.isSelected()) {
-			mModel.set(new TitleProperties(TitlePosition.TOP, mCheckVisible.isSelected()));
-		} else if (mRightButton.isSelected()) {
-			mModel.set(new TitleProperties(TitlePosition.RIGHT, mCheckVisible.isSelected()));
-		} else {
-			
-		}
-	}
+    mModel = model;
 
-	/* (non-Javadoc)
-	 * @see org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.event.ModernClickEvent)
-	 */
-	@Override
-	public void clicked(ModernClickEvent e) {
-		change(e);
-	}
+    add(mTopButton);
+    add(UI.createHGap(2));
+    add(mRightButton);
+    add(UI.createHGap(2));
+
+    ModernButtonGroup group = new ModernButtonGroup();
+
+    group.add(mTopButton);
+    add(UI.createHGap(2));
+    group.add(mRightButton);
+
+    mTopButton.addClickListener(this);
+    mRightButton.addClickListener(this);
+
+    mTopButton.setSelected(true);
+  }
+
+  /**
+   * Change.
+   *
+   * @param e
+   *          the e
+   */
+  private void change(ModernClickEvent e) {
+    if (mTopButton.isSelected()) {
+      mModel.set(new TitleProperties(TitlePosition.TOP, mCheckVisible.isSelected()));
+    } else if (mRightButton.isSelected()) {
+      mModel.set(new TitleProperties(TitlePosition.RIGHT, mCheckVisible.isSelected()));
+    } else {
+
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
+   * event.ModernClickEvent)
+   */
+  @Override
+  public void clicked(ModernClickEvent e) {
+    change(e);
+  }
 }

@@ -33,99 +33,96 @@ import org.jebtk.modern.text.ModernTextField;
 import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class ABIEditDialog.
  */
 public class ABIEditDialog extends ModernDialogTaskWindow implements ModernClickListener {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m name field. */
-	private ModernTextField mNameField = 
-			new ModernClipboardTextField("Name");
-	
-	/** The m line color button. */
-	private ColorSwatchButton mLineColorButton;
-	
-	/** The m track. */
-	private ABIPlotTrack mTrack;
 
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new ABI edit dialog.
-	 *
-	 * @param parent the parent
-	 * @param track the track
-	 */
-	public ABIEditDialog(ModernWindow parent, ABIPlotTrack track) {
-		super(parent);
-		
-		mLineColorButton = new ColorSwatchButton(mParent, track.getLineColor());
-		
-		mTrack = track;
-		
-		setTitle("Track Editor", track.getName());
-		
-		createUi();
-		
-		setup();
-	}
+  /** The m name field. */
+  private ModernTextField mNameField = new ModernClipboardTextField("Name");
 
-	/**
-	 * Setup.
-	 */
-	private void setup() {
-		setSize(480, 260);
-		
-		UI.centerWindowToScreen(this);
-	}
+  /** The m line color button. */
+  private ColorSwatchButton mLineColorButton;
 
+  /** The m track. */
+  private ABIPlotTrack mTrack;
 
-	/**
-	 * Creates the ui.
-	 */
-	private final void createUi() {
-		mNameField.setText(mTrack.getName());
-		
-		Box box = VBox.create();
-		
-		int[] rows = {ModernWidget.WIDGET_HEIGHT};
-		int[] cols = {80, 300};
-		
-		MatrixPanel matrixPanel = new MatrixPanel(rows, 
-				cols, 
-				ModernWidget.PADDING, 
-				ModernWidget.PADDING);
-		
-		matrixPanel.add(new ModernAutoSizeLabel("Name"));
-		matrixPanel.add(new ModernTextBorderPanel(mNameField));
-		
-		matrixPanel.add(new ModernAutoSizeLabel("Color"));
-		
-		Box box2 = HBox.create();
-		box2.add(mLineColorButton);
-		
-		matrixPanel.add(box2);
+  /**
+   * Instantiates a new ABI edit dialog.
+   *
+   * @param parent
+   *          the parent
+   * @param track
+   *          the track
+   */
+  public ABIEditDialog(ModernWindow parent, ABIPlotTrack track) {
+    super(parent);
 
-		setContent(matrixPanel);
-	}
+    mLineColorButton = new ColorSwatchButton(mParent, track.getLineColor());
 
-	/* (non-Javadoc)
-	 * @see java.awt.Component#getName()
-	 */
-	public String getName() {
-		return mNameField.getText();
-	}
-	
-	/**
-	 * Gets the line color.
-	 *
-	 * @return the line color
-	 */
-	public Color getLineColor() {
-		return mLineColorButton.getSelectedColor();
-	}
+    mTrack = track;
+
+    setTitle("Track Editor", track.getName());
+
+    createUi();
+
+    setup();
+  }
+
+  /**
+   * Setup.
+   */
+  private void setup() {
+    setSize(480, 260);
+
+    UI.centerWindowToScreen(this);
+  }
+
+  /**
+   * Creates the ui.
+   */
+  private final void createUi() {
+    mNameField.setText(mTrack.getName());
+
+    Box box = VBox.create();
+
+    int[] rows = { ModernWidget.WIDGET_HEIGHT };
+    int[] cols = { 80, 300 };
+
+    MatrixPanel matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING, ModernWidget.PADDING);
+
+    matrixPanel.add(new ModernAutoSizeLabel("Name"));
+    matrixPanel.add(new ModernTextBorderPanel(mNameField));
+
+    matrixPanel.add(new ModernAutoSizeLabel("Color"));
+
+    Box box2 = HBox.create();
+    box2.add(mLineColorButton);
+
+    matrixPanel.add(box2);
+
+    setContent(matrixPanel);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.awt.Component#getName()
+   */
+  public String getName() {
+    return mNameField.getText();
+  }
+
+  /**
+   * Gets the line color.
+   *
+   * @return the line color
+   */
+  public Color getLineColor() {
+    return mLineColorButton.getSelectedColor();
+  }
 }

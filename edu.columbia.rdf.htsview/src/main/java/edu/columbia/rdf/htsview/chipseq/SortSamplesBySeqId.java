@@ -22,19 +22,21 @@ import org.jebtk.core.path.Path;
  * The Class SortSamplesBySeqId.
  */
 public class SortSamplesBySeqId extends SortSamplesByChipSeqField {
-	
-	/**
-	 * Instantiates a new sort samples by seq id.
-	 */
-	public SortSamplesBySeqId() {
-		super(new Path("/ChIP-Seq/Sample/Seq_Id"));
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.edb.ui.sort.SampleSorter#getName()
-	 */
-	@Override
-	public final String getName() {
-		return "Sequence Id";
-	}
+
+  /**
+   * Instantiates a new sort samples by seq id.
+   */
+  public SortSamplesBySeqId() {
+    super(new Path("/ChIP-Seq/Sample/Seq_Id"));
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.edb.ui.sort.SampleSorter#getName()
+   */
+  @Override
+  public final String getName() {
+    return "Sequence Id";
+  }
 }

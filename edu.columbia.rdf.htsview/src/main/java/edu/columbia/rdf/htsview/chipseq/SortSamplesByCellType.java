@@ -22,19 +22,21 @@ import org.jebtk.core.path.Path;
  * The Class SortSamplesByCellType.
  */
 public class SortSamplesByCellType extends SortSamplesByChipSeqField {
-	
-	/**
-	 * Instantiates a new sort samples by cell type.
-	 */
-	public SortSamplesByCellType() {
-		super(new Path("/ChIP-Seq/Sample/Cell_Type"));
-	}
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.edb.ui.sort.SampleSorter#getName()
-	 */
-	@Override
-	public final String getName() {
-		return "Cell Type";
-	}
+
+  /**
+   * Instantiates a new sort samples by cell type.
+   */
+  public SortSamplesByCellType() {
+    super(new Path("/ChIP-Seq/Sample/Cell_Type"));
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.edb.ui.sort.SampleSorter#getName()
+   */
+  @Override
+  public final String getName() {
+    return "Cell Type";
+  }
 }

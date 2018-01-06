@@ -23,22 +23,20 @@ import org.jebtk.modern.list.ModernList;
  */
 public class LocationList extends ModernList<String> {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	
-	
-	/**
-	 * Instantiates a new location list.
-	 */
-	public LocationList() {
-		setCellRenderer(new LocationListRenderer());
-		
-		setDragReorderEnabled(true);
-		
-		setRowHeight(32);
-		
-		//addKeyListener(new KeyEvents());
-	}
+  /**
+   * Instantiates a new location list.
+   */
+  public LocationList() {
+    setCellRenderer(new LocationListRenderer());
+
+    setDragReorderEnabled(true);
+
+    setRowHeight(32);
+
+    // addKeyListener(new KeyEvents());
+  }
 
 }

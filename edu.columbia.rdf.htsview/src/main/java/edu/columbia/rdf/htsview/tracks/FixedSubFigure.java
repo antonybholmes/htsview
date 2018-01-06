@@ -26,36 +26,25 @@ import org.jebtk.graphplot.figure.PlotStyle;
  * The Class FixedSubFigure.
  */
 public abstract class FixedSubFigure extends TrackSubFigure {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.tracks.TrackSubFigure#update(org.jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int, java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
-	 */
-	@Override
-	public void update(GenomicRegion displayRegion, 
-			int resolution,
-			double yMax,
-			int width,
-			int height,
-			int margin,
-			Color lineColor,
-			Color fillColor,
-			PlotStyle style) {
-		
-		super.update(displayRegion, 
-				resolution,
-				1,
-				width, 
-				height,
-				margin,
-				lineColor, 
-				fillColor,
-				style);
-		
-		Axes.disableAllFeatures(currentAxes());
-		
-		currentAxes().getTitle().getFontStyle().setVisible(true);
-	}
+
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.TrackSubFigure#update(org.jebtk.
+   * bioinformatics.genome.GenomicRegion, int, double, int, int, int,
+   * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
+   */
+  @Override
+  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
+      Color lineColor, Color fillColor, PlotStyle style) {
+
+    super.update(displayRegion, resolution, 1, width, height, margin, lineColor, fillColor, style);
+
+    Axes.disableAllFeatures(currentAxes());
+
+    currentAxes().getTitle().getFontStyle().setVisible(true);
+  }
 }

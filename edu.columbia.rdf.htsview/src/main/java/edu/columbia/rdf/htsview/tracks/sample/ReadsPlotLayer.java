@@ -40,299 +40,279 @@ import edu.columbia.rdf.htsview.tracks.measurement.ScalePlotTrack;
  */
 public class ReadsPlotLayer extends AxesClippedLayer {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The constant HEIGHT.
-	 */
-	//public static final int HEIGHT = 
-	//		SettingsService.getInstance().getAsInt("edb.reads.tracks.reads-plot.height");
+  /**
+   * The constant HEIGHT.
+   */
+  // public static final int HEIGHT =
+  // SettingsService.getInstance().getAsInt("edb.reads.tracks.reads-plot.height");
 
-	/**
-	 * The constant BLOCK.
-	 */
-	//public static final int BLOCK = 
-	//		SettingsService.getInstance().getAsInt("edb.reads.tracks.reads-plot.block-height");
+  /**
+   * The constant BLOCK.
+   */
+  // public static final int BLOCK =
+  // SettingsService.getInstance().getAsInt("edb.reads.tracks.reads-plot.block-height");
 
-	//private static final int BAR_HEIGHT = 20;
+  // private static final int BAR_HEIGHT = 20;
 
-	/**
-	 * The member bed graph group.
-	 */
-	protected BedGraphGroupModel mBedGraphGroup;
+  /**
+   * The member bed graph group.
+   */
+  protected BedGraphGroupModel mBedGraphGroup;
 
-	/**
-	 * The member starts.
-	 */
-	private ListMultiMap<Integer, Integer> mStarts = null;
+  /**
+   * The member starts.
+   */
+  private ListMultiMap<Integer, Integer> mStarts = null;
 
-	/**
-	 * The member start map.
-	 */
-	//private MultiMap<Integer, Integer> mStartMap = 
-	//		DefaultListMultiMap.create();
+  /**
+   * The member start map.
+   */
+  // private MultiMap<Integer, Integer> mStartMap =
+  // DefaultListMultiMap.create();
 
-	//private MultiMap<Integer, Character> mStrandMap = 
-	//		DefaultListMultiMap.create();
+  // private MultiMap<Integer, Character> mStrandMap =
+  // DefaultListMultiMap.create();
 
-	/**
-	 * The member gap.
-	 */
-	private int mWidth;
+  /**
+   * The member gap.
+   */
+  private int mWidth;
 
-	/**
-	 * The member line color.
-	 */
-	private Color mLineColor;
+  /**
+   * The member line color.
+   */
+  private Color mLineColor;
 
-	/**
-	 * The member fill color.
-	 */
-	private Color mFillColor;
+  /**
+   * The member fill color.
+   */
+  private Color mFillColor;
 
-	/**
-	 * The member current id.
-	 */
-	//private String mCurrentId = null;
+  /**
+   * The member current id.
+   */
+  // private String mCurrentId = null;
 
-	private ListMultiMap<Integer, Strand> mStrands;
+  private ListMultiMap<Integer, Strand> mStrands;
 
-	//private boolean mStrandVisible;
+  // private boolean mStrandVisible;
 
-	//private boolean mNegStrandVisible;
+  // private boolean mNegStrandVisible;
 
-	/** The m neg strand line color. */
-	private Color mNegStrandLineColor;
+  /** The m neg strand line color. */
+  private Color mNegStrandLineColor;
 
-	/** The m anti strand fill color. */
-	private Color mAntiStrandFillColor;
+  /** The m anti strand fill color. */
+  private Color mAntiStrandFillColor;
 
-	/** The m read height. */
-	private int mReadHeight;
+  /** The m read height. */
+  private int mReadHeight;
 
-	/** The m block height. */
-	private int mBlockHeight;
+  /** The m block height. */
+  private int mBlockHeight;
 
+  /**
+   * Instantiates a new reads plot layer.
+   *
+   * @param readLength
+   *          the read length
+   */
+  public ReadsPlotLayer(int readLength) {
 
-	/**
-	 * Instantiates a new reads plot layer.
-	 *
-	 * @param readLength the read length
-	 */
-	public ReadsPlotLayer(int readLength) {
-		
-	}
-	
-	@Override
-	public String getType() {
-		return "Reads Layer";
-	}
+  }
 
-	/**
-	 * Update.
-	 *
-	 * @param starts the starts
-	 * @param strands the strands
-	 * @param width the width
-	 * @param strandVisible the strand visible
-	 * @param lineColor the line color
-	 * @param fillColor the fill color
-	 * @param negStrandVisible the neg strand visible
-	 * @param negStrandLineColor the neg strand line color
-	 * @param negStrandFillColor the neg strand fill color
-	 * @param readHeight the read height
-	 * @param gap the gap
-	 */
-	public void update(ListMultiMap<Integer, Integer> starts, 
-			ListMultiMap<Integer, Strand> strands,
-			int width,
-			boolean strandVisible, 
-			Color lineColor, 
-			Color fillColor, 
-			boolean negStrandVisible, 
-			Color negStrandLineColor, 
-			Color negStrandFillColor, 
-			int readHeight,
-			int gap) {
-		mStarts = starts;
-		mStrands = strands;
-		mWidth = width;
+  @Override
+  public String getType() {
+    return "Reads Layer";
+  }
 
-		//mStrandVisible = strandVisible;
-		mLineColor = lineColor;
-		mFillColor = fillColor;
+  /**
+   * Update.
+   *
+   * @param starts
+   *          the starts
+   * @param strands
+   *          the strands
+   * @param width
+   *          the width
+   * @param strandVisible
+   *          the strand visible
+   * @param lineColor
+   *          the line color
+   * @param fillColor
+   *          the fill color
+   * @param negStrandVisible
+   *          the neg strand visible
+   * @param negStrandLineColor
+   *          the neg strand line color
+   * @param negStrandFillColor
+   *          the neg strand fill color
+   * @param readHeight
+   *          the read height
+   * @param gap
+   *          the gap
+   */
+  public void update(ListMultiMap<Integer, Integer> starts, ListMultiMap<Integer, Strand> strands, int width,
+      boolean strandVisible, Color lineColor, Color fillColor, boolean negStrandVisible, Color negStrandLineColor,
+      Color negStrandFillColor, int readHeight, int gap) {
+    mStarts = starts;
+    mStrands = strands;
+    mWidth = width;
 
-		//mNegStrandVisible = negStrandVisible;
-		mNegStrandLineColor = negStrandLineColor;
-		mAntiStrandFillColor = negStrandFillColor;
+    // mStrandVisible = strandVisible;
+    mLineColor = lineColor;
+    mFillColor = fillColor;
 
-		mReadHeight = readHeight;
-		mBlockHeight = readHeight + gap;
+    // mNegStrandVisible = negStrandVisible;
+    mNegStrandLineColor = negStrandLineColor;
+    mAntiStrandFillColor = negStrandFillColor;
 
-		fireChanged();
-	}
+    mReadHeight = readHeight;
+    mBlockHeight = readHeight + gap;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.lib.bioinformatics.plot.figure.AxesClippedLayer#plotLayer(java.awt.Graphics2D, org.abh.common.ui.ui.graphics.DrawingContext, edu.columbia.rdf.lib.bioinformatics.plot.figure.SubFigure, edu.columbia.rdf.lib.bioinformatics.plot.figure.Axes)
-	 */
-	@Override
-	public void plotLayer(Graphics2D g2, 
-			DrawingContext context, 
-			Figure figure, 
-			SubFigure subFigure, 
-			Axes axes) {
+    fireChanged();
+  }
 
-		if (CollectionUtils.isNullOrEmpty(mStarts)) {
-			return;
-		}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.lib.bioinformatics.plot.figure.AxesClippedLayer#plotLayer(
+   * java.awt.Graphics2D, org.abh.common.ui.ui.graphics.DrawingContext,
+   * edu.columbia.rdf.lib.bioinformatics.plot.figure.SubFigure,
+   * edu.columbia.rdf.lib.bioinformatics.plot.figure.Axes)
+   */
+  @Override
+  public void plotLayer(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
 
-		int x1 = 0;
+    if (CollectionUtils.isNullOrEmpty(mStarts)) {
+      return;
+    }
 
-		int y = 0;
-		
-		
+    int x1 = 0;
 
-		/*
-		String id = getId(axes);
+    int y = 0;
 
-		if (mUpdate || mCurrentId == null || !id.equals(mCurrentId)) {
-			mStartMap.clear();
-			mStrandMap.clear();
+    /*
+     * String id = getId(axes);
+     * 
+     * if (mUpdate || mCurrentId == null || !id.equals(mCurrentId)) {
+     * mStartMap.clear(); mStrandMap.clear();
+     * 
+     * mGap = -1;
+     * 
+     * for (int i = 0; i < mStarts.size(); ++i) { int start = mStarts.get(i); char
+     * strand = mStrands.get(i);
+     * 
+     * if ((!mStrandVisible && strand == '+') || (!mNegStrandVisible && strand ==
+     * '-')) { continue; }
+     * 
+     * x1 = axes.toPlotX(start); x2 = axes.toPlotX(start + mReadLength);
+     * 
+     * if (mGap == -1) { mGap = Math.max(1, x2 - x1); }
+     * 
+     * int row = -1;
+     * 
+     * for (int r : mStartMap.keySet()) { boolean fit = true;
+     * 
+     * for (int s : mStartMap.get(r)) { int e = s + mGap;
+     * 
+     * if ((x1 >= s && x1 < e) || (x2 >= s && x2 < e)) { fit = false; break; } }
+     * 
+     * if (fit) { row = r; break; } }
+     * 
+     * if (row == -1) { row = mStartMap.size(); }
+     * 
+     * // debug //row = 0;
+     * 
+     * mStartMap.get(row).add(x1); mStrandMap.get(row).add(strand); } }
+     * 
+     * mUpdate = false; mCurrentId = id;
+     */
 
-			mGap = -1;
+    // System.err.println("coord " + axes.getXAxis().getMax() + " " +
+    // axes.getY1Axis().getMax() + " " + axes.getY1Axis().getMin());
 
-			for (int i = 0; i < mStarts.size(); ++i) {
-				int start = mStarts.get(i);
-				char strand = mStrands.get(i);
+    if (context == DrawingContext.SCREEN) {
+      BufferedImage bis = new BufferedImage(mWidth, mReadHeight, BufferedImage.TYPE_INT_RGB);
 
-				if ((!mStrandVisible && strand == '+') || (!mNegStrandVisible && strand == '-')) {
-					continue;
-				}
+      Graphics2D g2Temp = bis.createGraphics();
 
-				x1 = axes.toPlotX(start);
-				x2 = axes.toPlotX(start + mReadLength);
+      g2Temp.setColor(mFillColor);
+      g2Temp.fillRect(0, 0, mWidth, mReadHeight);
+      g2Temp.setColor(mLineColor);
+      g2Temp.drawRect(0, 0, mWidth, mReadHeight - 1);
+      g2Temp.dispose();
 
-				if (mGap == -1) {
-					mGap = Math.max(1, x2 - x1);
-				}
+      BufferedImage bia = new BufferedImage(mWidth, mReadHeight, BufferedImage.TYPE_INT_RGB);
 
-				int row = -1;
+      g2Temp = bia.createGraphics();
 
-				for (int r : mStartMap.keySet()) {
-					boolean fit = true;
+      g2Temp.setColor(mAntiStrandFillColor);
+      g2Temp.fillRect(0, 0, mWidth, mReadHeight);
+      g2Temp.setColor(mNegStrandLineColor);
+      g2Temp.drawRect(0, 0, mWidth, mReadHeight - 1);
+      g2Temp.dispose();
 
-					for (int s : mStartMap.get(r)) {
-						int e = s + mGap;
+      for (int row : mStarts.keySet()) {
+        List<Integer> starts = (List<Integer>) mStarts.get(row);
+        List<Strand> strands = (List<Strand>) mStrands.get(row);
 
-						if ((x1 >= s && x1 < e) || (x2 >= s && x2 < e)) {
-							fit = false;
-							break;
-						}
-					}
+        int ry = y + row * mBlockHeight;
 
-					if (fit) {
-						row = r;
-						break;
-					}
-				}
+        for (int i = 0; i < starts.size(); ++i) {
+          int s = starts.get(i);
+          Strand strand = strands.get(i);
 
-				if (row == -1) {
-					row = mStartMap.size();
-				}
+          x1 = s;
 
-				// debug
-				//row = 0;
+          if (strand == Strand.SENSE) {
+            g2.drawImage(bis, x1, ry, null);
+          } else {
+            g2.drawImage(bia, x1, ry, null);
+          }
+        }
+      }
+    } else {
+      for (int row : mStarts.keySet()) {
+        List<Integer> starts = (List<Integer>) mStarts.get(row);
+        List<Strand> strands = (List<Strand>) mStrands.get(row);
 
-				mStartMap.get(row).add(x1);
-				mStrandMap.get(row).add(strand);
-			}
-		}
+        int ry = y + row * mBlockHeight;
 
-		mUpdate = false;
-		mCurrentId = id;
-		 */
+        for (int i = 0; i < starts.size(); ++i) {
+          int s = starts.get(i);
+          Strand strand = strands.get(i);
 
-		//System.err.println("coord " + axes.getXAxis().getMax() + " " + axes.getY1Axis().getMax() + " " + axes.getY1Axis().getMin());
+          x1 = s;
 
-		if (context == DrawingContext.SCREEN) {
-			BufferedImage bis = new
-					BufferedImage(mWidth, mReadHeight, BufferedImage.TYPE_INT_RGB);
+          if (strand == Strand.SENSE) {
+            g2.setColor(mFillColor);
+          } else {
+            g2.setColor(mAntiStrandFillColor);
+          }
 
-			Graphics2D g2Temp = bis.createGraphics();
-			
-			g2Temp.setColor(mFillColor);
-			g2Temp.fillRect(0, 0, mWidth, mReadHeight);
-			g2Temp.setColor(mLineColor);
-			g2Temp.drawRect(0, 0, mWidth, mReadHeight - 1);
-			g2Temp.dispose();
-			
-			BufferedImage bia = new
-					BufferedImage(mWidth, mReadHeight, BufferedImage.TYPE_INT_RGB);
+          // System.err.println(x1 + " " + y + row * BLOCK + " " + mGap + " " +
+          // mFillColor);
 
-			g2Temp = bia.createGraphics();
-			
-			g2Temp.setColor(mAntiStrandFillColor);
-			g2Temp.fillRect(0, 0, mWidth, mReadHeight);
-			g2Temp.setColor(mNegStrandLineColor);
-			g2Temp.drawRect(0, 0, mWidth, mReadHeight - 1);
-			g2Temp.dispose();
-			
-			for (int row : mStarts.keySet()) {
-				List<Integer> starts = (List<Integer>)mStarts.get(row);
-				List<Strand> strands = (List<Strand>)mStrands.get(row);
+          g2.fillRect(x1, ry, mWidth, mReadHeight);
 
-				int ry = y + row * mBlockHeight;
+          if (strand == Strand.SENSE) {
+            g2.setColor(mLineColor);
+          } else {
+            g2.setColor(mNegStrandLineColor);
+          }
 
-				for (int i = 0; i < starts.size(); ++i) {
-					int s = starts.get(i);
-					Strand strand = strands.get(i);
+          // System.err.println(x1 + " " + y + row * BLOCK + " " + mGap + " " + mColor);
 
-					x1 = s;
-
-					if (strand == Strand.SENSE) {
-						g2.drawImage(bis, x1, ry, null);
-					} else {
-						g2.drawImage(bia, x1, ry, null);
-					}
-				}
-			}
-		} else {
-			for (int row : mStarts.keySet()) {
-				List<Integer> starts = (List<Integer>)mStarts.get(row);
-				List<Strand> strands = (List<Strand>)mStrands.get(row);
-
-				int ry = y + row * mBlockHeight;
-
-				for (int i = 0; i < starts.size(); ++i) {
-					int s = starts.get(i);
-					Strand strand = strands.get(i);
-
-					x1 = s;
-					
-					if (strand == Strand.SENSE) {
-						g2.setColor(mFillColor);
-					} else {
-						g2.setColor(mAntiStrandFillColor);
-					}
-
-					//System.err.println(x1 + " " + y + row * BLOCK + " " + mGap + " " + mFillColor);
-
-					g2.fillRect(x1, ry, mWidth, mReadHeight);
-
-					if (strand == Strand.SENSE) {
-						g2.setColor(mLineColor);
-					} else {
-						g2.setColor(mNegStrandLineColor);
-					}
-
-					//System.err.println(x1 + " " + y + row * BLOCK + " " + mGap + " " + mColor);
-
-					g2.drawRect(x1, ry, mWidth, mReadHeight - 1);
-				}
-			}
-		}
-	}
+          g2.drawRect(x1, ry, mWidth, mReadHeight - 1);
+        }
+      }
+    }
+  }
 }

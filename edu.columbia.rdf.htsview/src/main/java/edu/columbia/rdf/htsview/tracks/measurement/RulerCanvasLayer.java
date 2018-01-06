@@ -32,87 +32,84 @@ import org.jebtk.modern.graphics.DrawingContext;
  * The Class RulerCanvasLayer.
  */
 public class RulerCanvasLayer extends AxesClippedLayer {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
-	/** The m gap. */
-	private int mGap;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
-	/** The m start. */
-	private int mStart;
+  /** The m gap. */
+  private int mGap;
 
-	
-	@Override
-	public String getType() {
-		return "Ruler Layer";
-	}
+  /** The m start. */
+  private int mStart;
 
-	/**
-	 * Update.
-	 *
-	 * @param displayRegion the display region
-	 */
-	public void update(GenomicRegion displayRegion) {
-		mGap = (int)Math.pow(10, (int)Mathematics.log10(displayRegion.getLength()));
+  @Override
+  public String getType() {
+    return "Ruler Layer";
+  }
 
-		mStart = (int)(displayRegion.getStart() / (double)mGap) * mGap;
-	}
+  /**
+   * Update.
+   *
+   * @param displayRegion
+   *          the display region
+   */
+  public void update(GenomicRegion displayRegion) {
+    mGap = (int) Math.pow(10, (int) Mathematics.log10(displayRegion.getLength()));
 
-	/* (non-Javadoc)
-	 * @see org.graphplot.figure.AxesClippedLayer#plotLayer(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
-	 */
-	@Override
-	public void plotLayer(Graphics2D g2,
-			DrawingContext context,
-			Figure figure, 
-			SubFigure subFigure, 
-			Axes axes) {
-		// Use the graph properties and subplot layout to
-		// create the graph space mapper
+    mStart = (int) (displayRegion.getStart() / (double) mGap) * mGap;
+  }
 
-		int x1;
-		int y = 0;
-		int h = axes.getInternalSize().getH();
-		int h4 = h / 4;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.graphplot.figure.AxesClippedLayer#plotLayer(java.awt.Graphics2D,
+   * org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure,
+   * org.graphplot.figure.Axes)
+   */
+  @Override
+  public void plotLayer(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
+    // Use the graph properties and subplot layout to
+    // create the graph space mapper
 
-		g2.setColor(Color.BLACK);
+    int x1;
+    int y = 0;
+    int h = axes.getInternalSize().getH();
+    int h4 = h / 4;
 
-		g2.drawLine(0, 
-				y, 
-				axes.getInternalSize().getW(), 
-				y);
+    g2.setColor(Color.BLACK);
 
-		int s = mStart;
+    g2.drawLine(0, y, axes.getInternalSize().getW(), y);
 
-		boolean onScreen = false;
+    int s = mStart;
 
-		int ty = y + h - g2.getFontMetrics().getDescent();
+    boolean onScreen = false;
 
-		while(true) {
-			if (onScreen && !axes.getX1Axis().withinBounds(s)) {
-				break;
-			}
+    int ty = y + h - g2.getFontMetrics().getDescent();
 
-			if (!onScreen && axes.getX1Axis().withinBounds(s)) {
-				onScreen = true;
-			}
+    while (true) {
+      if (onScreen && !axes.getX1Axis().withinBounds(s)) {
+        break;
+      }
 
-			if (onScreen) {
-				x1 = axes.toPlotX1(s);
+      if (!onScreen && axes.getX1Axis().withinBounds(s)) {
+        onScreen = true;
+      }
 
-				g2.drawLine(x1, y, x1, y + h4);
+      if (onScreen) {
+        x1 = axes.toPlotX1(s);
 
-				String label = Formatter.number().format(s);
+        g2.drawLine(x1, y, x1, y + h4);
 
-				int w = g2.getFontMetrics().stringWidth(label);
+        String label = Formatter.number().format(s);
 
-				x1 -= w / 2;
+        int w = g2.getFontMetrics().stringWidth(label);
 
-				g2.drawString(label, x1, ty);
-			}
+        x1 -= w / 2;
 
-			s += mGap;
-		}
-	}
+        g2.drawString(label, x1, ty);
+      }
+
+      s += mGap;
+    }
+  }
 }

@@ -38,7 +38,6 @@ import org.jebtk.core.Mathematics;
 
 import edu.columbia.rdf.htsview.ngs.ReadCountsFile;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Decodes counts using a multi resolution file.
@@ -47,90 +46,95 @@ import edu.columbia.rdf.htsview.ngs.ReadCountsFile;
  */
 public class ReadCountsFileABI extends ReadCountsFile {
 
-	/** The m trace. */
-	private ABITrace mTrace;
-	
-	/** The m base. */
-	private char mBase;
+  /** The m trace. */
+  private ABITrace mTrace;
 
-	/**
-	 * Directory containing genome files which must be of the form
-	 * chr.n.txt. Each file must contain exactly one line consisting
-	 * of the entire chromosome.
-	 *
-	 * @param file the file
-	 * @param base the base
-	 */
-	public ReadCountsFileABI(Path file, char base) {
-		mBase = base;
-		
-		try {
-			mTrace = ABITrace.parse(file);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+  /** The m base. */
+  private char mBase;
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.lib.bioinformatics.reads.CountAssembly#getCounts(edu.columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
-	 */
-	@Override
-	public List<Integer> getCounts(GenomicRegion region, int window) throws IOException {
-		return getCounts(region.getChr(),
-				region.getStart(),
-				region.getEnd(),
-				window);
-	}
+  /**
+   * Directory containing genome files which must be of the form chr.n.txt. Each
+   * file must contain exactly one line consisting of the entire chromosome.
+   *
+   * @param file
+   *          the file
+   * @param base
+   *          the base
+   */
+  public ReadCountsFileABI(Path file, char base) {
+    mBase = base;
 
-	/**
-	 * Gets the counts.
-	 *
-	 * @param chr the chr
-	 * @param start the start
-	 * @param end the end
-	 * @param window the window
-	 * @return the counts
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<Integer> getCounts(Chromosome chr,
-			int start,
-			int end,
-			int window) throws IOException {
-		List<Integer> counts = new ArrayList<Integer>(end - start + 1);
-		
-		for (int i = start; i <= end; ++i) {
-			counts.add((int)mTrace.getColor(mBase, i));
-		}
-		
-		return counts;
-	}
+    try {
+      mTrace = ABITrace.parse(file);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.lib.bioinformatics.reads.CountAssembly#getStarts(edu.columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
-	 */
-	@Override
-	public List<Integer> getStarts(GenomicRegion region, int window) throws IOException {
-		return getStarts(region.getChr(),
-				region.getStart(),
-				region.getEnd(),
-				window);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.lib.bioinformatics.reads.CountAssembly#getCounts(edu.
+   * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
+   */
+  @Override
+  public List<Integer> getCounts(GenomicRegion region, int window) throws IOException {
+    return getCounts(region.getChr(), region.getStart(), region.getEnd(), window);
+  }
 
-	/**
-	 * Gets the starts.
-	 *
-	 * @param chr the chr
-	 * @param start the start
-	 * @param end the end
-	 * @param window the window
-	 * @return the starts
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<Integer> getStarts(Chromosome chr,
-			int start,
-			int end,
-			int window) throws IOException {
+  /**
+   * Gets the counts.
+   *
+   * @param chr
+   *          the chr
+   * @param start
+   *          the start
+   * @param end
+   *          the end
+   * @param window
+   *          the window
+   * @return the counts
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<Integer> getCounts(Chromosome chr, int start, int end, int window) throws IOException {
+    List<Integer> counts = new ArrayList<Integer>(end - start + 1);
 
-		return Mathematics.sequence(start, end);
-	}
+    for (int i = start; i <= end; ++i) {
+      counts.add((int) mTrace.getColor(mBase, i));
+    }
+
+    return counts;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.lib.bioinformatics.reads.CountAssembly#getStarts(edu.
+   * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
+   */
+  @Override
+  public List<Integer> getStarts(GenomicRegion region, int window) throws IOException {
+    return getStarts(region.getChr(), region.getStart(), region.getEnd(), window);
+  }
+
+  /**
+   * Gets the starts.
+   *
+   * @param chr
+   *          the chr
+   * @param start
+   *          the start
+   * @param end
+   *          the end
+   * @param window
+   *          the window
+   * @return the starts
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<Integer> getStarts(Chromosome chr, int start, int end, int window) throws IOException {
+
+    return Mathematics.sequence(start, end);
+  }
 }

@@ -32,32 +32,35 @@ import java.io.FilenameFilter;
 
 import org.jebtk.modern.io.GuiFileExtFilter;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The class BedGuiFileFilter.
  */
 public class BctGuiFileFilter extends GuiFileExtFilter implements FilenameFilter {
-	
-	/**
-	 * Instantiates a new bed gui file filter.
-	 */
-	public BctGuiFileFilter() {
-		super("bct.json");
-	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.filechooser.FileFilter#getDescription()
-	 */
-	public final String getDescription() {
-		return "BCT (*.bct.json)";
-	}
+  /**
+   * Instantiates a new bed gui file filter.
+   */
+  public BctGuiFileFilter() {
+    super("bct.json");
+  }
 
-	/* (non-Javadoc)
-	 * @see java.io.FilenameFilter#accept(java.io.File, java.lang.String)
-	 */
-	@Override
-	public boolean accept(File arg0, String name) {
-		return name.endsWith(".bct.json");
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see javax.swing.filechooser.FileFilter#getDescription()
+   */
+  public final String getDescription() {
+    return "BCT (*.bct.json)";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.io.FilenameFilter#accept(java.io.File, java.lang.String)
+   */
+  @Override
+  public boolean accept(File arg0, String name) {
+    return name.endsWith(".bct.json");
+  }
 }

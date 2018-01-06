@@ -31,81 +31,78 @@ import org.jebtk.modern.graphics.DrawingContext;
  * The Class RangeCanvasLayer.
  */
 public class RangeCanvasLayer extends AxesLayer {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The m start. */
-	private int mStart;
 
-	/** The m end. */
-	private int mEnd;
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
+  /** The m start. */
+  private int mStart;
 
-	@Override
-	public String getType() {
-		return "Range Layer";
-	}
-	
-	/**
-	 * Update.
-	 *
-	 * @param displayRegion the display region
-	 */
-	public void update(GenomicRegion displayRegion) {
-		mStart = displayRegion.getStart();
-		mEnd = displayRegion.getEnd();
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.graphplot.figure.AxesLayer#plot(java.awt.Graphics2D, org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure, org.graphplot.figure.Axes)
-	 */
-	@Override
-	public void drawPlot(Graphics2D g2,
-			DrawingContext context,
-			Figure figure, 
-			SubFigure subFigure, 
-			Axes axes) {
-		// Use the graph properties and subplot layout to
-		// create the graph space mapper
+  /** The m end. */
+  private int mEnd;
 
-		int x1;
-		int y = 0;
-		int h = axes.getInternalSize().getH();
-		int h4 = h / 4;
+  @Override
+  public String getType() {
+    return "Range Layer";
+  }
 
-		g2.setColor(Color.BLACK);
-		
-		g2.drawLine(0, 
-				y, 
-				axes.getInternalSize().getW(), 
-				y);
+  /**
+   * Update.
+   *
+   * @param displayRegion
+   *          the display region
+   */
+  public void update(GenomicRegion displayRegion) {
+    mStart = displayRegion.getStart();
+    mEnd = displayRegion.getEnd();
+  }
 
-		int ty = y + h - g2.getFontMetrics().getDescent();
-		
-		x1 = axes.toPlotX1(mStart);
-			
-		g2.drawLine(x1, y, x1, y + h4);
-			
-		String label = Formatter.number().format(mStart);
-			
-		int w = g2.getFontMetrics().stringWidth(label);
-			
-		x1 -= w / 2;
-			
-		g2.drawString(label, x1, ty);
-		
-		x1 = axes.toPlotX1(mEnd);
-		
-		g2.drawLine(x1, y, x1, y + h4);
-			
-		label = Formatter.number().format(mEnd);
-			
-		w = g2.getFontMetrics().stringWidth(label);
-			
-		x1 -= w / 2;
-			
-		g2.drawString(label, x1, ty);
-		
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.graphplot.figure.AxesLayer#plot(java.awt.Graphics2D,
+   * org.abh.common.ui.graphics.DrawingContext, org.graphplot.figure.SubFigure,
+   * org.graphplot.figure.Axes)
+   */
+  @Override
+  public void drawPlot(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
+    // Use the graph properties and subplot layout to
+    // create the graph space mapper
+
+    int x1;
+    int y = 0;
+    int h = axes.getInternalSize().getH();
+    int h4 = h / 4;
+
+    g2.setColor(Color.BLACK);
+
+    g2.drawLine(0, y, axes.getInternalSize().getW(), y);
+
+    int ty = y + h - g2.getFontMetrics().getDescent();
+
+    x1 = axes.toPlotX1(mStart);
+
+    g2.drawLine(x1, y, x1, y + h4);
+
+    String label = Formatter.number().format(mStart);
+
+    int w = g2.getFontMetrics().stringWidth(label);
+
+    x1 -= w / 2;
+
+    g2.drawString(label, x1, ty);
+
+    x1 = axes.toPlotX1(mEnd);
+
+    g2.drawLine(x1, y, x1, y + h4);
+
+    label = Formatter.number().format(mEnd);
+
+    w = g2.getFontMetrics().stringWidth(label);
+
+    x1 -= w / 2;
+
+    g2.drawString(label, x1, ty);
+
+  }
 }

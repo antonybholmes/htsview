@@ -44,7 +44,6 @@ import htsjdk.samtools.SAMRecordIterator;
 import htsjdk.samtools.SamReader;
 import htsjdk.samtools.SamReaderFactory;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * Decodes counts using a multi resolution file.
@@ -53,258 +52,261 @@ import htsjdk.samtools.SamReaderFactory;
  */
 public class ReadCountsFileBam extends ReadCountsFile {
 
-	/** The m file. */
-	private Path mFile;
+  /** The m file. */
+  private Path mFile;
 
-	/** The m reads. */
-	private int mReads = -1;
+  /** The m reads. */
+  private int mReads = -1;
 
-	/** The m read length. */
-	private int mReadLength = -1;
+  /** The m read length. */
+  private int mReadLength = -1;
 
-	/**
-	 * Directory containing genome files which must be of the form
-	 * chr.n.txt. Each file must contain exactly one line consisting
-	 * of the entire chromosome.
-	 *
-	 * @param file the file
-	 */
-	public ReadCountsFileBam(Path file) {
-		mFile = file;
+  /**
+   * Directory containing genome files which must be of the form chr.n.txt. Each
+   * file must contain exactly one line consisting of the entire chromosome.
+   *
+   * @param file
+   *          the file
+   */
+  public ReadCountsFileBam(Path file) {
+    mFile = file;
 
-		try {
-			mReads = SamUtils.getTotalReadsFromIndexedBam(file);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    try {
+      mReads = SamUtils.getTotalReadsFromIndexedBam(file);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
-		try {
-			mReadLength = SamUtils.getReadLengthFromBam(file);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    try {
+      mReadLength = SamUtils.getReadLengthFromBam(file);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.lib.bioinformatics.reads.CountAssembly#getCounts(edu.columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
-	 */
-	@Override
-	public List<Integer> getCounts(GenomicRegion region, int window) throws IOException {
-		return getCounts(region.getChr(),
-				region.getStart(),
-				region.getEnd(),
-				window);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.lib.bioinformatics.reads.CountAssembly#getCounts(edu.
+   * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
+   */
+  @Override
+  public List<Integer> getCounts(GenomicRegion region, int window) throws IOException {
+    return getCounts(region.getChr(), region.getStart(), region.getEnd(), window);
+  }
 
-	/**
-	 * Gets the counts.
-	 *
-	 * @param chr the chr
-	 * @param start the start
-	 * @param end the end
-	 * @param window the window
-	 * @return the counts
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<Integer> getCounts(Chromosome chr,
-			int start,
-			int end,
-			int window) throws IOException {
-		return binCounts(getStarts(chr, start, end, window), start, end, window);
-	}
+  /**
+   * Gets the counts.
+   *
+   * @param chr
+   *          the chr
+   * @param start
+   *          the start
+   * @param end
+   *          the end
+   * @param window
+   *          the window
+   * @return the counts
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<Integer> getCounts(Chromosome chr, int start, int end, int window) throws IOException {
+    return binCounts(getStarts(chr, start, end, window), start, end, window);
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.lib.bioinformatics.reads.CountAssembly#getStarts(edu.columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
-	 */
-	@Override
-	public List<Integer> getStarts(GenomicRegion region, int window) throws IOException {
-		return getStarts(region.getChr(),
-				region.getStart(),
-				region.getEnd(),
-				window);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.lib.bioinformatics.reads.CountAssembly#getStarts(edu.
+   * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
+   */
+  @Override
+  public List<Integer> getStarts(GenomicRegion region, int window) throws IOException {
+    return getStarts(region.getChr(), region.getStart(), region.getEnd(), window);
+  }
 
-	/**
-	 * Gets the starts.
-	 *
-	 * @param chr the chr
-	 * @param start the start
-	 * @param end the end
-	 * @param window the window
-	 * @return the starts
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<Integer> getStarts(Chromosome chr,
-			int start,
-			int end,
-			int window) throws IOException {
+  /**
+   * Gets the starts.
+   *
+   * @param chr
+   *          the chr
+   * @param start
+   *          the start
+   * @param end
+   *          the end
+   * @param window
+   *          the window
+   * @return the starts
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<Integer> getStarts(Chromosome chr, int start, int end, int window) throws IOException {
 
-		List<Integer> starts = new ArrayList<Integer>();
+    List<Integer> starts = new ArrayList<Integer>();
 
-		SAMRecordIterator iter = null;
+    SAMRecordIterator iter = null;
 
-		SamReader inputSam = 
-				SamReaderFactory.makeDefault().open(mFile.toFile());
+    SamReader inputSam = SamReaderFactory.makeDefault().open(mFile.toFile());
 
-		try {
-			iter = inputSam.queryContained(chr.toString(), start, end);
-		} catch (Exception e1) {
-			//e1.printStackTrace();
+    try {
+      iter = inputSam.queryContained(chr.toString(), start, end);
+    } catch (Exception e1) {
+      // e1.printStackTrace();
 
-			inputSam.close();
+      inputSam.close();
 
-			inputSam = SamReaderFactory.makeDefault().open(mFile.toFile());
+      inputSam = SamReaderFactory.makeDefault().open(mFile.toFile());
 
-			try {
-				// In cases where chromosome are called 1, 2, 3 etc rather than
-				// chr1, chr2, chr3 etc.
-				iter = inputSam.queryContained(chr.toString().substring(3), start, end);
-			} catch (Exception e2) {
-				inputSam.close();
+      try {
+        // In cases where chromosome are called 1, 2, 3 etc rather than
+        // chr1, chr2, chr3 etc.
+        iter = inputSam.queryContained(chr.toString().substring(3), start, end);
+      } catch (Exception e2) {
+        inputSam.close();
 
-				return Collections.emptyList();
-			}
-		}
+        return Collections.emptyList();
+      }
+    }
 
-		try {
-			SAMRecord record;
+    try {
+      SAMRecord record;
 
-			while(iter.hasNext()) {
-				record = iter.next();
+      while (iter.hasNext()) {
+        record = iter.next();
 
-				starts.add(record.getStart());
-			}
-		} finally {
-			inputSam.close();
-		}
+        starts.add(record.getStart());
+      }
+    } finally {
+      inputSam.close();
+    }
 
-		return starts;
-	}
+    return starts;
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.ngs.CountAssembly#getStrands(org.jebtk.bioinformatics.genome.GenomicRegion, int)
-	 */
-	@Override
-	public List<Strand> getStrands(GenomicRegion region, int window) throws IOException {
-		return getStrands(region.getChr(), 
-				region.getStart(), 
-				region.getEnd(), 
-				window);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.ngs.CountAssembly#getStrands(org.jebtk.
+   * bioinformatics.genome.GenomicRegion, int)
+   */
+  @Override
+  public List<Strand> getStrands(GenomicRegion region, int window) throws IOException {
+    return getStrands(region.getChr(), region.getStart(), region.getEnd(), window);
+  }
 
-	/**
-	 * Gets the strands.
-	 *
-	 * @param chr the chr
-	 * @param start the start
-	 * @param end the end
-	 * @param window the window
-	 * @return the strands
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public List<Strand> getStrands(Chromosome chr,
-			int start,
-			int end,
-			int window) throws IOException {
-		SAMRecordIterator iter = null;
+  /**
+   * Gets the strands.
+   *
+   * @param chr
+   *          the chr
+   * @param start
+   *          the start
+   * @param end
+   *          the end
+   * @param window
+   *          the window
+   * @return the strands
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  public List<Strand> getStrands(Chromosome chr, int start, int end, int window) throws IOException {
+    SAMRecordIterator iter = null;
 
-		SamReader inputSam = 
-				SamReaderFactory.makeDefault().open(mFile.toFile());
+    SamReader inputSam = SamReaderFactory.makeDefault().open(mFile.toFile());
 
-		try {
-			iter = inputSam.queryContained(chr.toString(), start, end);
-		} catch (Exception e1) {
-			//e1.printStackTrace();
+    try {
+      iter = inputSam.queryContained(chr.toString(), start, end);
+    } catch (Exception e1) {
+      // e1.printStackTrace();
 
-			inputSam.close();
+      inputSam.close();
 
-			inputSam = SamReaderFactory.makeDefault().open(mFile.toFile());
+      inputSam = SamReaderFactory.makeDefault().open(mFile.toFile());
 
-			try {
-				// In cases where chromosome are called 1, 2, 3 etc rather than
-				// chr1, chr2, chr3 etc.
-				iter = inputSam.queryContained(chr.toString().substring(3), start, end);
-			} catch (Exception e2) {
-				inputSam.close();
+      try {
+        // In cases where chromosome are called 1, 2, 3 etc rather than
+        // chr1, chr2, chr3 etc.
+        iter = inputSam.queryContained(chr.toString().substring(3), start, end);
+      } catch (Exception e2) {
+        inputSam.close();
 
-				return Collections.emptyList();
-			}
-		}
+        return Collections.emptyList();
+      }
+    }
 
-		SAMRecord record;
+    SAMRecord record;
 
-		List<Strand> strands = new ArrayList<Strand>();
+    List<Strand> strands = new ArrayList<Strand>();
 
-		try {
-			if (iter != null) {
-				while(iter.hasNext()) {
-					record = iter.next();
+    try {
+      if (iter != null) {
+        while (iter.hasNext()) {
+          record = iter.next();
 
-					strands.add(SamUtils.strand(record.getFlags()));
-				}
-			}
-		} finally {
-			inputSam.close();
-		}
+          strands.add(SamUtils.strand(record.getFlags()));
+        }
+      }
+    } finally {
+      inputSam.close();
+    }
 
-		return strands;
-	}
+    return strands;
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.ngs.CountAssembly#getReadCount()
-	 */
-	@Override
-	public int getReadCount() {
-		return mReads;
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.ngs.CountAssembly#getReadCount()
+   */
+  @Override
+  public int getReadCount() {
+    return mReads;
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.htsview.ngs.CountAssembly#getReadLength()
-	 */
-	@Override
-	public int getReadLength() {
-		return mReadLength;
-	}
-	
-	private static SAMRecordIterator openSam(Path file,
-			Chromosome chr,
-			int start,
-			int end,
-			int window) {
-		SamReader inputSam = 
-				SamReaderFactory.makeDefault().open(file.toFile());
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.ngs.CountAssembly#getReadLength()
+   */
+  @Override
+  public int getReadLength() {
+    return mReadLength;
+  }
 
-		SAMRecordIterator iter = null;
-		
-		try {
-			iter = inputSam.queryContained(chr.toString(), start, end);
-		} catch (Exception e1) {
-			//e1.printStackTrace();
+  private static SAMRecordIterator openSam(Path file, Chromosome chr, int start, int end, int window) {
+    SamReader inputSam = SamReaderFactory.makeDefault().open(file.toFile());
 
-			try {
-				inputSam.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+    SAMRecordIterator iter = null;
 
-			iter = null;
-			inputSam = SamReaderFactory.makeDefault().open(file.toFile());
+    try {
+      iter = inputSam.queryContained(chr.toString(), start, end);
+    } catch (Exception e1) {
+      // e1.printStackTrace();
 
-			try {
-				// In cases where chromosome are called 1, 2, 3 etc rather than
-				// chr1, chr2, chr3 etc.
-				iter = inputSam.queryContained(chr.toString().substring(3), start, end);
-			} catch (Exception e2) {
-				try {
-					inputSam.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+      try {
+        inputSam.close();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
 
-				iter = null;
-			}
-		}
-		
-		return iter;
-	}
+      iter = null;
+      inputSam = SamReaderFactory.makeDefault().open(file.toFile());
+
+      try {
+        // In cases where chromosome are called 1, 2, 3 etc rather than
+        // chr1, chr2, chr3 etc.
+        iter = inputSam.queryContained(chr.toString().substring(3), start, end);
+      } catch (Exception e2) {
+        try {
+          inputSam.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+
+        iter = null;
+      }
+    }
+
+    return iter;
+  }
 }

@@ -27,13 +27,15 @@ import edu.columbia.rdf.htsview.tracks.SampleAssemblyFile;
  */
 public class SampleAssemblyABI extends SampleAssemblyFile {
 
-	/**
-	 * Instantiates a new sample assembly ABI.
-	 *
-	 * @param file the file
-	 * @param base the base
-	 */
-	public SampleAssemblyABI(Path file, char base) {
-		super(new ReadCountsFileABI(file, base));
-	}
+  /**
+   * Instantiates a new sample assembly ABI.
+   *
+   * @param file
+   *          the file
+   * @param base
+   *          the base
+   */
+  public SampleAssemblyABI(Path file, char base) {
+    super(new ReadCountsFileABI(file, base));
+  }
 }

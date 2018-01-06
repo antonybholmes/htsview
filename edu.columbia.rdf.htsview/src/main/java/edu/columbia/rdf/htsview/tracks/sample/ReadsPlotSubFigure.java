@@ -38,200 +38,178 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  */
 public class ReadsPlotSubFigure extends TrackSubFigure {
 
-	/**
-	 * The constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+  /**
+   * The constant serialVersionUID.
+   */
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * The member layer.
-	 */
-	private ReadsPlotLayer mLayer;
+  /**
+   * The member layer.
+   */
+  private ReadsPlotLayer mLayer;
 
-	/** The m start map. */
-	private ListMultiMap<Integer, Integer> mStartMap = 
-			ArrayListMultiMap.create();
+  /** The m start map. */
+  private ListMultiMap<Integer, Integer> mStartMap = ArrayListMultiMap.create();
 
-	/** The m strand map. */
-	private ListMultiMap<Integer, Strand> mStrandMap = 
-			ArrayListMultiMap.create();
+  /** The m strand map. */
+  private ListMultiMap<Integer, Strand> mStrandMap = ArrayListMultiMap.create();
 
-	/** The m read length. */
-	private int mReadLength;
+  /** The m read length. */
+  private int mReadLength;
 
+  /**
+   * Instantiates a new reads plot sub figure.
+   *
+   * @param name
+   *          the name
+   * @param readLength
+   *          the read length
+   * @param titlePosition
+   *          the title position
+   */
+  public ReadsPlotSubFigure(String name, int readLength, TitleProperties titlePosition) {
+    mReadLength = readLength;
 
-	/**
-	 * Instantiates a new reads plot sub figure.
-	 *
-	 * @param name the name
-	 * @param readLength the read length
-	 * @param titlePosition the title position
-	 */
-	public ReadsPlotSubFigure(String name,
-			int readLength,
-			TitleProperties titlePosition) {
-		mReadLength = readLength;
-		
-		mLayer = new ReadsPlotLayer(readLength);
+    mLayer = new ReadsPlotLayer(readLength);
 
-		// set the graph limits
-		currentAxes().getX1Axis().getTitle().setText(null);
-		currentAxes().getY1Axis().setLimits(0, 1);
-		currentAxes().addChild(mLayer);
+    // set the graph limits
+    currentAxes().getX1Axis().getTitle().setText(null);
+    currentAxes().getY1Axis().setLimits(0, 1);
+    currentAxes().addChild(mLayer);
 
-		Track.setTitle(name, titlePosition, currentAxes());
-	}
+    Track.setTitle(name, titlePosition, currentAxes());
+  }
 
-	/**
-	 * Creates the.
-	 *
-	 * @param name the name
-	 * @param readLength the read length
-	 * @param titlePosition the title position
-	 * @return the reads plot sub figure
-	 */
-	public static ReadsPlotSubFigure create(String name, 
-			int readLength,
-			TitleProperties titlePosition) {
+  /**
+   * Creates the.
+   *
+   * @param name
+   *          the name
+   * @param readLength
+   *          the read length
+   * @param titlePosition
+   *          the title position
+   * @return the reads plot sub figure
+   */
+  public static ReadsPlotSubFigure create(String name, int readLength, TitleProperties titlePosition) {
 
-		// Now lets create a plot
+    // Now lets create a plot
 
-		ReadsPlotSubFigure canvas = 
-				new ReadsPlotSubFigure(name, readLength, titlePosition);
+    ReadsPlotSubFigure canvas = new ReadsPlotSubFigure(name, readLength, titlePosition);
 
-		return canvas;
-	}
+    return canvas;
+  }
 
-	/* (non-Javadoc)
-	 * @see edu.columbia.rdf.apps.edb.reads.tracks.TrackFigure#update(edu.columbia.rdf.lib.bioinformatics.genome.GenomicRegion, int, java.awt.Color, java.awt.Color)
-	 */
-	@Override
-	public void update(GenomicRegion displayRegion, 
-			int resolution,
-			double yMax,
-			int width,
-			int height,
-			int margin,
-			Color lineColor,
-			Color fillColor,
-			PlotStyle style) {
-		
-		//getCurrentAxes().setInternalPlotWidth(width);
-		
-		//System.err.println("regions " + bed.getName() + " " + displayRegion.getChr());
-		//getCurrentAxes().getXAxis().setLimits(displayRegion.getStart(), displayRegion.getEnd());
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.apps.edb.reads.tracks.TrackFigure#update(edu.columbia.rdf.
+   * lib.bioinformatics.genome.GenomicRegion, int, java.awt.Color, java.awt.Color)
+   */
+  @Override
+  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
+      Color lineColor, Color fillColor, PlotStyle style) {
 
-		super.update(displayRegion, 
-				resolution, 
-				yMax, 
-				width, 
-				height, 
-				margin, 
-				lineColor, 
-				fillColor,
-				style);
+    // getCurrentAxes().setInternalPlotWidth(width);
 
+    // System.err.println("regions " + bed.getName() + " " +
+    // displayRegion.getChr());
+    // getCurrentAxes().getXAxis().setLimits(displayRegion.getStart(),
+    // displayRegion.getEnd());
 
-		Axes.disableAllFeatures(currentAxes());
+    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
 
-		// Need to make the title visible
-		currentAxes().getTitle().getFontStyle().setVisible(true);
-	}
+    Axes.disableAllFeatures(currentAxes());
 
-	/**
-	 * Sets the starts.
-	 *
-	 * @param starts the new starts
-	 * @param strands the strands
-	 * @param strandVisible the strand visible
-	 * @param lineColor the line color
-	 * @param fillColor the fill color
-	 * @param negStrandVisible the neg strand visible
-	 * @param negStrandLineColor the neg strand line color
-	 * @param negStrandFillColor the neg strand fill color
-	 * @param readHeight the read height
-	 * @param gap the gap
-	 */
-	public void setStarts(List<Integer> starts,
-			List<Strand> strands,
-			boolean strandVisible, 
-			Color lineColor, 
-			Color fillColor, 
-			boolean negStrandVisible, 
-			Color negStrandLineColor, 
-			Color negStrandFillColor, 
-			int readHeight,
-			int gap) {
+    // Need to make the title visible
+    currentAxes().getTitle().getFontStyle().setVisible(true);
+  }
 
-		
-		
-		mStartMap.clear();
-		mStrandMap.clear();
+  /**
+   * Sets the starts.
+   *
+   * @param starts
+   *          the new starts
+   * @param strands
+   *          the strands
+   * @param strandVisible
+   *          the strand visible
+   * @param lineColor
+   *          the line color
+   * @param fillColor
+   *          the fill color
+   * @param negStrandVisible
+   *          the neg strand visible
+   * @param negStrandLineColor
+   *          the neg strand line color
+   * @param negStrandFillColor
+   *          the neg strand fill color
+   * @param readHeight
+   *          the read height
+   * @param gap
+   *          the gap
+   */
+  public void setStarts(List<Integer> starts, List<Strand> strands, boolean strandVisible, Color lineColor,
+      Color fillColor, boolean negStrandVisible, Color negStrandLineColor, Color negStrandFillColor, int readHeight,
+      int gap) {
 
-		int w = -1;
-		
-		for (int i = 0; i < starts.size(); ++i) {
-			int start = starts.get(i);
-			Strand strand = strands.get(i);
+    mStartMap.clear();
+    mStrandMap.clear();
 
-			if ((!strandVisible && strand == Strand.SENSE) || 
-					(!negStrandVisible && strand == Strand.ANTISENSE)) {
-				continue;
-			}
+    int w = -1;
 
-			int x1 = currentAxes().toPlotX1(start);
-			int x2 = currentAxes().toPlotX1(start + mReadLength);
+    for (int i = 0; i < starts.size(); ++i) {
+      int start = starts.get(i);
+      Strand strand = strands.get(i);
 
-			if (w == -1) {
-				w = Math.max(1, x2 - x1);
-			}
+      if ((!strandVisible && strand == Strand.SENSE) || (!negStrandVisible && strand == Strand.ANTISENSE)) {
+        continue;
+      }
 
-			int row = -1;
+      int x1 = currentAxes().toPlotX1(start);
+      int x2 = currentAxes().toPlotX1(start + mReadLength);
 
-			for (int r : mStartMap.keySet()) {
-				boolean fit = true;
+      if (w == -1) {
+        w = Math.max(1, x2 - x1);
+      }
 
-				for (int s : mStartMap.get(r)) {
-					int e = s + w;
+      int row = -1;
 
-					if ((x1 >= s && x1 < e) || (x2 >= s && x2 < e)) {
-						fit = false;
-						break;
-					}
-				}
+      for (int r : mStartMap.keySet()) {
+        boolean fit = true;
 
-				if (fit) {
-					row = r;
-					break;
-				}
-			}
+        for (int s : mStartMap.get(r)) {
+          int e = s + w;
 
-			if (row == -1) {
-				row = mStartMap.size();
-			}
+          if ((x1 >= s && x1 < e) || (x2 >= s && x2 < e)) {
+            fit = false;
+            break;
+          }
+        }
 
-			// debug
-			//row = 0;
+        if (fit) {
+          row = r;
+          break;
+        }
+      }
 
-			mStartMap.get(row).add(x1);
-			mStrandMap.get(row).add(strand);
-		}
+      if (row == -1) {
+        row = mStartMap.size();
+      }
 
+      // debug
+      // row = 0;
 
-		mLayer.update(mStartMap, 
-				mStrandMap,
-				w,
-				strandVisible,
-				lineColor, 
-				fillColor,
-				negStrandVisible,
-				negStrandLineColor, 
-				negStrandFillColor,
-				readHeight,
-				gap);
-		
-		int height = (readHeight + gap) * (1 + mStrandMap.size());
+      mStartMap.get(row).add(x1);
+      mStrandMap.get(row).add(strand);
+    }
 
-		currentAxes().setInternalHeight(height);
-	}
+    mLayer.update(mStartMap, mStrandMap, w, strandVisible, lineColor, fillColor, negStrandVisible, negStrandLineColor,
+        negStrandFillColor, readHeight, gap);
+
+    int height = (readHeight + gap) * (1 + mStrandMap.size());
+
+    currentAxes().setInternalHeight(height);
+  }
 }

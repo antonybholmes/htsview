@@ -20,10 +20,10 @@ package edu.columbia.rdf.htsview.tracks;
  * The Enum TrackUpdateMode.
  */
 public enum TrackUpdateMode {
-	
-	/** The full. */
-	FULL,
-	
-	/** The refresh. */
-	REFRESH
+
+  /** The full. */
+  FULL,
+
+  /** The refresh. */
+  REFRESH
 }
