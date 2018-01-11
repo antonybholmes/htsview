@@ -50,10 +50,12 @@ public class TrackListRenderer extends ModernListCellRenderer {
   private int mRow;
 
   /** The Constant LINE_COLOR. */
-  public static final Color LINE_COLOR = ThemeService.getInstance().colors().getHighlight(2);
+  public static final Color LINE_COLOR = ThemeService.getInstance().colors()
+      .getHighlight(2);
 
   /** The Constant COLOR. */
-  public static final Color COLOR = ThemeService.getInstance().colors().getHighlight(6);
+  public static final Color COLOR = ThemeService.getInstance().colors()
+      .getHighlight(6);
 
   /** The Constant NUM_WIDTH. */
   private static final int NUM_WIDTH = 20;
@@ -77,7 +79,9 @@ public class TrackListRenderer extends ModernListCellRenderer {
 
     String t = mRow + ".";
 
-    g2.drawString(t, x + NUM_WIDTH - g2.getFontMetrics().stringWidth(t) - PADDING, getTextYPosCenter(g2, getHeight()));
+    g2.drawString(t,
+        x + NUM_WIDTH - g2.getFontMetrics().stringWidth(t) - PADDING,
+        getTextYPosCenter(g2, getHeight()));
 
     x += NUM_WIDTH;
 
@@ -129,8 +133,12 @@ public class TrackListRenderer extends ModernListCellRenderer {
    * int)
    */
   @Override
-  public Component getCellRendererComponent(ModernList<?> list, Object value, boolean highlight, boolean isSelected,
-      boolean hasFocus, int row) {
+  public Component getCellRendererComponent(ModernList<?> list,
+      Object value,
+      boolean highlight,
+      boolean isSelected,
+      boolean hasFocus,
+      int row) {
 
     Track t = (Track) value;
 
@@ -139,6 +147,11 @@ public class TrackListRenderer extends ModernListCellRenderer {
     mFillColor = ColorUtils.getTransparentColor60(mColor);
     mRow = row + 1;
 
-    return super.getCellRendererComponent(list, value, highlight, isSelected, hasFocus, row);
+    return super.getCellRendererComponent(list,
+        value,
+        highlight,
+        isSelected,
+        hasFocus,
+        row);
   }
 }

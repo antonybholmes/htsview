@@ -39,14 +39,12 @@ public class SampleFsPlotTrack extends SamplePlotTrack {
   /**
    * Instantiates a new sample fs plot track.
    *
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
-   * @param metaFile
-   *          the meta file
+   * @param sample the sample
+   * @param assembly the assembly
+   * @param metaFile the meta file
    */
-  public SampleFsPlotTrack(Sample sample, SampleAssembly assembly, Path metaFile) {
+  public SampleFsPlotTrack(Sample sample, SampleAssembly assembly,
+      Path metaFile) {
     super(sample, assembly);
 
     mMetaFile = metaFile;
@@ -55,18 +53,14 @@ public class SampleFsPlotTrack extends SamplePlotTrack {
   /**
    * Instantiates a new sample fs plot track.
    *
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
-   * @param metaFile
-   *          the meta file
-   * @param color
-   *          the color
-   * @param fillColor
-   *          the fill color
+   * @param sample the sample
+   * @param assembly the assembly
+   * @param metaFile the meta file
+   * @param color the color
+   * @param fillColor the fill color
    */
-  public SampleFsPlotTrack(Sample sample, SampleAssembly assembly, Path metaFile, Color color, Color fillColor) {
+  public SampleFsPlotTrack(Sample sample, SampleAssembly assembly,
+      Path metaFile, Color color, Color fillColor) {
     super(sample, assembly, color, fillColor);
 
     mMetaFile = metaFile;
@@ -75,16 +69,13 @@ public class SampleFsPlotTrack extends SamplePlotTrack {
   /**
    * Instantiates a new sample fs plot track.
    *
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
-   * @param dir
-   *          the dir
-   * @param color
-   *          the color
+   * @param sample the sample
+   * @param assembly the assembly
+   * @param dir the dir
+   * @param color the color
    */
-  public SampleFsPlotTrack(Sample sample, SampleAssembly16bit assembly, Path dir, Color color) {
+  public SampleFsPlotTrack(Sample sample, SampleAssembly16bit assembly,
+      Path dir, Color color) {
     super(sample, assembly, color);
 
     mMetaFile = dir;
@@ -114,9 +105,8 @@ public class SampleFsPlotTrack extends SamplePlotTrack {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack#toJson(org.abh.common.
-   * json.JsonBuilder)
+   * @see edu.columbia.rdf.htsview.tracks.sample.SamplePlotTrack#toJson(org.abh.
+   * common. json.JsonBuilder)
    */
   @Override
   public void toJson(JsonBuilder json) {

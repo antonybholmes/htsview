@@ -34,113 +34,96 @@ public abstract class SampleAssembly {
   /**
    * Gets the starts.
    *
-   * @param sample
-   *          the sample
-   * @param region
-   *          the region
-   * @param window
-   *          the window
+   * @param sample the sample
+   * @param region the region
+   * @param window the window
    * @return the starts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getStarts(Sample sample, String region, int window) throws IOException {
+  public List<Integer> getStarts(Sample sample, String region, int window)
+      throws IOException {
     return getStarts(sample, GenomicRegion.parse(region), window);
   }
 
   /**
    * Gets the starts.
    *
-   * @param sample
-   *          the sample
-   * @param region
-   *          the region
-   * @param window
-   *          the window
+   * @param sample the sample
+   * @param region the region
+   * @param window the window
    * @return the starts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getStarts(Sample sample, GenomicRegion region, int window) throws IOException {
+  public List<Integer> getStarts(Sample sample,
+      GenomicRegion region,
+      int window) throws IOException {
     return null;
   }
 
   /**
    * Gets the strands.
    *
-   * @param sample
-   *          the sample
-   * @param region
-   *          the region
-   * @param window
-   *          the window
+   * @param sample the sample
+   * @param region the region
+   * @param window the window
    * @return the strands
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Strand> getStrands(Sample sample, GenomicRegion region, int window) throws IOException {
+  public List<Strand> getStrands(Sample sample,
+      GenomicRegion region,
+      int window) throws IOException {
     return null;
   }
 
   /**
    * Gets the counts.
    *
-   * @param sample
-   *          the sample
-   * @param region
-   *          the region
-   * @param window
-   *          the window
+   * @param sample the sample
+   * @param region the region
+   * @param window the window
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getCounts(Sample sample, String region, int window) throws IOException {
+  public List<Integer> getCounts(Sample sample, String region, int window)
+      throws IOException {
     return getCounts(sample, GenomicRegion.parse(region), window);
   }
 
   /**
    * Gets the counts.
    *
-   * @param sample
-   *          the sample
-   * @param region
-   *          the region
-   * @param window
-   *          the window
+   * @param sample the sample
+   * @param region the region
+   * @param window the window
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public abstract List<Integer> getCounts(Sample sample, GenomicRegion region, int window) throws IOException;
+  public abstract List<Integer> getCounts(Sample sample,
+      GenomicRegion region,
+      int window) throws IOException;
 
   /**
    * Gets the Reads per million mapped reads.
    *
-   * @param sample
-   *          the sample
-   * @param region
-   *          the region
-   * @param window
-   *          the window
+   * @param sample the sample
+   * @param region the region
+   * @param window the window
    * @return the normalized counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Double> getRPM(Sample sample, GenomicRegion region, int window) throws IOException {
+  public List<Double> getRPM(Sample sample, GenomicRegion region, int window)
+      throws IOException {
     return getRPM(sample, this, region, window);
   }
 
   /**
-   * Should return the number of mapped reads for the sample. If it returns -1, it
-   * is assumed the number of reads are unknown so there will not be any
+   * Should return the number of mapped reads for the sample. If it returns -1,
+   * it is assumed the number of reads are unknown so there will not be any
    * normalization of the sample.
    *
-   * @param sample
-   *          the sample
+   * @param sample the sample
    * @return the mapped reads
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public int getMappedReads(Sample sample) throws IOException {
     return -1;
@@ -149,10 +132,8 @@ public abstract class SampleAssembly {
   /**
    * Returns the bin a genomic coordinate is in.
    *
-   * @param p
-   *          a one based genomic coordinate
-   * @param window
-   *          a window bin size
+   * @param p a one based genomic coordinate
+   * @param window a window bin size
    * @return the bin
    */
   public static final int getBin(int p, int window) {
@@ -162,11 +143,9 @@ public abstract class SampleAssembly {
   /**
    * Should return true if this file type supports tracking individual reads.
    *
-   * @param sample
-   *          the sample
+   * @param sample the sample
    * @return true, if successful
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public boolean hasReadSupport(Sample sample) throws IOException {
     return false;
@@ -175,11 +154,9 @@ public abstract class SampleAssembly {
   /**
    * Checks if is bvt.
    *
-   * @param sample
-   *          the sample
+   * @param sample the sample
    * @return true, if is bvt
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public boolean isBVT(Sample sample) throws IOException {
     return false;
@@ -188,11 +165,9 @@ public abstract class SampleAssembly {
   /**
    * Gets the read length.
    *
-   * @param sample
-   *          the sample
+   * @param sample the sample
    * @return the read length
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public int getReadLength(Sample sample) throws IOException {
     return -1;
@@ -201,18 +176,18 @@ public abstract class SampleAssembly {
   /**
    * Gets the genome.
    *
-   * @param sample
-   *          the sample
+   * @param sample the sample
    * @return the genome
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public String getGenome(Sample sample) throws IOException {
     return Genome.HG19;
   }
 
-  public static List<Double> getRPM(Sample sample, SampleAssembly assembly, GenomicRegion region, int window)
-      throws IOException {
+  public static List<Double> getRPM(Sample sample,
+      SampleAssembly assembly,
+      GenomicRegion region,
+      int window) throws IOException {
     double scaleFactor;
 
     double mappedReads = assembly.getMappedReads(sample);
@@ -225,6 +200,7 @@ public abstract class SampleAssembly {
       scaleFactor = 1;
     }
 
-    return Mathematics.multiply(assembly.getCounts(sample, region, window), scaleFactor);
+    return Mathematics.multiply(assembly.getCounts(sample, region, window),
+        scaleFactor);
   }
 }

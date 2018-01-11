@@ -56,10 +56,8 @@ public class ReadCountsFileABI extends ReadCountsFile {
    * Directory containing genome files which must be of the form chr.n.txt. Each
    * file must contain exactly one line consisting of the entire chromosome.
    *
-   * @param file
-   *          the file
-   * @param base
-   *          the base
+   * @param file the file
+   * @param base the base
    */
   public ReadCountsFileABI(Path file, char base) {
     mBase = base;
@@ -78,26 +76,26 @@ public class ReadCountsFileABI extends ReadCountsFile {
    * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
    */
   @Override
-  public List<Integer> getCounts(GenomicRegion region, int window) throws IOException {
-    return getCounts(region.getChr(), region.getStart(), region.getEnd(), window);
+  public List<Integer> getCounts(GenomicRegion region, int window)
+      throws IOException {
+    return getCounts(region.getChr(),
+        region.getStart(),
+        region.getEnd(),
+        window);
   }
 
   /**
    * Gets the counts.
    *
-   * @param chr
-   *          the chr
-   * @param start
-   *          the start
-   * @param end
-   *          the end
-   * @param window
-   *          the window
+   * @param chr the chr
+   * @param start the start
+   * @param end the end
+   * @param window the window
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getCounts(Chromosome chr, int start, int end, int window) throws IOException {
+  public List<Integer> getCounts(Chromosome chr, int start, int end, int window)
+      throws IOException {
     List<Integer> counts = new ArrayList<Integer>(end - start + 1);
 
     for (int i = start; i <= end; ++i) {
@@ -114,26 +112,26 @@ public class ReadCountsFileABI extends ReadCountsFile {
    * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
    */
   @Override
-  public List<Integer> getStarts(GenomicRegion region, int window) throws IOException {
-    return getStarts(region.getChr(), region.getStart(), region.getEnd(), window);
+  public List<Integer> getStarts(GenomicRegion region, int window)
+      throws IOException {
+    return getStarts(region.getChr(),
+        region.getStart(),
+        region.getEnd(),
+        window);
   }
 
   /**
    * Gets the starts.
    *
-   * @param chr
-   *          the chr
-   * @param start
-   *          the start
-   * @param end
-   *          the end
-   * @param window
-   *          the window
+   * @param chr the chr
+   * @param start the start
+   * @param end the end
+   * @param window the window
    * @return the starts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getStarts(Chromosome chr, int start, int end, int window) throws IOException {
+  public List<Integer> getStarts(Chromosome chr, int start, int end, int window)
+      throws IOException {
 
     return Mathematics.sequence(start, end);
   }

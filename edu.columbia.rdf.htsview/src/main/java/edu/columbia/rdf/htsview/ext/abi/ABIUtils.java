@@ -42,8 +42,7 @@ public class ABIUtils {
   /**
    * Creates a DNA sequence using the bases with the greatest color values.
    *
-   * @param trace
-   *          the trace
+   * @param trace the trace
    * @return the char[]
    */
   public static char[] call(ABITrace trace) {
@@ -67,8 +66,7 @@ public class ABIUtils {
   /**
    * Top two.
    *
-   * @param trace
-   *          the trace
+   * @param trace the trace
    * @return the list
    */
   public static List<StringBuilder> topTwo(ABITrace trace) {
@@ -124,7 +122,8 @@ public class ABIUtils {
         }
 
         // We want the highest counts first
-        List<Integer> counts = CollectionUtils.reverse(CollectionUtils.sortKeys(countMap));
+        List<Integer> counts = CollectionUtils
+            .reverse(CollectionUtils.sortKeys(countMap));
 
         for (int si = 0; si < seqs.size(); ++si) {
           // If the number of colors at this position is less than
@@ -132,15 +131,16 @@ public class ABIUtils {
           // lowest position closest to the desired index
           int ci = Math.min(si, counts.size() - 1);
 
-          System.err.println(i + " " + counts.size() + " " + si + " " + ci + " " + counts.get(ci));
+          System.err.println(i + " " + counts.size() + " " + si + " " + ci + " "
+              + counts.get(ci));
 
           seqs.get(si).append(countMap.get(counts.get(ci)));
         }
 
         /*
          * // Sort by the top two for (int count :
-         * CollectionUtils.reverse(CollectionUtils.sortKeys(countMap))) { for (char b :
-         * countMap.get(count)) { if (bc == c) { break; }
+         * CollectionUtils.reverse(CollectionUtils.sortKeys(countMap))) { for
+         * (char b : countMap.get(count)) { if (bc == c) { break; }
          * 
          * seqs.get(bc).append(b);
          * 
@@ -158,14 +158,12 @@ public class ABIUtils {
   /**
    * Write fasta.
    *
-   * @param file
-   *          the file
-   * @param seqs
-   *          the seqs
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param file the file
+   * @param seqs the seqs
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public static void writeFasta(Path file, List<StringBuilder> seqs) throws IOException {
+  public static void writeFasta(Path file, List<StringBuilder> seqs)
+      throws IOException {
     int c = 1;
 
     BufferedWriter out = FileUtils.newBufferedWriter(file);

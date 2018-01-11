@@ -84,10 +84,8 @@ public class ReadAssemblyWeb extends ReadAssembly {
   /**
    * Instantiates a new read assembly web.
    *
-   * @param url
-   *          the url
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param url the url
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public ReadAssemblyWeb(URL url) throws IOException {
     mUrl = new UrlBuilder(url);
@@ -127,11 +125,12 @@ public class ReadAssemblyWeb extends ReadAssembly {
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.lib.bioinformatics.reads.ReadAssembly#getSubGroups(java.lang
-   * .String)
+   * edu.columbia.rdf.lib.bioinformatics.reads.ReadAssembly#getSubGroups(java.
+   * lang .String)
    */
   @Override
-  public List<String> getSubGroups(String group) throws IOException, ParseException {
+  public List<String> getSubGroups(String group)
+      throws IOException, ParseException {
     List<String> samples = new ArrayList<String>();
 
     try {
@@ -153,15 +152,17 @@ public class ReadAssemblyWeb extends ReadAssembly {
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.lib.bioinformatics.reads.ReadAssembly#getSamples(java.lang.
-   * String, java.lang.String)
+   * edu.columbia.rdf.lib.bioinformatics.reads.ReadAssembly#getSamples(java.
+   * lang. String, java.lang.String)
    */
   @Override
-  public List<String> getSamples(String group, String subGroup) throws IOException, ParseException {
+  public List<String> getSamples(String group, String subGroup)
+      throws IOException, ParseException {
     List<String> samples = new ArrayList<String>();
 
     try {
-      URL url = new UrlBuilder(mSamplesUrl).resolve(group).resolve(subGroup).toUrl();
+      URL url = new UrlBuilder(mSamplesUrl).resolve(group).resolve(subGroup)
+          .toUrl();
 
       Json json = mParser.parse(url);
 
@@ -184,13 +185,17 @@ public class ReadAssemblyWeb extends ReadAssembly {
    * edu.columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
    */
   @Override
-  public List<Integer> getCounts(String group, String subGroup, String sample, int window, GenomicRegion region)
-      throws IOException, ParseException {
+  public List<Integer> getCounts(String group,
+      String subGroup,
+      String sample,
+      int window,
+      GenomicRegion region) throws IOException, ParseException {
     List<Integer> ret = new ArrayList<Integer>();
 
     try {
-      URL url = new UrlBuilder(mCountsUrl).resolve(group).resolve(subGroup).resolve(sample).resolve(window)
-          .resolve(region.getChr().toString()).resolve(region.getStart()).resolve(region.getEnd()).toUrl();
+      URL url = new UrlBuilder(mCountsUrl).resolve(group).resolve(subGroup)
+          .resolve(sample).resolve(window).resolve(region.getChr().toString())
+          .resolve(region.getStart()).resolve(region.getEnd()).toUrl();
 
       // System.err.println(url);
 
@@ -217,11 +222,13 @@ public class ReadAssemblyWeb extends ReadAssembly {
    * lang.String, java.lang.String, java.lang.String)
    */
   @Override
-  public int getMappedReads(String group, String subGroup, String sample) throws IOException, ParseException {
+  public int getMappedReads(String group, String subGroup, String sample)
+      throws IOException, ParseException {
     int ret = -1;
 
     try {
-      URL url = new UrlBuilder(mMappedUrl).resolve(group).resolve(subGroup).resolve(sample).toUrl();
+      URL url = new UrlBuilder(mMappedUrl).resolve(group).resolve(subGroup)
+          .resolve(sample).toUrl();
 
       // System.err.println(url);
 

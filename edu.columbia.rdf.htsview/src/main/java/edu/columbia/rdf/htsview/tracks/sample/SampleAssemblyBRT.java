@@ -31,8 +31,7 @@ public class SampleAssemblyBRT extends SampleAssemblyFile {
   /**
    * Instantiates a new sample assembly BRT.
    *
-   * @param metaFile
-   *          the meta file
+   * @param metaFile the meta file
    */
   public SampleAssemblyBRT(Path metaFile) {
     super(new ReadCountsFileBRT(metaFile));

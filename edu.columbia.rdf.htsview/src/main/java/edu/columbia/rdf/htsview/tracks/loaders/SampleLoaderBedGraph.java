@@ -45,12 +45,14 @@ public class SampleLoaderBedGraph extends SampleLoaderFS {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.
+   * @see
+   * edu.columbia.rdf.htsview.tracks.loaders.SampleLoader#openSample(org.abh.
    * common.ui.window.ModernWindow, java.nio.file.Path,
    * org.abh.common.tree.TreeNode)
    */
   @Override
-  public Track openSample(ModernWindow parent, Path file, TreeNode<Track> root) throws IOException {
+  public Track openSample(ModernWindow parent, Path file, TreeNode<Track> root)
+      throws IOException {
     if (!mApplyToAll) {
       BedGraphStyleDialog dialog = new BedGraphStyleDialog(parent);
 

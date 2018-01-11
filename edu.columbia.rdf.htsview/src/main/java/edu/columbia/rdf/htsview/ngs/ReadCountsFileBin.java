@@ -81,8 +81,7 @@ public abstract class ReadCountsFileBin extends ReadCountsFile {
    * Directory containing genome files which must be of the form chr.n.txt. Each
    * file must contain exactly one line consisting of the entire chromosome.
    *
-   * @param metaFile
-   *          the meta file
+   * @param metaFile the meta file
    */
   public ReadCountsFileBin(Path metaFile) {
     mMetaFile = metaFile;
@@ -118,17 +117,14 @@ public abstract class ReadCountsFileBin extends ReadCountsFile {
   /**
    * Gets the file.
    *
-   * @param chr
-   *          the chr
-   * @param window
-   *          the window
-   * @param ext
-   *          the ext
+   * @param chr the chr
+   * @param window the window
+   * @param ext the ext
    * @return the file
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  protected Path getFile(Chromosome chr, int window, String ext) throws IOException {
+  protected Path getFile(Chromosome chr, int window, String ext)
+      throws IOException {
     if (!mFileMap.containsKey(chr)) {
       Path file = mDirectory.resolve(chr + "." + ext);
 
@@ -161,11 +157,9 @@ public abstract class ReadCountsFileBin extends ReadCountsFile {
   /**
    * Read genome.
    *
-   * @param in
-   *          the in
+   * @param in the in
    * @return the string
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public String readGenome(RandomAccessFile in) throws IOException {
     in.read(GENOME);

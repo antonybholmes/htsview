@@ -54,7 +54,8 @@ public class ReadCountsFileBRT extends ReadCountsFileBinTree {
   public static final int READ_FLAGS_WIDTH_BYTES = 1;
 
   /** The Constant READ_WIDTH_BYTES. */
-  public static final int READ_WIDTH_BYTES = READ_START_WIDTH_BYTES + READ_FLAGS_WIDTH_BYTES;
+  public static final int READ_WIDTH_BYTES = READ_START_WIDTH_BYTES
+      + READ_FLAGS_WIDTH_BYTES;
 
   /**
    * The constant FILE_EXT.
@@ -68,8 +69,7 @@ public class ReadCountsFileBRT extends ReadCountsFileBinTree {
    * Directory containing genome files which must be of the form chr.n.txt. Each
    * file must contain exactly one line consisting of the entire chromosome.
    *
-   * @param metaFile
-   *          the directory
+   * @param metaFile the directory
    */
   public ReadCountsFileBRT(Path metaFile) {
     super(metaFile);
@@ -82,7 +82,8 @@ public class ReadCountsFileBRT extends ReadCountsFileBinTree {
    * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
    */
   @Override
-  public List<Integer> getCounts(GenomicRegion region, int window) throws IOException {
+  public List<Integer> getCounts(GenomicRegion region, int window)
+      throws IOException {
     Chromosome chr = region.getChr();
 
     Path file = getFile(chr, window, FILE_EXT);
@@ -90,7 +91,11 @@ public class ReadCountsFileBRT extends ReadCountsFileBinTree {
     // System.err.println("read count file:" + file + " " + region + " " +
     // mReadLengthMap.get(chr) + " " + mOffsetMap.get(chr));
 
-    List<Integer> counts = getCounts(file, region.getStart(), region.getEnd(), window, mOffsetMap.get(chr));
+    List<Integer> counts = getCounts(file,
+        region.getStart(),
+        region.getEnd(),
+        window,
+        mOffsetMap.get(chr));
 
     return counts;
   }
@@ -102,12 +107,17 @@ public class ReadCountsFileBRT extends ReadCountsFileBinTree {
    * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
    */
   @Override
-  public List<Integer> getStarts(GenomicRegion region, int window) throws IOException {
+  public List<Integer> getStarts(GenomicRegion region, int window)
+      throws IOException {
     Chromosome chr = region.getChr();
 
     Path file = getFile(chr, window, FILE_EXT);
 
-    List<Integer> starts = getStarts(file, region.getStart(), region.getEnd(), window, mOffsetMap.get(chr));
+    List<Integer> starts = getStarts(file,
+        region.getStart(),
+        region.getEnd(),
+        window,
+        mOffsetMap.get(chr));
 
     return starts;
   }
@@ -119,12 +129,16 @@ public class ReadCountsFileBRT extends ReadCountsFileBinTree {
    * bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public List<Strand> getStrands(GenomicRegion region, int window) throws IOException {
+  public List<Strand> getStrands(GenomicRegion region, int window)
+      throws IOException {
     Chromosome chr = region.getChr();
 
     Path file = getFile(chr, window, FILE_EXT);
 
-    List<Strand> strands = getStrands(file, region.getStart(), region.getEnd(), mOffsetMap.get(chr));
+    List<Strand> strands = getStrands(file,
+        region.getStart(),
+        region.getEnd(),
+        mOffsetMap.get(chr));
 
     return strands;
   }
@@ -132,21 +146,19 @@ public class ReadCountsFileBRT extends ReadCountsFileBinTree {
   /**
    * Gets the counts.
    *
-   * @param file
-   *          the file
-   * @param start
-   *          the start
-   * @param end
-   *          the end
-   * @param window
-   *          the window
-   * @param dataOffset
-   *          the data offset
+   * @param file the file
+   * @param start the start
+   * @param end the end
+   * @param window the window
+   * @param dataOffset the data offset
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getCounts(final Path file, int start, int end, int window, int dataOffset) throws IOException {
+  public List<Integer> getCounts(final Path file,
+      int start,
+      int end,
+      int window,
+      int dataOffset) throws IOException {
 
     List<Integer> starts = getStarts(file, start, end, window, dataOffset);
 
@@ -158,22 +170,19 @@ public class ReadCountsFileBRT extends ReadCountsFileBinTree {
   /**
    * Get the counts from the file,.
    *
-   * @param file
-   *          The r tree binary file.
-   * @param start
-   *          The 1 based genomic start coordinate.
-   * @param end
-   *          The 1 based genomic end coordinate.
-   * @param window
-   *          The size of the window being viewed.
-   * @param dataOffset
-   *          The byte offset in the file where the reads begin.
+   * @param file The r tree binary file.
+   * @param start The 1 based genomic start coordinate.
+   * @param end The 1 based genomic end coordinate.
+   * @param window The size of the window being viewed.
+   * @param dataOffset The byte offset in the file where the reads begin.
    * @return the starts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  private static List<Integer> getStarts(final Path file, int start, int end, int window, int dataOffset)
-      throws IOException {
+  private static List<Integer> getStarts(final Path file,
+      int start,
+      int end,
+      int window,
+      int dataOffset) throws IOException {
 
     RandomAccessFile in = new RandomAccessFile(file.toFile(), "r");
 
@@ -187,7 +196,8 @@ public class ReadCountsFileBRT extends ReadCountsFileBinTree {
 
       int l = eo.endOffset - so.startOffset + 1;
 
-      // System.err.println("starts " + start + " " + end + " " + Arrays.toString(so)
+      // System.err.println("starts " + start + " " + end + " " +
+      // Arrays.toString(so)
       // + " " + Arrays.toString(eo) + " " + l);
 
       // To read the starts, first skip to dataOffset (the byte position
@@ -217,19 +227,17 @@ public class ReadCountsFileBRT extends ReadCountsFileBinTree {
   /**
    * Gets the strands.
    *
-   * @param file
-   *          the file
-   * @param start
-   *          the start
-   * @param end
-   *          the end
-   * @param dataOffset
-   *          the data offset
+   * @param file the file
+   * @param start the start
+   * @param end the end
+   * @param dataOffset the data offset
    * @return the strands
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  private static List<Strand> getStrands(final Path file, int start, int end, int dataOffset) throws IOException {
+  private static List<Strand> getStrands(final Path file,
+      int start,
+      int end,
+      int dataOffset) throws IOException {
 
     List<Byte> params = getFlags(file, start, end, dataOffset);
 
@@ -251,19 +259,17 @@ public class ReadCountsFileBRT extends ReadCountsFileBinTree {
   /**
    * Extract the 1 byte param field associated with a read.
    *
-   * @param file
-   *          the file
-   * @param start
-   *          the start
-   * @param end
-   *          the end
-   * @param dataOffset
-   *          the data offset
+   * @param file the file
+   * @param start the start
+   * @param end the end
+   * @param dataOffset the data offset
    * @return the flags
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  private static List<Byte> getFlags(final Path file, int start, int end, int dataOffset) throws IOException {
+  private static List<Byte> getFlags(final Path file,
+      int start,
+      int end,
+      int dataOffset) throws IOException {
 
     RandomAccessFile in = new RandomAccessFile(file.toFile(), "r");
 
@@ -277,7 +283,8 @@ public class ReadCountsFileBRT extends ReadCountsFileBinTree {
 
       int l = eo.endOffset - so.startOffset + 1;
 
-      // System.err.println("ends " + Arrays.toString(so) + " " + Arrays.toString(eo)
+      // System.err.println("ends " + Arrays.toString(so) + " " +
+      // Arrays.toString(eo)
       // + " " + l);
 
       // To read the starts, first skip to dataOffset (the byte position

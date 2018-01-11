@@ -51,10 +51,8 @@ public class BedPlotTrack extends UcscPlotTrack {
   /**
    * Instantiates a new bed plot track.
    *
-   * @param file
-   *          the file
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param file the file
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public BedPlotTrack(Path file) throws IOException {
     this(Bed.parseTracks(file).get(0), file);
@@ -63,10 +61,8 @@ public class BedPlotTrack extends UcscPlotTrack {
   /**
    * Instantiates a new bed plot track.
    *
-   * @param bed
-   *          the bed
-   * @param file
-   *          the file
+   * @param bed the bed
+   * @param file the file
    */
   public BedPlotTrack(UCSCTrack bed, Path file) {
     this(bed, file, TrackDisplayMode.COMPACT);
@@ -75,12 +71,9 @@ public class BedPlotTrack extends UcscPlotTrack {
   /**
    * Instantiates a new bed plot track.
    *
-   * @param file
-   *          the file
-   * @param mode
-   *          the mode
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param file the file
+   * @param mode the mode
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public BedPlotTrack(Path file, TrackDisplayMode mode) throws IOException {
     this(Bed.parseTracks(file).get(0), file, mode);
@@ -89,12 +82,9 @@ public class BedPlotTrack extends UcscPlotTrack {
   /**
    * Instantiates a new bed plot track.
    *
-   * @param bed
-   *          the bed
-   * @param file
-   *          the file
-   * @param mode
-   *          the mode
+   * @param bed the bed
+   * @param file the file
+   * @param mode the mode
    */
   public BedPlotTrack(UCSCTrack bed, Path file, TrackDisplayMode mode) {
     super(bed, mode);
@@ -134,9 +124,8 @@ public class BedPlotTrack extends UcscPlotTrack {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * edu.columbia.rdf.htsview.tracks.ext.ucsc.UcscPlotTrack#toJson(org.abh.common.
-   * json.JsonBuilder)
+   * @see edu.columbia.rdf.htsview.tracks.ext.ucsc.UcscPlotTrack#toJson(org.abh.
+   * common. json.JsonBuilder)
    */
   @Override
   public void toJson(JsonBuilder json) {

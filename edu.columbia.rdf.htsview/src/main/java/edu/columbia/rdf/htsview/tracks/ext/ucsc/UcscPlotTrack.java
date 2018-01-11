@@ -44,8 +44,7 @@ public class UcscPlotTrack extends GraphPlotTrack {
   /**
    * Instantiates a new ucsc plot track.
    *
-   * @param bed
-   *          the bed
+   * @param bed the bed
    */
   public UcscPlotTrack(UCSCTrack bed) {
     this(bed, bed.getColor());
@@ -54,10 +53,8 @@ public class UcscPlotTrack extends GraphPlotTrack {
   /**
    * Instantiates a new ucsc plot track.
    *
-   * @param bed
-   *          the bed
-   * @param fillColor
-   *          the fill color
+   * @param bed the bed
+   * @param fillColor the fill color
    */
   public UcscPlotTrack(UCSCTrack bed, Color fillColor) {
     this(bed, fillColor, TrackDisplayMode.COMPACT);
@@ -66,10 +63,8 @@ public class UcscPlotTrack extends GraphPlotTrack {
   /**
    * Instantiates a new ucsc plot track.
    *
-   * @param bed
-   *          the bed
-   * @param mode
-   *          the mode
+   * @param bed the bed
+   * @param mode the mode
    */
   public UcscPlotTrack(UCSCTrack bed, TrackDisplayMode mode) {
     this(bed, bed.getColor(), mode);
@@ -78,12 +73,9 @@ public class UcscPlotTrack extends GraphPlotTrack {
   /**
    * Instantiates a new ucsc plot track.
    *
-   * @param bed
-   *          the bed
-   * @param fillColor
-   *          the fill color
-   * @param mode
-   *          the mode
+   * @param bed the bed
+   * @param fillColor the fill color
+   * @param mode the mode
    */
   public UcscPlotTrack(UCSCTrack bed, Color fillColor, TrackDisplayMode mode) {
     mBed = bed;
@@ -146,8 +138,7 @@ public class UcscPlotTrack extends GraphPlotTrack {
   /**
    * Sets the display mode.
    *
-   * @param mode
-   *          the new display mode
+   * @param mode the new display mode
    */
   public void setDisplayMode(TrackDisplayMode mode) {
     mBed.setDisplayMode(mode);
@@ -169,7 +160,8 @@ public class UcscPlotTrack extends GraphPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) {
+  public TrackSubFigure createGraph(String genome,
+      TitleProperties titlePosition) {
     mSubFigure = BedPlotSubFigure.create(mBed, titlePosition);
 
     // mPlot.getGraphSpace().setPlotSize(PLOT_SIZE);
@@ -190,7 +182,11 @@ public class UcscPlotTrack extends GraphPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin) {
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+      int resolution,
+      int width,
+      int height,
+      int margin) {
     // mPlot.setForwardCanvasEventsEnabled(false);
     mSubFigure.update(displayRegion, resolution, width, height, margin);
     // mPlot.setForwardCanvasEventsEnabled(true);
@@ -201,9 +197,8 @@ public class UcscPlotTrack extends GraphPlotTrack {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * edu.columbia.rdf.htsview.tracks.GraphPlotTrack#edit(org.abh.common.ui.window.
-   * ModernWindow)
+   * @see edu.columbia.rdf.htsview.tracks.GraphPlotTrack#edit(org.abh.common.ui.
+   * window. ModernWindow)
    */
   @Override
   public void edit(ModernWindow parent) {
@@ -239,8 +234,8 @@ public class UcscPlotTrack extends GraphPlotTrack {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * edu.columbia.rdf.htsview.tracks.Track#toJson(org.abh.common.json.JsonBuilder)
+   * @see edu.columbia.rdf.htsview.tracks.Track#toJson(org.abh.common.json.
+   * JsonBuilder)
    */
   @Override
   public void toJson(JsonBuilder json) {

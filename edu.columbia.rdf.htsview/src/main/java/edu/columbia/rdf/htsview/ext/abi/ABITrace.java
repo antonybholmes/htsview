@@ -57,20 +57,15 @@ public class ABITrace implements NameProperty {
   /**
    * Instantiates a new ABI trace.
    *
-   * @param name
-   *          the name
-   * @param x
-   *          The x coordinates
-   * @param a
-   *          The a color values for each x coordinate.
-   * @param c
-   *          The c color values for each x coordinate.
-   * @param g
-   *          The g color values for each x coordinate.
-   * @param t
-   *          The t color values for each x coordinate.
+   * @param name the name
+   * @param x The x coordinates
+   * @param a The a color values for each x coordinate.
+   * @param c The c color values for each x coordinate.
+   * @param g The g color values for each x coordinate.
+   * @param t The t color values for each x coordinate.
    */
-  private ABITrace(String name, short[] x, short[] a, short[] c, short[] g, short[] t) {
+  private ABITrace(String name, short[] x, short[] a, short[] c, short[] g,
+      short[] t) {
     mName = name;
     mX = x;
     mA = a;
@@ -110,10 +105,8 @@ public class ABITrace implements NameProperty {
   /**
    * Gets the color value for a given base at a given location.
    *
-   * @param base
-   *          the base
-   * @param index
-   *          the index
+   * @param base the base
+   * @param index the index
    * @return the base
    */
   public short getColor(char base, int index) {
@@ -135,8 +128,7 @@ public class ABITrace implements NameProperty {
   /**
    * Gets the x.
    *
-   * @param index
-   *          the index
+   * @param index the index
    * @return the x
    */
   public short getX(int index) {
@@ -150,8 +142,7 @@ public class ABITrace implements NameProperty {
   /**
    * Gets the a.
    *
-   * @param index
-   *          the index
+   * @param index the index
    * @return the a
    */
   public short getColorA(int index) {
@@ -165,8 +156,7 @@ public class ABITrace implements NameProperty {
   /**
    * Gets the c.
    *
-   * @param index
-   *          the index
+   * @param index the index
    * @return the c
    */
   public short getColorC(int index) {
@@ -180,8 +170,7 @@ public class ABITrace implements NameProperty {
   /**
    * Gets the g.
    *
-   * @param index
-   *          the index
+   * @param index the index
    * @return the g
    */
   public short getColorG(int index) {
@@ -195,8 +184,7 @@ public class ABITrace implements NameProperty {
   /**
    * Gets the t.
    *
-   * @param index
-   *          the index
+   * @param index the index
    * @return the t
    */
   public short getColorT(int index) {
@@ -210,11 +198,9 @@ public class ABITrace implements NameProperty {
   /**
    * Parses the.
    *
-   * @param file
-   *          the file
+   * @param file the file
    * @return the ABI trace
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public static ABITrace parse(Path file) throws IOException {
     if (!FileUtils.exists(file)) {
@@ -276,7 +262,8 @@ public class ABITrace implements NameProperty {
       dirOffset = in.readInt();
 
       // SysUtils.err().println("header:", header, version);
-      // SysUtils.err().println("dir:", dirName, tag, type, elementSize, numDirs,
+      // SysUtils.err().println("dir:", dirName, tag, type, elementSize,
+      // numDirs,
       // dataSize, dirOffset);
 
       // Process directories
@@ -379,6 +366,7 @@ public class ABITrace implements NameProperty {
       in.close();
     }
 
-    return new ABITrace(PathUtils.getNameNoExt(file), xp, araw, craw, graw, traw);
+    return new ABITrace(PathUtils.getNameNoExt(file), xp, araw, craw, graw,
+        traw);
   }
 }

@@ -38,8 +38,7 @@ public class AnnotationBedPlotTrack extends AnnotationPlotTrack {
   /**
    * Instantiates a new annotation bed plot track.
    *
-   * @param bed
-   *          the bed
+   * @param bed the bed
    */
   public AnnotationBedPlotTrack(UCSCTrack bed) {
     super(bed.getName());
@@ -54,7 +53,8 @@ public class AnnotationBedPlotTrack extends AnnotationPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) {
+  public TrackSubFigure createGraph(String genome,
+      TitleProperties titlePosition) {
     mSubFigure = BedPlotSubFigure.create(mBed, titlePosition);
 
     // mPlot.getGraphSpace().setPlotSize(PLOT_SIZE);
@@ -74,7 +74,11 @@ public class AnnotationBedPlotTrack extends AnnotationPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin) {
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+      int resolution,
+      int width,
+      int height,
+      int margin) {
     mSubFigure.update(displayRegion, resolution, width, height, margin);
 
     return mSubFigure;

@@ -60,14 +60,12 @@ public class ReadsPlotSubFigure extends TrackSubFigure {
   /**
    * Instantiates a new reads plot sub figure.
    *
-   * @param name
-   *          the name
-   * @param readLength
-   *          the read length
-   * @param titlePosition
-   *          the title position
+   * @param name the name
+   * @param readLength the read length
+   * @param titlePosition the title position
    */
-  public ReadsPlotSubFigure(String name, int readLength, TitleProperties titlePosition) {
+  public ReadsPlotSubFigure(String name, int readLength,
+      TitleProperties titlePosition) {
     mReadLength = readLength;
 
     mLayer = new ReadsPlotLayer(readLength);
@@ -83,19 +81,19 @@ public class ReadsPlotSubFigure extends TrackSubFigure {
   /**
    * Creates the.
    *
-   * @param name
-   *          the name
-   * @param readLength
-   *          the read length
-   * @param titlePosition
-   *          the title position
+   * @param name the name
+   * @param readLength the read length
+   * @param titlePosition the title position
    * @return the reads plot sub figure
    */
-  public static ReadsPlotSubFigure create(String name, int readLength, TitleProperties titlePosition) {
+  public static ReadsPlotSubFigure create(String name,
+      int readLength,
+      TitleProperties titlePosition) {
 
     // Now lets create a plot
 
-    ReadsPlotSubFigure canvas = new ReadsPlotSubFigure(name, readLength, titlePosition);
+    ReadsPlotSubFigure canvas = new ReadsPlotSubFigure(name, readLength,
+        titlePosition);
 
     return canvas;
   }
@@ -105,11 +103,19 @@ public class ReadsPlotSubFigure extends TrackSubFigure {
    * 
    * @see
    * edu.columbia.rdf.apps.edb.reads.tracks.TrackFigure#update(edu.columbia.rdf.
-   * lib.bioinformatics.genome.GenomicRegion, int, java.awt.Color, java.awt.Color)
+   * lib.bioinformatics.genome.GenomicRegion, int, java.awt.Color,
+   * java.awt.Color)
    */
   @Override
-  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
-      Color lineColor, Color fillColor, PlotStyle style) {
+  public void update(GenomicRegion displayRegion,
+      int resolution,
+      double yMax,
+      int width,
+      int height,
+      int margin,
+      Color lineColor,
+      Color fillColor,
+      PlotStyle style) {
 
     // getCurrentAxes().setInternalPlotWidth(width);
 
@@ -118,7 +124,15 @@ public class ReadsPlotSubFigure extends TrackSubFigure {
     // getCurrentAxes().getXAxis().setLimits(displayRegion.getStart(),
     // displayRegion.getEnd());
 
-    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+    super.update(displayRegion,
+        resolution,
+        yMax,
+        width,
+        height,
+        margin,
+        lineColor,
+        fillColor,
+        style);
 
     Axes.disableAllFeatures(currentAxes());
 
@@ -129,29 +143,26 @@ public class ReadsPlotSubFigure extends TrackSubFigure {
   /**
    * Sets the starts.
    *
-   * @param starts
-   *          the new starts
-   * @param strands
-   *          the strands
-   * @param strandVisible
-   *          the strand visible
-   * @param lineColor
-   *          the line color
-   * @param fillColor
-   *          the fill color
-   * @param negStrandVisible
-   *          the neg strand visible
-   * @param negStrandLineColor
-   *          the neg strand line color
-   * @param negStrandFillColor
-   *          the neg strand fill color
-   * @param readHeight
-   *          the read height
-   * @param gap
-   *          the gap
+   * @param starts the new starts
+   * @param strands the strands
+   * @param strandVisible the strand visible
+   * @param lineColor the line color
+   * @param fillColor the fill color
+   * @param negStrandVisible the neg strand visible
+   * @param negStrandLineColor the neg strand line color
+   * @param negStrandFillColor the neg strand fill color
+   * @param readHeight the read height
+   * @param gap the gap
    */
-  public void setStarts(List<Integer> starts, List<Strand> strands, boolean strandVisible, Color lineColor,
-      Color fillColor, boolean negStrandVisible, Color negStrandLineColor, Color negStrandFillColor, int readHeight,
+  public void setStarts(List<Integer> starts,
+      List<Strand> strands,
+      boolean strandVisible,
+      Color lineColor,
+      Color fillColor,
+      boolean negStrandVisible,
+      Color negStrandLineColor,
+      Color negStrandFillColor,
+      int readHeight,
       int gap) {
 
     mStartMap.clear();
@@ -163,7 +174,8 @@ public class ReadsPlotSubFigure extends TrackSubFigure {
       int start = starts.get(i);
       Strand strand = strands.get(i);
 
-      if ((!strandVisible && strand == Strand.SENSE) || (!negStrandVisible && strand == Strand.ANTISENSE)) {
+      if ((!strandVisible && strand == Strand.SENSE)
+          || (!negStrandVisible && strand == Strand.ANTISENSE)) {
         continue;
       }
 
@@ -205,8 +217,17 @@ public class ReadsPlotSubFigure extends TrackSubFigure {
       mStrandMap.get(row).add(strand);
     }
 
-    mLayer.update(mStartMap, mStrandMap, w, strandVisible, lineColor, fillColor, negStrandVisible, negStrandLineColor,
-        negStrandFillColor, readHeight, gap);
+    mLayer.update(mStartMap,
+        mStrandMap,
+        w,
+        strandVisible,
+        lineColor,
+        fillColor,
+        negStrandVisible,
+        negStrandLineColor,
+        negStrandFillColor,
+        readHeight,
+        gap);
 
     int height = (readHeight + gap) * (1 + mStrandMap.size());
 

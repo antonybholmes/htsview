@@ -44,7 +44,8 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * The Class TrackEditDialog.
  */
-public class TrackEditDialog extends ModernDialogWindow implements ModernClickListener {
+public class TrackEditDialog extends ModernDialogWindow
+    implements ModernClickListener {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
@@ -76,10 +77,8 @@ public class TrackEditDialog extends ModernDialogWindow implements ModernClickLi
   /**
    * Instantiates a new track edit dialog.
    *
-   * @param parent
-   *          the parent
-   * @param track
-   *          the track
+   * @param parent the parent
+   * @param track the track
    */
   public TrackEditDialog(ModernWindow parent, Track track) {
     super(parent);
@@ -120,7 +119,8 @@ public class TrackEditDialog extends ModernDialogWindow implements ModernClickLi
     int[] rows = { ModernWidget.WIDGET_HEIGHT };
     int[] cols = { 100, 300 };
 
-    MatrixPanel matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING, ModernWidget.PADDING);
+    MatrixPanel matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING,
+        ModernWidget.PADDING);
 
     matrixPanel.add(new ModernAutoSizeLabel("Name"));
     matrixPanel.add(new ModernTextBorderPanel(mNameField));
@@ -157,9 +157,8 @@ public class TrackEditDialog extends ModernDialogWindow implements ModernClickLi
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
-   * ModernClickEvent)
+   * @see org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * event. ModernClickEvent)
    */
   public final void clicked(ModernClickEvent e) {
     if (e.getSource().equals(mOkButton)) {
@@ -184,7 +183,8 @@ public class TrackEditDialog extends ModernDialogWindow implements ModernClickLi
    * @return the line color
    */
   public Color getLineColor() {
-    return mCheckLineColor.isSelected() ? mLineColorButton.getSelectedColor() : null;
+    return mCheckLineColor.isSelected() ? mLineColorButton.getSelectedColor()
+        : null;
   }
 
   /**
@@ -193,6 +193,7 @@ public class TrackEditDialog extends ModernDialogWindow implements ModernClickLi
    * @return the fill color
    */
   public Color getFillColor() {
-    return mCheckFillColor.isSelected() ? mFillColorButton.getSelectedColor() : null;
+    return mCheckFillColor.isSelected() ? mFillColorButton.getSelectedColor()
+        : null;
   }
 }

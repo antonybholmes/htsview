@@ -45,14 +45,10 @@ public class ABIPlot extends Plot {
   /**
    * Instantiates a new ABI plot.
    *
-   * @param name
-   *          the name
-   * @param trace
-   *          the trace
-   * @param base
-   *          the base
-   * @param color
-   *          the color
+   * @param name the name
+   * @param trace the trace
+   * @param base the base
+   * @param color the color
    */
   public ABIPlot(String name, ABITrace trace, char base, Color color) {
     super(name);
@@ -65,27 +61,25 @@ public class ABIPlot extends Plot {
   /**
    * Update.
    *
-   * @param displayRegion
-   *          the display region
-   * @param resolution
-   *          the resolution
-   * @param yMax
-   *          the y max
-   * @param width
-   *          the width
-   * @param height
-   *          the height
-   * @param margin
-   *          the margin
-   * @param lineColor
-   *          the line color
-   * @param fillColor
-   *          the fill color
-   * @param style
-   *          the style
+   * @param displayRegion the display region
+   * @param resolution the resolution
+   * @param yMax the y max
+   * @param width the width
+   * @param height the height
+   * @param margin the margin
+   * @param lineColor the line color
+   * @param fillColor the fill color
+   * @param style the style
    */
-  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
-      Color lineColor, Color fillColor, PlotStyle style) {
+  public void update(GenomicRegion displayRegion,
+      int resolution,
+      double yMax,
+      int width,
+      int height,
+      int margin,
+      Color lineColor,
+      Color fillColor,
+      PlotStyle style) {
 
     // System.err.println("regions " + start + " " + end + " " +
     // getCurrentAxes().toPlotX(end));
@@ -102,7 +96,8 @@ public class ABIPlot extends Plot {
     XYSeries series = getAllSeries().getCurrent();
 
     // Use the bedgraph to set the series color
-    // System.err.println(lineColor + " " + getName() + " " + series.getName() + " "
+    // System.err.println(lineColor + " " + getName() + " " + series.getName() +
+    // " "
     // + series.getStyle().getLineStyle().getColor());
 
     if (!mLineColor.equals(series.getStyle().getLineStyle().getColor())) {

@@ -48,13 +48,12 @@ import org.jebtk.modern.menu.ModernMenuItem;
 import org.jebtk.modern.menu.ModernPopupMenu;
 import org.jebtk.modern.widget.ModernWidget;
 
-import edu.columbia.rdf.htsview.tracks.measurement.ScalePlotTrack;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class BedPlotLayer.
  */
-public class BedPlotLayer extends AxesClippedLayer implements ModernClickListener {
+public class BedPlotLayer extends AxesClippedLayer
+    implements ModernClickListener {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
@@ -98,8 +97,8 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseClicked(org.
-     * abh.common.ui.graphics.CanvasMouseEvent)
+     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseClicked(
+     * org. abh.common.ui.graphics.CanvasMouseEvent)
      */
     @Override
     public void canvasMouseClicked(CanvasMouseEvent e) {
@@ -110,8 +109,8 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseEntered(org.
-     * abh.common.ui.graphics.CanvasMouseEvent)
+     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseEntered(
+     * org. abh.common.ui.graphics.CanvasMouseEvent)
      */
     @Override
     public void canvasMouseEntered(CanvasMouseEvent e) {
@@ -122,8 +121,8 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseExited(org.
-     * abh.common.ui.graphics.CanvasMouseEvent)
+     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseExited(
+     * org. abh.common.ui.graphics.CanvasMouseEvent)
      */
     @Override
     public void canvasMouseExited(CanvasMouseEvent e) {
@@ -134,8 +133,8 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMousePressed(org.
-     * abh.common.ui.graphics.CanvasMouseEvent)
+     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMousePressed(
+     * org. abh.common.ui.graphics.CanvasMouseEvent)
      */
     @Override
     public void canvasMousePressed(CanvasMouseEvent e) {
@@ -159,8 +158,8 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseReleased(org.
-     * abh.common.ui.graphics.CanvasMouseEvent)
+     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseReleased(
+     * org. abh.common.ui.graphics.CanvasMouseEvent)
      */
     @Override
     public void canvasMouseReleased(CanvasMouseEvent e) {
@@ -172,8 +171,8 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseDragged(org.
-     * abh.common.ui.graphics.CanvasMouseEvent)
+     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseDragged(
+     * org. abh.common.ui.graphics.CanvasMouseEvent)
      */
     @Override
     public void canvasMouseDragged(CanvasMouseEvent e) {
@@ -185,8 +184,8 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseMoved(org.abh
-     * .common.ui.graphics.CanvasMouseEvent)
+     * org.abh.common.ui.graphics.ModernCanvasMouseListener#canvasMouseMoved(org
+     * .abh .common.ui.graphics.CanvasMouseEvent)
      */
     @Override
     public void canvasMouseMoved(CanvasMouseEvent e) {
@@ -199,8 +198,7 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
   /**
    * Instantiates a new bed plot layer.
    *
-   * @param color
-   *          the color
+   * @param color the color
    */
   public BedPlotLayer(Color color) {
     mColor = color;
@@ -215,7 +213,8 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
     menuItem.addClickListener(this);
     mMenu.add(menuItem);
 
-    menuItem = new ModernIconMenuItem("UCSC", UIService.getInstance().loadIcon("ucsc", 16));
+    menuItem = new ModernIconMenuItem("UCSC",
+        UIService.getInstance().loadIcon("ucsc", 16));
     menuItem.addClickListener(this);
     mMenu.add(menuItem);
 
@@ -230,14 +229,13 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
   /**
    * Update.
    *
-   * @param regions
-   *          the regions
-   * @param color
-   *          the color
-   * @param displayMode
-   *          the display mode
+   * @param regions the regions
+   * @param color the color
+   * @param displayMode the display mode
    */
-  public void update(List<UCSCTrackRegion> regions, Color color, TrackDisplayMode displayMode) {
+  public void update(List<UCSCTrackRegion> regions,
+      Color color,
+      TrackDisplayMode displayMode) {
     mRegions = regions;
     mColor = color;
     mDisplayMode = displayMode;
@@ -253,7 +251,11 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
    * org.graphplot.figure.Axes)
    */
   @Override
-  public void plotLayer(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
+  public void plotLayer(Graphics2D g2,
+      DrawingContext context,
+      Figure figure,
+      SubFigure subFigure,
+      Axes axes) {
 
     if (CollectionUtils.isNullOrEmpty(mRegions)) {
       return;
@@ -312,9 +314,9 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
       // Determine the correct y
 
       /*
-       * if (bed.getStrand() == '+' || bed.getStrand() == '-') { // draw track lower
-       * down so direction arrow can be put // in place yp = y + yDiff2; } else { //
-       * center the blocks within the space yp = y + yDiff1; }
+       * if (bed.getStrand() == '+' || bed.getStrand() == '-') { // draw track
+       * lower down so direction arrow can be put // in place yp = y + yDiff2; }
+       * else { // center the blocks within the space yp = y + yDiff1; }
        */
 
       yp = y; // + yDiff1;
@@ -336,7 +338,10 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
       } else {
         // draw for the sub regions
 
-        g2.drawLine(x1, yp + BedPlotTrack.HALF_BAR_HEIGHT, x2, yp + BedPlotTrack.HALF_BAR_HEIGHT);
+        g2.drawLine(x1,
+            yp + BedPlotTrack.HALF_BAR_HEIGHT,
+            x2,
+            yp + BedPlotTrack.HALF_BAR_HEIGHT);
 
         for (GenomicRegion subRegion : region.getSubRegions()) {
           sx1 = axes.toPlotX1(subRegion.getStart());
@@ -353,9 +358,10 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
       }
 
       /*
-       * if (bed.getStrand() == '+') { GenesPlotCanvasLayer.drawForwardArrow(g2, x1,
-       * yp); } else if (bed.getStrand() == '-') {
-       * GenesPlotCanvasLayer.drawReverseArrow(g2, x2, yp); } else { // do nothing }
+       * if (bed.getStrand() == '+') { GenesPlotCanvasLayer.drawForwardArrow(g2,
+       * x1, yp); } else if (bed.getStrand() == '-') {
+       * GenesPlotCanvasLayer.drawReverseArrow(g2, x2, yp); } else { // do
+       * nothing }
        */
 
       // In full mode, each feature is draw separately on its
@@ -379,15 +385,16 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
           s = region.getLocation();
         }
 
-        g2.drawString(s, x2 + BedPlotTrack.BAR_HEIGHT,
+        g2.drawString(s,
+            x2 + BedPlotTrack.BAR_HEIGHT,
             yp + ModernWidget.getTextYPosCenter(g2, BedPlotTrack.BAR_HEIGHT));
       }
     }
   }
 
   /*
-   * public final void drawForwardArrow(Graphics2D g2, int x, int y) { Graphics2D
-   * g2Temp = (Graphics2D)g2.create();
+   * public final void drawForwardArrow(Graphics2D g2, int x, int y) {
+   * Graphics2D g2Temp = (Graphics2D)g2.create();
    * 
    * g2Temp.translate(x + HALF_BAR_HEIGHT, y - HALF_BAR_HEIGHT);
    * 
@@ -397,8 +404,8 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
    * 
    * g2Temp.dispose(); }
    * 
-   * public final void drawReverseArrow(Graphics2D g2, int x, int y) { Graphics2D
-   * g2Temp = (Graphics2D)g2.create();
+   * public final void drawReverseArrow(Graphics2D g2, int x, int y) {
+   * Graphics2D g2Temp = (Graphics2D)g2.create();
    * 
    * g2Temp.translate(x - HALF_BAR_HEIGHT, y - HALF_BAR_HEIGHT);
    * 
@@ -411,9 +418,8 @@ public class BedPlotLayer extends AxesClippedLayer implements ModernClickListene
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
-   * ModernClickEvent)
+   * @see org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * event. ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

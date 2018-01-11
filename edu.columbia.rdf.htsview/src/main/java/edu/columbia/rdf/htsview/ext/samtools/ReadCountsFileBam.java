@@ -65,8 +65,7 @@ public class ReadCountsFileBam extends ReadCountsFile {
    * Directory containing genome files which must be of the form chr.n.txt. Each
    * file must contain exactly one line consisting of the entire chromosome.
    *
-   * @param file
-   *          the file
+   * @param file the file
    */
   public ReadCountsFileBam(Path file) {
     mFile = file;
@@ -91,26 +90,26 @@ public class ReadCountsFileBam extends ReadCountsFile {
    * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
    */
   @Override
-  public List<Integer> getCounts(GenomicRegion region, int window) throws IOException {
-    return getCounts(region.getChr(), region.getStart(), region.getEnd(), window);
+  public List<Integer> getCounts(GenomicRegion region, int window)
+      throws IOException {
+    return getCounts(region.getChr(),
+        region.getStart(),
+        region.getEnd(),
+        window);
   }
 
   /**
    * Gets the counts.
    *
-   * @param chr
-   *          the chr
-   * @param start
-   *          the start
-   * @param end
-   *          the end
-   * @param window
-   *          the window
+   * @param chr the chr
+   * @param start the start
+   * @param end the end
+   * @param window the window
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getCounts(Chromosome chr, int start, int end, int window) throws IOException {
+  public List<Integer> getCounts(Chromosome chr, int start, int end, int window)
+      throws IOException {
     return binCounts(getStarts(chr, start, end, window), start, end, window);
   }
 
@@ -121,26 +120,26 @@ public class ReadCountsFileBam extends ReadCountsFile {
    * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
    */
   @Override
-  public List<Integer> getStarts(GenomicRegion region, int window) throws IOException {
-    return getStarts(region.getChr(), region.getStart(), region.getEnd(), window);
+  public List<Integer> getStarts(GenomicRegion region, int window)
+      throws IOException {
+    return getStarts(region.getChr(),
+        region.getStart(),
+        region.getEnd(),
+        window);
   }
 
   /**
    * Gets the starts.
    *
-   * @param chr
-   *          the chr
-   * @param start
-   *          the start
-   * @param end
-   *          the end
-   * @param window
-   *          the window
+   * @param chr the chr
+   * @param start the start
+   * @param end the end
+   * @param window the window
    * @return the starts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getStarts(Chromosome chr, int start, int end, int window) throws IOException {
+  public List<Integer> getStarts(Chromosome chr, int start, int end, int window)
+      throws IOException {
 
     List<Integer> starts = new ArrayList<Integer>();
 
@@ -190,26 +189,26 @@ public class ReadCountsFileBam extends ReadCountsFile {
    * bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public List<Strand> getStrands(GenomicRegion region, int window) throws IOException {
-    return getStrands(region.getChr(), region.getStart(), region.getEnd(), window);
+  public List<Strand> getStrands(GenomicRegion region, int window)
+      throws IOException {
+    return getStrands(region.getChr(),
+        region.getStart(),
+        region.getEnd(),
+        window);
   }
 
   /**
    * Gets the strands.
    *
-   * @param chr
-   *          the chr
-   * @param start
-   *          the start
-   * @param end
-   *          the end
-   * @param window
-   *          the window
+   * @param chr the chr
+   * @param start the start
+   * @param end the end
+   * @param window the window
    * @return the strands
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Strand> getStrands(Chromosome chr, int start, int end, int window) throws IOException {
+  public List<Strand> getStrands(Chromosome chr, int start, int end, int window)
+      throws IOException {
     SAMRecordIterator iter = null;
 
     SamReader inputSam = SamReaderFactory.makeDefault().open(mFile.toFile());
@@ -273,7 +272,11 @@ public class ReadCountsFileBam extends ReadCountsFile {
     return mReadLength;
   }
 
-  private static SAMRecordIterator openSam(Path file, Chromosome chr, int start, int end, int window) {
+  private static SAMRecordIterator openSam(Path file,
+      Chromosome chr,
+      int start,
+      int end,
+      int window) {
     SamReader inputSam = SamReaderFactory.makeDefault().open(file.toFile());
 
     SAMRecordIterator iter = null;

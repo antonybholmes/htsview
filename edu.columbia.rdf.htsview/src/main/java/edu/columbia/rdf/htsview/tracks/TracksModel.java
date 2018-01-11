@@ -35,27 +35,24 @@ public class TracksModel extends ListModel<TreeNode<Track>> {
   private static final long serialVersionUID = 1L;
 
   /**
-   * Returns everything in the track model that can be represented as a BedGraph.
-   * Tracks such as genes or BED files are excluded.
+   * Returns everything in the track model that can be represented as a
+   * BedGraph. Tracks such as genes or BED files are excluded.
    *
-   * @param displayRegion
-   *          the display region
-   * @param resolution
-   *          the resolution
-   * @param normalize
-   *          the normalize
+   * @param displayRegion the display region
+   * @param resolution the resolution
+   * @param normalize the normalize
    * @return the bed graphs
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
-  public List<UCSCTrack> getBedGraphs(GenomicRegion displayRegion, int resolution, boolean normalize)
-      throws IOException, ParseException {
+  public List<UCSCTrack> getBedGraphs(GenomicRegion displayRegion,
+      int resolution,
+      boolean normalize) throws IOException, ParseException {
     List<UCSCTrack> bedGraphs = new ArrayList<UCSCTrack>();
 
     for (TreeNode<Track> track : this) {
-      UCSCTrack bedGraph = track.getValue().getBedGraph(displayRegion, resolution, normalize);
+      UCSCTrack bedGraph = track.getValue()
+          .getBedGraph(displayRegion, resolution, normalize);
 
       if (bedGraph != null) {
         bedGraphs.add(bedGraph);

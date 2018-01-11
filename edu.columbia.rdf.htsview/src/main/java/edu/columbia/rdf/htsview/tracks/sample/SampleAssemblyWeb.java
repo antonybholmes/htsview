@@ -43,7 +43,8 @@ import edu.columbia.rdf.htsview.tracks.SampleAssembly;
 public class SampleAssemblyWeb extends SampleAssembly {
 
   /** The Constant LOG. */
-  private static final Logger LOG = LoggerFactory.getLogger(SampleAssemblyWeb.class);
+  private static final Logger LOG = LoggerFactory
+      .getLogger(SampleAssemblyWeb.class);
 
   /** The m auth V 1. */
   private OTKAuthUrl mAuthV1;
@@ -57,17 +58,16 @@ public class SampleAssemblyWeb extends SampleAssembly {
   /**
    * Instantiates a new track assembly web.
    *
-   * @param login
-   *          the login
-   * @param url
-   *          the url
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param login the login
+   * @param url the url
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public SampleAssemblyWeb(EDBWLogin login, UrlBuilder url) throws IOException {
-    mAuthV1 = new OTKAuthUrl(url, login.getUser(), login.getKey(), login.getEpoch(), login.getStep());
+    mAuthV1 = new OTKAuthUrl(url, login.getUser(), login.getKey(),
+        login.getEpoch(), login.getStep());
 
-    // mAuthV1 = new OTKAuthUrl(new UrlBuilder(url).resolve("v2").resolve("auth"),
+    // mAuthV1 = new OTKAuthUrl(new
+    // UrlBuilder(url).resolve("v2").resolve("auth"),
     // login.getUser(),
     // login.getKey(),
     // login.getEpoch(),
@@ -75,8 +75,8 @@ public class SampleAssemblyWeb extends SampleAssembly {
   }
 
   /*
-   * @Override public List<Integer> getStarts(Sample sample, GenomicRegion region)
-   * throws IOException { List<Integer> ret = new ArrayList<Integer>();
+   * @Override public List<Integer> getStarts(Sample sample, GenomicRegion
+   * region) throws IOException { List<Integer> ret = new ArrayList<Integer>();
    * 
    * UrlBuilder startsUrl =
    * mAuthV1.getOTKAuthUrl().resolve("starts").resolve(sample.getId()).resolve(
@@ -98,11 +98,13 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.htsview.tracks.SampleAssembly#getStarts(edu.columbia.rdf.edb
-   * .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
+   * edu.columbia.rdf.htsview.tracks.SampleAssembly#getStarts(edu.columbia.rdf.
+   * edb .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public List<Integer> getStarts(Sample sample, GenomicRegion region, int window) throws IOException {
+  public List<Integer> getStarts(Sample sample,
+      GenomicRegion region,
+      int window) throws IOException {
 
     // List<Integer> ret = getJsonStarts(sample, region);
 
@@ -113,24 +115,25 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
     // return ret;
 
-    return getJsonStarts(sample, region, window); // getBinaryStarts(sample, region, window);
+    return getJsonStarts(sample, region, window); // getBinaryStarts(sample,
+                                                  // region, window);
   }
 
   /**
    * Gets the json starts.
    *
-   * @param sample
-   *          the sample
-   * @param region
-   *          the region
+   * @param sample the sample
+   * @param region the region
    * @return the json starts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getJsonStarts(Sample sample, GenomicRegion region, int window) throws IOException {
+  public List<Integer> getJsonStarts(Sample sample,
+      GenomicRegion region,
+      int window) throws IOException {
     List<Integer> ret = new ArrayList<Integer>();
 
-    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("starts").resolve(sample.getId()).resolve(region.getChr())
+    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("starts")
+        .resolve(sample.getId()).resolve(region.getChr())
         .resolve(region.getStart()).resolve(region.getEnd());
 
     // LOG.info("starts url: {}", url);
@@ -149,19 +152,18 @@ public class SampleAssemblyWeb extends SampleAssembly {
   /**
    * Gets the binary starts.
    *
-   * @param sample
-   *          the sample
-   * @param region
-   *          the region
-   * @param window
-   *          the window
+   * @param sample the sample
+   * @param region the region
+   * @param window the window
    * @return the binary starts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getBinaryStarts(Sample sample, GenomicRegion region, int window) throws IOException {
+  public List<Integer> getBinaryStarts(Sample sample,
+      GenomicRegion region,
+      int window) throws IOException {
 
-    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("starts").resolve(sample.getId()).resolve(region.getChr())
+    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("starts")
+        .resolve(sample.getId()).resolve(region.getChr())
         .resolve(region.getStart()).resolve(region.getEnd()).resolve("b");
 
     return BufferUtils.byteBuffer().wrap(UrlUtils.read(url).bytes()).ints();
@@ -175,25 +177,28 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * edb.Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public List<Strand> getStrands(Sample sample, GenomicRegion region, int window) throws IOException {
-    return getJsonStrands(sample, region, window); // getBinaryStrands(sample, region, window);
+  public List<Strand> getStrands(Sample sample,
+      GenomicRegion region,
+      int window) throws IOException {
+    return getJsonStrands(sample, region, window); // getBinaryStrands(sample,
+                                                   // region, window);
   }
 
   /**
    * Gets the json strands.
    *
-   * @param sample
-   *          the sample
-   * @param region
-   *          the region
+   * @param sample the sample
+   * @param region the region
    * @return the json strands
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Strand> getJsonStrands(Sample sample, GenomicRegion region, int window) throws IOException {
+  public List<Strand> getJsonStrands(Sample sample,
+      GenomicRegion region,
+      int window) throws IOException {
     List<Strand> ret = new ArrayList<Strand>();
 
-    UrlBuilder startsUrl = mAuthV1.getOTKAuthUrl().resolve("strands").resolve(sample.getId()).resolve(region.getChr())
+    UrlBuilder startsUrl = mAuthV1.getOTKAuthUrl().resolve("strands")
+        .resolve(sample.getId()).resolve(region.getChr())
         .resolve(region.getStart()).resolve(region.getEnd());
 
     // LOG.info("starts url: {}", startsUrl);
@@ -212,18 +217,17 @@ public class SampleAssemblyWeb extends SampleAssembly {
   /**
    * Gets the binary strands.
    *
-   * @param sample
-   *          the sample
-   * @param region
-   *          the region
-   * @param window
-   *          the window
+   * @param sample the sample
+   * @param region the region
+   * @param window the window
    * @return the binary strands
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Strand> getBinaryStrands(Sample sample, GenomicRegion region, int window) throws IOException {
-    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("strands").resolve(sample.getId()).resolve(region.getChr())
+  public List<Strand> getBinaryStrands(Sample sample,
+      GenomicRegion region,
+      int window) throws IOException {
+    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("strands")
+        .resolve(sample.getId()).resolve(region.getChr())
         .resolve(region.getStart()).resolve(region.getEnd()).resolve("b");
 
     /*
@@ -236,47 +240,48 @@ public class SampleAssemblyWeb extends SampleAssembly {
      * return ret;
      */
 
-    return Strand.parse(BufferUtils.byteBuffer().wrap(UrlUtils.read(url).bytes()).byteChars());
+    return Strand.parse(
+        BufferUtils.byteBuffer().wrap(UrlUtils.read(url).bytes()).byteChars());
   }
 
   /*
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.htsview.tracks.SampleAssembly#getCounts(edu.columbia.rdf.edb
-   * .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
+   * edu.columbia.rdf.htsview.tracks.SampleAssembly#getCounts(edu.columbia.rdf.
+   * edb .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public List<Integer> getCounts(Sample sample, GenomicRegion region, int window) throws IOException {
+  public List<Integer> getCounts(Sample sample,
+      GenomicRegion region,
+      int window) throws IOException {
 
     return getJsonCounts(sample, region, window);
 
     /*
-     * if (hasReadSupport(sample)) { return getBinaryCounts(sample, region, window);
-     * } else { return getJsonCounts(sample, region, window); }
+     * if (hasReadSupport(sample)) { return getBinaryCounts(sample, region,
+     * window); } else { return getJsonCounts(sample, region, window); }
      */
   }
 
   /**
    * Gets the json counts.
    *
-   * @param sample
-   *          the sample
-   * @param region
-   *          the region
-   * @param window
-   *          the window
+   * @param sample the sample
+   * @param region the region
+   * @param window the window
    * @return the json counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getJsonCounts(Sample sample, GenomicRegion region, int window) throws IOException {
+  public List<Integer> getJsonCounts(Sample sample,
+      GenomicRegion region,
+      int window) throws IOException {
     List<Integer> ret = new ArrayList<Integer>();
 
     UrlBuilder url = mAuthV1.getOTKAuthUrl();
 
-    url = url.resolve("counts").resolve(sample.getId()).resolve(region.getChr()).resolve(region.getStart())
-        .resolve(region.getEnd()).resolve(window);
+    url = url.resolve("counts").resolve(sample.getId()).resolve(region.getChr())
+        .resolve(region.getStart()).resolve(region.getEnd()).resolve(window);
 
     // LOG.info("Count url: {}", url);
 
@@ -294,22 +299,21 @@ public class SampleAssemblyWeb extends SampleAssembly {
   /**
    * Gets the binary counts.
    *
-   * @param sample
-   *          the sample
-   * @param region
-   *          the region
-   * @param window
-   *          the window
+   * @param sample the sample
+   * @param region the region
+   * @param window the window
    * @return the binary counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getBinaryCounts(Sample sample, GenomicRegion region, int window) throws IOException {
+  public List<Integer> getBinaryCounts(Sample sample,
+      GenomicRegion region,
+      int window) throws IOException {
 
     UrlBuilder url = mAuthV1.getOTKAuthUrl();
 
-    url = url.resolve("counts").resolve(sample.getId()).resolve(region.getChr()).resolve(region.getStart())
-        .resolve(region.getEnd()).resolve(window).resolve("b");
+    url = url.resolve("counts").resolve(sample.getId()).resolve(region.getChr())
+        .resolve(region.getStart()).resolve(region.getEnd()).resolve(window)
+        .resolve("b");
 
     // LOG.info("Count url: {}", url);
 
@@ -346,12 +350,13 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.htsview.tracks.SampleAssembly#getGenome(edu.columbia.rdf.edb
-   * .Sample)
+   * edu.columbia.rdf.htsview.tracks.SampleAssembly#getGenome(edu.columbia.rdf.
+   * edb .Sample)
    */
   @Override
   public String getGenome(Sample sample) throws IOException {
-    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("genome").resolve(sample.getId());
+    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("genome")
+        .resolve(sample.getId());
 
     Json json = new JsonParser().parse(url.toUrl());
 
@@ -361,11 +366,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
   /**
    * See if we can use the brt version of the files.
    *
-   * @param sample
-   *          the sample
+   * @param sample the sample
    * @return true, if successful
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   @Override
   public boolean hasReadSupport(Sample sample) throws IOException {
@@ -373,7 +376,8 @@ public class SampleAssemblyWeb extends SampleAssembly {
       return mBRTMap.get(sample);
     }
 
-    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("type").resolve(sample.getId());
+    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("type")
+        .resolve(sample.getId());
 
     LOG.info("BRT url: {}", url);
 
@@ -403,7 +407,8 @@ public class SampleAssemblyWeb extends SampleAssembly {
       return mBVTMap.get(sample);
     }
 
-    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("type").resolve(sample.getId());
+    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("type")
+        .resolve(sample.getId());
 
     // LOG.info("BRT url: {}", url);
 
@@ -422,12 +427,13 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.htsview.tracks.SampleAssembly#getReadLength(edu.columbia.rdf
-   * .edb.Sample)
+   * edu.columbia.rdf.htsview.tracks.SampleAssembly#getReadLength(edu.columbia.
+   * rdf .edb.Sample)
    */
   @Override
   public int getReadLength(Sample sample) throws IOException {
-    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("length").resolve(sample.getId());
+    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("length")
+        .resolve(sample.getId());
 
     // LOG.info("Read length url: {}", url);
 

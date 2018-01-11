@@ -29,7 +29,6 @@ import org.jebtk.modern.ribbon.Ribbon;
 import org.jebtk.modern.ribbon.RibbonSection;
 import org.jebtk.modern.spinner.ModernCompactSpinner;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
-import org.jebtk.modern.widget.ModernWidget;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -56,22 +55,26 @@ public class ScaleRibbonSection extends RibbonSection {
   /**
    * The m check common y scale.
    */
-  private ModernTwoStateWidget mCheckCommonYScale = new ModernCheckSwitch("Same");
+  private ModernTwoStateWidget mCheckCommonYScale = new ModernCheckSwitch(
+      "Same");
 
   /**
    * The m check normalize.
    */
-  private ModernTwoStateWidget mCheckNormalize = new ModernCheckSwitch("Normalize", true);
+  private ModernTwoStateWidget mCheckNormalize = new ModernCheckSwitch(
+      "Normalize", true);
 
   /**
    * The m text y min.
    */
-  private ModernCompactSpinner mTextYMin = new ModernCompactSpinner(0, 10000, 0);
+  private ModernCompactSpinner mTextYMin = new ModernCompactSpinner(0, 10000,
+      0);
 
   /**
    * The m text y max.
    */
-  private ModernCompactSpinner mTextYMax = new ModernCompactSpinner(1, 10000, 1);
+  private ModernCompactSpinner mTextYMax = new ModernCompactSpinner(1, 10000,
+      1);
 
   /**
    * The m y axis limit model.
@@ -86,11 +89,13 @@ public class ScaleRibbonSection extends RibbonSection {
     /*
      * (non-Javadoc)
      * 
-     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     * @see
+     * org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
-      mTextYMax.setText(Formatter.number().dp(2).format(mYAxisLimitModel.getMax()));
+      mTextYMax
+          .setText(Formatter.number().dp(2).format(mYAxisLimitModel.getMax()));
     }
 
   }
@@ -144,8 +149,8 @@ public class ScaleRibbonSection extends RibbonSection {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-     * event.ModernClickEvent)
+     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+     * ui. event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -162,8 +167,8 @@ public class ScaleRibbonSection extends RibbonSection {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-     * event.ModernClickEvent)
+     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+     * ui. event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -180,8 +185,8 @@ public class ScaleRibbonSection extends RibbonSection {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-     * event.ModernClickEvent)
+     * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+     * ui. event.ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -192,14 +197,12 @@ public class ScaleRibbonSection extends RibbonSection {
   /**
    * Instantiates a new scale ribbon section2.
    *
-   * @param ribbon
-   *          the ribbon
-   * @param name
-   *          the name
-   * @param yAxisLimitModel
-   *          the y axis limit model
+   * @param ribbon the ribbon
+   * @param name the name
+   * @param yAxisLimitModel the y axis limit model
    */
-  public ScaleRibbonSection(Ribbon ribbon, String name, AxisLimitsModel yAxisLimitModel) {
+  public ScaleRibbonSection(Ribbon ribbon, String name,
+      AxisLimitsModel yAxisLimitModel) {
     super(ribbon, name);
 
     mYAxisLimitModel = yAxisLimitModel;

@@ -36,8 +36,7 @@ public abstract class AnnotationPlotTrack extends Track {
   /**
    * Instantiates a new annotation plot track.
    *
-   * @param name
-   *          the name
+   * @param name the name
    */
   public AnnotationPlotTrack(String name) {
     setName(name);
@@ -101,8 +100,8 @@ public abstract class AnnotationPlotTrack extends Track {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * edu.columbia.rdf.htsview.tracks.Track#toJson(org.abh.common.json.JsonBuilder)
+   * @see edu.columbia.rdf.htsview.tracks.Track#toJson(org.abh.common.json.
+   * JsonBuilder)
    */
   @Override
   public void toJson(JsonBuilder json) {

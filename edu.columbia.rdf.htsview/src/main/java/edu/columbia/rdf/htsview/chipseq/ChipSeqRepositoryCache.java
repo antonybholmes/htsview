@@ -30,12 +30,11 @@ public class ChipSeqRepositoryCache extends RestrictedTypeRepositoryCache {
   /**
    * Instantiates a new chip seq repository cache.
    *
-   * @param login
-   *          the login
-   * @throws UnsupportedEncodingException
-   *           the unsupported encoding exception
+   * @param login the login
+   * @throws UnsupportedEncodingException the unsupported encoding exception
    */
-  public ChipSeqRepositoryCache(EDBWLogin login) throws UnsupportedEncodingException {
+  public ChipSeqRepositoryCache(EDBWLogin login)
+      throws UnsupportedEncodingException {
     super(login, EDBRepository.CHIP_SEQ_TYPE);
   }
 }

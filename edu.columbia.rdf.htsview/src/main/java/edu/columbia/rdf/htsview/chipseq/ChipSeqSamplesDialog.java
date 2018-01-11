@@ -32,8 +32,7 @@ public class ChipSeqSamplesDialog extends SamplesDialog {
   /**
    * Instantiates a new chip seq samples dialog.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public ChipSeqSamplesDialog(ModernWindow parent) {
     this(parent, new SearchModel());
@@ -42,13 +41,12 @@ public class ChipSeqSamplesDialog extends SamplesDialog {
   /**
    * Instantiates a new chip seq samples dialog.
    *
-   * @param parent
-   *          the parent
-   * @param searchModel
-   *          the search model
+   * @param parent the parent
+   * @param searchModel the search model
    */
   public ChipSeqSamplesDialog(ModernWindow parent, SearchModel searchModel) {
 
-    super(parent, "ChIP-seq Samples", "htsview.samples.help.url", "chipseq", new ChipSeqSortModel(), searchModel);
+    super(parent, "ChIP-seq Samples", "htsview.samples.help.url", "chipseq",
+        new ChipSeqSortModel(), searchModel);
   }
 }

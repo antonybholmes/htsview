@@ -65,8 +65,7 @@ public class SampleLoaderService {
   /**
    * Register.
    *
-   * @param parser
-   *          the parser
+   * @param parser the parser
    */
   public void register(SampleLoader parser) {
     register(parser.getExt(), parser);
@@ -75,10 +74,8 @@ public class SampleLoaderService {
   /**
    * Register.
    *
-   * @param type
-   *          the type
-   * @param parser
-   *          the parser
+   * @param type the type
+   * @param parser the parser
    */
   private void register(String type, SampleLoader parser) {
     mParserMap.put(type, parser);
@@ -87,8 +84,7 @@ public class SampleLoaderService {
   /**
    * Gets the.
    *
-   * @param type
-   *          the type
+   * @param type the type
    * @return the sample loader
    */
   public SampleLoader get(String type) {
@@ -100,17 +96,15 @@ public class SampleLoaderService {
    * For unattended file opening, use either the {@code openSample()} or
    * {@code openReads()} methods.
    *
-   * @param parent
-   *          the parent
-   * @param files
-   *          the files
-   * @param root
-   *          the root
+   * @param parent the parent
+   * @param files the files
+   * @param root the root
    * @return the track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public Track openFiles(ModernWindow parent, List<Path> files, TreeNode<Track> root) throws IOException {
+  public Track openFiles(ModernWindow parent,
+      List<Path> files,
+      TreeNode<Track> root) throws IOException {
     if (CollectionUtils.isNullOrEmpty(files)) {
       return null;
     }
@@ -127,17 +121,14 @@ public class SampleLoaderService {
   /**
    * Open file.
    *
-   * @param parent
-   *          the parent
-   * @param file
-   *          the file
-   * @param root
-   *          the root
+   * @param parent the parent
+   * @param file the file
+   * @param root the root
    * @return the track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public Track openFile(ModernWindow parent, Path file, TreeNode<Track> root) throws IOException {
+  public Track openFile(ModernWindow parent, Path file, TreeNode<Track> root)
+      throws IOException {
     // First try the normal file extension
     String ext = PathUtils.getFileExt(file);
 
@@ -174,17 +165,15 @@ public class SampleLoaderService {
   /**
    * Open multiple samples.
    *
-   * @param parent
-   *          the parent
-   * @param files
-   *          the files
-   * @param root
-   *          the root
+   * @param parent the parent
+   * @param files the files
+   * @param root the root
    * @return the track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public Track openSamples(ModernWindow parent, List<Path> files, TreeNode<Track> root) throws IOException {
+  public Track openSamples(ModernWindow parent,
+      List<Path> files,
+      TreeNode<Track> root) throws IOException {
     if (CollectionUtils.isNullOrEmpty(files)) {
       return null;
     }
@@ -201,17 +190,14 @@ public class SampleLoaderService {
   /**
    * Open sample.
    *
-   * @param parent
-   *          the parent
-   * @param file
-   *          the file
-   * @param root
-   *          the root
+   * @param parent the parent
+   * @param file the file
+   * @param root the root
    * @return the track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public Track openSample(ModernWindow parent, Path file, TreeNode<Track> root) throws IOException {
+  public Track openSample(ModernWindow parent, Path file, TreeNode<Track> root)
+      throws IOException {
     // First try the normal file extension
     String ext = PathUtils.getFileExt(file);
 
@@ -248,17 +234,15 @@ public class SampleLoaderService {
   /**
    * Open reads.
    *
-   * @param parent
-   *          the parent
-   * @param files
-   *          the files
-   * @param root
-   *          the root
+   * @param parent the parent
+   * @param files the files
+   * @param root the root
    * @return the track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public Track openReads(ModernWindow parent, List<Path> files, TreeNode<Track> root) throws IOException {
+  public Track openReads(ModernWindow parent,
+      List<Path> files,
+      TreeNode<Track> root) throws IOException {
     if (CollectionUtils.isNullOrEmpty(files)) {
       return null;
     }
@@ -275,17 +259,14 @@ public class SampleLoaderService {
   /**
    * Open reads.
    *
-   * @param parent
-   *          the parent
-   * @param file
-   *          the file
-   * @param root
-   *          the root
+   * @param parent the parent
+   * @param file the file
+   * @param root the root
    * @return the track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public Track openReads(ModernWindow parent, Path file, TreeNode<Track> root) throws IOException {
+  public Track openReads(ModernWindow parent, Path file, TreeNode<Track> root)
+      throws IOException {
     // First try the normal file extension
     String ext = PathUtils.getFileExt(file);
 

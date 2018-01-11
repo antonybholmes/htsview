@@ -35,8 +35,9 @@ public class RulerPlotCanvas extends MeasurementSubFigure {
   private static final long serialVersionUID = 1L;
 
   /** The Constant MARGINS. */
-  public static final MarginProperties MARGINS = new MarginProperties(Track.MARGINS.getTop(), Track.MARGINS.getLeft(),
-      Track.MEDIUM_MARGIN, Track.SMALL_MARGIN);
+  public static final MarginProperties MARGINS = new MarginProperties(
+      Track.MARGINS.getTop(), Track.MARGINS.getLeft(), Track.MEDIUM_MARGIN,
+      Track.SMALL_MARGIN);
 
   /** The m layer. */
   private RulerCanvasLayer mLayer;
@@ -44,8 +45,7 @@ public class RulerPlotCanvas extends MeasurementSubFigure {
   /**
    * Instantiates a new ruler plot canvas.
    *
-   * @param titlePosition
-   *          the title position
+   * @param titlePosition the title position
    */
   public RulerPlotCanvas(TitleProperties titlePosition) {
     mLayer = new RulerCanvasLayer();
@@ -61,8 +61,7 @@ public class RulerPlotCanvas extends MeasurementSubFigure {
   /**
    * Creates the.
    *
-   * @param titlePosition
-   *          the title position
+   * @param titlePosition the title position
    * @return the ruler plot canvas
    */
   public static RulerPlotCanvas create(TitleProperties titlePosition) {
@@ -91,14 +90,29 @@ public class RulerPlotCanvas extends MeasurementSubFigure {
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.htsview.tracks.measurement.MeasurementSubFigure#update(org.
-   * jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int,
+   * edu.columbia.rdf.htsview.tracks.measurement.MeasurementSubFigure#update(
+   * org. jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int,
    * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
-      Color lineColor, Color fillColor, PlotStyle style) {
-    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+  public void update(GenomicRegion displayRegion,
+      int resolution,
+      double yMax,
+      int width,
+      int height,
+      int margin,
+      Color lineColor,
+      Color fillColor,
+      PlotStyle style) {
+    super.update(displayRegion,
+        resolution,
+        yMax,
+        width,
+        height,
+        margin,
+        lineColor,
+        fillColor,
+        style);
 
     mLayer.update(displayRegion);
   }

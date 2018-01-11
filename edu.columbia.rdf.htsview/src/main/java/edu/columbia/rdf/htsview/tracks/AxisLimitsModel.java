@@ -64,14 +64,18 @@ public class AxisLimitsModel extends ChangeListeners {
     /*
      * (non-Javadoc)
      * 
-     * @see org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
+     * @see
+     * org.abh.lib.event.ChangeListener#changed(org.abh.lib.event.ChangeEvent)
      */
     @Override
     public void changed(ChangeEvent e) {
       SettingsService.getInstance().update("edb.reads.scale.max-y", mMax);
-      SettingsService.getInstance().update("edb.reads.scale.auto-y", mAutoLimits);
-      SettingsService.getInstance().update("edb.reads.scale.same-y", mCommonScale);
-      SettingsService.getInstance().update("edb.reads.scale.normalize-y", mNormalize);
+      SettingsService.getInstance().update("edb.reads.scale.auto-y",
+          mAutoLimits);
+      SettingsService.getInstance().update("edb.reads.scale.same-y",
+          mCommonScale);
+      SettingsService.getInstance().update("edb.reads.scale.normalize-y",
+          mNormalize);
     }
   }
 
@@ -80,9 +84,12 @@ public class AxisLimitsModel extends ChangeListeners {
    */
   public AxisLimitsModel() {
     mMax = SettingsService.getInstance().getAsDouble("edb.reads.scale.max-y");
-    mAutoLimits = SettingsService.getInstance().getAsBool("edb.reads.scale.auto-y");
-    mCommonScale = SettingsService.getInstance().getAsBool("edb.reads.scale.same-y");
-    mNormalize = SettingsService.getInstance().getAsBool("edb.reads.scale.normalize-y");
+    mAutoLimits = SettingsService.getInstance()
+        .getAsBool("edb.reads.scale.auto-y");
+    mCommonScale = SettingsService.getInstance()
+        .getAsBool("edb.reads.scale.same-y");
+    mNormalize = SettingsService.getInstance()
+        .getAsBool("edb.reads.scale.normalize-y");
 
     addChangeListener(new ChangeEvents());
   }
@@ -90,10 +97,8 @@ public class AxisLimitsModel extends ChangeListeners {
   /**
    * Sets the limits.
    *
-   * @param min
-   *          the min
-   * @param max
-   *          the max
+   * @param min the min
+   * @param max the max
    */
   public void setLimits(double min, double max) {
     mMin = min;
@@ -125,8 +130,7 @@ public class AxisLimitsModel extends ChangeListeners {
   /**
    * Sets the auto limits.
    *
-   * @param autoLimits
-   *          the new auto limits
+   * @param autoLimits the new auto limits
    */
   public void setAutoLimits(boolean autoLimits) {
     mAutoLimits = autoLimits;
@@ -146,8 +150,7 @@ public class AxisLimitsModel extends ChangeListeners {
   /**
    * Sets the common y scale.
    *
-   * @param commonScale
-   *          the new common y scale
+   * @param commonScale the new common y scale
    */
   public void setCommonYScale(boolean commonScale) {
     mCommonScale = commonScale;
@@ -167,8 +170,7 @@ public class AxisLimitsModel extends ChangeListeners {
   /**
    * Sets the normalize.
    *
-   * @param normalize
-   *          the new normalize
+   * @param normalize the new normalize
    */
   public void setNormalize(boolean normalize) {
     mNormalize = normalize;

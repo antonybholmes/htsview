@@ -52,17 +52,16 @@ public class ABISubFigure extends TrackSubFigure {
   /**
    * Creates the.
    *
-   * @param name
-   *          the name
-   * @param trace
-   *          the trace
-   * @param style
-   *          the style
-   * @param titlePosition
-   *          the title position
+   * @param name the name
+   * @param trace the trace
+   * @param style the style
+   * @param titlePosition the title position
    * @return the ABI sub figure
    */
-  public static ABISubFigure create(String name, ABITrace trace, PlotStyle style, TitleProperties titlePosition) {
+  public static ABISubFigure create(String name,
+      ABITrace trace,
+      PlotStyle style,
+      TitleProperties titlePosition) {
     ABISubFigure subFigure = new ABISubFigure();
 
     Axes axes = subFigure.currentAxes();
@@ -110,8 +109,15 @@ public class ABISubFigure extends TrackSubFigure {
    * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
-      Color lineColor, Color fillColor, PlotStyle style) {
+  public void update(GenomicRegion displayRegion,
+      int resolution,
+      double yMax,
+      int width,
+      int height,
+      int margin,
+      Color lineColor,
+      Color fillColor,
+      PlotStyle style) {
 
     // int start = displayRegion.getStart();
 
@@ -126,7 +132,15 @@ public class ABISubFigure extends TrackSubFigure {
     // getCurrentAxes().getXAxis().setLimits(start, end);
     // getCurrentAxes().getXAxis().startEndTicksOnly();
 
-    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+    super.update(displayRegion,
+        resolution,
+        yMax,
+        width,
+        height,
+        margin,
+        lineColor,
+        fillColor,
+        style);
 
     if (styleNotSet || mStyle != style) {
       setStyle(style);
@@ -145,13 +159,22 @@ public class ABISubFigure extends TrackSubFigure {
 
     // Create a series for each bedgraph in the group
 
-    List<PlotBox> layers = currentAxes().getChild(GridLocation.CENTER).getByType(LayerType.PLOT);
+    List<PlotBox> layers = currentAxes().getChild(GridLocation.CENTER)
+        .getByType(LayerType.PLOT);
 
     for (PlotBox layer : layers) {
       if (layer instanceof ABIPlot) {
         ABIPlot p = (ABIPlot) layer;
 
-        p.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+        p.update(displayRegion,
+            resolution,
+            yMax,
+            width,
+            height,
+            margin,
+            lineColor,
+            fillColor,
+            style);
       }
     }
 
@@ -172,14 +195,16 @@ public class ABISubFigure extends TrackSubFigure {
      * 
      * List<UCSCTrackRegion> regions =
      * UCSCTrackRegions.getFixedGapSearch(mBedGraph.getRegions()).getFeatureSet(
-     * displayRegion.getChr(), displayRegion.getStart(), displayRegion.getEnd());
+     * displayRegion.getChr(), displayRegion.getStart(),
+     * displayRegion.getEnd());
      * 
      * mPlot.setMatrix(new BedGraphRegionMatrix(regions));
      * 
      * for (MovableLayer l : plots) { Plot p = (Plot)l;
      * 
      * System.err.println("sdfsdf " + p.getId() + " " + p.getName() + " " +
-     * (p.getMatrix() == null) + " " + p.getAllSeries().getCurrent().getColor()); }
+     * (p.getMatrix() == null) + " " +
+     * p.getAllSeries().getCurrent().getColor()); }
      */
   }
 }

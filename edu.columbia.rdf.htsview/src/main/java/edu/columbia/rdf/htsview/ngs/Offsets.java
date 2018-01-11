@@ -30,10 +30,8 @@ public class Offsets {
   /**
    * Instantiates a new offsets.
    *
-   * @param so
-   *          the so
-   * @param eo
-   *          the eo
+   * @param so the so
+   * @param eo the eo
    */
   public Offsets(int so, int eo) {
     this.startOffset = so;

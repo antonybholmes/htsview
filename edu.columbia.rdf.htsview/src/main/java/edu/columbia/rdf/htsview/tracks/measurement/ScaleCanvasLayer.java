@@ -55,11 +55,11 @@ public class ScaleCanvasLayer extends AxesLayer {
   /**
    * Update.
    *
-   * @param displayRegion
-   *          the display region
+   * @param displayRegion the display region
    */
   public void update(GenomicRegion displayRegion) {
-    mGap = (int) Math.pow(10, (int) Mathematics.log10(displayRegion.getLength()));
+    mGap = (int) Math.pow(10,
+        (int) Mathematics.log10(displayRegion.getLength()));
   }
 
   /*
@@ -70,7 +70,11 @@ public class ScaleCanvasLayer extends AxesLayer {
    * org.graphplot.figure.Axes)
    */
   @Override
-  public void drawPlot(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
+  public void drawPlot(Graphics2D g2,
+      DrawingContext context,
+      Figure figure,
+      SubFigure subFigure,
+      Axes axes) {
     // Use the graph properties and subplot layout to
     // create the graph space mapper
 
@@ -78,7 +82,8 @@ public class ScaleCanvasLayer extends AxesLayer {
 
     int y = axes.getInternalSize().getH() / 2;
 
-    int w = axes.toPlotX1(axes.getX1Axis().getMin() + mGap) - axes.toPlotX1(axes.getX1Axis().getMin());
+    int w = axes.toPlotX1(axes.getX1Axis().getMin() + mGap)
+        - axes.toPlotX1(axes.getX1Axis().getMin());
 
     int x1 = (axes.getInternalSize().getW() - w) / 2;
 

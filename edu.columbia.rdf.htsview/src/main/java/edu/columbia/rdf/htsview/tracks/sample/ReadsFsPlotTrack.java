@@ -38,14 +38,12 @@ public class ReadsFsPlotTrack extends ReadsPlotTrack {
   /**
    * Instantiates a new reads plot track.
    *
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
-   * @param metaFile
-   *          the meta file
+   * @param sample the sample
+   * @param assembly the assembly
+   * @param metaFile the meta file
    */
-  public ReadsFsPlotTrack(Sample sample, SampleAssembly assembly, Path metaFile) {
+  public ReadsFsPlotTrack(Sample sample, SampleAssembly assembly,
+      Path metaFile) {
     super(sample, assembly);
 
     mMetaFile = metaFile;

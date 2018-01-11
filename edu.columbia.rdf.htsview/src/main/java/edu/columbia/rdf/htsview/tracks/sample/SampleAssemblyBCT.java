@@ -31,8 +31,7 @@ public class SampleAssemblyBCT extends SampleAssemblyFile {
   /**
    * Instantiates a new track assembly web.
    *
-   * @param metaFile
-   *          the meta file
+   * @param metaFile the meta file
    */
   public SampleAssemblyBCT(Path metaFile) {
     super(new ReadCountsFileBCT(metaFile));

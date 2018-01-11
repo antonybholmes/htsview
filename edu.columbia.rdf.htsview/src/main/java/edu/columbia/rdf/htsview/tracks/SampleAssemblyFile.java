@@ -41,8 +41,7 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
   /**
    * Instantiates a new track assembly web.
    *
-   * @param counts
-   *          the counts
+   * @param counts the counts
    */
   public SampleAssemblyFile(ReadCountsFile counts) {
     mCounts = counts;
@@ -54,11 +53,13 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.htsview.tracks.SampleAssembly#getStarts(edu.columbia.rdf.edb
-   * .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
+   * edu.columbia.rdf.htsview.tracks.SampleAssembly#getStarts(edu.columbia.rdf.
+   * edb .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public List<Integer> getStarts(Sample sample, GenomicRegion region, int window) throws IOException {
+  public List<Integer> getStarts(Sample sample,
+      GenomicRegion region,
+      int window) throws IOException {
 
     return mCounts.getStarts(region, window);
   }
@@ -71,7 +72,9 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
    * edb.Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public List<Strand> getStrands(Sample sample, GenomicRegion region, int window) throws IOException {
+  public List<Strand> getStrands(Sample sample,
+      GenomicRegion region,
+      int window) throws IOException {
     return mCounts.getStrands(region, window);
   }
 
@@ -79,11 +82,13 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.htsview.tracks.SampleAssembly#getCounts(edu.columbia.rdf.edb
-   * .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
+   * edu.columbia.rdf.htsview.tracks.SampleAssembly#getCounts(edu.columbia.rdf.
+   * edb .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public List<Integer> getCounts(Sample sample, GenomicRegion region, int window) throws IOException {
+  public List<Integer> getCounts(Sample sample,
+      GenomicRegion region,
+      int window) throws IOException {
 
     return mCounts.getCounts(region, window);
   }
@@ -104,8 +109,8 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.htsview.tracks.SampleAssembly#getGenome(edu.columbia.rdf.edb
-   * .Sample)
+   * edu.columbia.rdf.htsview.tracks.SampleAssembly#getGenome(edu.columbia.rdf.
+   * edb .Sample)
    */
   @Override
   public String getGenome(Sample sample) throws IOException {
@@ -116,8 +121,8 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.htsview.tracks.SampleAssembly#getReadLength(edu.columbia.rdf
-   * .edb.Sample)
+   * edu.columbia.rdf.htsview.tracks.SampleAssembly#getReadLength(edu.columbia.
+   * rdf .edb.Sample)
    */
   @Override
   public int getReadLength(Sample sample) {

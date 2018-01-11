@@ -16,20 +16,15 @@
 package edu.columbia.rdf.htsview.tracks.ext.ucsc;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 import java.util.List;
 
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrackRegion;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrackRegions;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import org.jebtk.graphplot.figure.Axes;
-import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.graphplot.figure.PlotStyle;
-import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.figure.series.XYSeries;
-import org.jebtk.modern.graphics.DrawingContext;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -46,8 +41,7 @@ public class BedGraphPlot extends Plot {
   /**
    * Instantiates a new bed graph plot.
    *
-   * @param name
-   *          the name
+   * @param name the name
    */
   public BedGraphPlot(String name) {
     super(name);
@@ -58,8 +52,7 @@ public class BedGraphPlot extends Plot {
   /**
    * Sets the bed graph.
    *
-   * @param bedGraph
-   *          the new bed graph
+   * @param bedGraph the new bed graph
    */
   public void setBedGraph(UCSCTrack bedGraph) {
     mBedGraph = bedGraph;
@@ -68,27 +61,25 @@ public class BedGraphPlot extends Plot {
   /**
    * Update.
    *
-   * @param displayRegion
-   *          the display region
-   * @param resolution
-   *          the resolution
-   * @param yMax
-   *          the y max
-   * @param width
-   *          the width
-   * @param height
-   *          the height
-   * @param margin
-   *          the margin
-   * @param lineColor
-   *          the line color
-   * @param fillColor
-   *          the fill color
-   * @param style
-   *          the style
+   * @param displayRegion the display region
+   * @param resolution the resolution
+   * @param yMax the y max
+   * @param width the width
+   * @param height the height
+   * @param margin the margin
+   * @param lineColor the line color
+   * @param fillColor the fill color
+   * @param style the style
    */
-  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
-      Color lineColor, Color fillColor, PlotStyle style) {
+  public void update(GenomicRegion displayRegion,
+      int resolution,
+      double yMax,
+      int width,
+      int height,
+      int margin,
+      Color lineColor,
+      Color fillColor,
+      PlotStyle style) {
 
     // System.err.println("regions " + start + " " + end + " " +
     // getCurrentAxes().toPlotX(end));
@@ -105,22 +96,25 @@ public class BedGraphPlot extends Plot {
     XYSeries series = getAllSeries().getCurrent();
 
     // Use the bedgraph to set the series color
-    // System.err.println(lineColor + " " + getName() + " " + series.getName() + " "
+    // System.err.println(lineColor + " " + getName() + " " + series.getName() +
+    // " "
     // + series.getStyle().getLineStyle().getColor());
 
-    if (lineColor == null || !lineColor.equals(series.getStyle().getLineStyle().getColor())) {
+    if (lineColor == null
+        || !lineColor.equals(series.getStyle().getLineStyle().getColor())) {
       series.getStyle().getLineStyle().setColor(lineColor);
     }
 
-    if (fillColor == null || !fillColor.equals(series.getStyle().getFillStyle().getColor())) {
+    if (fillColor == null
+        || !fillColor.equals(series.getStyle().getFillStyle().getColor())) {
       series.getStyle().getFillStyle().setColor(fillColor);
     }
 
     // series.addRegex("x");
     // series.addRegex("y");
 
-    List<UCSCTrackRegion> regions = UCSCTrackRegions.getFixedGapSearch(mBedGraph.getRegions())
-        .getFeatureSet(displayRegion);
+    List<UCSCTrackRegion> regions = UCSCTrackRegions
+        .getFixedGapSearch(mBedGraph.getRegions()).getFeatureSet(displayRegion);
 
     setMatrix(new BedGraphRegionMatrix(regions));
   }
@@ -128,8 +122,8 @@ public class BedGraphPlot extends Plot {
   /*
    * (non-Javadoc)
    * 
-   * @Override public void drawPlot(Graphics2D g2, DrawingContext context, Figure
-   * figure, SubFigure subFigure, Axes axes) { aaPlot(g2, context, figure,
-   * subFigure, axes); }
+   * @Override public void drawPlot(Graphics2D g2, DrawingContext context,
+   * Figure figure, SubFigure subFigure, Axes axes) { aaPlot(g2, context,
+   * figure, subFigure, axes); }
    */
 }

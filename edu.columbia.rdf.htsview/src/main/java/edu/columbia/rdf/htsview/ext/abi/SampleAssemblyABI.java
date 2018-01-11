@@ -30,10 +30,8 @@ public class SampleAssemblyABI extends SampleAssemblyFile {
   /**
    * Instantiates a new sample assembly ABI.
    *
-   * @param file
-   *          the file
-   * @param base
-   *          the base
+   * @param file the file
+   * @param base the base
    */
   public SampleAssemblyABI(Path file, char base) {
     super(new ReadCountsFileABI(file, base));

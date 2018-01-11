@@ -37,7 +37,8 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * The Class ABIEditDialog.
  */
-public class ABIEditDialog extends ModernDialogTaskWindow implements ModernClickListener {
+public class ABIEditDialog extends ModernDialogTaskWindow
+    implements ModernClickListener {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
@@ -54,10 +55,8 @@ public class ABIEditDialog extends ModernDialogTaskWindow implements ModernClick
   /**
    * Instantiates a new ABI edit dialog.
    *
-   * @param parent
-   *          the parent
-   * @param track
-   *          the track
+   * @param parent the parent
+   * @param track the track
    */
   public ABIEditDialog(ModernWindow parent, ABIPlotTrack track) {
     super(parent);
@@ -93,7 +92,8 @@ public class ABIEditDialog extends ModernDialogTaskWindow implements ModernClick
     int[] rows = { ModernWidget.WIDGET_HEIGHT };
     int[] cols = { 80, 300 };
 
-    MatrixPanel matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING, ModernWidget.PADDING);
+    MatrixPanel matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING,
+        ModernWidget.PADDING);
 
     matrixPanel.add(new ModernAutoSizeLabel("Name"));
     matrixPanel.add(new ModernTextBorderPanel(mNameField));

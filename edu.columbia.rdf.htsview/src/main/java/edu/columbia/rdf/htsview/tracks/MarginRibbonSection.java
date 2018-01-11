@@ -41,7 +41,8 @@ public class MarginRibbonSection extends RibbonSection {
   /**
    * The m text y min.
    */
-  private ModernCompactSpinner mWidthField = new ModernCompactSpinner(1, 10000, 400);
+  private ModernCompactSpinner mWidthField = new ModernCompactSpinner(1, 10000,
+      400);
 
   /** The m model. */
   private MarginModel mModel;
@@ -65,10 +66,8 @@ public class MarginRibbonSection extends RibbonSection {
   /**
    * Instantiates a new scale ribbon section2.
    *
-   * @param ribbon
-   *          the ribbon
-   * @param model
-   *          the model
+   * @param ribbon the ribbon
+   * @param model the model
    */
   public MarginRibbonSection(Ribbon ribbon, MarginModel model) {
     super(ribbon, "Margin");

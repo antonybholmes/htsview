@@ -59,7 +59,8 @@ public class ReadCountsFile32Bit extends ReadCountsFile {
   /**
    * The member file map.
    */
-  private Map<Chromosome, IterMap<Integer, Path>> mFileMap = DefaultHashMap.create(new HashMapCreator<Integer, Path>());
+  private Map<Chromosome, IterMap<Integer, Path>> mFileMap = DefaultHashMap
+      .create(new HashMapCreator<Integer, Path>());
 
   private Map<Chromosome, IterMap<Integer, Integer>> mBitMap = DefaultHashMap
       .create(new HashMapCreator<Integer, Integer>());
@@ -68,8 +69,7 @@ public class ReadCountsFile32Bit extends ReadCountsFile {
    * Directory containing genome files which must be of the form chr.n.txt. Each
    * file must contain exactly one line consisting of the entire chromosome.
    *
-   * @param metaFile
-   *          the meta file
+   * @param metaFile the meta file
    */
   public ReadCountsFile32Bit(Path metaFile) {
     mDir = metaFile;
@@ -91,7 +91,8 @@ public class ReadCountsFile32Bit extends ReadCountsFile {
    * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
    */
   @Override
-  public List<Integer> getCounts(GenomicRegion region, int window) throws IOException {
+  public List<Integer> getCounts(GenomicRegion region, int window)
+      throws IOException {
     Chromosome chr = region.getChr();
 
     if (!mFileMap.get(chr).containsKey(window)) {
@@ -150,26 +151,50 @@ public class ReadCountsFile32Bit extends ReadCountsFile {
     if (mFileMap.get(chr).containsKey(window)) {
       switch (mBitMap.get(chr).get(window)) {
       case 32:
-        return getCounts32(mFileMap.get(chr).get(window), region.getStart(), region.getEnd(), window);
+        return getCounts32(mFileMap.get(chr).get(window),
+            region.getStart(),
+            region.getEnd(),
+            window);
       case 24:
-        return getCounts24(mFileMap.get(chr).get(window), region.getStart(), region.getEnd(), window);
+        return getCounts24(mFileMap.get(chr).get(window),
+            region.getStart(),
+            region.getEnd(),
+            window);
       case 20:
-        return getCounts20(mFileMap.get(chr).get(window), region.getStart(), region.getEnd(), window);
+        return getCounts20(mFileMap.get(chr).get(window),
+            region.getStart(),
+            region.getEnd(),
+            window);
       case 16:
-        return getCounts16(mFileMap.get(chr).get(window), region.getStart(), region.getEnd(), window);
+        return getCounts16(mFileMap.get(chr).get(window),
+            region.getStart(),
+            region.getEnd(),
+            window);
       case 12:
-        return getCounts12(mFileMap.get(chr).get(window), region.getStart(), region.getEnd(), window);
+        return getCounts12(mFileMap.get(chr).get(window),
+            region.getStart(),
+            region.getEnd(),
+            window);
       case 8:
-        return getCounts8(mFileMap.get(chr).get(window), region.getStart(), region.getEnd(), window);
+        return getCounts8(mFileMap.get(chr).get(window),
+            region.getStart(),
+            region.getEnd(),
+            window);
       default:
-        return getCounts4(mFileMap.get(chr).get(window), region.getStart(), region.getEnd(), window);
+        return getCounts4(mFileMap.get(chr).get(window),
+            region.getStart(),
+            region.getEnd(),
+            window);
       }
     } else {
       return Collections.emptyList();
     }
   }
 
-  private static List<Integer> getCounts4(final Path file, int start, int end, int window) throws IOException {
+  private static List<Integer> getCounts4(final Path file,
+      int start,
+      int end,
+      int window) throws IOException {
 
     int s = (start - 1) / window;
     int e = (end - 1) / window;
@@ -196,7 +221,10 @@ public class ReadCountsFile32Bit extends ReadCountsFile {
     return scores;
   }
 
-  private static List<Integer> getCounts8(final Path file, int start, int end, int window) throws IOException {
+  private static List<Integer> getCounts8(final Path file,
+      int start,
+      int end,
+      int window) throws IOException {
 
     int s = (start - 1) / window;
     int e = (end - 1) / window;
@@ -213,7 +241,10 @@ public class ReadCountsFile32Bit extends ReadCountsFile {
     return scores;
   }
 
-  private static List<Integer> getCounts12(final Path file, int start, int end, int window) throws IOException {
+  private static List<Integer> getCounts12(final Path file,
+      int start,
+      int end,
+      int window) throws IOException {
 
     int s = (start - 1) / window;
     int e = (end - 1) / window;
@@ -249,13 +280,16 @@ public class ReadCountsFile32Bit extends ReadCountsFile {
 
       // if (even) {
       // System.err.println("12bit " + s + " " + (s * 3 / 2) + " " + p + " " +
-      // String.format("%8s", Integer.toBinaryString(buf[p])).replace(" ", "0") + " "
+      // String.format("%8s", Integer.toBinaryString(buf[p])).replace(" ", "0")
+      // + " "
       // + score + " " + even);
       // } else {
       // int pp = p - 1;
       // System.err.println("12bit " + s + " " + (s * 3 / 2) + " " + pp + " " +
-      // String.format("%8s", Integer.toBinaryString(buf[pp])).replace(" ", "0") + " "
-      // + String.format("%8s", Integer.toBinaryString(buf[pp + 1])).replace(" ", "0")
+      // String.format("%8s", Integer.toBinaryString(buf[pp])).replace(" ", "0")
+      // + " "
+      // + String.format("%8s", Integer.toBinaryString(buf[pp + 1])).replace("
+      // ", "0")
       // + " " + score + " " + even);
       // }
 
@@ -270,19 +304,17 @@ public class ReadCountsFile32Bit extends ReadCountsFile {
   /**
    * Gets the counts.
    *
-   * @param file
-   *          the file
-   * @param start
-   *          the start
-   * @param end
-   *          the end
-   * @param window
-   *          the window
+   * @param file the file
+   * @param start the start
+   * @param end the end
+   * @param window the window
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  private static List<Integer> getCounts16(final Path file, int start, int end, int window) throws IOException {
+  private static List<Integer> getCounts16(final Path file,
+      int start,
+      int end,
+      int window) throws IOException {
 
     int s = (start - 1) / window;
     int e = (end - 1) / window;
@@ -303,7 +335,10 @@ public class ReadCountsFile32Bit extends ReadCountsFile {
     return scores;
   }
 
-  private static List<Integer> getCounts20(final Path file, int start, int end, int window) throws IOException {
+  private static List<Integer> getCounts20(final Path file,
+      int start,
+      int end,
+      int window) throws IOException {
 
     int s = (start - 1) / window;
     int e = (end - 1) / window;
@@ -328,9 +363,11 @@ public class ReadCountsFile32Bit extends ReadCountsFile {
       int score = 0;
 
       if (even) {
-        score = (buf[p] << 12) | (buf[p + 1] << 4) | ((buf[p + 2] & 0b11110000) >> 4);
+        score = (buf[p] << 12) | (buf[p + 1] << 4)
+            | ((buf[p + 2] & 0b11110000) >> 4);
       } else {
-        score = ((buf[p] & 0b1111) << 16) | (buf[p + 1] << 8) | (buf[p + 2] & 0b11111111);
+        score = ((buf[p] & 0b1111) << 16) | (buf[p + 1] << 8)
+            | (buf[p + 2] & 0b11111111);
 
         ++p;
       }
@@ -345,7 +382,10 @@ public class ReadCountsFile32Bit extends ReadCountsFile {
     return scores;
   }
 
-  private static List<Integer> getCounts24(final Path file, int start, int end, int window) throws IOException {
+  private static List<Integer> getCounts24(final Path file,
+      int start,
+      int end,
+      int window) throws IOException {
 
     int s = (start - 1) / window;
     int e = (end - 1) / window;
@@ -358,7 +398,8 @@ public class ReadCountsFile32Bit extends ReadCountsFile {
     int p = 0;
 
     for (int i = 0; i < l; ++i) {
-      scores.add((buf[p] << 16) | (buf[p + 1] << 8) | (buf[p + 2] & 0b11111111));
+      scores
+          .add((buf[p] << 16) | (buf[p + 1] << 8) | (buf[p + 2] & 0b11111111));
 
       p += 3;
     }
@@ -366,7 +407,10 @@ public class ReadCountsFile32Bit extends ReadCountsFile {
     return scores;
   }
 
-  private static List<Integer> getCounts32(final Path file, int start, int end, int window) throws IOException {
+  private static List<Integer> getCounts32(final Path file,
+      int start,
+      int end,
+      int window) throws IOException {
 
     int s = (start - 1) / window;
     int e = (end - 1) / window;
@@ -379,7 +423,8 @@ public class ReadCountsFile32Bit extends ReadCountsFile {
     int p = 0;
 
     for (int i = 0; i < l; ++i) {
-      scores.add((buf[p] << 24) | (buf[p + 1] << 16) | (buf[p + 2] << 8) | (buf[p + 3] & 0b11111111));
+      scores.add((buf[p] << 24) | (buf[p + 1] << 16) | (buf[p + 2] << 8)
+          | (buf[p + 3] & 0b11111111));
 
       p += 4;
     }

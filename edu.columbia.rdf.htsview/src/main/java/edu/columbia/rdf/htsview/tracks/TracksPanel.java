@@ -98,8 +98,8 @@ public abstract class TracksPanel extends ModernWidget {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.dialog.DialogEventListener#statusChanged(org.abh.common.ui.
-     * dialog.DialogEvent)
+     * org.abh.common.ui.dialog.DialogEventListener#statusChanged(org.abh.common
+     * .ui. dialog.DialogEvent)
      */
     @Override
     public void statusChanged(DialogEvent e) {
@@ -124,8 +124,8 @@ public abstract class TracksPanel extends ModernWidget {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.dialog.DialogEventListener#statusChanged(org.abh.common.ui.
-     * dialog.DialogEvent)
+     * org.abh.common.ui.dialog.DialogEventListener#statusChanged(org.abh.common
+     * .ui. dialog.DialogEvent)
      */
     @Override
     public void statusChanged(DialogEvent e) {
@@ -138,14 +138,12 @@ public abstract class TracksPanel extends ModernWidget {
   /**
    * Instantiates a new tracks panel.
    *
-   * @param parent
-   *          the parent
-   * @param tree
-   *          the tree
-   * @param trackList
-   *          the track list
+   * @param parent the parent
+   * @param tree the tree
+   * @param trackList the track list
    */
-  public TracksPanel(ModernRibbonWindow parent, ModernTree<Track> tree, TrackTree trackList) {
+  public TracksPanel(ModernRibbonWindow parent, ModernTree<Track> tree,
+      TrackTree trackList) {
 
     mParent = parent;
     mTree = tree;
@@ -195,8 +193,7 @@ public abstract class TracksPanel extends ModernWidget {
   /**
    * Load tracks.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   protected void loadTracks() throws IOException {
     AnnotationTracksDialog dialog = new AnnotationTracksDialog(mParent, mTree);
@@ -222,7 +219,8 @@ public abstract class TracksPanel extends ModernWidget {
    * Delete tracks.
    */
   protected void deleteTracks() {
-    ModernMessageDialog.createOkCancelWarningDialog(mParent, "Are you sure you want to delete the selected tracks?",
+    ModernMessageDialog.createOkCancelWarningDialog(mParent,
+        "Are you sure you want to delete the selected tracks?",
         new DeleteEvents());
   }
 
@@ -230,28 +228,25 @@ public abstract class TracksPanel extends ModernWidget {
    * Clear tracks.
    */
   protected void clearTracks() {
-    ModernMessageDialog.createOkCancelWarningDialog(mParent, "Are you sure you want to delete all tracks?",
+    ModernMessageDialog.createOkCancelWarningDialog(mParent,
+        "Are you sure you want to delete all tracks?",
         new ClearEvents());
   }
 
   /**
    * Save xml view.
    *
-   * @param file
-   *          the file
-   * @param region
-   *          the region
-   * @param width
-   *          the width
-   * @param margin
-   *          the margin
-   * @throws TransformerException
-   *           the transformer exception
-   * @throws ParserConfigurationException
-   *           the parser configuration exception
+   * @param file the file
+   * @param region the region
+   * @param width the width
+   * @param margin the margin
+   * @throws TransformerException the transformer exception
+   * @throws ParserConfigurationException the parser configuration exception
    */
-  public void saveXmlView(Path file, GenomicRegion region, int width, int margin)
-      throws TransformerException, ParserConfigurationException {
+  public void saveXmlView(Path file,
+      GenomicRegion region,
+      int width,
+      int margin) throws TransformerException, ParserConfigurationException {
     if (file == null || region == null) {
       return;
     }
@@ -272,7 +267,8 @@ public abstract class TracksPanel extends ModernWidget {
     Deque<TreeNode<Track>> nodeQueue = new ArrayDeque<TreeNode<Track>>();
     Deque<Element> xmlQueue = new ArrayDeque<Element>();
 
-    for (TreeNode<Track> child : CollectionUtils.reverse(mTrackList.getRoot())) {
+    for (TreeNode<Track> child : CollectionUtils
+        .reverse(mTrackList.getRoot())) {
       nodeQueue.push(child);
       xmlQueue.push(rootElement);
     }
@@ -301,22 +297,21 @@ public abstract class TracksPanel extends ModernWidget {
   /**
    * Sets the tracks.
    *
-   * @param tracks
-   *          the new tracks
+   * @param tracks the new tracks
    */
   public void setTracks(List<Track> tracks) {
     mTrackList.clear();
 
     for (Track track : tracks) {
-      mTrackList.getRoot().addChild(new TreeNode<Track>(track.getName(), track));
+      mTrackList.getRoot()
+          .addChild(new TreeNode<Track>(track.getName(), track));
     }
   }
 
   /**
    * Sets the tracks.
    *
-   * @param tracks
-   *          the new tracks
+   * @param tracks the new tracks
    */
   public void setTracks(TreeRootNode<Track> tracks) {
     mTrackList.setRoot(tracks);

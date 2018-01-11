@@ -43,10 +43,12 @@ public class SizeRibbonSection extends RibbonSection {
   /**
    * The m text y min.
    */
-  private ModernCompactSpinner mWidthField = new ModernCompactSpinner(1, 10000, 1000);
+  private ModernCompactSpinner mWidthField = new ModernCompactSpinner(1, 10000,
+      1000);
 
   /** The m height field. */
-  private ModernCompactSpinner mHeightField = new ModernCompactSpinner(1, 10000, 1000);
+  private ModernCompactSpinner mHeightField = new ModernCompactSpinner(1, 10000,
+      1000);
 
   /** The m width model. */
   private WidthModel mWidthModel;
@@ -89,14 +91,12 @@ public class SizeRibbonSection extends RibbonSection {
   /**
    * Instantiates a new scale ribbon section2.
    *
-   * @param ribbon
-   *          the ribbon
-   * @param widthModel
-   *          the width model
-   * @param heightModel
-   *          the height model
+   * @param ribbon the ribbon
+   * @param widthModel the width model
+   * @param heightModel the height model
    */
-  public SizeRibbonSection(Ribbon ribbon, WidthModel widthModel, HeightModel heightModel) {
+  public SizeRibbonSection(Ribbon ribbon, WidthModel widthModel,
+      HeightModel heightModel) {
     super(ribbon, "Size");
 
     mWidthModel = widthModel;

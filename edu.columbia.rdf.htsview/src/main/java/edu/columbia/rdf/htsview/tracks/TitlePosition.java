@@ -39,8 +39,7 @@ public enum TitlePosition {
   /**
    * Parses the.
    *
-   * @param text
-   *          the text
+   * @param text the text
    * @return the title position
    */
   public static TitlePosition parse(String text) {

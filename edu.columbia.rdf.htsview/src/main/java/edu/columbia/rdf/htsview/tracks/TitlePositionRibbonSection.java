@@ -31,7 +31,8 @@ import org.jebtk.modern.ribbon.RibbonSection;
  *
  * @author Antony Holmes Holmes
  */
-public class TitlePositionRibbonSection extends RibbonSection implements ModernClickListener {
+public class TitlePositionRibbonSection extends RibbonSection
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -51,7 +52,8 @@ public class TitlePositionRibbonSection extends RibbonSection implements ModernC
       UIService.getInstance().loadIcon("title_right", 32));
 
   /** The m check visible. */
-  private ModernCheckButton mCheckVisible = new RibbonLargeRadioButton("Visible");
+  private ModernCheckButton mCheckVisible = new RibbonLargeRadioButton(
+      "Visible");
 
   /**
    * The m model.
@@ -61,10 +63,8 @@ public class TitlePositionRibbonSection extends RibbonSection implements ModernC
   /**
    * Instantiates a new title position ribbon section.
    *
-   * @param ribbon
-   *          the ribbon
-   * @param model
-   *          the model
+   * @param ribbon the ribbon
+   * @param model the model
    */
   public TitlePositionRibbonSection(Ribbon ribbon, TitlePositionModel model) {
     super(ribbon, "Title Position");
@@ -91,14 +91,15 @@ public class TitlePositionRibbonSection extends RibbonSection implements ModernC
   /**
    * Change.
    *
-   * @param e
-   *          the e
+   * @param e the e
    */
   private void change(ModernClickEvent e) {
     if (mTopButton.isSelected()) {
-      mModel.set(new TitleProperties(TitlePosition.TOP, mCheckVisible.isSelected()));
+      mModel.set(
+          new TitleProperties(TitlePosition.TOP, mCheckVisible.isSelected()));
     } else if (mRightButton.isSelected()) {
-      mModel.set(new TitleProperties(TitlePosition.RIGHT, mCheckVisible.isSelected()));
+      mModel.set(
+          new TitleProperties(TitlePosition.RIGHT, mCheckVisible.isSelected()));
     } else {
 
     }
@@ -108,8 +109,8 @@ public class TitlePositionRibbonSection extends RibbonSection implements ModernC
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

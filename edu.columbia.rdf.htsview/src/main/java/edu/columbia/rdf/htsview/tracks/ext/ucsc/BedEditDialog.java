@@ -55,7 +55,8 @@ public class BedEditDialog extends ModernDialogTaskWindow {
   private ModernRadioButton mCheckFull = new ModernRadioButton("Full");
 
   /** The m check compact. */
-  private ModernRadioButton mCheckCompact = new ModernRadioButton("Compact", true);
+  private ModernRadioButton mCheckCompact = new ModernRadioButton("Compact",
+      true);
 
   /** The m track. */
   private UcscPlotTrack mTrack;
@@ -63,10 +64,8 @@ public class BedEditDialog extends ModernDialogTaskWindow {
   /**
    * Instantiates a new bed edit dialog.
    *
-   * @param parent
-   *          the parent
-   * @param track
-   *          the track
+   * @param parent the parent
+   * @param track the track
    */
   public BedEditDialog(ModernWindow parent, UcscPlotTrack track) {
     super(parent);
@@ -111,7 +110,8 @@ public class BedEditDialog extends ModernDialogTaskWindow {
     int[] rows = { ModernWidget.WIDGET_HEIGHT };
     int[] cols = { 80, 300 };
 
-    MatrixPanel matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING, ModernWidget.PADDING);
+    MatrixPanel matrixPanel = new MatrixPanel(rows, cols, ModernWidget.PADDING,
+        ModernWidget.PADDING);
 
     matrixPanel.add(new ModernAutoSizeLabel("Name"));
     matrixPanel.add(new ModernTextBorderPanel(mNameField));

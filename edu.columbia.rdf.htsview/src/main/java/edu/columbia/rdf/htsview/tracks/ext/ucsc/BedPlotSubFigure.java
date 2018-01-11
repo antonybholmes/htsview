@@ -52,14 +52,12 @@ public class BedPlotSubFigure extends FixedSubFigure {
   /**
    * Instantiates a new bed plot sub figure.
    *
-   * @param bed
-   *          the bed
-   * @param color
-   *          the color
-   * @param titlePosition
-   *          the title position
+   * @param bed the bed
+   * @param color the color
+   * @param titlePosition the title position
    */
-  public BedPlotSubFigure(UCSCTrack bed, Color color, TitleProperties titlePosition) {
+  public BedPlotSubFigure(UCSCTrack bed, Color color,
+      TitleProperties titlePosition) {
     mBed = bed;
     mBedLayer = new BedPlotLayer(color);
 
@@ -74,28 +72,26 @@ public class BedPlotSubFigure extends FixedSubFigure {
   /**
    * Creates the.
    *
-   * @param bed
-   *          the bed
-   * @param titlePosition
-   *          the title position
+   * @param bed the bed
+   * @param titlePosition the title position
    * @return the bed plot sub figure
    */
-  public static BedPlotSubFigure create(UCSCTrack bed, TitleProperties titlePosition) {
+  public static BedPlotSubFigure create(UCSCTrack bed,
+      TitleProperties titlePosition) {
     return create(bed, bed.getColor(), titlePosition);
   }
 
   /**
    * Creates the.
    *
-   * @param bed
-   *          the bed
-   * @param color
-   *          the color
-   * @param titlePosition
-   *          the title position
+   * @param bed the bed
+   * @param color the color
+   * @param titlePosition the title position
    * @return the bed plot sub figure
    */
-  public static BedPlotSubFigure create(UCSCTrack bed, Color color, TitleProperties titlePosition) {
+  public static BedPlotSubFigure create(UCSCTrack bed,
+      Color color,
+      TitleProperties titlePosition) {
 
     // Now lets create a plot
 
@@ -112,10 +108,18 @@ public class BedPlotSubFigure extends FixedSubFigure {
    * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
-      Color lineColor, Color fillColor, PlotStyle style) {
+  public void update(GenomicRegion displayRegion,
+      int resolution,
+      double yMax,
+      int width,
+      int height,
+      int margin,
+      Color lineColor,
+      Color fillColor,
+      PlotStyle style) {
 
-    List<UCSCTrackRegion> regions = UCSCTrackRegions.getFixedGapSearch(mBed.getRegions()).getFeatureSet(displayRegion);
+    List<UCSCTrackRegion> regions = UCSCTrackRegions
+        .getFixedGapSearch(mBed.getRegions()).getFeatureSet(displayRegion);
 
     int n = 1;
 
@@ -127,7 +131,15 @@ public class BedPlotSubFigure extends FixedSubFigure {
 
     height = BedPlotTrack.BLOCK_HEIGHT * n;
 
-    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+    super.update(displayRegion,
+        resolution,
+        yMax,
+        width,
+        height,
+        margin,
+        lineColor,
+        fillColor,
+        style);
 
     mBedLayer.update(regions, mBed.getColor(), mBed.getDisplayMode());
 

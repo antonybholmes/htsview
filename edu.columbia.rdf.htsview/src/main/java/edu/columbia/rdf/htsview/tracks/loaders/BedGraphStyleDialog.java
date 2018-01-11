@@ -36,7 +36,8 @@ import org.jebtk.modern.window.WindowWidgetFocusEvents;
  * @author Antony Holmes Holmes
  *
  */
-public class BedGraphStyleDialog extends ModernDialogTaskWindow implements ModernClickListener {
+public class BedGraphStyleDialog extends ModernDialogTaskWindow
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -46,7 +47,8 @@ public class BedGraphStyleDialog extends ModernDialogTaskWindow implements Moder
   /**
    * The m bed graph button.
    */
-  private ModernRadioButton mBedGraphButton = new ModernRadioButton("BedGraph", true);
+  private ModernRadioButton mBedGraphButton = new ModernRadioButton("BedGraph",
+      true);
 
   /**
    * The m bed button.
@@ -61,10 +63,8 @@ public class BedGraphStyleDialog extends ModernDialogTaskWindow implements Moder
   /**
    * Instantiates a new bed graph style dialog.
    *
-   * @param parent
-   *          the parent
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param parent the parent
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public BedGraphStyleDialog(ModernWindow parent) throws IOException {
     super(parent);
@@ -95,8 +95,7 @@ public class BedGraphStyleDialog extends ModernDialogTaskWindow implements Moder
   /**
    * Creates the ui.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private final void createUi() throws IOException {
     // this.getContentPane().add(new JLabel("Change " +

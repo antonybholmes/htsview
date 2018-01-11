@@ -36,7 +36,8 @@ import org.jebtk.modern.io.GuiFileExtFilter;
 /**
  * The class BedGuiFileFilter.
  */
-public class BvtGuiFileFilter extends GuiFileExtFilter implements FilenameFilter {
+public class BvtGuiFileFilter extends GuiFileExtFilter
+    implements FilenameFilter {
 
   /**
    * Instantiates a new bed gui file filter.

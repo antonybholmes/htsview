@@ -49,15 +49,14 @@ public class BedGraphSubFigure extends TrackSubFigure {
   /**
    * Creates the.
    *
-   * @param name
-   *          the name
-   * @param style
-   *          the style
-   * @param titlePosition
-   *          the title position
+   * @param name the name
+   * @param style the style
+   * @param titlePosition the title position
    * @return the bed graph sub figure
    */
-  public static BedGraphSubFigure create(String name, PlotStyle style, TitleProperties titlePosition) {
+  public static BedGraphSubFigure create(String name,
+      PlotStyle style,
+      TitleProperties titlePosition) {
     BedGraphSubFigure subFigure = new BedGraphSubFigure();
 
     Axes axes = subFigure.currentAxes();
@@ -87,8 +86,15 @@ public class BedGraphSubFigure extends TrackSubFigure {
    * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
-      Color lineColor, Color fillColor, PlotStyle style) {
+  public void update(GenomicRegion displayRegion,
+      int resolution,
+      double yMax,
+      int width,
+      int height,
+      int margin,
+      Color lineColor,
+      Color fillColor,
+      PlotStyle style) {
 
     // int start = displayRegion.getStart();
 
@@ -103,7 +109,15 @@ public class BedGraphSubFigure extends TrackSubFigure {
     // getCurrentAxes().getXAxis().setLimits(start, end);
     // getCurrentAxes().getXAxis().startEndTicksOnly();
 
-    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+    super.update(displayRegion,
+        resolution,
+        yMax,
+        width,
+        height,
+        margin,
+        lineColor,
+        fillColor,
+        style);
 
     if (styleNotSet || mStyle != style) {
       setStyle(style);
@@ -137,7 +151,15 @@ public class BedGraphSubFigure extends TrackSubFigure {
       if (layer instanceof BedGraphPlot) {
         BedGraphPlot p = (BedGraphPlot) layer;
 
-        p.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+        p.update(displayRegion,
+            resolution,
+            yMax,
+            width,
+            height,
+            margin,
+            lineColor,
+            fillColor,
+            style);
       }
     }
 
@@ -158,14 +180,16 @@ public class BedGraphSubFigure extends TrackSubFigure {
      * 
      * List<UCSCTrackRegion> regions =
      * UCSCTrackRegions.getFixedGapSearch(mBedGraph.getRegions()).getFeatureSet(
-     * displayRegion.getChr(), displayRegion.getStart(), displayRegion.getEnd());
+     * displayRegion.getChr(), displayRegion.getStart(),
+     * displayRegion.getEnd());
      * 
      * mPlot.setMatrix(new BedGraphRegionMatrix(regions));
      * 
      * for (MovableLayer l : plots) { Plot p = (Plot)l;
      * 
      * System.err.println("sdfsdf " + p.getId() + " " + p.getName() + " " +
-     * (p.getMatrix() == null) + " " + p.getAllSeries().getCurrent().getColor()); }
+     * (p.getMatrix() == null) + " " +
+     * p.getAllSeries().getCurrent().getColor()); }
      */
   }
 }

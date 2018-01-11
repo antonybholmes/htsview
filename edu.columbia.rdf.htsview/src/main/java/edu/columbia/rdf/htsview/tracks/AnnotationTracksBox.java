@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.jebtk.core.tree.TreeNode;
-import org.jebtk.modern.button.ModernCheckBox;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.dialog.ModernDialogTaskWindow;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -54,8 +53,8 @@ public class AnnotationTracksBox extends VBox {
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.event.
-     * ModernClickEvent)
+     * org.abh.common.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+     * event. ModernClickEvent)
      */
     @Override
     public void clicked(ModernClickEvent e) {
@@ -69,8 +68,7 @@ public class AnnotationTracksBox extends VBox {
   /**
    * Instantiates a new annotation tracks box.
    *
-   * @param node
-   *          the node
+   * @param node the node
    */
   public AnnotationTracksBox(TreeNode<Track> node) {
     add(mCheckAll);
@@ -92,7 +90,8 @@ public class AnnotationTracksBox extends VBox {
         ModernDialogTaskWindow.midSectionHeader(child.getName(), this);
 
         for (TreeNode<Track> child2 : child) {
-          ModernTwoStateWidget checkBox = new ModernCheckSwitch(child2.getName());
+          ModernTwoStateWidget checkBox = new ModernCheckSwitch(
+              child2.getName());
 
           // Ui.setSize(checkBox, ModernWidget.EXTRA_LARGE_SIZE);
 

@@ -40,7 +40,8 @@ import org.jebtk.modern.window.ModernWindow;
 /**
  * The Class ReadsPlotTrackEditDialog.
  */
-public class ReadsPlotTrackEditDialog extends ModernDialogTaskWindow implements ModernClickListener {
+public class ReadsPlotTrackEditDialog extends ModernDialogTaskWindow
+    implements ModernClickListener {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
@@ -58,7 +59,8 @@ public class ReadsPlotTrackEditDialog extends ModernDialogTaskWindow implements 
   private ReadsPlotTrack mTrack;
 
   /** The m check forward. */
-  private CheckBox mCheckForward = new ModernCheckSwitch("Forward Strand", true);
+  private CheckBox mCheckForward = new ModernCheckSwitch("Forward Strand",
+      true);
 
   /** The m check line color. */
   private CheckBox mCheckLineColor = new ModernCheckSwitch("Line color");
@@ -76,7 +78,8 @@ public class ReadsPlotTrackEditDialog extends ModernDialogTaskWindow implements 
   private CheckBox mCheckNegFillColor = new ModernCheckSwitch("Fill color");
 
   /** The m spinner read height. */
-  private ModernCompactSpinner mSpinnerReadHeight = new ModernCompactSpinner(1, 32, 1);
+  private ModernCompactSpinner mSpinnerReadHeight = new ModernCompactSpinner(1,
+      32, 1);
 
   /** The m spinner gap. */
   private ModernCompactSpinner mSpinnerGap = new ModernCompactSpinner(0, 32, 1);
@@ -90,10 +93,8 @@ public class ReadsPlotTrackEditDialog extends ModernDialogTaskWindow implements 
   /**
    * Instantiates a new reads plot track edit dialog.
    *
-   * @param parent
-   *          the parent
-   * @param track
-   *          the track
+   * @param parent the parent
+   * @param track the track
    */
   public ReadsPlotTrackEditDialog(ModernWindow parent, ReadsPlotTrack track) {
     super(parent);
@@ -195,7 +196,8 @@ public class ReadsPlotTrackEditDialog extends ModernDialogTaskWindow implements 
     UI.setSize(mCheckNegLineColor, 100, ModernWidget.WIDGET_HEIGHT);
     box2.add(mCheckNegLineColor);
 
-    mNegLineColorButton = new ColorSwatchButton(mParent, mTrack.getNegLineColor());
+    mNegLineColorButton = new ColorSwatchButton(mParent,
+        mTrack.getNegLineColor());
 
     box2.add(mNegLineColorButton);
 
@@ -210,7 +212,8 @@ public class ReadsPlotTrackEditDialog extends ModernDialogTaskWindow implements 
     UI.setSize(mCheckNegFillColor, 100, ModernWidget.WIDGET_HEIGHT);
     box2.add(mCheckNegFillColor);
 
-    mNegFillColorButton = new ColorSwatchButton(mParent, mTrack.getNegFillColor());
+    mNegFillColorButton = new ColorSwatchButton(mParent,
+        mTrack.getNegFillColor());
 
     box2.add(mNegFillColorButton);
 
@@ -248,7 +251,8 @@ public class ReadsPlotTrackEditDialog extends ModernDialogTaskWindow implements 
    * @return the line color
    */
   public Color getLineColor() {
-    return mCheckLineColor.isSelected() ? mLineColorButton.getSelectedColor() : null;
+    return mCheckLineColor.isSelected() ? mLineColorButton.getSelectedColor()
+        : null;
   }
 
   /**
@@ -257,7 +261,8 @@ public class ReadsPlotTrackEditDialog extends ModernDialogTaskWindow implements 
    * @return the fill color
    */
   public Color getFillColor() {
-    return mCheckFillColor.isSelected() ? mFillColorButton.getSelectedColor() : null;
+    return mCheckFillColor.isSelected() ? mFillColorButton.getSelectedColor()
+        : null;
   }
 
   /**
@@ -266,7 +271,9 @@ public class ReadsPlotTrackEditDialog extends ModernDialogTaskWindow implements 
    * @return the neg line color
    */
   public Color getNegLineColor() {
-    return mCheckNegLineColor.isSelected() ? mNegLineColorButton.getSelectedColor() : null;
+    return mCheckNegLineColor.isSelected()
+        ? mNegLineColorButton.getSelectedColor()
+        : null;
   }
 
   /**
@@ -275,7 +282,9 @@ public class ReadsPlotTrackEditDialog extends ModernDialogTaskWindow implements 
    * @return the neg fill color
    */
   public Color getNegFillColor() {
-    return mCheckNegFillColor.isSelected() ? mNegFillColorButton.getSelectedColor() : null;
+    return mCheckNegFillColor.isSelected()
+        ? mNegFillColorButton.getSelectedColor()
+        : null;
   }
 
   /**

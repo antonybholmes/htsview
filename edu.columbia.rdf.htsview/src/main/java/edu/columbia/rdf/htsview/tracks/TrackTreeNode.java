@@ -29,8 +29,7 @@ public class TrackTreeNode extends TreeNode<Track> {
   /**
    * Instantiates a new track tree node.
    *
-   * @param track
-   *          the track
+   * @param track the track
    */
   public TrackTreeNode(Track track) {
     super(track.getName(), track);

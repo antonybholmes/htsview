@@ -38,7 +38,8 @@ import edu.columbia.rdf.htsview.tracks.SampleAssembly;
 public class SampleAssemblyTiled extends SampleAssembly {
 
   /** The Constant LOG. */
-  private final static Logger LOG = LoggerFactory.getLogger(SampleAssemblyTiled.class);
+  private final static Logger LOG = LoggerFactory
+      .getLogger(SampleAssemblyTiled.class);
 
   /**
    * The Class TrackTiles.
@@ -72,18 +73,14 @@ public class SampleAssemblyTiled extends SampleAssembly {
     /**
      * Instantiates a new track tiles.
      *
-     * @param assembly
-     *          the assembly
-     * @param numTiles
-     *          the num tiles
-     * @param chrSizes
-     *          the chr sizes
-     * @param sample
-     *          the sample
-     * @param window
-     *          the window
+     * @param assembly the assembly
+     * @param numTiles the num tiles
+     * @param chrSizes the chr sizes
+     * @param sample the sample
+     * @param window the window
      */
-    public TrackTiles(SampleAssembly assembly, int numTiles, ChromosomeSizes chrSizes, Sample sample, int window) {
+    public TrackTiles(SampleAssembly assembly, int numTiles,
+        ChromosomeSizes chrSizes, Sample sample, int window) {
       mAssembly = assembly;
 
       // Ensure the number of tiles is an odd number
@@ -99,11 +96,9 @@ public class SampleAssemblyTiled extends SampleAssembly {
     /**
      * Gets the counts.
      *
-     * @param region
-     *          the region
+     * @param region the region
      * @return the counts
-     * @throws IOException
-     *           Signals that an I/O exception has occurred.
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     public List<Integer> getCounts(GenomicRegion region) throws IOException {
 
@@ -111,12 +106,14 @@ public class SampleAssemblyTiled extends SampleAssembly {
       if (mCounts == null || !GenomicRegion.within(region, mRegion)) {
         int w = region.getLength() * mCenterTile;
 
-        mRegion = new GenomicRegion(region.getChr(), Math.max(1, region.getStart() - w),
+        mRegion = new GenomicRegion(region.getChr(),
+            Math.max(1, region.getStart() - w),
             Math.min(mChrSizes.getSize(region.getChr()), region.getEnd() + w));
 
         mCounts = mAssembly.getCounts(mSample, mRegion, mWindow);
 
-        // LOG.info("Cache miss in sample {} at {} window {}", mSample.getName(),
+        // LOG.info("Cache miss in sample {} at {} window {}",
+        // mSample.getName(),
         // mRegion, mWindow);
       }
 
@@ -145,8 +142,7 @@ public class SampleAssemblyTiled extends SampleAssembly {
   /**
    * Instantiates a new sample assembly tiled.
    *
-   * @param assembly
-   *          the assembly
+   * @param assembly the assembly
    */
   public SampleAssemblyTiled(SampleAssembly assembly) {
     this(assembly, 5);
@@ -155,10 +151,8 @@ public class SampleAssemblyTiled extends SampleAssembly {
   /**
    * Instantiates a new sample assembly tiled.
    *
-   * @param assembly
-   *          the assembly
-   * @param numTiles
-   *          the num tiles
+   * @param assembly the assembly
+   * @param numTiles the num tiles
    */
   public SampleAssemblyTiled(SampleAssembly assembly, int numTiles) {
     mAssembly = assembly;
@@ -169,18 +163,22 @@ public class SampleAssemblyTiled extends SampleAssembly {
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.htsview.tracks.SampleAssembly#getCounts(edu.columbia.rdf.edb
-   * .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
+   * edu.columbia.rdf.htsview.tracks.SampleAssembly#getCounts(edu.columbia.rdf.
+   * edb .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public List<Integer> getCounts(Sample sample, GenomicRegion region, int window) throws IOException {
+  public List<Integer> getCounts(Sample sample,
+      GenomicRegion region,
+      int window) throws IOException {
 
     if (!mTileMap.containsKey(window)) {
       mTileMap.put(window,
           new TrackTiles(mAssembly, mNumTiles,
               sample.getOrganism().getScientificName().contains("Homo")
-                  ? ChromosomeSizesService.getInstance().getSizes(GenomeAssembly.HG19)
-                  : ChromosomeSizesService.getInstance().getSizes(GenomeAssembly.MM10),
+                  ? ChromosomeSizesService.getInstance()
+                      .getSizes(GenomeAssembly.HG19)
+                  : ChromosomeSizesService.getInstance()
+                      .getSizes(GenomeAssembly.MM10),
               sample, window));
     }
 

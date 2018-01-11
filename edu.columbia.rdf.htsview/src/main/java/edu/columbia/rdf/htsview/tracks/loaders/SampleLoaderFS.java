@@ -38,74 +38,64 @@ public abstract class SampleLoaderFS extends SampleLoader {
   /**
    * Open sample fs.
    *
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
-   * @param metaFile
-   *          the meta file
-   * @param root
-   *          the root
+   * @param sample the sample
+   * @param assembly the assembly
+   * @param metaFile the meta file
+   * @param root the root
    * @return the track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public Track openSampleFs(Sample sample, SampleAssembly assembly, Path metaFile, TreeNode<Track> root)
-      throws IOException {
+  public Track openSampleFs(Sample sample,
+      SampleAssembly assembly,
+      Path metaFile,
+      TreeNode<Track> root) throws IOException {
     return load(sample, createSampleFs(sample, assembly, metaFile), root);
   }
 
   /**
    * Creates the sample fs.
    *
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
-   * @param metaFile
-   *          the meta file
+   * @param sample the sample
+   * @param assembly the assembly
+   * @param metaFile the meta file
    * @return the sample fs plot track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public SampleFsPlotTrack createSampleFs(Sample sample, SampleAssembly assembly, Path metaFile) throws IOException {
+  public SampleFsPlotTrack createSampleFs(Sample sample,
+      SampleAssembly assembly,
+      Path metaFile) throws IOException {
     return new SampleFsPlotTrack(sample, assembly, metaFile);
   }
 
   /**
    * Open reads fs.
    *
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
-   * @param metaFile
-   *          the meta file
-   * @param root
-   *          the root
+   * @param sample the sample
+   * @param assembly the assembly
+   * @param metaFile the meta file
+   * @param root the root
    * @return the track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public Track openReadsFs(Sample sample, SampleAssembly assembly, Path metaFile, TreeNode<Track> root)
-      throws IOException {
+  public Track openReadsFs(Sample sample,
+      SampleAssembly assembly,
+      Path metaFile,
+      TreeNode<Track> root) throws IOException {
     return load(sample, createReadsFs(sample, assembly, metaFile), root);
   }
 
   /**
    * Creates the reads fs.
    *
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
-   * @param metaFile
-   *          the meta file
+   * @param sample the sample
+   * @param assembly the assembly
+   * @param metaFile the meta file
    * @return the reads fs plot track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public ReadsFsPlotTrack createReadsFs(Sample sample, SampleAssembly assembly, Path metaFile) throws IOException {
+  public ReadsFsPlotTrack createReadsFs(Sample sample,
+      SampleAssembly assembly,
+      Path metaFile) throws IOException {
     return new ReadsFsPlotTrack(sample, assembly, metaFile);
   }
 

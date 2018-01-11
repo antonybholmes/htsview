@@ -28,7 +28,6 @@
 package edu.columbia.rdf.htsview.ngs;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Collections;
 import java.util.List;
 
@@ -44,13 +43,10 @@ public abstract class CountAssembly {
   /**
    * Gets the starts.
    *
-   * @param region
-   *          the region
-   * @param window
-   *          the window
+   * @param region the region
+   * @param window the window
    * @return the starts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public List<Integer> getStarts(String region, int window) throws IOException {
     return getStarts(GenomicRegion.parse(region), window);
@@ -59,28 +55,23 @@ public abstract class CountAssembly {
   /**
    * Gets the starts.
    *
-   * @param region
-   *          the region
-   * @param window
-   *          the window
+   * @param region the region
+   * @param window the window
    * @return the starts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getStarts(GenomicRegion region, int window) throws IOException {
+  public List<Integer> getStarts(GenomicRegion region, int window)
+      throws IOException {
     return Collections.emptyList();
   }
 
   /**
    * Gets the strands.
    *
-   * @param region
-   *          the region
-   * @param window
-   *          the window
+   * @param region the region
+   * @param window the window
    * @return the strands
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public List<Strand> getStrands(String region, int window) throws IOException {
     return getStrands(GenomicRegion.parse(region), window);
@@ -89,26 +80,22 @@ public abstract class CountAssembly {
   /**
    * Gets the strands.
    *
-   * @param region
-   *          the region
-   * @param window
-   *          the window
+   * @param region the region
+   * @param window the window
    * @return the strands
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Strand> getStrands(GenomicRegion region, int window) throws IOException {
+  public List<Strand> getStrands(GenomicRegion region, int window)
+      throws IOException {
     return Collections.emptyList();
   }
 
   /**
    * Gets the counts.
    *
-   * @param region
-   *          the region
+   * @param region the region
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public List<Integer> getCounts(String region) throws IOException {
     return getCounts(region, 1);
@@ -117,13 +104,10 @@ public abstract class CountAssembly {
   /**
    * Gets the counts.
    *
-   * @param region
-   *          the region
-   * @param window
-   *          the window
+   * @param region the region
+   * @param window the window
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public List<Integer> getCounts(String region, int window) throws IOException {
     return getCounts(GenomicRegion.parse(region), window);
@@ -132,11 +116,9 @@ public abstract class CountAssembly {
   /**
    * Gets the counts.
    *
-   * @param region
-   *          the region
+   * @param region the region
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public List<Integer> getCounts(GenomicRegion region) throws IOException {
     return getCounts(region, 1);
@@ -145,26 +127,21 @@ public abstract class CountAssembly {
   /**
    * Gets the counts.
    *
-   * @param region
-   *          the region
-   * @param window
-   *          the window
+   * @param region the region
+   * @param window the window
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public abstract List<Integer> getCounts(GenomicRegion region, int window) throws IOException;
+  public abstract List<Integer> getCounts(GenomicRegion region, int window)
+      throws IOException;
 
   /**
    * Gets the values.
    *
-   * @param region
-   *          the region
-   * @param window
-   *          the window
+   * @param region the region
+   * @param window the window
    * @return the values
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public List<Double> getValues(String region, int window) throws IOException {
     return getValues(GenomicRegion.parse(region), window);
@@ -173,11 +150,9 @@ public abstract class CountAssembly {
   /**
    * Gets the values.
    *
-   * @param region
-   *          the region
+   * @param region the region
    * @return the values
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public List<Double> getValues(GenomicRegion region) throws IOException {
     return getValues(region, 1);
@@ -186,15 +161,13 @@ public abstract class CountAssembly {
   /**
    * Returns values in a position range.
    *
-   * @param region
-   *          the region
-   * @param window
-   *          the window
+   * @param region the region
+   * @param window the window
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Double> getValues(GenomicRegion region, int window) throws IOException {
+  public List<Double> getValues(GenomicRegion region, int window)
+      throws IOException {
     return Collections.emptyList();
   }
 
@@ -227,8 +200,7 @@ public abstract class CountAssembly {
    * Gets the genome.
    *
    * @return the genome
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public String getGenome() throws IOException {
     return null;

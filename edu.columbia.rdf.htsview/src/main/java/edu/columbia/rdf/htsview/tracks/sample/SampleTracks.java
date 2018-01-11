@@ -17,7 +17,6 @@ package edu.columbia.rdf.htsview.tracks.sample;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.text.ParseException;
 
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.json.Json;
@@ -42,15 +41,15 @@ public class SampleTracks {
   /**
    * Gets the sample from track.
    *
-   * @param json
-   *          the json
+   * @param json the json
    * @return the sample from track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public static Sample getSampleFromTrack(Json json) throws IOException {
     Sample sample = new Sample(-1, null, null, json.getAsString("Name"),
-        new Species(-1, json.getAsString("Organism"), json.getAsString("Organism")), null);
+        new Species(-1, json.getAsString("Organism"),
+            json.getAsString("Organism")),
+        null);
 
     return sample;
   }
@@ -58,13 +57,10 @@ public class SampleTracks {
   /**
    * Open json.
    *
-   * @param dir
-   *          the dir
-   * @param file
-   *          the file
+   * @param dir the dir
+   * @param file the file
    * @return the json
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public static Json openJson(Path dir, String file) throws IOException {
     return new JsonParser().parse(dir.resolve(file));
@@ -73,13 +69,10 @@ public class SampleTracks {
   /**
    * Open json.
    *
-   * @param dir
-   *          the dir
-   * @param file
-   *          the file
+   * @param dir the dir
+   * @param file the file
    * @return the json
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public static Json openJson(Path dir, Path file) throws IOException {
     return new JsonParser().parse(dir.resolve(file));
@@ -88,11 +81,9 @@ public class SampleTracks {
   /**
    * Checks if is BRT track.
    *
-   * @param dir
-   *          the dir
+   * @param dir the dir
    * @return true, if is BRT track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public static boolean isBRTTrack(Path dir) throws IOException {
     return FileUtils.find(dir, "brt.json") != null;
@@ -101,11 +92,9 @@ public class SampleTracks {
   /**
    * Checks if is BRT 2 track.
    *
-   * @param dir
-   *          the dir
+   * @param dir the dir
    * @return true, if is BRT 2 track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public static boolean isBRT2Track(Path dir) throws IOException {
     return FileUtils.find(dir, "brt2.json") != null;
@@ -114,11 +103,9 @@ public class SampleTracks {
   /**
    * Checks if is BVT track.
    *
-   * @param dir
-   *          the dir
+   * @param dir the dir
    * @return true, if is BVT track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public static boolean isBVTTrack(Path dir) throws IOException {
     return FileUtils.find(dir, "bvt.json") != null;

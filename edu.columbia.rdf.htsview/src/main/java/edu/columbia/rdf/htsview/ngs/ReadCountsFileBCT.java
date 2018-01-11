@@ -69,7 +69,8 @@ public class ReadCountsFileBCT extends ReadCountsFileBinTree {
   public static final int LOWER_8_BIT_MASK = 255;
 
   /** The Constant BIN_COUNTS. */
-  public static final int[] BIN_COUNTS = { 1, 3, 30, 300, 3000, 30000, 300000, 3000000, 30000000, 300000000 };
+  public static final int[] BIN_COUNTS = { 1, 3, 30, 300, 3000, 30000, 300000,
+      3000000, 30000000, 300000000 };
 
   /**
    * The constant FILE_EXT.
@@ -93,8 +94,7 @@ public class ReadCountsFileBCT extends ReadCountsFileBinTree {
    * Directory containing genome files which must be of the form chr.n.txt. Each
    * file must contain exactly one line consisting of the entire chromosome.
    *
-   * @param metaFile
-   *          the directory
+   * @param metaFile the directory
    */
   public ReadCountsFileBCT(Path metaFile) {
     super(metaFile);
@@ -107,26 +107,26 @@ public class ReadCountsFileBCT extends ReadCountsFileBinTree {
    * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
    */
   @Override
-  public List<Integer> getCounts(GenomicRegion region, int window) throws IOException {
-    return getCounts(region.getChr(), region.getStart(), region.getEnd(), window);
+  public List<Integer> getCounts(GenomicRegion region, int window)
+      throws IOException {
+    return getCounts(region.getChr(),
+        region.getStart(),
+        region.getEnd(),
+        window);
   }
 
   /**
    * Gets the counts.
    *
-   * @param chr
-   *          the chr
-   * @param start
-   *          the start
-   * @param end
-   *          the end
-   * @param window
-   *          the window
+   * @param chr the chr
+   * @param start the start
+   * @param end the end
+   * @param window the window
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getCounts(Chromosome chr, int start, int end, int window) throws IOException {
+  public List<Integer> getCounts(Chromosome chr, int start, int end, int window)
+      throws IOException {
     if (window < MIN_WINDOW) {
       return Collections.emptyList();
     }
@@ -237,7 +237,8 @@ public class ReadCountsFileBCT extends ReadCountsFileBinTree {
    * bioinformatics.genome.Chromosome, int, java.lang.String)
    */
   @Override
-  protected Path getFile(Chromosome chr, int window, String ext) throws IOException {
+  protected Path getFile(Chromosome chr, int window, String ext)
+      throws IOException {
     if (!mFileMap.containsKey(chr) || !mFileMap.get(chr).containsKey(window)) {
       Path file = createFile(mDirectory, chr, window);
 
@@ -261,7 +262,8 @@ public class ReadCountsFileBCT extends ReadCountsFileBinTree {
           mGenome = readGenome(in);
         }
 
-        SysUtils.err().println("bct:", file, mBitMap.get(file), count, length, mGenome);
+        SysUtils.err()
+            .println("bct:", file, mBitMap.get(file), count, length, mGenome);
 
       } finally {
         in.close();
@@ -274,16 +276,14 @@ public class ReadCountsFileBCT extends ReadCountsFileBinTree {
   /**
    * Return crap.
    *
-   * @param dir
-   *          the dir
-   * @param chr
-   *          the chr
-   * @param window
-   *          the window
+   * @param dir the dir
+   * @param chr the chr
+   * @param window the window
    * @return the path
    */
   public static Path createFile(Path dir, Chromosome chr, int window) {
-    // System.err.println("bct file:" + dir.resolve(chr.toString() + ".w" + window +
+    // System.err.println("bct file:" + dir.resolve(chr.toString() + ".w" +
+    // window +
     // "." + FILE_EXT));
 
     return dir.resolve(chr.toString() + ".w" + window + "." + FILE_EXT);

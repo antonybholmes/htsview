@@ -85,43 +85,55 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
   private ModernTextField mSubtractField = new ModernClipboardTextField();
 
   /** The m height field. */
-  private ModernCompactSpinner mHeightField = new ModernCompactSpinner(1, 1000, FIELD_WIDTH);
+  private ModernCompactSpinner mHeightField = new ModernCompactSpinner(1, 1000,
+      FIELD_WIDTH);
 
   /** The m check common Y. */
-  private ModernRadioButton mCheckCommonY = new ModernRadioButton("Common Y", FIELD_WIDTH);
+  private ModernRadioButton mCheckCommonY = new ModernRadioButton("Common Y",
+      FIELD_WIDTH);
 
   /** The m check auto Y. */
-  private ModernRadioButton mCheckAutoY = new ModernRadioButton("Auto Y", FIELD_WIDTH);
+  private ModernRadioButton mCheckAutoY = new ModernRadioButton("Auto Y",
+      FIELD_WIDTH);
 
   /** The m check max Y. */
-  private ModernRadioButton mCheckMaxY = new ModernRadioButton("Max Y", FIELD_WIDTH);
+  private ModernRadioButton mCheckMaxY = new ModernRadioButton("Max Y",
+      FIELD_WIDTH);
 
   /** The m check normalize Y. */
-  private ModernTwoStateWidget mCheckNormalizeY = new ModernCheckSwitch("Normalize Y", FIELD_WIDTH);
+  private ModernTwoStateWidget mCheckNormalizeY = new ModernCheckSwitch(
+      "Normalize Y", FIELD_WIDTH);
 
   /** The m max Y field. */
-  private ModernCompactSpinner mMaxYField = new ModernCompactSpinner(0, 10000, 1);
+  private ModernCompactSpinner mMaxYField = new ModernCompactSpinner(0, 10000,
+      1);
 
   /** The m track. */
   private SamplePlotTrack mTrack;
 
   /** The m check line color. */
-  private ModernTwoStateWidget mCheckLineColor = new ModernCheckSwitch("Line color", FIELD_WIDTH);
+  private ModernTwoStateWidget mCheckLineColor = new ModernCheckSwitch(
+      "Line color", FIELD_WIDTH);
 
   /** The m check fill color. */
-  private ModernTwoStateWidget mCheckFillColor = new ModernCheckSwitch("Fill color", FIELD_WIDTH);
+  private ModernTwoStateWidget mCheckFillColor = new ModernCheckSwitch(
+      "Fill color", FIELD_WIDTH);
 
   /** The m check subtract input. */
-  private ModernTwoStateWidget mCheckSubtractInput = new ModernCheckSwitch("Subtract", FIELD_WIDTH);
+  private ModernTwoStateWidget mCheckSubtractInput = new ModernCheckSwitch(
+      "Subtract", FIELD_WIDTH);
 
   /** The m check common height. */
-  private ModernRadioButton mCheckCommonHeight = new ModernRadioButton("Common height", FIELD_WIDTH);
+  private ModernRadioButton mCheckCommonHeight = new ModernRadioButton(
+      "Common height", FIELD_WIDTH);
 
   /** The m check max height. */
-  private ModernRadioButton mCheckMaxHeight = new ModernRadioButton("Height", FIELD_WIDTH);
+  private ModernRadioButton mCheckMaxHeight = new ModernRadioButton("Height",
+      FIELD_WIDTH);
 
   /** The m sample db button. */
-  private ModernButton mSampleDbButton = new ModernDialogFlatButton(UIService.getInstance().loadIcon("database", 16));
+  private ModernButton mSampleDbButton = new ModernDialogFlatButton(
+      UIService.getInstance().loadIcon("database", 16));
 
   /** The m sample fs button. */
   private ModernButton mSampleFsButton = new ModernDialogFlatButton(
@@ -142,14 +154,12 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
   /**
    * Instantiates a new sample plot track edit dialog.
    *
-   * @param parent
-   *          the parent
-   * @param track
-   *          the track
-   * @param assembly
-   *          the assembly
+   * @param parent the parent
+   * @param track the track
+   * @param assembly the assembly
    */
-  public SamplePlotTrackEditDialog(ModernWindow parent, SamplePlotTrack track, SampleAssembly assembly) {
+  public SamplePlotTrackEditDialog(ModernWindow parent, SamplePlotTrack track,
+      SampleAssembly assembly) {
     super(parent, "htsview.sample-editor.help.url");
 
     mTrack = track;
@@ -161,7 +171,8 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
 
     mHeightField.setValue(track.getHeight());
 
-    mMaxYField.setValue(Mathematics.dp(track.getYMax(track.getNormalizeY()), 2)); // Math.ceil(track.getYMax(track.getNormalizeY())));
+    mMaxYField
+        .setValue(Mathematics.dp(track.getYMax(track.getNormalizeY()), 2)); // Math.ceil(track.getYMax(track.getNormalizeY())));
 
     if (track.getCommonY()) {
       mCheckCommonY.setSelected(true);
@@ -333,10 +344,8 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
   /**
    * Load db sample.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
   private void loadDbSample() throws IOException, ParseException {
     ChipSeqSamplesDialog dialog = new ChipSeqSamplesDialog(mParent);
@@ -359,10 +368,8 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
   /**
    * Load fs sample.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
   private void loadFsSample() throws IOException, ParseException {
     browseForTrack();
@@ -371,10 +378,8 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
   /**
    * Browse for tracks.
    *
-   * @throws ParseException
-   *           the parse exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void browseForTrack() throws ParseException, IOException {
     browseForTrack(RecentFilesService.getInstance().getPwd());
@@ -383,28 +388,25 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
   /**
    * Browse for tracks.
    *
-   * @param pwd
-   *          the pwd
-   * @throws ParseException
-   *           the parse exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param pwd the pwd
+   * @throws ParseException the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void browseForTrack(Path pwd) throws ParseException, IOException {
     openTrack(FileDialog.open(mParent)
-        .filter(new AllSamplesGuiFileFilter(), new BamGuiFileFilter(), new Brt2GuiFileFilter(), new BvtGuiFileFilter())
+        .filter(new AllSamplesGuiFileFilter(),
+            new BamGuiFileFilter(),
+            new Brt2GuiFileFilter(),
+            new BvtGuiFileFilter())
         .getFile(pwd));
   }
 
   /**
    * Open track.
    *
-   * @param dir
-   *          the dir
-   * @throws ParseException
-   *           the parse exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param dir the dir
+   * @throws ParseException the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void openTrack(Path dir) throws ParseException, IOException {
     if (SampleTracks.isBRT2Track(dir)) {
@@ -421,14 +423,12 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
   /**
    * Open16bit track.
    *
-   * @param metaFile
-   *          the meta file
-   * @throws ParseException
-   *           the parse exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param metaFile the meta file
+   * @throws ParseException the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  private void open16bitTrack(Path metaFile) throws ParseException, IOException {
+  private void open16bitTrack(Path metaFile)
+      throws ParseException, IOException {
     Json json = JsonParser.json(metaFile);
 
     Sample sample = SampleTracks.getSampleFromTrack(json);
@@ -439,12 +439,9 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
   /**
    * Open brt track.
    *
-   * @param metaFile
-   *          the meta file
-   * @throws ParseException
-   *           the parse exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param metaFile the meta file
+   * @throws ParseException the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void openBRTTrack(Path metaFile) throws ParseException, IOException {
     Json json = JsonParser.json(metaFile);
@@ -457,12 +454,9 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
   /**
    * Open BRT 2 track.
    *
-   * @param metaFile
-   *          the meta file
-   * @throws ParseException
-   *           the parse exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param metaFile the meta file
+   * @throws ParseException the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void openBRT2Track(Path metaFile) throws ParseException, IOException {
     Json json = JsonParser.json(metaFile);
@@ -475,12 +469,9 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
   /**
    * Open BVT track.
    *
-   * @param metaFile
-   *          the meta file
-   * @throws ParseException
-   *           the parse exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param metaFile the meta file
+   * @throws ParseException the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private void openBVTTrack(Path metaFile) throws ParseException, IOException {
     Json json = JsonParser.json(metaFile);
@@ -493,10 +484,8 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
   /**
    * Open track.
    *
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
+   * @param sample the sample
+   * @param assembly the assembly
    */
   private void openTrack(Sample sample, SampleAssembly assembly) {
     mInputSample = sample;
@@ -523,7 +512,8 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
    * @return the line color
    */
   public Color getLineColor() {
-    return mCheckLineColor.isSelected() ? mLineColorButton.getSelectedColor() : null;
+    return mCheckLineColor.isSelected() ? mLineColorButton.getSelectedColor()
+        : null;
   }
 
   /**
@@ -532,7 +522,8 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
    * @return the fill color
    */
   public Color getFillColor() {
-    return mCheckFillColor.isSelected() ? mFillColorButton.getSelectedColor() : null;
+    return mCheckFillColor.isSelected() ? mFillColorButton.getSelectedColor()
+        : null;
   }
 
   /**

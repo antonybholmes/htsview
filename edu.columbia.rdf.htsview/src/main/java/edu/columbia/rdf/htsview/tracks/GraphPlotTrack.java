@@ -35,8 +35,7 @@ public abstract class GraphPlotTrack extends Track {
   /**
    * Should enable a UI dialog or similar to allow the track to be edited.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   @Override
   public void edit(ModernWindow parent) {

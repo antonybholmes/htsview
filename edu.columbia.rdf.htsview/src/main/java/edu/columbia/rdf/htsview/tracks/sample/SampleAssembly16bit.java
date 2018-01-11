@@ -32,8 +32,7 @@ public class SampleAssembly16bit extends SampleAssemblyFile {
   /**
    * Instantiates a new sample assembly 16 bit.
    *
-   * @param metaFile
-   *          the meta file
+   * @param metaFile the meta file
    */
   public SampleAssembly16bit(Path metaFile) {
     super(new ReadCountsFile32Bit(metaFile));

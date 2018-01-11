@@ -56,11 +56,13 @@ public class ReadsPlotTrack extends SamplePlotTrack {
       .getAsColor("edb.reads.tracks.reads-plot.strands.positive.fill-color");
 
   /** The Constant DEFAULT_NEG_STRAND_LINE_COLOR. */
-  private static final Color DEFAULT_NEG_STRAND_LINE_COLOR = SettingsService.getInstance()
+  private static final Color DEFAULT_NEG_STRAND_LINE_COLOR = SettingsService
+      .getInstance()
       .getAsColor("edb.reads.tracks.reads-plot.strands.negative.line-color");
 
   /** The Constant DEFAULT_NEG_STRAND_FILL_COLOR. */
-  private static final Color DEFAULT_NEG_STRAND_FILL_COLOR = SettingsService.getInstance()
+  private static final Color DEFAULT_NEG_STRAND_FILL_COLOR = SettingsService
+      .getInstance()
       .getAsColor("edb.reads.tracks.reads-plot.strands.negative.fill-color");
 
   /** The Constant MAX_READS_DISPLAY. */
@@ -101,25 +103,20 @@ public class ReadsPlotTrack extends SamplePlotTrack {
   /**
    * Instantiates a new reads plot track.
    *
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
+   * @param sample the sample
+   * @param assembly the assembly
    */
   public ReadsPlotTrack(Sample sample, SampleAssembly assembly) {
-    this(sample, assembly, DEFAULT_LINE_COLOR, DEFAULT_FILL_COLOR, DEFAULT_NEG_STRAND_LINE_COLOR,
-        DEFAULT_NEG_STRAND_FILL_COLOR);
+    this(sample, assembly, DEFAULT_LINE_COLOR, DEFAULT_FILL_COLOR,
+        DEFAULT_NEG_STRAND_LINE_COLOR, DEFAULT_NEG_STRAND_FILL_COLOR);
   }
 
   /**
    * Instantiates a new reads plot track.
    *
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
-   * @param color
-   *          the color
+   * @param sample the sample
+   * @param assembly the assembly
+   * @param color the color
    */
   public ReadsPlotTrack(Sample sample, SampleAssembly assembly, Color color) {
     this(sample, assembly, color, color);
@@ -128,69 +125,52 @@ public class ReadsPlotTrack extends SamplePlotTrack {
   /**
    * Instantiates a new reads plot track.
    *
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
-   * @param color
-   *          the color
-   * @param negColor
-   *          the neg color
+   * @param sample the sample
+   * @param assembly the assembly
+   * @param color the color
+   * @param negColor the neg color
    */
-  public ReadsPlotTrack(Sample sample, SampleAssembly assembly, Color color, Color negColor) {
-    this(sample, assembly, color, ColorUtils.getTransparentColor50(color), negColor,
-        ColorUtils.getTransparentColor50(negColor));
+  public ReadsPlotTrack(Sample sample, SampleAssembly assembly, Color color,
+      Color negColor) {
+    this(sample, assembly, color, ColorUtils.getTransparentColor50(color),
+        negColor, ColorUtils.getTransparentColor50(negColor));
   }
 
   /**
    * Instantiates a new reads plot track.
    *
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
-   * @param color
-   *          the color
-   * @param fillColor
-   *          the fill color
-   * @param negStrandLineColor
-   *          the neg strand line color
-   * @param negStrandFillColor
-   *          the neg strand fill color
+   * @param sample the sample
+   * @param assembly the assembly
+   * @param color the color
+   * @param fillColor the fill color
+   * @param negStrandLineColor the neg strand line color
+   * @param negStrandFillColor the neg strand fill color
    */
-  public ReadsPlotTrack(Sample sample, SampleAssembly assembly, Color color, Color fillColor, Color negStrandLineColor,
-      Color negStrandFillColor) {
-    this(sample, assembly, true, color, fillColor, true, negStrandLineColor, negStrandLineColor, DEFAULT_READ_HEIGHT,
-        DEFAULT_GAP);
+  public ReadsPlotTrack(Sample sample, SampleAssembly assembly, Color color,
+      Color fillColor, Color negStrandLineColor, Color negStrandFillColor) {
+    this(sample, assembly, true, color, fillColor, true, negStrandLineColor,
+        negStrandLineColor, DEFAULT_READ_HEIGHT, DEFAULT_GAP);
 
   }
 
   /**
    * Instantiates a new reads plot track.
    *
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
-   * @param strandVisible
-   *          the strand visible
-   * @param color
-   *          the color
-   * @param fillColor
-   *          the fill color
-   * @param negStrandVisible
-   *          the neg strand visible
-   * @param negStrandLineColor
-   *          the neg strand line color
-   * @param negStrandFillColor
-   *          the neg strand fill color
-   * @param readHeight
-   *          the read height
-   * @param gap
-   *          the gap
+   * @param sample the sample
+   * @param assembly the assembly
+   * @param strandVisible the strand visible
+   * @param color the color
+   * @param fillColor the fill color
+   * @param negStrandVisible the neg strand visible
+   * @param negStrandLineColor the neg strand line color
+   * @param negStrandFillColor the neg strand fill color
+   * @param readHeight the read height
+   * @param gap the gap
    */
-  public ReadsPlotTrack(Sample sample, SampleAssembly assembly, boolean strandVisible, Color color, Color fillColor,
-      boolean negStrandVisible, Color negStrandLineColor, Color negStrandFillColor, int readHeight, int gap) {
+  public ReadsPlotTrack(Sample sample, SampleAssembly assembly,
+      boolean strandVisible, Color color, Color fillColor,
+      boolean negStrandVisible, Color negStrandLineColor,
+      Color negStrandFillColor, int readHeight, int gap) {
     super(sample, assembly, color, fillColor, -1);
 
     try {
@@ -241,8 +221,7 @@ public class ReadsPlotTrack extends SamplePlotTrack {
   /**
    * Sets the forward visible.
    *
-   * @param visible
-   *          the new forward visible
+   * @param visible the new forward visible
    */
   public void setForwardVisible(boolean visible) {
     mStrandVisible = visible;
@@ -260,8 +239,7 @@ public class ReadsPlotTrack extends SamplePlotTrack {
   /**
    * Sets the neg visible.
    *
-   * @param visible
-   *          the new neg visible
+   * @param visible the new neg visible
    */
   public void setAntiSenseVisible(boolean visible) {
     mNegStrandVisible = visible;
@@ -279,8 +257,7 @@ public class ReadsPlotTrack extends SamplePlotTrack {
   /**
    * Sets the neg fill color.
    *
-   * @param color
-   *          the new neg fill color
+   * @param color the new neg fill color
    */
   public void setAntiSenseFillColor(Color color) {
     mNegStrandFillColor = color;
@@ -298,8 +275,7 @@ public class ReadsPlotTrack extends SamplePlotTrack {
   /**
    * Sets the neg line color.
    *
-   * @param color
-   *          the new neg line color
+   * @param color the new neg line color
    */
   public void setAntiSenseLineColor(Color color) {
     mNegStrandLineColor = color;
@@ -308,8 +284,7 @@ public class ReadsPlotTrack extends SamplePlotTrack {
   /**
    * Sets the read height.
    *
-   * @param readHeight
-   *          the new read height
+   * @param readHeight the new read height
    */
   public void setReadHeight(int readHeight) {
     mReadHeight = readHeight;
@@ -327,8 +302,7 @@ public class ReadsPlotTrack extends SamplePlotTrack {
   /**
    * Sets the gap between reads.
    *
-   * @param gap
-   *          the new gap between reads.
+   * @param gap the new gap between reads.
    */
   public void setGap(int gap) {
     mGap = gap;
@@ -357,8 +331,10 @@ public class ReadsPlotTrack extends SamplePlotTrack {
    * edu.columbia.rdf.apps.edb.reads.TitlePosition)
    */
   @Override
-  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
-    mSubFigure = ReadsPlotSubFigure.create(getName(), mReadLength, titlePosition);
+  public TrackSubFigure createGraph(String genome,
+      TitleProperties titlePosition) throws IOException {
+    mSubFigure = ReadsPlotSubFigure
+        .create(getName(), mReadLength, titlePosition);
 
     Axes axes = mSubFigure.currentAxes();
 
@@ -389,16 +365,22 @@ public class ReadsPlotTrack extends SamplePlotTrack {
   /*
    * (non-Javadoc)
    * 
-   * @see edu.columbia.rdf.apps.edb.reads.tracks.SamplePlotTrack#updateGraph(edu.
+   * @see
+   * edu.columbia.rdf.apps.edb.reads.tracks.SamplePlotTrack#updateGraph(edu.
    * columbia.rdf.lib.bioinformatics.genome.GenomicRegion, int, boolean)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin)
-      throws IOException {
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+      int resolution,
+      int width,
+      int height,
+      int margin) throws IOException {
 
-    List<Integer> starts = mAssembly.getStarts(mSample, displayRegion, resolution);
+    List<Integer> starts = mAssembly
+        .getStarts(mSample, displayRegion, resolution);
 
-    List<Strand> strands = mAssembly.getStrands(mSample, displayRegion, resolution);
+    List<Strand> strands = mAssembly
+        .getStrands(mSample, displayRegion, resolution);
 
     if (starts.size() > MAX_READS_DISPLAY) {
       starts = CollectionUtils.subSample(starts, MAX_READS_DISPLAY);
@@ -407,8 +389,16 @@ public class ReadsPlotTrack extends SamplePlotTrack {
 
     mSubFigure.update(displayRegion, resolution, width, height, margin);
 
-    ((ReadsPlotSubFigure) mSubFigure).setStarts(starts, strands, mStrandVisible, mLineColor, mFillColor,
-        mNegStrandVisible, mNegStrandLineColor, mNegStrandFillColor, mReadHeight, mGap);
+    ((ReadsPlotSubFigure) mSubFigure).setStarts(starts,
+        strands,
+        mStrandVisible,
+        mLineColor,
+        mFillColor,
+        mNegStrandVisible,
+        mNegStrandLineColor,
+        mNegStrandFillColor,
+        mReadHeight,
+        mGap);
 
     return mSubFigure;
   }
@@ -422,7 +412,8 @@ public class ReadsPlotTrack extends SamplePlotTrack {
    */
   @Override
   public void edit(ModernWindow parent) {
-    ReadsPlotTrackEditDialog dialog = new ReadsPlotTrackEditDialog(parent, this);
+    ReadsPlotTrackEditDialog dialog = new ReadsPlotTrackEditDialog(parent,
+        this);
 
     dialog.setVisible(true);
 

@@ -49,15 +49,14 @@ public class AnnotationTracksDialog extends ModernDialogMultiCardWindow {
   /**
    * Instantiates a new annotation tracks dialog.
    *
-   * @param parent
-   *          the parent
-   * @param tree
-   *          the tree
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param parent the parent
+   * @param tree the tree
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public AnnotationTracksDialog(ModernWindow parent, ModernTree<Track> tree) throws IOException {
-    super(parent, "Annotations", "htsview.annotations.help.url", ModernDialogTaskType.OK_CANCEL);
+  public AnnotationTracksDialog(ModernWindow parent, ModernTree<Track> tree)
+      throws IOException {
+    super(parent, "Annotations", "htsview.annotations.help.url",
+        ModernDialogTaskType.OK_CANCEL);
 
     mTree = tree;
 
@@ -85,8 +84,7 @@ public class AnnotationTracksDialog extends ModernDialogMultiCardWindow {
   /**
    * Creates the ui.
    *
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private final void createUi() throws IOException {
     for (TreeNode<Track> child : mTree) {

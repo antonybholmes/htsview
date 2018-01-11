@@ -30,8 +30,6 @@ import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.modern.graphics.DrawingContext;
 
-import edu.columbia.rdf.htsview.tracks.measurement.ScalePlotTrack;
-
 // TODO: Auto-generated Javadoc
 /**
  * Draw peaks.
@@ -119,8 +117,7 @@ public class ReadsPlotLayer extends AxesClippedLayer {
   /**
    * Instantiates a new reads plot layer.
    *
-   * @param readLength
-   *          the read length
+   * @param readLength the read length
    */
   public ReadsPlotLayer(int readLength) {
 
@@ -134,32 +131,29 @@ public class ReadsPlotLayer extends AxesClippedLayer {
   /**
    * Update.
    *
-   * @param starts
-   *          the starts
-   * @param strands
-   *          the strands
-   * @param width
-   *          the width
-   * @param strandVisible
-   *          the strand visible
-   * @param lineColor
-   *          the line color
-   * @param fillColor
-   *          the fill color
-   * @param negStrandVisible
-   *          the neg strand visible
-   * @param negStrandLineColor
-   *          the neg strand line color
-   * @param negStrandFillColor
-   *          the neg strand fill color
-   * @param readHeight
-   *          the read height
-   * @param gap
-   *          the gap
+   * @param starts the starts
+   * @param strands the strands
+   * @param width the width
+   * @param strandVisible the strand visible
+   * @param lineColor the line color
+   * @param fillColor the fill color
+   * @param negStrandVisible the neg strand visible
+   * @param negStrandLineColor the neg strand line color
+   * @param negStrandFillColor the neg strand fill color
+   * @param readHeight the read height
+   * @param gap the gap
    */
-  public void update(ListMultiMap<Integer, Integer> starts, ListMultiMap<Integer, Strand> strands, int width,
-      boolean strandVisible, Color lineColor, Color fillColor, boolean negStrandVisible, Color negStrandLineColor,
-      Color negStrandFillColor, int readHeight, int gap) {
+  public void update(ListMultiMap<Integer, Integer> starts,
+      ListMultiMap<Integer, Strand> strands,
+      int width,
+      boolean strandVisible,
+      Color lineColor,
+      Color fillColor,
+      boolean negStrandVisible,
+      Color negStrandLineColor,
+      Color negStrandFillColor,
+      int readHeight,
+      int gap) {
     mStarts = starts;
     mStrands = strands;
     mWidth = width;
@@ -188,7 +182,11 @@ public class ReadsPlotLayer extends AxesClippedLayer {
    * edu.columbia.rdf.lib.bioinformatics.plot.figure.Axes)
    */
   @Override
-  public void plotLayer(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
+  public void plotLayer(Graphics2D g2,
+      DrawingContext context,
+      Figure figure,
+      SubFigure subFigure,
+      Axes axes) {
 
     if (CollectionUtils.isNullOrEmpty(mStarts)) {
       return;
@@ -206,11 +204,11 @@ public class ReadsPlotLayer extends AxesClippedLayer {
      * 
      * mGap = -1;
      * 
-     * for (int i = 0; i < mStarts.size(); ++i) { int start = mStarts.get(i); char
-     * strand = mStrands.get(i);
+     * for (int i = 0; i < mStarts.size(); ++i) { int start = mStarts.get(i);
+     * char strand = mStrands.get(i);
      * 
-     * if ((!mStrandVisible && strand == '+') || (!mNegStrandVisible && strand ==
-     * '-')) { continue; }
+     * if ((!mStrandVisible && strand == '+') || (!mNegStrandVisible && strand
+     * == '-')) { continue; }
      * 
      * x1 = axes.toPlotX(start); x2 = axes.toPlotX(start + mReadLength);
      * 
@@ -239,7 +237,8 @@ public class ReadsPlotLayer extends AxesClippedLayer {
     // axes.getY1Axis().getMax() + " " + axes.getY1Axis().getMin());
 
     if (context == DrawingContext.SCREEN) {
-      BufferedImage bis = new BufferedImage(mWidth, mReadHeight, BufferedImage.TYPE_INT_RGB);
+      BufferedImage bis = new BufferedImage(mWidth, mReadHeight,
+          BufferedImage.TYPE_INT_RGB);
 
       Graphics2D g2Temp = bis.createGraphics();
 
@@ -249,7 +248,8 @@ public class ReadsPlotLayer extends AxesClippedLayer {
       g2Temp.drawRect(0, 0, mWidth, mReadHeight - 1);
       g2Temp.dispose();
 
-      BufferedImage bia = new BufferedImage(mWidth, mReadHeight, BufferedImage.TYPE_INT_RGB);
+      BufferedImage bia = new BufferedImage(mWidth, mReadHeight,
+          BufferedImage.TYPE_INT_RGB);
 
       g2Temp = bia.createGraphics();
 
@@ -308,7 +308,8 @@ public class ReadsPlotLayer extends AxesClippedLayer {
             g2.setColor(mNegStrandLineColor);
           }
 
-          // System.err.println(x1 + " " + y + row * BLOCK + " " + mGap + " " + mColor);
+          // System.err.println(x1 + " " + y + row * BLOCK + " " + mGap + " " +
+          // mColor);
 
           g2.drawRect(x1, ry, mWidth, mReadHeight - 1);
         }

@@ -36,24 +36,21 @@ public abstract class TrackJsonParser implements NameProperty {
   /**
    * Creates a new track from the json.
    *
-   * @param window
-   *          the window
-   * @param name
-   *          the name
-   * @param id
-   *          the id
-   * @param annotationTree
-   *          the annotation tree
-   * @param trackJson
-   *          the track json
-   * @param rootNode
-   *          the root node
+   * @param window the window
+   * @param name the name
+   * @param id the id
+   * @param annotationTree the annotation tree
+   * @param trackJson the track json
+   * @param rootNode the root node
    * @return true, if successful
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public abstract boolean parse(ModernWindow window, String name, int id, ModernTree<Track> annotationTree,
-      Json trackJson, TreeNode<Track> rootNode) throws IOException;
+  public abstract boolean parse(ModernWindow window,
+      String name,
+      int id,
+      ModernTree<Track> annotationTree,
+      Json trackJson,
+      TreeNode<Track> rootNode) throws IOException;
 
   /**
    * Returns the type this parser is designed to deal with.
@@ -65,8 +62,7 @@ public abstract class TrackJsonParser implements NameProperty {
   /**
    * Gets the file.
    *
-   * @param json
-   *          the json
+   * @param json the json
    * @return the file
    */
   protected static Path getFile(Json json) {

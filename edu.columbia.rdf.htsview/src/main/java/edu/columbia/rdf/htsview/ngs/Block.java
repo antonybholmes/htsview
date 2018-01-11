@@ -45,18 +45,12 @@ public class Block extends Offsets implements Comparable<Block> {
   /**
    * Instantiates a new block.
    *
-   * @param bin
-   *          the bin
-   * @param start
-   *          the start
-   * @param level
-   *          the level
-   * @param width
-   *          the width
-   * @param so
-   *          the so
-   * @param eo
-   *          the eo
+   * @param bin the bin
+   * @param start the start
+   * @param level the level
+   * @param width the width
+   * @param so the so
+   * @param eo the eo
    */
   public Block(int bin, int start, int level, int width, int so, int eo) {
     super(so, eo);

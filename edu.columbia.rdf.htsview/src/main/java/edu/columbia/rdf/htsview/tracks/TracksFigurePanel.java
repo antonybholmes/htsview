@@ -34,7 +34,8 @@ import org.jebtk.modern.theme.ThemeService;
 /**
  * The Class TracksFigure.
  */
-public class TracksFigurePanel extends PlotBoxPanel { // Figure { // PlotBoxColumn {
+public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
+                                                      // PlotBoxColumn {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
@@ -45,12 +46,15 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { // PlotBoxColu
   public static final double MIN_MAX_Y = 0.1;
 
   /** The Constant SELECTION_COLOR. */
-  private static final Color SELECTION_COLOR = ThemeService.getInstance().colors().getColorHighlight(5);
+  private static final Color SELECTION_COLOR = ThemeService.getInstance()
+      .colors().getColorHighlight(5);
 
   /** The Constant SELECTION_COLOR_TRANS. */
-  private static final Color SELECTION_COLOR_TRANS = ColorUtils.getTransparentColor75(SELECTION_COLOR);
+  private static final Color SELECTION_COLOR_TRANS = ColorUtils
+      .getTransparentColor75(SELECTION_COLOR);
 
-  private static final int X_GAP = SettingsService.getInstance().getAsInt("sequencing.tracks.mouse.drag.x-gap");
+  private static final int X_GAP = SettingsService.getInstance()
+      .getAsInt("sequencing.tracks.mouse.drag.x-gap");
 
   /** The m drag start. */
   private int mDragStart = -1;
@@ -86,8 +90,8 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { // PlotBoxColu
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseAdapter#canvasMousePressed(org.
-     * abh.common.ui.graphics.CanvasMouseEvent)
+     * org.abh.common.ui.graphics.ModernCanvasMouseAdapter#canvasMousePressed(
+     * org. abh.common.ui.graphics.CanvasMouseEvent)
      */
     @Override
     public void canvasMousePressed(CanvasMouseEvent e) {
@@ -110,8 +114,8 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { // PlotBoxColu
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseAdapter#canvasMouseReleased(org.
-     * abh.common.ui.graphics.CanvasMouseEvent)
+     * org.abh.common.ui.graphics.ModernCanvasMouseAdapter#canvasMouseReleased(
+     * org. abh.common.ui.graphics.CanvasMouseEvent)
      */
     @Override
     public void canvasMouseReleased(CanvasMouseEvent e) {
@@ -132,8 +136,8 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { // PlotBoxColu
      * (non-Javadoc)
      * 
      * @see
-     * org.abh.common.ui.graphics.ModernCanvasMouseAdapter#canvasMouseDragged(org.
-     * abh.common.ui.graphics.CanvasMouseEvent)
+     * org.abh.common.ui.graphics.ModernCanvasMouseAdapter#canvasMouseDragged(
+     * org. abh.common.ui.graphics.CanvasMouseEvent)
      */
     @Override
     public void canvasMouseDragged(CanvasMouseEvent e) {
@@ -158,12 +162,11 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { // PlotBoxColu
   /**
    * Instantiates a new tracks figure.
    *
-   * @param genomicModel
-   *          the genomic model
-   * @param sizes
-   *          the sizes
+   * @param genomicModel the genomic model
+   * @param sizes the sizes
    */
-  public TracksFigurePanel(TracksFigure figure, GenomicRegionModel genomicModel, ChromosomeSizes sizes) {
+  public TracksFigurePanel(TracksFigure figure, GenomicRegionModel genomicModel,
+      ChromosomeSizes sizes) {
     super(figure);
 
     mFigure = figure;
@@ -191,13 +194,17 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { // PlotBoxColu
   }
 
   @Override
-  public final void plot(Graphics2D g2, DrawingContext context, Object... params) {
+  public final void plot(Graphics2D g2,
+      DrawingContext context,
+      Object... params) {
     super.plot(g2, context, params);
 
     plotSelection(g2, context, params);
   }
 
-  public void plotSelection(Graphics2D g2, DrawingContext context, Object... params) {
+  public void plotSelection(Graphics2D g2,
+      DrawingContext context,
+      Object... params) {
 
     int h = getParent().getHeight();
 
@@ -226,8 +233,7 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { // PlotBoxColu
   /**
    * Alter selection.
    *
-   * @param x
-   *          the x
+   * @param x the x
    */
   private void alterSelection() {
     if (mSelectionStart == -1 || mSelectionEnd == -1) {
@@ -236,11 +242,15 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { // PlotBoxColu
 
     GenomicRegion region = mGenomicModel.get();
 
-    double p = Math.min(1, Math.max(0, (mSelectionStart - Track.LEFT_MARGIN) / (double) Track.PLOT_WIDTH));
+    double p = Math.min(1,
+        Math.max(0,
+            (mSelectionStart - Track.LEFT_MARGIN) / (double) Track.PLOT_WIDTH));
 
     int start = region.getStart() + (int) (p * region.getLength());
 
-    p = Math.min(1, Math.max(0, (mSelectionEnd - Track.LEFT_MARGIN) / (double) Track.PLOT_WIDTH));
+    p = Math.min(1,
+        Math.max(0,
+            (mSelectionEnd - Track.LEFT_MARGIN) / (double) Track.PLOT_WIDTH));
 
     int end = region.getStart() + (int) (p * region.getLength());
 
@@ -265,13 +275,15 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { // PlotBoxColu
 
     mDragBin = bin;
 
-    double w = mFigure.currentSubFigure().currentAxes().getInternalSize().getW();
+    double w = mFigure.currentSubFigure().currentAxes().getInternalSize()
+        .getW();
 
     double p = -mDist / w;
 
     int shift = (int) (p * mDragStartRegion.getLength());
 
-    GenomicRegion newRegion = GenomicRegion.shift(mDragStartRegion, shift, 10, mSizes);
+    GenomicRegion newRegion = GenomicRegion
+        .shift(mDragStartRegion, shift, 10, mSizes);
 
     // System.err.println("new " + mDragStartRegion + " " + newRegion + " " +
     // mDragStartRegion.getLength() + " " + p);

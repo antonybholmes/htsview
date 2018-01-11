@@ -30,8 +30,7 @@ public class TitleProperties {
   /**
    * Instantiates a new title properties.
    *
-   * @param position
-   *          the position
+   * @param position the position
    */
   public TitleProperties(TitlePosition position) {
     this(position, true);
@@ -40,10 +39,8 @@ public class TitleProperties {
   /**
    * Instantiates a new title properties.
    *
-   * @param position
-   *          the position
-   * @param visible
-   *          the visible
+   * @param position the position
+   * @param visible the visible
    */
   public TitleProperties(TitlePosition position, boolean visible) {
     mPos = position;

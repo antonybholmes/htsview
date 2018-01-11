@@ -43,12 +43,14 @@ import org.w3c.dom.Element;
 /**
  * The Class Track.
  */
-public abstract class Track extends ChangeListeners implements Comparable<Track>, XmlRepresentation, ToJson {
+public abstract class Track extends ChangeListeners
+    implements Comparable<Track>, XmlRepresentation, ToJson {
 
   private static final long serialVersionUID = 1L;
 
   /** The Constant PLOT_WIDTH. */
-  public static final int PLOT_WIDTH = SettingsService.getInstance().getAsInt("htsview.plot.width");
+  public static final int PLOT_WIDTH = SettingsService.getInstance()
+      .getAsInt("htsview.plot.width");
 
   /** The Constant SMALL_MARGIN. */
   public static final int SMALL_MARGIN = 5;
@@ -75,14 +77,16 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
   public static final int RIGHT_MARGIN = EXTRA_LARGE_MARGIN;
 
   /** The Constant MARGINS. */
-  public static final MarginProperties MARGINS = new MarginProperties(MEDIUM_MARGIN, LEFT_MARGIN, MEDIUM_MARGIN,
-      RIGHT_MARGIN);
+  public static final MarginProperties MARGINS = new MarginProperties(
+      MEDIUM_MARGIN, LEFT_MARGIN, MEDIUM_MARGIN, RIGHT_MARGIN);
 
   /** The Constant SMALL_TRACK_SIZE. */
-  public static final Dimension SMALL_TRACK_SIZE = new Dimension(Track.PLOT_WIDTH, 24);
+  public static final Dimension SMALL_TRACK_SIZE = new Dimension(
+      Track.PLOT_WIDTH, 24);
 
   /** The Constant MEDIUM_TRACK_SIZE. */
-  public static final Dimension MEDIUM_TRACK_SIZE = new Dimension(Track.PLOT_WIDTH, MEDIUM_MARGIN);
+  public static final Dimension MEDIUM_TRACK_SIZE = new Dimension(
+      Track.PLOT_WIDTH, MEDIUM_MARGIN);
 
   /** The Constant END. */
   public static final int END = LEFT_MARGIN + PLOT_WIDTH;
@@ -105,8 +109,7 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
   /**
    * Sets the name.
    *
-   * @param name
-   *          the new name
+   * @param name the new name
    */
   public void setName(String name) {
     // do nothing
@@ -115,8 +118,7 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
   /**
    * Set the track color.
    *
-   * @param color
-   *          the new line color
+   * @param color the new line color
    */
   public void setLineColor(Color color) {
     // do nothing
@@ -125,8 +127,7 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
   /**
    * Sets the fill color.
    *
-   * @param color
-   *          the new fill color
+   * @param color the new fill color
    */
   public void setFillColor(Color color) {
     // do nothing
@@ -153,8 +154,7 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
   /**
    * Sets the height.
    *
-   * @param height
-   *          the new height
+   * @param height the new height
    */
   public void setHeight(int height) {
     // do nothing
@@ -175,8 +175,7 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
    * 
    * setAutoY(...); setNormalizeY(...); setCommonY(...); setYMax(...);
    *
-   * @param model
-   *          the new y properties
+   * @param model the new y properties
    */
   public void setYProperties(AxisLimitsModel model) {
     setAutoY(model.getAutoSetLimits());
@@ -188,8 +187,7 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
   /**
    * Set the maximum y to show on the y axis.
    *
-   * @param yMax
-   *          the new y max
+   * @param yMax the new y max
    */
   public void setYMax(double yMax) {
     // Do nothing
@@ -198,8 +196,7 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
   /**
    * Returns the maximum y to show on the y axis.
    *
-   * @param normalize
-   *          the normalize
+   * @param normalize the normalize
    * @return the y max
    */
   public double getYMax(boolean normalize) {
@@ -220,8 +217,7 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
    * value for the display. This will be dynamic and change with the data
    * currently being displayed.
    *
-   * @param autoY
-   *          the new auto Y
+   * @param autoY the new auto Y
    */
   public void setAutoY(boolean autoY) {
     // Do nothing
@@ -239,8 +235,7 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
   /**
    * Sets the normalize Y.
    *
-   * @param normalize
-   *          the new normalize Y
+   * @param normalize the new normalize Y
    */
   public void setNormalizeY(boolean normalize) {
     // Do nothing
@@ -258,8 +253,7 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
   /**
    * Sets the common Y.
    *
-   * @param mCommon
-   *          the new common Y
+   * @param mCommon the new common Y
    */
   public void setCommonY(boolean mCommon) {
     // Do nothing
@@ -277,8 +271,7 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
   /**
    * Sets the common height.
    *
-   * @param mCommon
-   *          the new common height
+   * @param mCommon the new common height
    */
   public void setCommonHeight(boolean mCommon) {
     // Do nothing
@@ -287,8 +280,7 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
   /**
    * Sets the style.
    *
-   * @param style
-   *          the new style
+   * @param style the new style
    */
   public void setStyle(PlotStyle style) {
     // Do nothing
@@ -307,34 +299,29 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
    * Should return a graph canvas representation of the underlying track data so
    * it can be displayed graphically.
    *
-   * @param genome
-   *          the genome
-   * @param titlePosition
-   *          the title position
+   * @param genome the genome
+   * @param titlePosition the title position
    * @return the track sub figure
-   * @throws Exception
-   *           the exception
+   * @throws Exception the exception
    */
-  public abstract TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws Exception;
+  public abstract TrackSubFigure createGraph(String genome,
+      TitleProperties titlePosition) throws Exception;
 
   /**
    * Called when the display region is changed.
    *
-   * @param displayRegion
-   *          the display region
-   * @param resolution
-   *          the resolution
-   * @param width
-   *          the width
-   * @param height
-   *          the height
-   * @param margin
-   *          the margin
+   * @param displayRegion the display region
+   * @param resolution the resolution
+   * @param width the width
+   * @param height the height
+   * @param margin the margin
    * @return the track sub figure
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public abstract TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height,
+  public abstract TrackSubFigure updateGraph(GenomicRegion displayRegion,
+      int resolution,
+      int width,
+      int height,
       int margin) throws IOException;
 
   /**
@@ -347,42 +334,36 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
   /**
    * Gets the bed graph.
    *
-   * @param displayRegion
-   *          the display region
-   * @param resolution
-   *          the resolution
+   * @param displayRegion the display region
+   * @param resolution the resolution
    * @return the bed graph
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
-  public UCSCTrack getBedGraph(GenomicRegion displayRegion, int resolution) throws IOException {
+  public UCSCTrack getBedGraph(GenomicRegion displayRegion, int resolution)
+      throws IOException {
     return getBedGraph(displayRegion, resolution, true);
   }
 
   /**
    * Should return a BedGraph representation of the track data.
    *
-   * @param displayRegion
-   *          the display region
-   * @param resolution
-   *          the resolution
-   * @param normalize
-   *          the normalize
+   * @param displayRegion the display region
+   * @param resolution the resolution
+   * @param normalize the normalize
    * @return the bed graph
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public UCSCTrack getBedGraph(GenomicRegion displayRegion, int resolution, boolean normalize) throws IOException {
+  public UCSCTrack getBedGraph(GenomicRegion displayRegion,
+      int resolution,
+      boolean normalize) throws IOException {
     return null;
   }
 
   /**
    * Should enable a UI dialog or similar to allow the track to be edited.
    *
-   * @param parent
-   *          the parent
+   * @param parent the parent
    */
   public void edit(ModernWindow parent) {
     // do nothing
@@ -391,8 +372,7 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
   /**
    * Right title width.
    *
-   * @param name
-   *          the name
+   * @param name the name
    * @return the int
    */
   public static int rightTitleWidth(String name) {
@@ -402,8 +382,7 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
   /**
    * Create a human readable version of a bp measure.
    *
-   * @param bp
-   *          the bp
+   * @param bp the bp
    * @return the string
    */
   public static String formatBp(int bp) {
@@ -419,14 +398,13 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
   /**
    * Sets the margins.
    *
-   * @param name
-   *          the name
-   * @param titlePosition
-   *          the title position
-   * @param subFigure
-   *          the sub figure
+   * @param name the name
+   * @param titlePosition the title position
+   * @param subFigure the sub figure
    */
-  protected static void setMargins(String name, TitleProperties titlePosition, TrackSubFigure subFigure) {
+  protected static void setMargins(String name,
+      TitleProperties titlePosition,
+      TrackSubFigure subFigure) {
     switch (titlePosition.getPosition()) {
     case RIGHT:
     case COMPACT_RIGHT:
@@ -441,14 +419,13 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
   /**
    * Sets the title.
    *
-   * @param name
-   *          the name
-   * @param titlePosition
-   *          the title position
-   * @param axes
-   *          the axes
+   * @param name the name
+   * @param titlePosition the title position
+   * @param axes the axes
    */
-  public static void setTitle(String name, TitleProperties titlePosition, Axes axes) {
+  public static void setTitle(String name,
+      TitleProperties titlePosition,
+      Axes axes) {
     axes.getTitle().setText(name);
 
     // Remove any existing titles
@@ -472,40 +449,37 @@ public abstract class Track extends ChangeListeners implements Comparable<Track>
   /**
    * Sets the standard margins.
    *
-   * @param name
-   *          the name
-   * @param mPlot
-   *          the m plot
+   * @param name the name
+   * @param mPlot the m plot
    */
   protected static void setStandardMargins(String name, TrackSubFigure mPlot) {
     mPlot.currentAxes().setMargins(MARGINS);
 
-    System.err.println("standard margins " + mPlot.getName() + " " + mPlot.getMargins());
+    System.err.println(
+        "standard margins " + mPlot.getName() + " " + mPlot.getMargins());
   }
 
   /**
    * Sets the small margins.
    *
-   * @param name
-   *          the name
-   * @param mPlot
-   *          the m plot
+   * @param name the name
+   * @param mPlot the m plot
    */
   protected static void setSmallMargins(String name, TrackSubFigure mPlot) {
     int right = rightTitleWidth(name);
 
-    mPlot.currentAxes().setMargins(SMALL_MARGIN, MARGINS.getLeft(), SMALL_MARGIN, right);
+    mPlot.currentAxes()
+        .setMargins(SMALL_MARGIN, MARGINS.getLeft(), SMALL_MARGIN, right);
 
-    System.err.println("small margins " + mPlot.getName() + " " + mPlot.currentAxes().getMargins());
+    System.err.println("small margins " + mPlot.getName() + " "
+        + mPlot.currentAxes().getMargins());
   }
 
   /**
    * Sets the small margins.
    *
-   * @param name
-   *          the name
-   * @param axes
-   *          the axes
+   * @param name the name
+   * @param axes the axes
    */
   protected static void setSmallMargins(String name, Axes axes) {
     int right = rightTitleWidth(name);

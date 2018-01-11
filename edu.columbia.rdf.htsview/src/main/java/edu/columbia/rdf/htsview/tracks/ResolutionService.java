@@ -66,8 +66,9 @@ public class ResolutionService implements Iterable<Integer> {
    */
   private void load() {
     try {
-      mResolutions = CollectionUtils.sort(
-          CollectionUtils.toInt(TextUtils.scSplit(SettingsService.getInstance().getAsString("edb.reads.resolutions"))));
+      mResolutions = CollectionUtils
+          .sort(CollectionUtils.toInt(TextUtils.scSplit(SettingsService
+              .getInstance().getAsString("edb.reads.resolutions"))));
     } catch (ParseException e) {
       e.printStackTrace();
     }
@@ -86,8 +87,7 @@ public class ResolutionService implements Iterable<Integer> {
   /**
    * Gets the human readable.
    *
-   * @param resolution
-   *          the resolution
+   * @param resolution the resolution
    * @return the human readable
    */
   public static String getHumanReadable(int resolution) {

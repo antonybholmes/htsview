@@ -113,10 +113,8 @@ public class SamplePlotTrack extends GraphPlotTrack {
   /**
    * Instantiates a new sample plot track.
    *
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
+   * @param sample the sample
+   * @param assembly the assembly
    */
   public SamplePlotTrack(Sample sample, SampleAssembly assembly) {
     this(sample, assembly, DEFAULT_COLOR);
@@ -125,69 +123,54 @@ public class SamplePlotTrack extends GraphPlotTrack {
   /**
    * Instantiates a new sample plot track.
    *
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
-   * @param color
-   *          the color
+   * @param sample the sample
+   * @param assembly the assembly
+   * @param color the color
    */
   public SamplePlotTrack(Sample sample, SampleAssembly assembly, Color color) {
-    this(sample, assembly, color, ColorUtils.tint(color, 0.5), PLOT_SIZE.height);
+    this(sample, assembly, color, ColorUtils.tint(color, 0.5),
+        PLOT_SIZE.height);
   }
 
   /**
    * Instantiates a new sample plot track.
    *
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
-   * @param lineColor
-   *          the line color
-   * @param fillColor
-   *          the fill color
+   * @param sample the sample
+   * @param assembly the assembly
+   * @param lineColor the line color
+   * @param fillColor the fill color
    */
-  public SamplePlotTrack(Sample sample, SampleAssembly assembly, Color lineColor, Color fillColor) {
+  public SamplePlotTrack(Sample sample, SampleAssembly assembly,
+      Color lineColor, Color fillColor) {
     this(sample, assembly, lineColor, fillColor, PLOT_SIZE.height);
   }
 
   /**
    * Instantiates a new sample plot track.
    *
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
-   * @param lineColor
-   *          the line color
-   * @param fillColor
-   *          the fill color
-   * @param height
-   *          the height
+   * @param sample the sample
+   * @param assembly the assembly
+   * @param lineColor the line color
+   * @param fillColor the fill color
+   * @param height the height
    */
-  public SamplePlotTrack(Sample sample, SampleAssembly assembly, Color lineColor, Color fillColor, int height) {
+  public SamplePlotTrack(Sample sample, SampleAssembly assembly,
+      Color lineColor, Color fillColor, int height) {
     this(sample.getName(), sample, assembly, lineColor, fillColor, height);
   }
 
   /**
    * Instantiates a new sample plot track.
    *
-   * @param name
-   *          the name
-   * @param sample
-   *          the sample
-   * @param assembly
-   *          the assembly
-   * @param lineColor
-   *          the line color
-   * @param fillColor
-   *          the fill color
-   * @param height
-   *          the height
+   * @param name the name
+   * @param sample the sample
+   * @param assembly the assembly
+   * @param lineColor the line color
+   * @param fillColor the fill color
+   * @param height the height
    */
-  public SamplePlotTrack(String name, Sample sample, SampleAssembly assembly, Color lineColor, Color fillColor,
-      int height) {
+  public SamplePlotTrack(String name, Sample sample, SampleAssembly assembly,
+      Color lineColor, Color fillColor, int height) {
     mName = name;
     mSample = sample;
     mAssembly = assembly;
@@ -274,8 +257,7 @@ public class SamplePlotTrack extends GraphPlotTrack {
   /**
    * Auto Y.
    *
-   * @param normalize
-   *          the normalize
+   * @param normalize the normalize
    * @return the double
    */
   private double autoY(boolean normalize) {
@@ -292,7 +274,8 @@ public class SamplePlotTrack extends GraphPlotTrack {
       return TracksFigure.MIN_MAX_Y;
     }
 
-    List<UCSCTrackRegion> regions = UCSCTrackRegions.getFixedGapSearch(bedGraph.getRegions()).getFeatureSet(mRegion);
+    List<UCSCTrackRegion> regions = UCSCTrackRegions
+        .getFixedGapSearch(bedGraph.getRegions()).getFeatureSet(mRegion);
 
     double y = 0;
 
@@ -469,8 +452,7 @@ public class SamplePlotTrack extends GraphPlotTrack {
   /**
    * Sets the subtract input.
    *
-   * @param subtract
-   *          the new subtract input
+   * @param subtract the new subtract input
    */
   public void setSubtractInput(boolean subtract) {
     mSubtract = subtract;
@@ -479,10 +461,8 @@ public class SamplePlotTrack extends GraphPlotTrack {
   /**
    * Sets the input.
    *
-   * @param inputSample
-   *          the input sample
-   * @param inputAssembly
-   *          the input assembly
+   * @param inputSample the input sample
+   * @param inputAssembly the input assembly
    */
   public void setInput(Sample inputSample, SampleAssembly inputAssembly) {
     mInputSample = inputSample;
@@ -498,7 +478,8 @@ public class SamplePlotTrack extends GraphPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
+  public TrackSubFigure createGraph(String genome,
+      TitleProperties titlePosition) throws IOException {
     mSubFigure = BedGraphSubFigure.create(getName(), mStyle, titlePosition);
 
     Axes axes = mSubFigure.currentAxes();
@@ -539,8 +520,11 @@ public class SamplePlotTrack extends GraphPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin)
-      throws IOException {
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+      int resolution,
+      int width,
+      int height,
+      int margin) throws IOException {
     mRegion = displayRegion;
     mResolution = resolution;
 
@@ -552,8 +536,15 @@ public class SamplePlotTrack extends GraphPlotTrack {
       height = mHeight;
     }
 
-    mSubFigure.update(displayRegion, resolution, getYMax(getNormalizeY()), width, height, margin, mLineColor,
-        mFillColor, mStyle);
+    mSubFigure.update(displayRegion,
+        resolution,
+        getYMax(getNormalizeY()),
+        width,
+        height,
+        margin,
+        mLineColor,
+        mFillColor,
+        mStyle);
 
     // mSubFigure.getCurrentAxes().getTitle().setText(mName);
 
@@ -578,7 +569,8 @@ public class SamplePlotTrack extends GraphPlotTrack {
    * genome.GenomicRegion, int)
    */
   @Override
-  public UCSCTrack getBedGraph(GenomicRegion displayRegion, int resolution) throws IOException {
+  public UCSCTrack getBedGraph(GenomicRegion displayRegion, int resolution)
+      throws IOException {
     return getBedGraph(displayRegion, resolution, mNormalize);
   }
 
@@ -590,12 +582,16 @@ public class SamplePlotTrack extends GraphPlotTrack {
    * genome.GenomicRegion, int, boolean)
    */
   @Override
-  public UCSCTrack getBedGraph(GenomicRegion displayRegion, int resolution, boolean normalize) throws IOException {
-    List<Integer> counts = mAssembly.getCounts(mSample, displayRegion, resolution);
+  public UCSCTrack getBedGraph(GenomicRegion displayRegion,
+      int resolution,
+      boolean normalize) throws IOException {
+    List<Integer> counts = mAssembly
+        .getCounts(mSample, displayRegion, resolution);
 
     // Subtract the input if desired
     if (mSubtract && mInputSample != null) {
-      List<Integer> mInputCounts = mInputAssembly.getCounts(mInputSample, displayRegion, resolution);
+      List<Integer> mInputCounts = mInputAssembly
+          .getCounts(mInputSample, displayRegion, resolution);
 
       // System.err.println("w1 " + counts);
       // System.err.println("w2 " + mInputCounts);
@@ -627,7 +623,8 @@ public class SamplePlotTrack extends GraphPlotTrack {
     for (int count : counts) {
       normalizedCount = count * scaleFactor;
 
-      BedGraphRegion br = new BedGraphRegion(displayRegion.getChr(), start, start + resolution - 1, normalizedCount);
+      BedGraphRegion br = new BedGraphRegion(displayRegion.getChr(), start,
+          start + resolution - 1, normalizedCount);
 
       bedGraph.getRegions().add(br);
 
@@ -640,13 +637,13 @@ public class SamplePlotTrack extends GraphPlotTrack {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * edu.columbia.rdf.htsview.tracks.GraphPlotTrack#edit(org.abh.common.ui.window.
-   * ModernWindow)
+   * @see edu.columbia.rdf.htsview.tracks.GraphPlotTrack#edit(org.abh.common.ui.
+   * window. ModernWindow)
    */
   @Override
   public void edit(ModernWindow parent) {
-    SamplePlotTrackEditDialog dialog = new SamplePlotTrackEditDialog(parent, this, mAssembly);
+    SamplePlotTrackEditDialog dialog = new SamplePlotTrackEditDialog(parent,
+        this, mAssembly);
 
     dialog.setVisible(true);
 
@@ -696,8 +693,8 @@ public class SamplePlotTrack extends GraphPlotTrack {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * edu.columbia.rdf.htsview.tracks.Track#toJson(org.abh.common.json.JsonBuilder)
+   * @see edu.columbia.rdf.htsview.tracks.Track#toJson(org.abh.common.json.
+   * JsonBuilder)
    */
   @Override
   public void toJson(JsonBuilder json) {
@@ -711,8 +708,7 @@ public class SamplePlotTrack extends GraphPlotTrack {
   /**
    * Common json.
    *
-   * @param json
-   *          the json
+   * @param json the json
    */
   public void commonJson(JsonBuilder json) {
     json.startObject();

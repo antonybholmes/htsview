@@ -29,21 +29,21 @@ public abstract class ReadCountsFile extends CountAssembly {
 
   /**
    * Bins a list of starts into buckets with each bucket representing a bin of
-   * size window. The array begins at the bin containing the start and ends at the
-   * bin containing the end. All reads falling between these two bins will be
-   * counted. Each array element is the count of the number of reads in the bin
+   * size window. The array begins at the bin containing the start and ends at
+   * the bin containing the end. All reads falling between these two bins will
+   * be counted. Each array element is the count of the number of reads in the
+   * bin
    *
-   * @param starts
-   *          the starts
-   * @param start
-   *          the start
-   * @param end
-   *          the end
-   * @param window
-   *          the bin size
+   * @param starts the starts
+   * @param start the start
+   * @param end the end
+   * @param window the bin size
    * @return the counts
    */
-  protected static List<Integer> binCounts(final List<Integer> starts, int start, int end, int window) {
+  protected static List<Integer> binCounts(final List<Integer> starts,
+      int start,
+      int end,
+      int window) {
     int startBin = start / window;
     int endBin = end / window;
     int l = endBin - startBin + 1;

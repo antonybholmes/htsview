@@ -40,10 +40,24 @@ public abstract class MeasurementSubFigure extends FixedSubFigure {
    * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
-      Color lineColor, Color fillColor, PlotStyle style) {
+  public void update(GenomicRegion displayRegion,
+      int resolution,
+      double yMax,
+      int width,
+      int height,
+      int margin,
+      Color lineColor,
+      Color fillColor,
+      PlotStyle style) {
 
-    super.update(displayRegion, resolution, yMax, width, Track.MEDIUM_TRACK_SIZE.height, margin, lineColor, fillColor,
+    super.update(displayRegion,
+        resolution,
+        yMax,
+        width,
+        Track.MEDIUM_TRACK_SIZE.height,
+        margin,
+        lineColor,
+        fillColor,
         style);
   }
 }

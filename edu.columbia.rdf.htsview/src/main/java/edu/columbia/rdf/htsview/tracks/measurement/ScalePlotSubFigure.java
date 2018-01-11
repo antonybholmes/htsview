@@ -39,8 +39,7 @@ public class ScalePlotSubFigure extends MeasurementSubFigure {
   /**
    * Instantiates a new scale plot sub figure.
    *
-   * @param titlePosition
-   *          the title position
+   * @param titlePosition the title position
    */
   public ScalePlotSubFigure(TitleProperties titlePosition) {
     mLayer = new ScaleCanvasLayer();
@@ -53,8 +52,7 @@ public class ScalePlotSubFigure extends MeasurementSubFigure {
   /**
    * Creates the.
    *
-   * @param titlePosition
-   *          the title position
+   * @param titlePosition the title position
    * @return the scale plot sub figure
    */
   public static ScalePlotSubFigure create(TitleProperties titlePosition) {
@@ -83,14 +81,29 @@ public class ScalePlotSubFigure extends MeasurementSubFigure {
    * (non-Javadoc)
    * 
    * @see
-   * edu.columbia.rdf.htsview.tracks.measurement.MeasurementSubFigure#update(org.
-   * jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int,
+   * edu.columbia.rdf.htsview.tracks.measurement.MeasurementSubFigure#update(
+   * org. jebtk.bioinformatics.genome.GenomicRegion, int, double, int, int, int,
    * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
-      Color lineColor, Color fillColor, PlotStyle style) {
-    super.update(displayRegion, resolution, yMax, width, height, margin, lineColor, fillColor, style);
+  public void update(GenomicRegion displayRegion,
+      int resolution,
+      double yMax,
+      int width,
+      int height,
+      int margin,
+      Color lineColor,
+      Color fillColor,
+      PlotStyle style) {
+    super.update(displayRegion,
+        resolution,
+        yMax,
+        width,
+        height,
+        margin,
+        lineColor,
+        fillColor,
+        style);
 
     mLayer.update(displayRegion);
   }

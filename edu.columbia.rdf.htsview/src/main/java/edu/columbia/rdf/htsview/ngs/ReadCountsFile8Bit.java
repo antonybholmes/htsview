@@ -27,7 +27,6 @@
  */
 package edu.columbia.rdf.htsview.ngs;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.text.ParseException;
@@ -39,7 +38,6 @@ import java.util.Map;
 import org.jebtk.bioinformatics.dna.GenomeAssemblyDir;
 import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import org.jebtk.core.io.Io;
 import org.jebtk.core.io.PathUtils;
 
 // TODO: Auto-generated Javadoc
@@ -66,8 +64,7 @@ public class ReadCountsFile8Bit extends ReadCountsFile {
    * Directory containing genome files which must be of the form chr.n.txt. Each
    * file must contain exactly one line consisting of the entire chromosome.
    *
-   * @param directory
-   *          the directory
+   * @param directory the directory
    */
   public ReadCountsFile8Bit(Path directory) {
     mDirectory = directory;
@@ -80,32 +77,35 @@ public class ReadCountsFile8Bit extends ReadCountsFile {
    * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
    */
   @Override
-  public List<Integer> getCounts(GenomicRegion region, int window) throws IOException {
+  public List<Integer> getCounts(GenomicRegion region, int window)
+      throws IOException {
     Chromosome chr = region.getChr();
 
     if (!mFileMap.containsKey(chr)) {
-      mFileMap.put(chr, mDirectory.resolve(chr + ".counts.win." + window + ".8bit"));
+      mFileMap.put(chr,
+          mDirectory.resolve(chr + ".counts.win." + window + ".8bit"));
     }
 
-    return getCounts(mFileMap.get(chr), region.getStart(), region.getEnd(), window);
+    return getCounts(mFileMap.get(chr),
+        region.getStart(),
+        region.getEnd(),
+        window);
   }
 
   /**
    * Gets the counts.
    *
-   * @param file
-   *          the file
-   * @param start
-   *          the start
-   * @param end
-   *          the end
-   * @param window
-   *          the window
+   * @param file the file
+   * @param start the start
+   * @param end the end
+   * @param window the window
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  private static List<Integer> getCounts(final Path file, int start, int end, int window) throws IOException {
+  private static List<Integer> getCounts(final Path file,
+      int start,
+      int end,
+      int window) throws IOException {
 
     int s = (start - 1) / window;
     int e = (end - 1) / window;
@@ -125,12 +125,9 @@ public class ReadCountsFile8Bit extends ReadCountsFile {
   /**
    * The main method.
    *
-   * @param args
-   *          the arguments
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @param args the arguments
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
   public static void main(String[] args) throws IOException, ParseException {
     CountAssembly a = new ReadCountsFile8Bit(PathUtils.getPath(

@@ -34,49 +34,41 @@ public abstract class SampleLoader implements NameProperty {
   /**
    * Open.
    *
-   * @param parent
-   *          the parent
-   * @param file
-   *          the file
-   * @param root
-   *          the root
+   * @param parent the parent
+   * @param file the file
+   * @param root the root
    * @return the track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public Track open(ModernWindow parent, Path file, TreeNode<Track> root) throws IOException {
+  public Track open(ModernWindow parent, Path file, TreeNode<Track> root)
+      throws IOException {
     return openSample(parent, file, root);
   }
 
   /**
    * Should be called to open a sample track.
    *
-   * @param parent
-   *          the parent
-   * @param file
-   *          the file
-   * @param root
-   *          the root
+   * @param parent the parent
+   * @param file the file
+   * @param root the root
    * @return the track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public abstract Track openSample(ModernWindow parent, Path file, TreeNode<Track> root) throws IOException;
+  public abstract Track openSample(ModernWindow parent,
+      Path file,
+      TreeNode<Track> root) throws IOException;
 
   /**
    * Should be called to open a reads track showing individual reads.
    *
-   * @param parent
-   *          the parent
-   * @param file
-   *          the file
-   * @param root
-   *          the root
+   * @param parent the parent
+   * @param file the file
+   * @param root the root
    * @return the track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public Track openReads(ModernWindow parent, Path file, TreeNode<Track> root) throws IOException {
+  public Track openReads(ModernWindow parent, Path file, TreeNode<Track> root)
+      throws IOException {
     return null;
   }
 
@@ -94,49 +86,41 @@ public abstract class SampleLoader implements NameProperty {
   /**
    * Load.
    *
-   * @param sample
-   *          the sample
-   * @param track
-   *          the track
-   * @param root
-   *          the root
+   * @param sample the sample
+   * @param track the track
+   * @param root the root
    * @return the track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public static Track load(Sample sample, Track track, TreeNode<Track> root) throws IOException {
+  public static Track load(Sample sample, Track track, TreeNode<Track> root)
+      throws IOException {
     return load(sample.getName(), track, root);
   }
 
   /**
    * Load.
    *
-   * @param track
-   *          the track
-   * @param root
-   *          the root
+   * @param track the track
+   * @param root the root
    * @return the track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public static Track load(Track track, TreeNode<Track> root) throws IOException {
+  public static Track load(Track track, TreeNode<Track> root)
+      throws IOException {
     return load(track.getName(), track, root);
   }
 
   /**
    * Load a track into the track tree.
    *
-   * @param name
-   *          the name
-   * @param track
-   *          the track
-   * @param root
-   *          the root
+   * @param name the name
+   * @param track the track
+   * @param root the root
    * @return the track
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public static Track load(String name, Track track, TreeNode<Track> root) throws IOException {
+  public static Track load(String name, Track track, TreeNode<Track> root)
+      throws IOException {
     root.addChild(new TreeNode<Track>(name, track));
 
     return track;

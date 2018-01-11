@@ -53,10 +53,8 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
   /**
    * Instantiates a new bed graph plot track.
    *
-   * @param bedGraph
-   *          the bed graph
-   * @param file
-   *          the file
+   * @param bedGraph the bed graph
+   * @param file the file
    */
   public BedGraphPlotTrack(UCSCTrack bedGraph, Path file) {
     mBedGraph = bedGraph;
@@ -151,10 +149,13 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
-    mSubFigure = BedGraphSubFigure.create(mBedGraph.getName(), mStyle, titlePosition);
+  public TrackSubFigure createGraph(String genome,
+      TitleProperties titlePosition) throws IOException {
+    mSubFigure = BedGraphSubFigure
+        .create(mBedGraph.getName(), mStyle, titlePosition);
 
-    ((BedGraphPlot) mSubFigure.currentAxes().currentPlot()).setBedGraph(mBedGraph);
+    ((BedGraphPlot) mSubFigure.currentAxes().currentPlot())
+        .setBedGraph(mBedGraph);
 
     mSubFigure.currentAxes().setInternalSize(PLOT_SIZE);
 
@@ -163,7 +164,8 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
     case COMPACT_RIGHT:
       int right = rightTitleWidth(getName());
 
-      mSubFigure.currentAxes().setMargins(MEDIUM_MARGIN, MARGINS.getLeft(), LARGE_MARGIN, right);
+      mSubFigure.currentAxes()
+          .setMargins(MEDIUM_MARGIN, MARGINS.getLeft(), LARGE_MARGIN, right);
 
       break;
     default:
@@ -183,11 +185,21 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin)
-      throws IOException {
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+      int resolution,
+      int width,
+      int height,
+      int margin) throws IOException {
     // Turn off updating so that we reduce drawing events
     // mPlot.setForwardCanvasEventsEnabled(false);
-    mSubFigure.update(displayRegion, resolution, mYMax, width, height, margin, getFillColor(), getFillColor(),
+    mSubFigure.update(displayRegion,
+        resolution,
+        mYMax,
+        width,
+        height,
+        margin,
+        getFillColor(),
+        getFillColor(),
         getStyle());
     // mPlot.setForwardCanvasEventsEnabled(true);
 
@@ -201,7 +213,9 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
    * edu.columbia.rdf.htsview.tracks.Track#getBedGraph(org.jebtk.bioinformatics.
    * genome.GenomicRegion, int, boolean)
    */
-  public UCSCTrack getBedGraph(GenomicRegion displayRegion, int resolution, boolean normalize) {
+  public UCSCTrack getBedGraph(GenomicRegion displayRegion,
+      int resolution,
+      boolean normalize) {
     return mBedGraph;
   }
 
@@ -226,8 +240,8 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * edu.columbia.rdf.htsview.tracks.Track#toJson(org.abh.common.json.JsonBuilder)
+   * @see edu.columbia.rdf.htsview.tracks.Track#toJson(org.abh.common.json.
+   * JsonBuilder)
    */
   @Override
   public void toJson(JsonBuilder json) {

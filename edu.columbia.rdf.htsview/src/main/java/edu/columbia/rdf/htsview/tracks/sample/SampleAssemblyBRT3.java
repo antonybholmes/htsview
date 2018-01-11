@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.htsview.tracks.sample;
 
-import java.io.IOException;
 import java.nio.file.Path;
 
 import edu.columbia.rdf.htsview.ngs.ReadCountsFileBRT3;
@@ -32,8 +31,7 @@ public class SampleAssemblyBRT3 extends SampleAssemblyFile {
   /**
    * Instantiates a new track assembly web.
    *
-   * @param metaFile
-   *          the meta file
+   * @param metaFile the meta file
    */
   public SampleAssemblyBRT3(Path metaFile) {
     super(new ReadCountsFileBRT3(metaFile));

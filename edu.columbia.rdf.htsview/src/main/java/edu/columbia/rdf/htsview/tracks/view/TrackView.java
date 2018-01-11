@@ -58,30 +58,25 @@ public class TrackView {
   /**
    * Load json view.
    *
-   * @param window
-   *          the window
-   * @param jsonFile
-   *          the json file
-   * @param tracksPanel
-   *          the tracks panel
-   * @param mAnnotationTree
-   *          the m annotation tree
-   * @param mWidthModel
-   *          the m width model
-   * @param mMarginModel
-   *          the m margin model
-   * @param mGenomicModel
-   *          the m genomic model
-   * @param titleModel
-   *          the title model
-   * @throws ParseException
-   *           the parse exception
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param window the window
+   * @param jsonFile the json file
+   * @param tracksPanel the tracks panel
+   * @param mAnnotationTree the m annotation tree
+   * @param mWidthModel the m width model
+   * @param mMarginModel the m margin model
+   * @param mGenomicModel the m genomic model
+   * @param titleModel the title model
+   * @throws ParseException the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public static void loadJsonView(ModernWindow window, final Path jsonFile, TracksPanel tracksPanel,
-      final ModernTree<Track> mAnnotationTree, WidthModel mWidthModel, MarginModel mMarginModel,
-      GenomicRegionModel mGenomicModel, TitlePositionModel titleModel) throws ParseException, IOException {
+  public static void loadJsonView(ModernWindow window,
+      final Path jsonFile,
+      TracksPanel tracksPanel,
+      final ModernTree<Track> mAnnotationTree,
+      WidthModel mWidthModel,
+      MarginModel mMarginModel,
+      GenomicRegionModel mGenomicModel,
+      TitlePositionModel titleModel) throws ParseException, IOException {
     TreeRootNode<Track> root = new TreeRootNode<Track>();
     Deque<TreeNode<Track>> queue = new ArrayDeque<TreeNode<Track>>();
 
@@ -91,7 +86,8 @@ public class TrackView {
 
     Json viewJson = new JsonParser().parse(jsonFile);
 
-    GenomicRegion region = GenomicRegion.parse(viewJson.get("location").getAsString());
+    GenomicRegion region = GenomicRegion
+        .parse(viewJson.get("location").getAsString());
 
     if (region == null) {
       return;
@@ -155,7 +151,8 @@ public class TrackView {
         TrackJsonParser parser = TrackParserService.getInstance().get(type);
 
         if (parser != null) {
-          allowChildren = parser.parse(window, name, id, mAnnotationTree, trackJson, rootNode);
+          allowChildren = parser
+              .parse(window, name, id, mAnnotationTree, trackJson, rootNode);
         }
 
         Json subTracksJson = trackJson.get("tracks");
@@ -177,8 +174,7 @@ public class TrackView {
   /**
    * Gets the file.
    *
-   * @param json
-   *          the json
+   * @param json the json
    * @return the file
    */
   private static Path getFile(Json json) {
@@ -200,23 +196,20 @@ public class TrackView {
   /**
    * Save json view.
    *
-   * @param file
-   *          the file
-   * @param trackList
-   *          the track list
-   * @param region
-   *          the region
-   * @param titleProperties
-   *          the title properties
-   * @param width
-   *          the width
-   * @param margin
-   *          the margin
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @param file the file
+   * @param trackList the track list
+   * @param region the region
+   * @param titleProperties the title properties
+   * @param width the width
+   * @param margin the margin
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public static void saveJsonView(Path file, TrackTree trackList, GenomicRegion region, TitleProperties titleProperties,
-      int width, int margin) throws IOException {
+  public static void saveJsonView(Path file,
+      TrackTree trackList,
+      GenomicRegion region,
+      TitleProperties titleProperties,
+      int width,
+      int margin) throws IOException {
     if (file == null || region == null) {
       return;
     }
@@ -228,7 +221,8 @@ public class TrackView {
     root.add("margin-px", margin);
 
     root.startObject("titles");
-    root.add("position", titleProperties.getPosition().toString().toLowerCase());
+    root.add("position",
+        titleProperties.getPosition().toString().toLowerCase());
     root.add("visible", titleProperties.getVisible());
     root.endObject();
 

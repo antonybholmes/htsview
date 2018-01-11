@@ -55,8 +55,7 @@ public class TrackParserService {
   /**
    * Register.
    *
-   * @param parser
-   *          the parser
+   * @param parser the parser
    */
   public void register(TrackJsonParser parser) {
     register(parser.getType(), parser);
@@ -65,10 +64,8 @@ public class TrackParserService {
   /**
    * Register.
    *
-   * @param type
-   *          the type
-   * @param parser
-   *          the parser
+   * @param type the type
+   * @param parser the parser
    */
   private void register(String type, TrackJsonParser parser) {
     mParserMap.put(type, parser);
@@ -77,8 +74,7 @@ public class TrackParserService {
   /**
    * Gets the.
    *
-   * @param type
-   *          the type
+   * @param type the type
    * @return the track json parser
    */
   public TrackJsonParser get(String type) {

@@ -76,8 +76,7 @@ public class ReadCountsFileBRT3 extends ReadCountsFileBinTree {
    * Directory containing genome files which must be of the form chr.n.txt. Each
    * file must contain exactly one line consisting of the entire chromosome.
    *
-   * @param metaFile
-   *          the directory
+   * @param metaFile the directory
    */
   public ReadCountsFileBRT3(Path metaFile) {
     super(metaFile);
@@ -96,26 +95,26 @@ public class ReadCountsFileBRT3 extends ReadCountsFileBinTree {
    * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
    */
   @Override
-  public List<Integer> getCounts(GenomicRegion region, int window) throws IOException {
-    return getCounts(region.getChr(), region.getStart(), region.getEnd(), window);
+  public List<Integer> getCounts(GenomicRegion region, int window)
+      throws IOException {
+    return getCounts(region.getChr(),
+        region.getStart(),
+        region.getEnd(),
+        window);
   }
 
   /**
    * Gets the counts.
    *
-   * @param chr
-   *          the chr
-   * @param start
-   *          the start
-   * @param end
-   *          the end
-   * @param window
-   *          the window
+   * @param chr the chr
+   * @param start the start
+   * @param end the end
+   * @param window the window
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getCounts(Chromosome chr, int start, int end, int window) throws IOException {
+  public List<Integer> getCounts(Chromosome chr, int start, int end, int window)
+      throws IOException {
     Path file = getFile(chr, window, FILE_EXT);
 
     RandomAccessFile in = FileUtils.newRandomAccess(file);
@@ -176,17 +175,14 @@ public class ReadCountsFileBRT3 extends ReadCountsFileBinTree {
   /**
    * Gets the count offset.
    *
-   * @param in
-   *          the in
-   * @param p
-   *          the p
-   * @param window
-   *          the window
+   * @param in the in
+   * @param p the p
+   * @param window the window
    * @return the count offset
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public static Offsets getCountOffset(RandomAccessFile in, int p, int window) throws IOException {
+  public static Offsets getCountOffset(RandomAccessFile in, int p, int window)
+      throws IOException {
     boolean found = false;
     int bin = -1;
     int width = -1;

@@ -89,8 +89,7 @@ public class ABIPlotTrack extends GraphPlotTrack {
   /**
    * Instantiates a new ABI plot track.
    *
-   * @param trace
-   *          the trace
+   * @param trace the trace
    */
   public ABIPlotTrack(ABITrace trace) {
     this(trace, DEFAULT_COLOR);
@@ -99,24 +98,20 @@ public class ABIPlotTrack extends GraphPlotTrack {
   /**
    * Instantiates a new ABI plot track.
    *
-   * @param trace
-   *          the trace
-   * @param color
-   *          the color
+   * @param trace the trace
+   * @param color the color
    */
   public ABIPlotTrack(ABITrace trace, Color color) {
-    this(trace, color, ColorUtils.getTransparentColor50(color), PLOT_SIZE.height);
+    this(trace, color, ColorUtils.getTransparentColor50(color),
+        PLOT_SIZE.height);
   }
 
   /**
    * Instantiates a new ABI plot track.
    *
-   * @param trace
-   *          the trace
-   * @param lineColor
-   *          the line color
-   * @param fillColor
-   *          the fill color
+   * @param trace the trace
+   * @param lineColor the line color
+   * @param fillColor the fill color
    */
   public ABIPlotTrack(ABITrace trace, Color lineColor, Color fillColor) {
     this(trace, lineColor, fillColor, PLOT_SIZE.height);
@@ -125,34 +120,27 @@ public class ABIPlotTrack extends GraphPlotTrack {
   /**
    * Instantiates a new ABI plot track.
    *
-   * @param trace
-   *          the trace
-   * @param lineColor
-   *          the line color
-   * @param fillColor
-   *          the fill color
-   * @param height
-   *          the height
+   * @param trace the trace
+   * @param lineColor the line color
+   * @param fillColor the fill color
+   * @param height the height
    */
-  public ABIPlotTrack(ABITrace trace, Color lineColor, Color fillColor, int height) {
+  public ABIPlotTrack(ABITrace trace, Color lineColor, Color fillColor,
+      int height) {
     this(trace.getName(), trace, lineColor, fillColor, height);
   }
 
   /**
    * Instantiates a new ABI plot track.
    *
-   * @param name
-   *          the name
-   * @param trace
-   *          the trace
-   * @param lineColor
-   *          the line color
-   * @param fillColor
-   *          the fill color
-   * @param height
-   *          the height
+   * @param name the name
+   * @param trace the trace
+   * @param lineColor the line color
+   * @param fillColor the fill color
+   * @param height the height
    */
-  public ABIPlotTrack(String name, ABITrace trace, Color lineColor, Color fillColor, int height) {
+  public ABIPlotTrack(String name, ABITrace trace, Color lineColor,
+      Color fillColor, int height) {
     mName = name;
     mTrace = trace;
 
@@ -404,7 +392,8 @@ public class ABIPlotTrack extends GraphPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome, TitleProperties titlePosition) throws IOException {
+  public TrackSubFigure createGraph(String genome,
+      TitleProperties titlePosition) throws IOException {
     mSubFigure = ABISubFigure.create(getName(), mTrace, mStyle, titlePosition);
 
     Axes axes = mSubFigure.currentAxes();
@@ -438,15 +427,26 @@ public class ABIPlotTrack extends GraphPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion, int resolution, int width, int height, int margin)
-      throws IOException {
+  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+      int resolution,
+      int width,
+      int height,
+      int margin) throws IOException {
     mRegion = displayRegion;
 
     if (!getCommonHeight()) {
       height = mHeight;
     }
 
-    mSubFigure.update(displayRegion, resolution, mYMax, width, height, margin, mLineColor, mFillColor, mStyle);
+    mSubFigure.update(displayRegion,
+        resolution,
+        mYMax,
+        width,
+        height,
+        margin,
+        mLineColor,
+        mFillColor,
+        mStyle);
 
     mSubFigure.currentAxes().getTitle().setText(mName);
 
@@ -471,16 +471,16 @@ public class ABIPlotTrack extends GraphPlotTrack {
    * genome.GenomicRegion, int)
    */
   @Override
-  public UCSCTrack getBedGraph(GenomicRegion displayRegion, int resolution) throws IOException {
+  public UCSCTrack getBedGraph(GenomicRegion displayRegion, int resolution)
+      throws IOException {
     return getBedGraph(displayRegion, resolution, mNormalize);
   }
 
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * edu.columbia.rdf.htsview.tracks.GraphPlotTrack#edit(org.abh.common.ui.window.
-   * ModernWindow)
+   * @see edu.columbia.rdf.htsview.tracks.GraphPlotTrack#edit(org.abh.common.ui.
+   * window. ModernWindow)
    */
   @Override
   public void edit(ModernWindow parent) {
@@ -517,8 +517,8 @@ public class ABIPlotTrack extends GraphPlotTrack {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * edu.columbia.rdf.htsview.tracks.Track#toJson(org.abh.common.json.JsonBuilder)
+   * @see edu.columbia.rdf.htsview.tracks.Track#toJson(org.abh.common.json.
+   * JsonBuilder)
    */
   @Override
   public void toJson(JsonBuilder json) {
@@ -532,8 +532,7 @@ public class ABIPlotTrack extends GraphPlotTrack {
   /**
    * Common json.
    *
-   * @param json
-   *          the json
+   * @param json the json
    */
   public void commonJson(JsonBuilder json) {
     json.startObject();

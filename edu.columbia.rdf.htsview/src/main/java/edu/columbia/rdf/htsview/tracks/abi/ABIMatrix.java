@@ -42,12 +42,9 @@ public class ABIMatrix extends DataFrame {
   /**
    * Instantiates a new ABI matrix.
    *
-   * @param trace
-   *          the trace
-   * @param base
-   *          the base
-   * @param region
-   *          the region
+   * @param trace the trace
+   * @param base the base
+   * @param region the region
    */
   public ABIMatrix(ABITrace trace, char base, GenomicRegion region) {
     super(new EmptyMatrix(trace.getNumBases(), 2));

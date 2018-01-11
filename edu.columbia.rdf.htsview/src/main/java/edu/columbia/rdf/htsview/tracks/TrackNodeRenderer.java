@@ -49,10 +49,12 @@ public class TrackNodeRenderer extends ModernTreeBranchNodeRenderer {
   private Color mLineColor;
 
   /** The Constant LINE_COLOR. */
-  public static final Color LINE_COLOR = ThemeService.getInstance().colors().getHighlight(2);
+  public static final Color LINE_COLOR = ThemeService.getInstance().colors()
+      .getHighlight(2);
 
   /** The Constant COLOR. */
-  public static final Color COLOR = ThemeService.getInstance().colors().getHighlight(6);
+  public static final Color COLOR = ThemeService.getInstance().colors()
+      .getHighlight(6);
 
   /**
    * Instantiates a new track node renderer.
@@ -65,8 +67,8 @@ public class TrackNodeRenderer extends ModernTreeBranchNodeRenderer {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.tree.ModernTreeNodeRenderer#drawForegroundAAText(java.awt.
-   * Graphics2D)
+   * org.abh.common.ui.tree.ModernTreeNodeRenderer#drawForegroundAAText(java.
+   * awt. Graphics2D)
    */
   @Override
   public void drawForegroundAAText(Graphics2D g2) {
@@ -102,7 +104,9 @@ public class TrackNodeRenderer extends ModernTreeBranchNodeRenderer {
     // }
 
     // g2.setColor(mFillColor);
-    g2.drawString(truncate(g2, mText, x2 - x - PADDING), x, getTextYPosCenter(g2, getHeight()));
+    g2.drawString(truncate(g2, mText, x2 - x - PADDING),
+        x,
+        getTextYPosCenter(g2, getHeight()));
 
     // g2.setColor(mFillColor);
     // g2.fillOval(x2, y, ORB_WIDTH, ORB_WIDTH);
@@ -132,14 +136,27 @@ public class TrackNodeRenderer extends ModernTreeBranchNodeRenderer {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.tree.ModernTreeNodeRenderer#getRenderer(org.abh.common.ui.
-   * tree.Tree, org.abh.common.tree.TreeNode, boolean, boolean, boolean, boolean,
-   * int, int)
+   * org.abh.common.ui.tree.ModernTreeNodeRenderer#getRenderer(org.abh.common.
+   * ui. tree.Tree, org.abh.common.tree.TreeNode, boolean, boolean, boolean,
+   * boolean, int, int)
    */
   @Override
-  public ModernTreeNodeRenderer getRenderer(Tree<?> tree, TreeNode<?> node, boolean nodeIsHighlighted,
-      boolean nodeIsSelected, boolean hasFocus, boolean isDragToNode, int depth, int row) {
-    super.getRenderer(tree, node, nodeIsHighlighted, nodeIsSelected, hasFocus, isDragToNode, depth, row);
+  public ModernTreeNodeRenderer getRenderer(Tree<?> tree,
+      TreeNode<?> node,
+      boolean nodeIsHighlighted,
+      boolean nodeIsSelected,
+      boolean hasFocus,
+      boolean isDragToNode,
+      int depth,
+      int row) {
+    super.getRenderer(tree,
+        node,
+        nodeIsHighlighted,
+        nodeIsSelected,
+        hasFocus,
+        isDragToNode,
+        depth,
+        row);
 
     Track t = (Track) node.getValue();
 

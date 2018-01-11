@@ -60,7 +60,8 @@ public class ReadCountsFileBVT extends ReadCountsFileBinTree {
   public static final int READ_FLAG_WIDTH_BYTES = 1;
 
   /** The Constant READ_WIDTH_BYTES. */
-  public static final int READ_WIDTH_BYTES = READ_START_WIDTH_BYTES + READ_VALUE_WIDTH_BYTES + READ_FLAG_WIDTH_BYTES;
+  public static final int READ_WIDTH_BYTES = READ_START_WIDTH_BYTES
+      + READ_VALUE_WIDTH_BYTES + READ_FLAG_WIDTH_BYTES;
 
   /**
    * The constant FILE_EXT.
@@ -71,8 +72,7 @@ public class ReadCountsFileBVT extends ReadCountsFileBinTree {
    * Directory containing genome files which must be of the form chr.n.txt. Each
    * file must contain exactly one line consisting of the entire chromosome.
    *
-   * @param metaFile
-   *          the directory
+   * @param metaFile the directory
    */
   public ReadCountsFileBVT(Path metaFile) {
     super(metaFile);
@@ -81,12 +81,12 @@ public class ReadCountsFileBVT extends ReadCountsFileBinTree {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * edu.columbia.rdf.htsview.ngs.CountAssembly#getCounts(org.jebtk.bioinformatics
-   * .genome.GenomicRegion, int)
+   * @see edu.columbia.rdf.htsview.ngs.CountAssembly#getCounts(org.jebtk.
+   * bioinformatics .genome.GenomicRegion, int)
    */
   @Override
-  public List<Integer> getCounts(GenomicRegion region, int window) throws IOException {
+  public List<Integer> getCounts(GenomicRegion region, int window)
+      throws IOException {
     return CollectionUtils.double2Int(getValues(region, window));
   }
 
@@ -97,26 +97,26 @@ public class ReadCountsFileBVT extends ReadCountsFileBinTree {
    * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
    */
   @Override
-  public List<Integer> getStarts(GenomicRegion region, int window) throws IOException {
-    return getStarts(region.getChr(), region.getStart(), region.getEnd(), window);
+  public List<Integer> getStarts(GenomicRegion region, int window)
+      throws IOException {
+    return getStarts(region.getChr(),
+        region.getStart(),
+        region.getEnd(),
+        window);
   }
 
   /**
    * Gets the starts.
    *
-   * @param chr
-   *          the chr
-   * @param start
-   *          the start
-   * @param end
-   *          the end
-   * @param window
-   *          the window
+   * @param chr the chr
+   * @param start the start
+   * @param end the end
+   * @param window the window
    * @return the starts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getStarts(Chromosome chr, int start, int end, int window) throws IOException {
+  public List<Integer> getStarts(Chromosome chr, int start, int end, int window)
+      throws IOException {
     ArrayList<Integer> starts = new ArrayList<Integer>();
 
     Path file = getFile(chr, window, FILE_EXT);
@@ -163,31 +163,30 @@ public class ReadCountsFileBVT extends ReadCountsFileBinTree {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * edu.columbia.rdf.htsview.ngs.CountAssembly#getValues(org.jebtk.bioinformatics
-   * .genome.GenomicRegion, int)
+   * @see edu.columbia.rdf.htsview.ngs.CountAssembly#getValues(org.jebtk.
+   * bioinformatics .genome.GenomicRegion, int)
    */
   @Override
-  public List<Double> getValues(GenomicRegion region, int window) throws IOException {
-    return getValues(region.getChr(), region.getStart(), region.getEnd(), window);
+  public List<Double> getValues(GenomicRegion region, int window)
+      throws IOException {
+    return getValues(region.getChr(),
+        region.getStart(),
+        region.getEnd(),
+        window);
   }
 
   /**
    * Get the counts from the file,.
    *
-   * @param chr
-   *          the chr
-   * @param start
-   *          The 1 based genomic start coordinate.
-   * @param end
-   *          The 1 based genomic end coordinate.
-   * @param window
-   *          The size of the window being viewed.
+   * @param chr the chr
+   * @param start The 1 based genomic start coordinate.
+   * @param end The 1 based genomic end coordinate.
+   * @param window The size of the window being viewed.
    * @return the starts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Double> getValues(Chromosome chr, int start, int end, int window) throws IOException {
+  public List<Double> getValues(Chromosome chr, int start, int end, int window)
+      throws IOException {
 
     Path file = getFile(chr, window, FILE_EXT);
 
@@ -205,7 +204,8 @@ public class ReadCountsFileBVT extends ReadCountsFileBinTree {
 
       int l = eo.endOffset - so.startOffset + 1;
 
-      // System.err.println("starts " + start + " " + so.level + " " + eo.level + " "
+      // System.err.println("starts " + start + " " + so.level + " " + eo.level
+      // + " "
       // + window);
 
       if (window >= MIN_BIN_WIDTH) {
@@ -278,19 +278,17 @@ public class ReadCountsFileBVT extends ReadCountsFileBinTree {
   /**
    * Gets the counts.
    *
-   * @param starts
-   *          the starts
-   * @param values
-   *          the values
-   * @param start
-   *          the start
-   * @param end
-   *          the end
-   * @param window
-   *          the bin size
+   * @param starts the starts
+   * @param values the values
+   * @param start the start
+   * @param end the end
+   * @param window the bin size
    * @return the counts
    */
-  private static List<Double> getValues(final List<Integer> starts, final List<Double> values, int start, int end,
+  private static List<Double> getValues(final List<Integer> starts,
+      final List<Double> values,
+      int start,
+      int end,
       int window) {
     int startBin = start / window;
     int endBin = end / window;
@@ -330,19 +328,18 @@ public class ReadCountsFileBVT extends ReadCountsFileBinTree {
   /**
    * Gets the values.
    *
-   * @param values
-   *          the values
-   * @param startBlock
-   *          the start block
-   * @param start
-   *          the start
-   * @param end
-   *          the end
-   * @param window
-   *          the window
+   * @param values the values
+   * @param startBlock the start block
+   * @param start the start
+   * @param end the end
+   * @param window the window
    * @return the values
    */
-  private static List<Double> getValues(final List<Double> values, Block startBlock, int start, int end, int window) {
+  private static List<Double> getValues(final List<Double> values,
+      Block startBlock,
+      int start,
+      int end,
+      int window) {
     int startBin = start / window;
     int endBin = end / window;
     int l = endBin - startBin + 1;

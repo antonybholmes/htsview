@@ -32,7 +32,8 @@ import org.jebtk.modern.widget.ModernTwoStateWidget;
  *
  * @author Antony Holmes Holmes
  */
-public class LayoutRibbonSection extends RibbonSection implements ModernClickListener {
+public class LayoutRibbonSection extends RibbonSection
+    implements ModernClickListener {
 
   /**
    * The constant serialVersionUID.
@@ -42,19 +43,20 @@ public class LayoutRibbonSection extends RibbonSection implements ModernClickLis
   /**
    * The m top button.
    */
-  private RibbonLargeRadioButton mTopButton = new RibbonLargeRadioButton("Titles Top",
-      UIService.getInstance().loadIcon("title_top", 32));
+  private RibbonLargeRadioButton mTopButton = new RibbonLargeRadioButton(
+      "Titles Top", UIService.getInstance().loadIcon("title_top", 32));
 
   /**
    * The m right button.
    */
-  private RibbonLargeRadioButton mRightButton = new RibbonLargeRadioButton("Titles Right",
-      UIService.getInstance().loadIcon("title_right", 32));
+  private RibbonLargeRadioButton mRightButton = new RibbonLargeRadioButton(
+      "Titles Right", UIService.getInstance().loadIcon("title_right", 32));
 
   /**
    * The m compact right button.
    */
-  private RibbonLargeRadioButton mCompactRightButton = new RibbonLargeRadioButton("Compact Right Titles",
+  private RibbonLargeRadioButton mCompactRightButton = new RibbonLargeRadioButton(
+      "Compact Right Titles",
       UIService.getInstance().loadIcon("title_compact_right", 32));
 
   /** The m check visible. */
@@ -68,10 +70,8 @@ public class LayoutRibbonSection extends RibbonSection implements ModernClickLis
   /**
    * Instantiates a new title position ribbon section2.
    *
-   * @param ribbon
-   *          the ribbon
-   * @param model
-   *          the model
+   * @param ribbon the ribbon
+   * @param model the model
    */
   public LayoutRibbonSection(Ribbon ribbon, TitlePositionModel model) {
     super(ribbon, "Titles");
@@ -85,12 +85,14 @@ public class LayoutRibbonSection extends RibbonSection implements ModernClickLis
     mTopButton.setShowText(false);
     add(mTopButton);
 
-    mRightButton.setToolTip("Wide", "Title are positioned on the right of plots to save vertical space.");
+    mRightButton.setToolTip("Wide",
+        "Title are positioned on the right of plots to save vertical space.");
     mRightButton.setShowText(false);
     add(UI.createHGap(2));
     add(mRightButton);
 
-    mCompactRightButton.setToolTip("Compact", "Title are positioned on the right of plots to save vertical space.");
+    mCompactRightButton.setToolTip("Compact",
+        "Title are positioned on the right of plots to save vertical space.");
     mCompactRightButton.setShowText(false);
     add(UI.createHGap(2));
     add(mCompactRightButton);
@@ -124,16 +126,18 @@ public class LayoutRibbonSection extends RibbonSection implements ModernClickLis
   /**
    * Change.
    *
-   * @param e
-   *          the e
+   * @param e the e
    */
   private void change(ModernClickEvent e) {
     if (mTopButton.isSelected()) {
-      mModel.set(new TitleProperties(TitlePosition.TOP, mCheckVisible.isSelected()));
+      mModel.set(
+          new TitleProperties(TitlePosition.TOP, mCheckVisible.isSelected()));
     } else if (mRightButton.isSelected()) {
-      mModel.set(new TitleProperties(TitlePosition.RIGHT, mCheckVisible.isSelected()));
+      mModel.set(
+          new TitleProperties(TitlePosition.RIGHT, mCheckVisible.isSelected()));
     } else if (mCompactRightButton.isSelected()) {
-      mModel.set(new TitleProperties(TitlePosition.COMPACT_RIGHT, mCheckVisible.isSelected()));
+      mModel.set(new TitleProperties(TitlePosition.COMPACT_RIGHT,
+          mCheckVisible.isSelected()));
     } else {
 
     }
@@ -143,8 +147,8 @@ public class LayoutRibbonSection extends RibbonSection implements ModernClickLis
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.ui.
-   * event.ModernClickEvent)
+   * org.abh.common.ui.ui.event.ModernClickListener#clicked(org.abh.common.ui.
+   * ui. event.ModernClickEvent)
    */
   @Override
   public void clicked(ModernClickEvent e) {

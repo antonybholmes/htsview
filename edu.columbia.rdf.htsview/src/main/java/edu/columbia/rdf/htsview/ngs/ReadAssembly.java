@@ -43,101 +43,87 @@ public abstract class ReadAssembly {
    * Gets the groups.
    *
    * @return the groups
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
   public abstract List<String> getGroups() throws IOException, ParseException;
 
   /**
    * Gets the sub groups.
    *
-   * @param group
-   *          the group
+   * @param group the group
    * @return the sub groups
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
-  public abstract List<String> getSubGroups(String group) throws IOException, ParseException;
+  public abstract List<String> getSubGroups(String group)
+      throws IOException, ParseException;
 
   /**
    * Gets the samples.
    *
-   * @param group
-   *          the group
-   * @param subGroup
-   *          the sub group
+   * @param group the group
+   * @param subGroup the sub group
    * @return the samples
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
-  public abstract List<String> getSamples(String group, String subGroup) throws IOException, ParseException;
+  public abstract List<String> getSamples(String group, String subGroup)
+      throws IOException, ParseException;
 
   /**
    * Gets the counts.
    *
-   * @param group
-   *          the group
-   * @param subGroup
-   *          the sub group
-   * @param sample
-   *          the sample
-   * @param window
-   *          the window
-   * @param genomicRegion
-   *          the genomic region
+   * @param group the group
+   * @param subGroup the sub group
+   * @param sample the sample
+   * @param window the window
+   * @param genomicRegion the genomic region
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
-  public List<Integer> getCounts(String group, String subGroup, String sample, int window, String genomicRegion)
-      throws IOException, ParseException {
-    return getCounts(group, subGroup, sample, window, GenomicRegion.parse(genomicRegion));
+  public List<Integer> getCounts(String group,
+      String subGroup,
+      String sample,
+      int window,
+      String genomicRegion) throws IOException, ParseException {
+    return getCounts(group,
+        subGroup,
+        sample,
+        window,
+        GenomicRegion.parse(genomicRegion));
   }
 
   /**
    * Gets the counts.
    *
-   * @param group
-   *          the group
-   * @param subGroup
-   *          the sub group
-   * @param sample
-   *          the sample
-   * @param window
-   *          the window
-   * @param region
-   *          the region
+   * @param group the group
+   * @param subGroup the sub group
+   * @param sample the sample
+   * @param window the window
+   * @param region the region
    * @return the counts
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
-  public abstract List<Integer> getCounts(String group, String subGroup, String sample, int window,
+  public abstract List<Integer> getCounts(String group,
+      String subGroup,
+      String sample,
+      int window,
       GenomicRegion region) throws IOException, ParseException;
 
   /**
    * Gets the mapped reads.
    *
-   * @param group
-   *          the group
-   * @param subGroup
-   *          the sub group
-   * @param sample
-   *          the sample
+   * @param group the group
+   * @param subGroup the sub group
+   * @param sample the sample
    * @return the mapped reads
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
-   * @throws ParseException
-   *           the parse exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws ParseException the parse exception
    */
-  public abstract int getMappedReads(String group, String subGroup, String sample) throws IOException, ParseException;
+  public abstract int getMappedReads(String group,
+      String subGroup,
+      String sample) throws IOException, ParseException;
 }

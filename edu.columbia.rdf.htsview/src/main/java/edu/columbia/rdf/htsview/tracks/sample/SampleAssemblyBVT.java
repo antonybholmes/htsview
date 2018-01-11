@@ -31,8 +31,7 @@ public class SampleAssemblyBVT extends SampleAssemblyFile {
   /**
    * Instantiates a new sample assembly BVT.
    *
-   * @param metaFile
-   *          the meta file
+   * @param metaFile the meta file
    */
   public SampleAssemblyBVT(Path metaFile) {
     super(new ReadCountsFileBVT(metaFile));

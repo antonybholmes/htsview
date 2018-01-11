@@ -28,8 +28,7 @@ public abstract class SortSamplesByChipSeqField extends SortSamplesByTag {
   /**
    * Instantiates a new sort samples by chip seq field.
    *
-   * @param path
-   *          the path
+   * @param path the path
    */
   public SortSamplesByChipSeqField(String path) {
     this(new Path(path));
@@ -38,8 +37,7 @@ public abstract class SortSamplesByChipSeqField extends SortSamplesByTag {
   /**
    * Instantiates a new sort samples by chip seq field.
    *
-   * @param path
-   *          the path
+   * @param path the path
    */
   public SortSamplesByChipSeqField(Path path) {
     super(path);

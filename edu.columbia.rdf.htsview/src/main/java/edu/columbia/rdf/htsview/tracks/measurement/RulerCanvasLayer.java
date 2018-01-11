@@ -50,11 +50,11 @@ public class RulerCanvasLayer extends AxesClippedLayer {
   /**
    * Update.
    *
-   * @param displayRegion
-   *          the display region
+   * @param displayRegion the display region
    */
   public void update(GenomicRegion displayRegion) {
-    mGap = (int) Math.pow(10, (int) Mathematics.log10(displayRegion.getLength()));
+    mGap = (int) Math.pow(10,
+        (int) Mathematics.log10(displayRegion.getLength()));
 
     mStart = (int) (displayRegion.getStart() / (double) mGap) * mGap;
   }
@@ -67,7 +67,11 @@ public class RulerCanvasLayer extends AxesClippedLayer {
    * org.graphplot.figure.Axes)
    */
   @Override
-  public void plotLayer(Graphics2D g2, DrawingContext context, Figure figure, SubFigure subFigure, Axes axes) {
+  public void plotLayer(Graphics2D g2,
+      DrawingContext context,
+      Figure figure,
+      SubFigure subFigure,
+      Axes axes) {
     // Use the graph properties and subplot layout to
     // create the graph space mapper
 

@@ -64,17 +64,21 @@ public abstract class ReadCountsFileBinTree extends ReadCountsFileBin {
   /**
    * The bin widths for each level of the tree.
    */
-  public static final int[] BIN_WIDTHS = { 1000000000, 100000000, 10000000, 1000000, 100000, 10000, 1000 };
+  public static final int[] BIN_WIDTHS = { 1000000000, 100000000, 10000000,
+      1000000, 100000, 10000, 1000 };
 
   /** The Constant BIN_COUNTS. */
-  public static final int[] BIN_COUNTS = { 1, 10, 100, 1000, 10000, 100000, 1000000 };
+  public static final int[] BIN_COUNTS = { 1, 10, 100, 1000, 10000, 100000,
+      1000000 };
 
   /** The Constant CUM_BIN_COUNTS. */
-  public static final int[] CUM_BIN_COUNTS = { 0, 1, 1 + 10, 1 + 10 + 100, 1 + 10 + 100 + 1000,
-      1 + 10 + 100 + 1000 + 10000, 1 + 10 + 100 + 1000 + 10000 + 100000 };
+  public static final int[] CUM_BIN_COUNTS = { 0, 1, 1 + 10, 1 + 10 + 100,
+      1 + 10 + 100 + 1000, 1 + 10 + 100 + 1000 + 10000,
+      1 + 10 + 100 + 1000 + 10000 + 100000 };
 
   /** The Constant TOTAL_BINS. */
-  public static final int TOTAL_BINS = 1 + 10 + 100 + 1000 + 10000 + 100000 + 1000000;
+  public static final int TOTAL_BINS = 1 + 10 + 100 + 1000 + 10000 + 100000
+      + 1000000;
 
   /**
    * The constant BIN_DIVISIONS.
@@ -91,8 +95,7 @@ public abstract class ReadCountsFileBinTree extends ReadCountsFileBin {
    * Directory containing genome files which must be of the form chr.n.txt. Each
    * file must contain exactly one line consisting of the entire chromosome.
    *
-   * @param metaFile
-   *          the meta file
+   * @param metaFile the meta file
    */
   public ReadCountsFileBinTree(Path metaFile) {
     super(metaFile);
@@ -101,8 +104,7 @@ public abstract class ReadCountsFileBinTree extends ReadCountsFileBin {
   /**
    * Multi res offset.
    *
-   * @param b
-   *          the b
+   * @param b the b
    * @return the int
    */
   public int multiResOffset(Block b) {
@@ -112,15 +114,13 @@ public abstract class ReadCountsFileBinTree extends ReadCountsFileBin {
   /**
    * Gets the data offset.
    *
-   * @param in
-   *          the in
-   * @param p
-   *          the p
+   * @param in the in
+   * @param p the p
    * @return the data offset
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public static Block getDataOffset(RandomAccessFile in, int p) throws IOException {
+  public static Block getDataOffset(RandomAccessFile in, int p)
+      throws IOException {
     return getDataOffset(in, p, MIN_BIN_WIDTH);
   }
 
@@ -129,18 +129,15 @@ public abstract class ReadCountsFileBinTree extends ReadCountsFileBin {
    * position. Positions are relative and require the correct data offset to be
    * added to locate them in the file.
    *
-   * @param in
-   *          The BVT File to scan
-   * @param p
-   *          a one based genomic position in the chromosome the BRT file
+   * @param in The BVT File to scan
+   * @param p a one based genomic position in the chromosome the BRT file
    *          represents.
-   * @param window
-   *          the window
+   * @param window the window
    * @return the data offset
-   * @throws IOException
-   *           Signals that an I/O exception has occurred.
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  public static Block getDataOffset(RandomAccessFile in, int p, int window) throws IOException {
+  public static Block getDataOffset(RandomAccessFile in, int p, int window)
+      throws IOException {
     boolean found = false;
     int positionBin = -1;
     int bin = -1;
@@ -199,7 +196,8 @@ public abstract class ReadCountsFileBinTree extends ReadCountsFileBin {
       // since we are not going to find a bin that the coordinate fits
       // into, but we have the closest.
 
-      // System.err.println("bins " + bin + " " + positionBin + " " + width + " so:" +
+      // System.err.println("bins " + bin + " " + positionBin + " " + width + "
+      // so:" +
       // startOffset + " " + gso + " " + binSize + " " + window);
 
       if (bin > positionBin) {

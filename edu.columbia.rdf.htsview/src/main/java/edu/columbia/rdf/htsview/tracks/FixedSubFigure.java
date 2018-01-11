@@ -38,10 +38,25 @@ public abstract class FixedSubFigure extends TrackSubFigure {
    * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion, int resolution, double yMax, int width, int height, int margin,
-      Color lineColor, Color fillColor, PlotStyle style) {
+  public void update(GenomicRegion displayRegion,
+      int resolution,
+      double yMax,
+      int width,
+      int height,
+      int margin,
+      Color lineColor,
+      Color fillColor,
+      PlotStyle style) {
 
-    super.update(displayRegion, resolution, 1, width, height, margin, lineColor, fillColor, style);
+    super.update(displayRegion,
+        resolution,
+        1,
+        width,
+        height,
+        margin,
+        lineColor,
+        fillColor,
+        style);
 
     Axes.disableAllFeatures(currentAxes());
 

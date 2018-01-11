@@ -51,6 +51,7 @@ public class ResolutionModel extends ItemModel<Integer> {
     super.set(resolution);
 
     // Store the setting
-    SettingsService.getInstance().update("edb.reads.default-resolution", resolution);
+    SettingsService.getInstance().update("edb.reads.default-resolution",
+        resolution);
   }
 }
