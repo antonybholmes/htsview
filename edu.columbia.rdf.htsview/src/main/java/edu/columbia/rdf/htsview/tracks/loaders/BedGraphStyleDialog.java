@@ -98,7 +98,7 @@ public class BedGraphStyleDialog extends ModernDialogTaskWindow
    * @throws IOException Signals that an I/O exception has occurred.
    */
   private final void createUi() throws IOException {
-    // this.getContentPane().add(new JLabel("Change " +
+    // this.getWindowContentPanel().add(new JLabel("Change " +
     // getProductDetails().getProductName() + " settings", JLabel.LEFT),
     // BorderLayout.PAGE_START);
 
