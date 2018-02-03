@@ -23,6 +23,7 @@ import java.util.Deque;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegionModel;
+import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.json.Json;
@@ -75,6 +76,7 @@ public class TrackView {
       final ModernTree<Track> mAnnotationTree,
       WidthModel mWidthModel,
       MarginModel mMarginModel,
+      GenomeModel mGenomeModel,
       GenomicRegionModel mGenomicModel,
       TitlePositionModel titleModel) throws ParseException, IOException {
     TreeRootNode<Track> root = new TreeRootNode<Track>();
@@ -86,8 +88,16 @@ public class TrackView {
 
     Json viewJson = new JsonParser().parse(jsonFile);
 
+    String genome;
+    
+    if (viewJson.containsKey("genome")) {
+      genome = viewJson.getAsString("genome");
+    } else {
+      genome = mGenomeModel.get();
+    }
+    
     GenomicRegion region = GenomicRegion
-        .parse(viewJson.get("location").getAsString());
+        .parse(genome, viewJson.getAsString("location"));
 
     if (region == null) {
       return;
@@ -152,7 +162,7 @@ public class TrackView {
 
         if (parser != null) {
           allowChildren = parser
-              .parse(window, name, id, mAnnotationTree, trackJson, rootNode);
+              .parse(window, name, id, mGenomeModel.get(), mAnnotationTree, trackJson, rootNode);
         }
 
         Json subTracksJson = trackJson.get("tracks");
@@ -216,6 +226,7 @@ public class TrackView {
 
     JsonBuilder root = JsonBuilder.create().startObject();
 
+    root.add("genome", region.getChr().getGenome());
     root.add("location", region.getLocation());
     root.add("width-px", width);
     root.add("margin-px", margin);

@@ -30,9 +30,8 @@ import javax.swing.Box;
 import javax.swing.KeyStroke;
 
 import org.jebtk.bioinformatics.genomic.Chromosome;
-import org.jebtk.bioinformatics.genomic.ChromosomeService;
-import org.jebtk.bioinformatics.genomic.ChromosomeSizesService;
 import org.jebtk.bioinformatics.genomic.GenesService;
+import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegionModel;
 import org.jebtk.bioinformatics.ui.GenomeModel;
@@ -160,7 +159,7 @@ public class LocationsPanel extends ModernComponent
      */
     @Override
     public void selectionChanged(ChangeEvent e) {
-      GenomicRegion region = parse(mLocationList.getSelectedItem());
+      GenomicRegion region = parse(mGenomeModel.get(), mLocationList.getSelectedItem());
 
       if (region != null) {
         mModel.set(region);
@@ -394,7 +393,7 @@ public class LocationsPanel extends ModernComponent
    * @return the genomic region
    * @throws ParseException the parse exception
    */
-  private GenomicRegion parse(String text) {
+  private GenomicRegion parse(String genome, String text) {
     if (TextUtils.isNullOrEmpty(text)) {
       return null;
     }
@@ -404,21 +403,19 @@ public class LocationsPanel extends ModernComponent
     if (text.matches("^chr(\\d+|[xymXYM])$")) {
       // use the whole chromosome
 
-      Chromosome chromosome = ChromosomeService.getInstance()
-          .parse(mGenomeModel.get(), text);
+      Chromosome chromosome = GenomeService.getInstance()
+          .chr(mGenomeModel.get(), text);
 
-      int size = ChromosomeSizesService.getInstance()
-          .getSizes(mGenomeModel.get()).getSize(chromosome);
+      int size = chromosome.getSize();
 
       region = new GenomicRegion(chromosome, 1, size);
 
     } else if (text.startsWith("chr")) { // remove commas
-      region = GenomicRegion.parse(text);
+      region = GenomicRegion.parse(genome, text);
 
       // Make sure region is within the bounds of the chromosome
 
-      int size = ChromosomeSizesService.getInstance()
-          .getSizes(mGenomeModel.get()).getSize(region.getChr());
+      int size = region.getChr().getSize();
 
       region = new GenomicRegion(region.getChr(),
           Math.max(1, region.getStart()), Math.min(region.getEnd(), size));

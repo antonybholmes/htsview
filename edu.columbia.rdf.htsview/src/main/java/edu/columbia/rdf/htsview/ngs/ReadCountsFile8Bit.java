@@ -29,7 +29,6 @@ package edu.columbia.rdf.htsview.ngs;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,7 +37,6 @@ import java.util.Map;
 import org.jebtk.bioinformatics.dna.GenomeAssemblyDir;
 import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import org.jebtk.core.io.PathUtils;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -120,19 +118,5 @@ public class ReadCountsFile8Bit extends ReadCountsFile {
     }
 
     return scores;
-  }
-
-  /**
-   * The main method.
-   *
-   * @param args the arguments
-   * @throws IOException Signals that an I/O exception has occurred.
-   * @throws ParseException the parse exception
-   */
-  public static void main(String[] args) throws IOException, ParseException {
-    CountAssembly a = new ReadCountsFile8Bit(PathUtils.getPath(
-        "/ifs/scratch/cancer/Lab_RDF/abh2138/ChIP_seq/rdf/samples/transcription_factors/bcl6/CB4_BCL6_RK040/hg19/align_2_mismatches/reads/"));
-
-    System.err.println(a.getCounts("chr1:1000000-1100000", 10));
   }
 }

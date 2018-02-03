@@ -48,8 +48,8 @@ public abstract class CountAssembly {
    * @return the starts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getStarts(String region, int window) throws IOException {
-    return getStarts(GenomicRegion.parse(region), window);
+  public List<Integer> getStarts(String genome, String region, int window) throws IOException {
+    return getStarts(GenomicRegion.parse(genome, region), window);
   }
 
   /**
@@ -73,8 +73,8 @@ public abstract class CountAssembly {
    * @return the strands
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Strand> getStrands(String region, int window) throws IOException {
-    return getStrands(GenomicRegion.parse(region), window);
+  public List<Strand> getStrands(String genome, String region, int window) throws IOException {
+    return getStrands(GenomicRegion.parse(genome, region), window);
   }
 
   /**
@@ -97,8 +97,8 @@ public abstract class CountAssembly {
    * @return the counts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getCounts(String region) throws IOException {
-    return getCounts(region, 1);
+  public List<Integer> getCounts(String genome, String region) throws IOException {
+    return getCounts(genome, region, 1);
   }
 
   /**
@@ -109,8 +109,8 @@ public abstract class CountAssembly {
    * @return the counts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getCounts(String region, int window) throws IOException {
-    return getCounts(GenomicRegion.parse(region), window);
+  public List<Integer> getCounts(String genome, String region, int window) throws IOException {
+    return getCounts(GenomicRegion.parse(genome, region), window);
   }
 
   /**
@@ -143,8 +143,8 @@ public abstract class CountAssembly {
    * @return the values
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Double> getValues(String region, int window) throws IOException {
-    return getValues(GenomicRegion.parse(region), window);
+  public List<Double> getValues(String genome, String region, int window) throws IOException {
+    return getValues(GenomicRegion.parse(genome, region), window);
   }
 
   /**

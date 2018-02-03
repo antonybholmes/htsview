@@ -18,15 +18,14 @@ package edu.columbia.rdf.htsview.tracks;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import org.jebtk.bioinformatics.genomic.ChromosomeSizes;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegionModel;
 import org.jebtk.core.ColorUtils;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.graphplot.plotbox.PlotBoxPanel;
+import org.jebtk.modern.graphics.CanvasMouseAdapter;
 import org.jebtk.modern.graphics.CanvasMouseEvent;
 import org.jebtk.modern.graphics.DrawingContext;
-import org.jebtk.modern.graphics.ModernCanvasMouseAdapter;
 import org.jebtk.modern.theme.ModernTheme;
 import org.jebtk.modern.theme.ThemeService;
 
@@ -76,15 +75,13 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
   private int mSelectionEnd = -1;
 
   private int mDragBin = Integer.MIN_VALUE;
-
-  private ChromosomeSizes mSizes;
-
+  
   private TracksFigure mFigure;
 
   /**
    * The Class CanvasMouseEvents.
    */
-  private class CanvasMouseEvents extends ModernCanvasMouseAdapter {
+  private class CanvasMouseEvents extends CanvasMouseAdapter {
 
     /*
      * (non-Javadoc)
@@ -165,13 +162,11 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
    * @param genomicModel the genomic model
    * @param sizes the sizes
    */
-  public TracksFigurePanel(TracksFigure figure, GenomicRegionModel genomicModel,
-      ChromosomeSizes sizes) {
+  public TracksFigurePanel(TracksFigure figure, GenomicRegionModel genomicModel) {
     super(figure);
 
     mFigure = figure;
     mGenomicModel = genomicModel;
-    mSizes = sizes;
 
     // setLayout(new FigureLayoutVBox());
 
@@ -283,7 +278,7 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
     int shift = (int) (p * mDragStartRegion.getLength());
 
     GenomicRegion newRegion = GenomicRegion
-        .shift(mDragStartRegion, shift, 10, mSizes);
+        .shift(mDragStartRegion, shift, 10);
 
     // System.err.println("new " + mDragStartRegion + " " + newRegion + " " +
     // mDragStartRegion.getLength() + " " + p);

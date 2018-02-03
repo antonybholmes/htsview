@@ -48,6 +48,7 @@ public abstract class TrackJsonParser implements NameProperty {
   public abstract boolean parse(ModernWindow window,
       String name,
       int id,
+      String genome,
       ModernTree<Track> annotationTree,
       Json trackJson,
       TreeNode<Track> rootNode) throws IOException;

@@ -78,7 +78,7 @@ public abstract class ReadAssembly {
    * @param subGroup the sub group
    * @param sample the sample
    * @param window the window
-   * @param genomicRegion the genomic region
+   * @param region the genomic region
    * @return the counts
    * @throws IOException Signals that an I/O exception has occurred.
    * @throws ParseException the parse exception
@@ -87,12 +87,13 @@ public abstract class ReadAssembly {
       String subGroup,
       String sample,
       int window,
-      String genomicRegion) throws IOException, ParseException {
+      String genome,
+      String region) throws IOException, ParseException {
     return getCounts(group,
         subGroup,
         sample,
         window,
-        GenomicRegion.parse(genomicRegion));
+        GenomicRegion.parse(genome, region));
   }
 
   /**

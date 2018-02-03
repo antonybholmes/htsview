@@ -20,9 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jebtk.bioinformatics.genomic.ChromosomeSizes;
-import org.jebtk.bioinformatics.genomic.ChromosomeSizesService;
-import org.jebtk.bioinformatics.genomic.GenomeAssembly;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.collections.SubList;
 import org.slf4j.Logger;
@@ -61,9 +58,6 @@ public class SampleAssemblyTiled extends SampleAssembly {
     /** The m region. */
     GenomicRegion mRegion;
 
-    /** The m chr sizes. */
-    private ChromosomeSizes mChrSizes;
-
     /** The m center tile. */
     private int mCenterTile;
 
@@ -80,13 +74,11 @@ public class SampleAssemblyTiled extends SampleAssembly {
      * @param window the window
      */
     public TrackTiles(SampleAssembly assembly, int numTiles,
-        ChromosomeSizes chrSizes, Sample sample, int window) {
+        Sample sample, int window) {
       mAssembly = assembly;
 
       // Ensure the number of tiles is an odd number
       mNumTiles = numTiles + (numTiles % 2 == 0 ? 1 : 0);
-
-      mChrSizes = chrSizes;
       mSample = sample;
       mWindow = window;
 
@@ -108,7 +100,7 @@ public class SampleAssemblyTiled extends SampleAssembly {
 
         mRegion = new GenomicRegion(region.getChr(),
             Math.max(1, region.getStart() - w),
-            Math.min(mChrSizes.getSize(region.getChr()), region.getEnd() + w));
+            Math.min(region.getChr().getSize(), region.getEnd() + w));
 
         mCounts = mAssembly.getCounts(mSample, mRegion, mWindow);
 
@@ -173,13 +165,7 @@ public class SampleAssemblyTiled extends SampleAssembly {
 
     if (!mTileMap.containsKey(window)) {
       mTileMap.put(window,
-          new TrackTiles(mAssembly, mNumTiles,
-              sample.getOrganism().getScientificName().contains("Homo")
-                  ? ChromosomeSizesService.getInstance()
-                      .getSizes(GenomeAssembly.HG19)
-                  : ChromosomeSizesService.getInstance()
-                      .getSizes(GenomeAssembly.MM10),
-              sample, window));
+          new TrackTiles(mAssembly, mNumTiles, sample, window));
     }
 
     return mTileMap.get(window).getCounts(region);

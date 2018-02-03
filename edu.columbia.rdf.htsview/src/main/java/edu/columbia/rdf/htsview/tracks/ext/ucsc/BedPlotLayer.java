@@ -42,7 +42,7 @@ import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.CanvasMouseEvent;
 import org.jebtk.modern.graphics.DrawingContext;
-import org.jebtk.modern.graphics.ModernCanvasMouseListener;
+import org.jebtk.modern.graphics.CanvasMouseListener;
 import org.jebtk.modern.menu.ModernIconMenuItem;
 import org.jebtk.modern.menu.ModernMenuItem;
 import org.jebtk.modern.menu.ModernPopupMenu;
@@ -91,7 +91,7 @@ public class BedPlotLayer extends AxesClippedLayer
   /**
    * The Class CanvasEvents.
    */
-  private class CanvasEvents implements ModernCanvasMouseListener {
+  private class CanvasEvents implements CanvasMouseListener {
 
     /*
      * (non-Javadoc)

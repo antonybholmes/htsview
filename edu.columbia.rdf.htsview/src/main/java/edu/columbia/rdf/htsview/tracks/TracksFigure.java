@@ -270,8 +270,6 @@ public class TracksFigure extends Figure { // Figure { // PlotBoxColumn {
             .updateGraph(displayRegion, resolution, width, height, margin);
 
         cf.currentAxes().getTitle().setVisible(false);
-
-        System.err.println("child " + cf.getName());
       }
     }
 
