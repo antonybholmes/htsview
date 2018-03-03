@@ -94,7 +94,7 @@ public class BedEditDialog extends ModernDialogTaskWindow {
       mCheckCompact.doClick();
     }
 
-    setSize(480, 260);
+    setSize(480, 280);
 
     UI.centerWindowToScreen(this);
   }
@@ -130,7 +130,7 @@ public class BedEditDialog extends ModernDialogTaskWindow {
     box.add(mCheckFull);
     box.add(mCheckCompact);
 
-    setContent(box);
+    setDialogCardContent(box);
   }
 
   /*
