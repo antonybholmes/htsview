@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.text.ParseException;
 
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
-import org.jebtk.bioinformatics.genomic.Dna;
+import org.jebtk.bioinformatics.genomic.DNA;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.Mathematics;
 import org.jebtk.core.event.ChangeListeners;
@@ -386,12 +386,12 @@ public abstract class Track extends ChangeListeners
    * @return the string
    */
   public static String formatBp(int bp) {
-    if (bp < Dna.KILOBASE) {
+    if (bp < DNA.KILOBASE) {
       return Formatter.number().format(bp) + " bp";
-    } else if (bp < Dna.MEGABASE) {
-      return Mathematics.round((double) bp / Dna.KILOBASE, 3) + " kb";
+    } else if (bp < DNA.MEGABASE) {
+      return Mathematics.round((double) bp / DNA.KILOBASE, 3) + " kb";
     } else {
-      return Mathematics.round((double) bp / Dna.MEGABASE, 3) + " Mb";
+      return Mathematics.round((double) bp / DNA.MEGABASE, 3) + " Mb";
     }
   }
 

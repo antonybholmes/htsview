@@ -403,7 +403,7 @@ public class LocationsPanel extends ModernComponent
     if (text.matches("^chr(\\d+|[xymXYM])$")) {
       // use the whole chromosome
 
-      Chromosome chromosome = GenomeService.getInstance()
+      Chromosome chromosome = GenomeService.instance()
           .chr(mGenomeModel.get(), text);
 
       int size = chromosome.getSize();
