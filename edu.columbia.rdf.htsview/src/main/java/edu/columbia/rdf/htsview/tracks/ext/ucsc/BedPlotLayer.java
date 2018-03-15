@@ -32,7 +32,7 @@ import org.jebtk.bioinformatics.ext.ucsc.UCSCTrackRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.geom.IntRect;
-import org.jebtk.core.network.UrlUtils;
+import org.jebtk.core.network.URLUtils;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.AxesClippedLayer;
 import org.jebtk.graphplot.figure.Figure;
@@ -425,7 +425,7 @@ public class BedPlotLayer extends AxesClippedLayer
   public void clicked(ModernClickEvent e) {
     if (e.getMessage().equals("UCSC")) {
       try {
-        UrlUtils.launch(new URL(BASE_URL + mSelectedBed.getLocation()));
+        URLUtils.launch(new URL(BASE_URL + mSelectedBed.getLocation()));
       } catch (MalformedURLException e1) {
         e1.printStackTrace();
       } catch (URISyntaxException e1) {

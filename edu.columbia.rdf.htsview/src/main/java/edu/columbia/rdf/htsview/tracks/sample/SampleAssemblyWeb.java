@@ -27,7 +27,7 @@ import org.jebtk.core.BufferUtils;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.json.JsonParser;
 import org.jebtk.core.network.UrlBuilder;
-import org.jebtk.core.network.UrlUtils;
+import org.jebtk.core.network.URLUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -166,7 +166,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
         .resolve(sample.getId()).resolve(region.getChr())
         .resolve(region.getStart()).resolve(region.getEnd()).resolve("b");
 
-    return BufferUtils.byteBuffer().wrap(UrlUtils.read(url).bytes()).ints();
+    return BufferUtils.byteBuffer().wrap(URLUtils.read(url).bytes()).ints();
   }
 
   /*
@@ -241,7 +241,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
      */
 
     return Strand.parse(
-        BufferUtils.byteBuffer().wrap(UrlUtils.read(url).bytes()).byteChars());
+        BufferUtils.byteBuffer().wrap(URLUtils.read(url).bytes()).byteChars());
   }
 
   /*
@@ -317,7 +317,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
     // LOG.info("Count url: {}", url);
 
-    return BufferUtils.byteBuffer().wrap(UrlUtils.read(url).bytes()).ints();
+    return BufferUtils.byteBuffer().wrap(URLUtils.read(url).bytes()).ints();
   }
 
   /*
