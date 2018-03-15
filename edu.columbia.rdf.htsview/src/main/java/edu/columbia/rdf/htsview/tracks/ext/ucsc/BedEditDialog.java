@@ -130,7 +130,7 @@ public class BedEditDialog extends ModernDialogTaskWindow {
     box.add(mCheckFull);
     box.add(mCheckCompact);
 
-    setDialogCardContent(box);
+    setCard(box);
   }
 
   /*

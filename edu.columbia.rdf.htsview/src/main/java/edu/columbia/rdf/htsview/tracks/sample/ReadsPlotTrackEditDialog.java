@@ -233,7 +233,7 @@ public class ReadsPlotTrackEditDialog extends ModernDialogTaskWindow
     box2.add(mSpinnerGap);
     box.add(box2);
 
-    setDialogCardContent(box);
+    setCard(box);
   }
 
   /*

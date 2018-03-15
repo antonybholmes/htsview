@@ -338,7 +338,7 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
 
     box.add(box2);
 
-    setDialogCardContent(box);
+    setCard(box);
   }
 
   /**
