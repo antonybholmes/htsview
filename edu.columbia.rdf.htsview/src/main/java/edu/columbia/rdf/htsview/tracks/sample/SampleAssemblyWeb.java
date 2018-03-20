@@ -32,7 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.columbia.rdf.edb.EDBWLogin;
-import edu.columbia.rdf.edb.OTKAuthUrl;
+import edu.columbia.rdf.edb.TOTPAuthUrl;
 import edu.columbia.rdf.edb.Sample;
 import edu.columbia.rdf.htsview.tracks.SampleAssembly;
 
@@ -47,7 +47,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
       .getLogger(SampleAssemblyWeb.class);
 
   /** The m auth V 1. */
-  private OTKAuthUrl mAuthV1;
+  private TOTPAuthUrl mAuthV1;
 
   /** The m BRT map. */
   private Map<Sample, Boolean> mBRTMap = new HashMap<Sample, Boolean>();
@@ -63,7 +63,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * @throws IOException Signals that an I/O exception has occurred.
    */
   public SampleAssemblyWeb(EDBWLogin login, UrlBuilder url) throws IOException {
-    mAuthV1 = new OTKAuthUrl(url, login.getUser(), login.getKey(),
+    mAuthV1 = new TOTPAuthUrl(url, login.getKey(), login.getKey(),
         login.getEpoch(), login.getStep());
 
     // mAuthV1 = new OTKAuthUrl(new
