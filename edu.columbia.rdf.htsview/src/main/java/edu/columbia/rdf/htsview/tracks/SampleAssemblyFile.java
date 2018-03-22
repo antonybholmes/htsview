@@ -22,7 +22,7 @@ import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.Strand;
 
 import edu.columbia.rdf.edb.Sample;
-import edu.columbia.rdf.htsview.ngs.ReadCountsFile;
+import edu.columbia.rdf.edb.ngs.ReadCountsFile;
 
 // TODO: Auto-generated Javadoc
 /**

@@ -36,7 +36,7 @@ import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.Mathematics;
 
-import edu.columbia.rdf.htsview.ngs.ReadCountsFile;
+import edu.columbia.rdf.edb.ngs.ReadCountsFile;
 
 // TODO: Auto-generated Javadoc
 /**

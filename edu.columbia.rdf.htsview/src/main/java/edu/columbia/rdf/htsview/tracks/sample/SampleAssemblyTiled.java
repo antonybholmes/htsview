@@ -73,8 +73,8 @@ public class SampleAssemblyTiled extends SampleAssembly {
      * @param sample the sample
      * @param window the window
      */
-    public TrackTiles(SampleAssembly assembly, int numTiles,
-        Sample sample, int window) {
+    public TrackTiles(SampleAssembly assembly, int numTiles, Sample sample,
+        int window) {
       mAssembly = assembly;
 
       // Ensure the number of tiles is an odd number

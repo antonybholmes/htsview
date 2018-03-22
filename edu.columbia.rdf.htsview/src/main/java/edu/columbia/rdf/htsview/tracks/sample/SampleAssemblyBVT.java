@@ -17,7 +17,7 @@ package edu.columbia.rdf.htsview.tracks.sample;
 
 import java.nio.file.Path;
 
-import edu.columbia.rdf.htsview.ngs.ReadCountsFileBVT;
+import edu.columbia.rdf.edb.ngs.ReadCountsFileBVT;
 import edu.columbia.rdf.htsview.tracks.SampleAssemblyFile;
 
 // TODO: Auto-generated Javadoc

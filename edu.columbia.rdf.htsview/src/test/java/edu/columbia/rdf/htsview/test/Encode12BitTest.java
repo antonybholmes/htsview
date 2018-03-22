@@ -20,8 +20,8 @@ import java.io.IOException;
 import org.jebtk.core.io.PathUtils;
 import org.junit.Test;
 
-import edu.columbia.rdf.htsview.ngs.CountAssembly;
-import edu.columbia.rdf.htsview.ngs.ReadCountsFile32Bit;
+import edu.columbia.rdf.edb.ngs.CountAssembly;
+import edu.columbia.rdf.edb.ngs.ReadCountsFile32Bit;
 
 public class Encode12BitTest {
   @Test

@@ -75,7 +75,7 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
   private int mSelectionEnd = -1;
 
   private int mDragBin = Integer.MIN_VALUE;
-  
+
   private TracksFigure mFigure;
 
   /**
@@ -162,7 +162,8 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
    * @param genomicModel the genomic model
    * @param sizes the sizes
    */
-  public TracksFigurePanel(TracksFigure figure, GenomicRegionModel genomicModel) {
+  public TracksFigurePanel(TracksFigure figure,
+      GenomicRegionModel genomicModel) {
     super(figure);
 
     mFigure = figure;
@@ -277,8 +278,7 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
 
     int shift = (int) (p * mDragStartRegion.getLength());
 
-    GenomicRegion newRegion = GenomicRegion
-        .shift(mDragStartRegion, shift, 10);
+    GenomicRegion newRegion = GenomicRegion.shift(mDragStartRegion, shift, 10);
 
     // System.err.println("new " + mDragStartRegion + " " + newRegion + " " +
     // mDragStartRegion.getLength() + " " + p);

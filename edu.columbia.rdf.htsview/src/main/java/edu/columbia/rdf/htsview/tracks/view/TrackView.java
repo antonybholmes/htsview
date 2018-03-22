@@ -89,15 +89,15 @@ public class TrackView {
     Json viewJson = new JsonParser().parse(jsonFile);
 
     String genome;
-    
+
     if (viewJson.containsKey("genome")) {
       genome = viewJson.getAsString("genome");
     } else {
       genome = mGenomeModel.get();
     }
-    
-    GenomicRegion region = GenomicRegion
-        .parse(genome, viewJson.getAsString("location"));
+
+    GenomicRegion region = GenomicRegion.parse(genome,
+        viewJson.getAsString("location"));
 
     if (region == null) {
       return;
@@ -161,8 +161,13 @@ public class TrackView {
         TrackJsonParser parser = TrackParserService.getInstance().get(type);
 
         if (parser != null) {
-          allowChildren = parser
-              .parse(window, name, id, mGenomeModel.get(), mAnnotationTree, trackJson, rootNode);
+          allowChildren = parser.parse(window,
+              name,
+              id,
+              mGenomeModel.get(),
+              mAnnotationTree,
+              trackJson,
+              rootNode);
         }
 
         Json subTracksJson = trackJson.get("tracks");

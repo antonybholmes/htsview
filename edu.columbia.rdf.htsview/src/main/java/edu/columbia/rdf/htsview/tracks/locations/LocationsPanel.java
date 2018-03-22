@@ -159,7 +159,8 @@ public class LocationsPanel extends ModernComponent
      */
     @Override
     public void selectionChanged(ChangeEvent e) {
-      GenomicRegion region = parse(mGenomeModel.get(), mLocationList.getSelectedItem());
+      GenomicRegion region = parse(mGenomeModel.get(),
+          mLocationList.getSelectedItem());
 
       if (region != null) {
         mModel.set(region);
@@ -403,8 +404,8 @@ public class LocationsPanel extends ModernComponent
     if (text.matches("^chr(\\d+|[xymXYM])$")) {
       // use the whole chromosome
 
-      Chromosome chromosome = GenomeService.instance()
-          .chr(mGenomeModel.get(), text);
+      Chromosome chromosome = GenomeService.instance().chr(mGenomeModel.get(),
+          text);
 
       int size = chromosome.getSize();
 

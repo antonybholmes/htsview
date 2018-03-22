@@ -63,8 +63,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * @throws IOException Signals that an I/O exception has occurred.
    */
   public SampleAssemblyWeb(EDBWLogin login, UrlBuilder url) throws IOException {
-    mAuthV1 = new TOTPAuthUrl(url, login.getKey(), login.getKey(),
-        login.getEpoch(), login.getStep());
+    mAuthV1 = new TOTPAuthUrl(url, login);
 
     // mAuthV1 = new OTKAuthUrl(new
     // UrlBuilder(url).resolve("v2").resolve("auth"),
@@ -133,8 +132,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
     List<Integer> ret = new ArrayList<Integer>();
 
     UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("starts")
-        .resolve(sample.getId()).resolve(region.getChr())
-        .resolve(region.getStart()).resolve(region.getEnd());
+        .resolve(sample.getId()).resolve(region.getGenome())
+        .resolve(region.getChr()).resolve(region.getStart())
+        .resolve(region.getEnd());
 
     // LOG.info("starts url: {}", url);
 
@@ -163,8 +163,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
       int window) throws IOException {
 
     UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("starts")
-        .resolve(sample.getId()).resolve(region.getChr())
-        .resolve(region.getStart()).resolve(region.getEnd()).resolve("b");
+        .resolve(sample.getId()).resolve(region.getGenome())
+        .resolve(region.getChr()).resolve(region.getStart())
+        .resolve(region.getEnd()).resolve("b");
 
     return BufferUtils.byteBuffer().wrap(URLUtils.read(url).bytes()).ints();
   }
@@ -198,8 +199,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
     List<Strand> ret = new ArrayList<Strand>();
 
     UrlBuilder startsUrl = mAuthV1.getOTKAuthUrl().resolve("strands")
-        .resolve(sample.getId()).resolve(region.getChr())
-        .resolve(region.getStart()).resolve(region.getEnd());
+        .resolve(sample.getId()).resolve(region.getGenome())
+        .resolve(region.getChr()).resolve(region.getStart())
+        .resolve(region.getEnd());
 
     // LOG.info("starts url: {}", startsUrl);
 
@@ -227,8 +229,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
       GenomicRegion region,
       int window) throws IOException {
     UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("strands")
-        .resolve(sample.getId()).resolve(region.getChr())
-        .resolve(region.getStart()).resolve(region.getEnd()).resolve("b");
+        .resolve(sample.getId()).resolve(region.getGenome())
+        .resolve(region.getChr()).resolve(region.getStart())
+        .resolve(region.getEnd()).resolve("b");
 
     /*
      * byte[] bytes = Network.read(url).bytes();
@@ -280,7 +283,8 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
     UrlBuilder url = mAuthV1.getOTKAuthUrl();
 
-    url = url.resolve("counts").resolve(sample.getId()).resolve(region.getChr())
+    url = url.resolve("counts").resolve(sample.getId())
+        .resolve(region.getGenome()).resolve(region.getChr())
         .resolve(region.getStart()).resolve(region.getEnd()).resolve(window);
 
     // LOG.info("Count url: {}", url);
@@ -311,7 +315,8 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
     UrlBuilder url = mAuthV1.getOTKAuthUrl();
 
-    url = url.resolve("counts").resolve(sample.getId()).resolve(region.getChr())
+    url = url.resolve("counts").resolve(sample.getId())
+        .resolve(region.getGenome()).resolve(region.getChr())
         .resolve(region.getStart()).resolve(region.getEnd()).resolve(window)
         .resolve("b");
 

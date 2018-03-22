@@ -40,8 +40,10 @@ public abstract class SampleAssembly {
    * @return the starts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getStarts(Sample sample, String genome, String region, int window)
-      throws IOException {
+  public List<Integer> getStarts(Sample sample,
+      String genome,
+      String region,
+      int window) throws IOException {
     return getStarts(sample, GenomicRegion.parse(genome, region), window);
   }
 
@@ -84,8 +86,10 @@ public abstract class SampleAssembly {
    * @return the counts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getCounts(Sample sample, String genome, String region, int window)
-      throws IOException {
+  public List<Integer> getCounts(Sample sample,
+      String genome,
+      String region,
+      int window) throws IOException {
     return getCounts(sample, GenomicRegion.parse(genome, region), window);
   }
 
