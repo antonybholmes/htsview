@@ -94,7 +94,7 @@ public class BedEditDialog extends ModernDialogTaskWindow {
       mCheckCompact.doClick();
     }
 
-    setSize(480, 280);
+    setSize(480, 320);
 
     UI.centerWindowToScreen(this);
   }
