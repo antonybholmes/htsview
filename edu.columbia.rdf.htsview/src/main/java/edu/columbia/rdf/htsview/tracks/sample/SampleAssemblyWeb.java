@@ -26,13 +26,11 @@ import org.jebtk.bioinformatics.genomic.Strand;
 import org.jebtk.core.BufferUtils;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.json.JsonParser;
-import org.jebtk.core.network.UrlBuilder;
 import org.jebtk.core.network.URLUtils;
+import org.jebtk.core.network.UrlBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import edu.columbia.rdf.edb.EDBWLogin;
-import edu.columbia.rdf.edb.TOTPAuthUrl;
 import edu.columbia.rdf.edb.Sample;
 import edu.columbia.rdf.htsview.tracks.SampleAssembly;
 
@@ -47,7 +45,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
       .getLogger(SampleAssemblyWeb.class);
 
   /** The m auth V 1. */
-  private TOTPAuthUrl mAuthV1;
+  private UrlBuilder mAuthV1;
 
   /** The m BRT map. */
   private Map<Sample, Boolean> mBRTMap = new HashMap<Sample, Boolean>();
@@ -62,8 +60,8 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * @param url the url
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public SampleAssemblyWeb(EDBWLogin login, UrlBuilder url) throws IOException {
-    mAuthV1 = new TOTPAuthUrl(url, login);
+  public SampleAssemblyWeb(UrlBuilder login) throws IOException {
+    mAuthV1 = login; // new SeqUrlBuilder(login);
 
     // mAuthV1 = new OTKAuthUrl(new
     // UrlBuilder(url).resolve("v2").resolve("auth"),
@@ -78,7 +76,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * region) throws IOException { List<Integer> ret = new ArrayList<Integer>();
    * 
    * UrlBuilder startsUrl =
-   * mAuthV1.getOTKAuthUrl().resolve("starts").resolve(sample.getId()).resolve(
+   * getOTKAuthUrl().resolve("starts").resolve(sample.getId()).resolve(
    * region.getChr()).resolve(region.getStart()).resolve(region.getEnd());
    * 
    * //LOG.info("starts url: {}", startsUrl);
@@ -131,14 +129,13 @@ public class SampleAssemblyWeb extends SampleAssembly {
       int window) throws IOException {
     List<Integer> ret = new ArrayList<Integer>();
 
-    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("starts")
-        .resolve(sample.getId()).resolve(region.getGenome())
-        .resolve(region.getChr()).resolve(region.getStart())
-        .resolve(region.getEnd());
+    UrlBuilder url = mAuthV1.resolve("starts").resolve(sample.getId())
+        .resolve(region.getGenome()).resolve(region.getChr())
+        .resolve(region.getStart()).resolve(region.getEnd());
 
     // LOG.info("starts url: {}", url);
 
-    Json json = new JsonParser().parse(url.toUrl());
+    Json json = new JsonParser().parse(url.toURL());
 
     Json startsJson = json.get(0).get("s");
 
@@ -162,10 +159,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
       GenomicRegion region,
       int window) throws IOException {
 
-    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("starts")
-        .resolve(sample.getId()).resolve(region.getGenome())
-        .resolve(region.getChr()).resolve(region.getStart())
-        .resolve(region.getEnd()).resolve("b");
+    UrlBuilder url = mAuthV1.resolve("starts").resolve(sample.getId())
+        .resolve(region.getGenome()).resolve(region.getChr())
+        .resolve(region.getStart()).resolve(region.getEnd()).resolve("b");
 
     return BufferUtils.byteBuffer().wrap(URLUtils.read(url).bytes()).ints();
   }
@@ -198,14 +194,13 @@ public class SampleAssemblyWeb extends SampleAssembly {
       int window) throws IOException {
     List<Strand> ret = new ArrayList<Strand>();
 
-    UrlBuilder startsUrl = mAuthV1.getOTKAuthUrl().resolve("strands")
-        .resolve(sample.getId()).resolve(region.getGenome())
-        .resolve(region.getChr()).resolve(region.getStart())
-        .resolve(region.getEnd());
+    UrlBuilder startsUrl = mAuthV1.resolve("strands").resolve(sample.getId())
+        .resolve(region.getGenome()).resolve(region.getChr())
+        .resolve(region.getStart()).resolve(region.getEnd());
 
     // LOG.info("starts url: {}", startsUrl);
 
-    Json json = new JsonParser().parse(startsUrl.toUrl());
+    Json json = new JsonParser().parse(startsUrl.toURL());
 
     Json strandsJson = json.get(0).get("s");
 
@@ -228,10 +223,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
   public List<Strand> getBinaryStrands(Sample sample,
       GenomicRegion region,
       int window) throws IOException {
-    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("strands")
-        .resolve(sample.getId()).resolve(region.getGenome())
-        .resolve(region.getChr()).resolve(region.getStart())
-        .resolve(region.getEnd()).resolve("b");
+    UrlBuilder url = mAuthV1.resolve("strands").resolve(sample.getId())
+        .resolve(region.getGenome()).resolve(region.getChr())
+        .resolve(region.getStart()).resolve(region.getEnd()).resolve("b");
 
     /*
      * byte[] bytes = Network.read(url).bytes();
@@ -281,7 +275,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
       int window) throws IOException {
     List<Integer> ret = new ArrayList<Integer>();
 
-    UrlBuilder url = mAuthV1.getOTKAuthUrl();
+    UrlBuilder url = mAuthV1;
 
     url = url.resolve("counts").resolve(sample.getId())
         .resolve(region.getGenome()).resolve(region.getChr())
@@ -289,7 +283,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
     // LOG.info("Count url: {}", url);
 
-    Json json = new JsonParser().parse(url.toUrl());
+    Json json = new JsonParser().parse(url.toURL());
 
     Json countsJson = json.get(0).get("c");
 
@@ -313,7 +307,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
       GenomicRegion region,
       int window) throws IOException {
 
-    UrlBuilder url = mAuthV1.getOTKAuthUrl();
+    UrlBuilder url = mAuthV1;
 
     url = url.resolve("counts").resolve(sample.getId())
         .resolve(region.getGenome()).resolve(region.getChr())
@@ -338,13 +332,13 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
     UrlBuilder mappedUrl;
 
-    mappedUrl = mAuthV1.getOTKAuthUrl();
+    mappedUrl = mAuthV1;
 
     mappedUrl = mappedUrl.resolve("mapped").resolve(sample.getId());
 
     // LOG.info("Mapped url: {}", mappedUrl);
 
-    Json json = new JsonParser().parse(mappedUrl.toUrl());
+    Json json = new JsonParser().parse(mappedUrl.toURL());
 
     ret = json.getAsInt(0);
 
@@ -360,10 +354,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
    */
   @Override
   public String getGenome(Sample sample) throws IOException {
-    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("genome")
-        .resolve(sample.getId());
+    UrlBuilder url = mAuthV1.resolve("genome").resolve(sample.getId());
 
-    Json json = new JsonParser().parse(url.toUrl());
+    Json json = new JsonParser().parse(url.toURL());
 
     return json.get(0).getAsString("genome");
   }
@@ -381,12 +374,11 @@ public class SampleAssemblyWeb extends SampleAssembly {
       return mBRTMap.get(sample);
     }
 
-    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("type")
-        .resolve(sample.getId());
+    UrlBuilder url = mAuthV1.resolve("type").resolve(sample.getId());
 
     LOG.info("BRT url: {}", url);
 
-    Json json = new JsonParser().parse(url.toUrl());
+    Json json = new JsonParser().parse(url.toURL());
 
     System.err.println("track web " + json + " " + json.getAsString(0));
 
@@ -412,12 +404,11 @@ public class SampleAssemblyWeb extends SampleAssembly {
       return mBVTMap.get(sample);
     }
 
-    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("type")
-        .resolve(sample.getId());
+    UrlBuilder url = mAuthV1.resolve("type").resolve(sample.getId());
 
     // LOG.info("BRT url: {}", url);
 
-    Json json = new JsonParser().parse(url.toUrl());
+    Json json = new JsonParser().parse(url.toURL());
 
     boolean isBVT = json.get(0).getAsString("type").equals("bvt");
 
@@ -437,12 +428,11 @@ public class SampleAssemblyWeb extends SampleAssembly {
    */
   @Override
   public int getReadLength(Sample sample) throws IOException {
-    UrlBuilder url = mAuthV1.getOTKAuthUrl().resolve("length")
-        .resolve(sample.getId());
+    UrlBuilder url = mAuthV1.resolve("length").resolve(sample.getId());
 
     // LOG.info("Read length url: {}", url);
 
-    Json json = new JsonParser().parse(url.toUrl());
+    Json json = new JsonParser().parse(url.toURL());
 
     return json.get(0).getAsInt("length");
   }

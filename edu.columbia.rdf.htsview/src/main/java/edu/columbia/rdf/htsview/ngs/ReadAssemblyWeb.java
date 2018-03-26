@@ -90,7 +90,7 @@ public class ReadAssemblyWeb extends ReadAssembly {
   public ReadAssemblyWeb(URL url) throws IOException {
     mUrl = new UrlBuilder(url);
 
-    mGroupsUrl = new UrlBuilder(mUrl).resolve("groups").toUrl();
+    mGroupsUrl = new UrlBuilder(mUrl).resolve("groups").toURL();
 
     mSubGroupsUrl = new UrlBuilder(mUrl).resolve("subgroups");
 
@@ -134,7 +134,7 @@ public class ReadAssemblyWeb extends ReadAssembly {
     List<String> samples = new ArrayList<String>();
 
     try {
-      URL url = new UrlBuilder(mSubGroupsUrl).resolve(group).toUrl();
+      URL url = new UrlBuilder(mSubGroupsUrl).resolve(group).toURL();
 
       Json json = mParser.parse(url);
 
@@ -162,7 +162,7 @@ public class ReadAssemblyWeb extends ReadAssembly {
 
     try {
       URL url = new UrlBuilder(mSamplesUrl).resolve(group).resolve(subGroup)
-          .toUrl();
+          .toURL();
 
       Json json = mParser.parse(url);
 
@@ -195,7 +195,7 @@ public class ReadAssemblyWeb extends ReadAssembly {
     try {
       URL url = new UrlBuilder(mCountsUrl).resolve(group).resolve(subGroup)
           .resolve(sample).resolve(window).resolve(region.getChr().toString())
-          .resolve(region.getStart()).resolve(region.getEnd()).toUrl();
+          .resolve(region.getStart()).resolve(region.getEnd()).toURL();
 
       // System.err.println(url);
 
@@ -228,7 +228,7 @@ public class ReadAssemblyWeb extends ReadAssembly {
 
     try {
       URL url = new UrlBuilder(mMappedUrl).resolve(group).resolve(subGroup)
-          .resolve(sample).toUrl();
+          .resolve(sample).toURL();
 
       // System.err.println(url);
 
