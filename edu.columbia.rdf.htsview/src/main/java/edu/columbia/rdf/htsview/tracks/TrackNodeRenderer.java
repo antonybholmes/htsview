@@ -25,7 +25,6 @@ import org.jebtk.modern.tree.ModernTreeBranchNodeRenderer;
 import org.jebtk.modern.tree.ModernTreeNodeRenderer;
 import org.jebtk.modern.tree.Tree;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TrackNodeRenderer.
  */

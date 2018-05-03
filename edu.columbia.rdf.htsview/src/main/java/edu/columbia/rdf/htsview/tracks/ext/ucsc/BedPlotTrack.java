@@ -27,7 +27,6 @@ import org.jebtk.core.json.JsonBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class BedPlotTrack.
  */

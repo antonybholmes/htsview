@@ -22,7 +22,6 @@ import org.jebtk.bioinformatics.ext.ucsc.UCSCTrackRegion;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.EmptyMatrix;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class BedGraphRegionMatrix.
  */

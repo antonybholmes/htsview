@@ -20,7 +20,6 @@ import org.jebtk.core.event.ChangeListener;
 import org.jebtk.core.event.ChangeListeners;
 import org.jebtk.core.settings.SettingsService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class AxisLimitsModel.
  */

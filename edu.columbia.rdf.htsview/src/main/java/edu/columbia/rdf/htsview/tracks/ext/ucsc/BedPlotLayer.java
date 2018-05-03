@@ -48,7 +48,6 @@ import org.jebtk.modern.menu.ModernMenuItem;
 import org.jebtk.modern.menu.ModernPopupMenu;
 import org.jebtk.modern.widget.ModernWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class BedPlotLayer.
  */

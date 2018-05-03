@@ -29,7 +29,6 @@ import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AnnotationTracksBox.
  */

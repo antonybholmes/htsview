@@ -21,7 +21,6 @@ import edu.columbia.rdf.edb.Sample;
 import edu.columbia.rdf.edb.ngs.ReadCountsFileBRT2;
 import edu.columbia.rdf.htsview.tracks.SampleAssemblyFile;
 
-// TODO: Auto-generated Javadoc
 /**
  * Stream a track directly from a r tree binary file.
  *

@@ -60,7 +60,6 @@ import edu.columbia.rdf.htsview.ngs.BvtGuiFileFilter;
 import edu.columbia.rdf.htsview.tracks.SampleAssembly;
 import edu.columbia.rdf.matcalc.figure.graph2d.Graph2dStyleButton;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SamplePlotTrackEditDialog.
  */
@@ -248,7 +247,7 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
     mCheckLineColor.setSelected(mTrack.getLineColor() != null);
     mCheckFillColor.setSelected(mTrack.getFillColor() != null);
 
-    setSize(720, 700);
+    setSize(720, 720);
 
     UI.centerWindowToScreen(this);
   }

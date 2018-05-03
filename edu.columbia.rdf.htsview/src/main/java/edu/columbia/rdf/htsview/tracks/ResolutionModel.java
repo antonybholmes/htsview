@@ -18,7 +18,6 @@ package edu.columbia.rdf.htsview.tracks;
 import org.jebtk.core.model.ItemModel;
 import org.jebtk.core.settings.SettingsService;
 
-// TODO: Auto-generated Javadoc
 /**
  * Centrally keep track of selected experiments in the order they were selected.
  * 

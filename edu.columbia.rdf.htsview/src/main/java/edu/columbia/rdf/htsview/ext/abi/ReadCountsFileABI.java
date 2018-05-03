@@ -38,7 +38,6 @@ import org.jebtk.core.Mathematics;
 
 import edu.columbia.rdf.edb.ngs.ReadCountsFile;
 
-// TODO: Auto-generated Javadoc
 /**
  * Decodes counts using a multi resolution file.
  *

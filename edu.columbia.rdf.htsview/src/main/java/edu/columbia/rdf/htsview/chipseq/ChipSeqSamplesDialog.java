@@ -20,7 +20,6 @@ import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.edb.ui.SamplesDialog;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ChipSeqSamplesDialog.
  */

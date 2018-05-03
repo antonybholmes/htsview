@@ -30,7 +30,6 @@ import org.jebtk.modern.ribbon.RibbonSection;
 import org.jebtk.modern.spinner.ModernCompactSpinner;
 import org.jebtk.modern.widget.ModernTwoStateWidget;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allows user to select a color map.
  *

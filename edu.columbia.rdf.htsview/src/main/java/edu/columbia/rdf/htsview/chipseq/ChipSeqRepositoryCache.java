@@ -21,7 +21,6 @@ import edu.columbia.rdf.edb.EDBWLogin;
 import edu.columbia.rdf.edb.ui.EDBRepository;
 import edu.columbia.rdf.edb.ui.RestrictedTypeRepositoryCache;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class ChipSeqRepositoryCache.
  */

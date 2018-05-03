@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.htsview.chipseq;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SortSamplesByGenome.
  */

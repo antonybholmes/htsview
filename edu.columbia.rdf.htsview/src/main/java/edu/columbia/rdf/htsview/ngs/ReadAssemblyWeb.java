@@ -30,7 +30,6 @@ package edu.columbia.rdf.htsview.ngs;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,7 +108,7 @@ public class ReadAssemblyWeb extends ReadAssembly {
    * @see edu.columbia.rdf.lib.bioinformatics.reads.ReadAssembly#getGroups()
    */
   @Override
-  public List<String> getGroups() throws IOException, ParseException {
+  public List<String> getGroups() throws IOException {
     List<String> groups = new ArrayList<String>();
 
     Json json = mParser.parse(mGroupsUrl);
@@ -130,7 +129,7 @@ public class ReadAssemblyWeb extends ReadAssembly {
    */
   @Override
   public List<String> getSubGroups(String group)
-      throws IOException, ParseException {
+      throws IOException {
     List<String> samples = new ArrayList<String>();
 
     try {
@@ -157,7 +156,7 @@ public class ReadAssemblyWeb extends ReadAssembly {
    */
   @Override
   public List<String> getSamples(String group, String subGroup)
-      throws IOException, ParseException {
+      throws IOException {
     List<String> samples = new ArrayList<String>();
 
     try {
@@ -189,7 +188,7 @@ public class ReadAssemblyWeb extends ReadAssembly {
       String subGroup,
       String sample,
       int window,
-      GenomicRegion region) throws IOException, ParseException {
+      GenomicRegion region) throws IOException {
     List<Integer> ret = new ArrayList<Integer>();
 
     try {
@@ -223,7 +222,7 @@ public class ReadAssemblyWeb extends ReadAssembly {
    */
   @Override
   public int getMappedReads(String group, String subGroup, String sample)
-      throws IOException, ParseException {
+      throws IOException {
     int ret = -1;
 
     try {

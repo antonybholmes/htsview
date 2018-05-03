@@ -21,7 +21,6 @@ import java.awt.Graphics2D;
 import org.jebtk.modern.list.ModernList;
 import org.jebtk.modern.list.ModernListCellRenderer;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class LocationListRenderer.
  */

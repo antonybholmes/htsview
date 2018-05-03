@@ -23,7 +23,6 @@ import edu.columbia.rdf.edb.ui.sort.SortSamplesByName;
 import edu.columbia.rdf.edb.ui.sort.SortSamplesByOrganism;
 import edu.columbia.rdf.edb.ui.sort.SortSamplesByPerson;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ChipSeqSortModel.
  */

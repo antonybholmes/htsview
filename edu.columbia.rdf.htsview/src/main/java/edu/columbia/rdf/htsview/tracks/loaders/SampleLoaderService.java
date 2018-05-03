@@ -28,7 +28,6 @@ import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.htsview.tracks.Track;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SampleLoaderService.
  */
@@ -162,15 +161,7 @@ public class SampleLoaderService {
     return ret;
   }
 
-  /**
-   * Open multiple samples.
-   *
-   * @param parent the parent
-   * @param files the files
-   * @param root the root
-   * @return the track
-   * @throws IOException Signals that an I/O exception has occurred.
-   */
+  /*
   public Track openSamples(ModernWindow parent,
       List<Path> files,
       TreeNode<Track> root) throws IOException {
@@ -186,16 +177,9 @@ public class SampleLoaderService {
 
     return ret;
   }
+  */
 
-  /**
-   * Open sample.
-   *
-   * @param parent the parent
-   * @param file the file
-   * @param root the root
-   * @return the track
-   * @throws IOException Signals that an I/O exception has occurred.
-   */
+  /*
   public Track openSample(ModernWindow parent, Path file, TreeNode<Track> root)
       throws IOException {
     // First try the normal file extension
@@ -206,7 +190,7 @@ public class SampleLoaderService {
     SampleLoader loader = get(ext);
 
     if (loader != null) {
-      ret = loader.openSample(parent, file, root);
+      ret = loader.open(parent, file, root);// loader.openSample(parent, file, root);
     } else {
       // Try the longer extension
       ext = PathUtils.getFileExtLong(file);
@@ -214,7 +198,7 @@ public class SampleLoaderService {
       loader = get(ext);
 
       if (loader != null) {
-        ret = loader.openSample(parent, file, root);
+        ret = loader.open(parent, file, root);
       } else {
         // As a last resort try the whole file name for file types
         // such as bct.json
@@ -223,13 +207,14 @@ public class SampleLoaderService {
         loader = get(ext);
 
         if (loader != null) {
-          ret = loader.openSample(parent, file, root);
+          ret = loader.open(parent, file, root);
         }
       }
     }
 
     return ret;
   }
+  */
 
   /**
    * Open reads.

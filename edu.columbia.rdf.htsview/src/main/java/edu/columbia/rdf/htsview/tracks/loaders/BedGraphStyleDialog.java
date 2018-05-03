@@ -29,7 +29,6 @@ import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.window.ModernWindow;
 import org.jebtk.modern.window.WindowWidgetFocusEvents;
 
-// TODO: Auto-generated Javadoc
 /**
  * Users can decide if they want bedgraph display as bed or graph.
  * 

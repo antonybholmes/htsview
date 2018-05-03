@@ -25,7 +25,6 @@ import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.sys.SysUtils;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ABITrace encapsulate an ABI trace (ab1) file. This class is
  * currently designed to extract the peak locations and color values for each

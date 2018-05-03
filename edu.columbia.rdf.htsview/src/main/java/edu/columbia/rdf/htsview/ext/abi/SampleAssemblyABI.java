@@ -19,7 +19,6 @@ import java.nio.file.Path;
 
 import edu.columbia.rdf.htsview.tracks.SampleAssemblyFile;
 
-// TODO: Auto-generated Javadoc
 /**
  * Stream a track directly from a r tree binary file.
  *

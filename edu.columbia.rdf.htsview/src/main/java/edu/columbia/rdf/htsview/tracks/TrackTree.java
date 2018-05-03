@@ -17,7 +17,6 @@ package edu.columbia.rdf.htsview.tracks;
 
 import org.jebtk.modern.tree.ModernTree;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TrackTree.
  */

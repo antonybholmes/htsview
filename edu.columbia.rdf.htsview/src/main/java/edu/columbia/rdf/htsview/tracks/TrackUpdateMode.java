@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.htsview.tracks;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Enum TrackUpdateMode.
  */

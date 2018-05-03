@@ -36,7 +36,6 @@ import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
 import edu.columbia.rdf.htsview.tracks.TracksFigure;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ABIPlotTrack.
  */

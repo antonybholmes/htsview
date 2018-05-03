@@ -43,7 +43,6 @@ import edu.columbia.rdf.htsview.tracks.TrackTree;
 import edu.columbia.rdf.htsview.tracks.TracksPanel;
 import edu.columbia.rdf.htsview.tracks.WidthModel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TrackView.
  */
@@ -180,8 +179,12 @@ public class TrackView {
         }
       }
     }
+    
+    
 
     tracksPanel.setTracks(root);
+    
+    System.err.println("Sdfsdf");
 
     mGenomicModel.set(region);
   }

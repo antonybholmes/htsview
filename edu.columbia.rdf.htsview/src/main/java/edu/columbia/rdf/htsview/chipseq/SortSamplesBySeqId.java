@@ -17,7 +17,6 @@ package edu.columbia.rdf.htsview.chipseq;
 
 import org.jebtk.core.path.Path;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SortSamplesBySeqId.
  */

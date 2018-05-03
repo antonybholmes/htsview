@@ -18,7 +18,6 @@ package edu.columbia.rdf.htsview.tracks.locations;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.model.SetModel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class LocationsModel.
  */

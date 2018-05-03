@@ -27,7 +27,6 @@ import org.w3c.dom.Element;
 import edu.columbia.rdf.edb.Sample;
 import edu.columbia.rdf.htsview.tracks.SampleAssembly;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SampleFsPlotTrack.
  */

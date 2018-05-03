@@ -26,7 +26,6 @@ import org.jebtk.modern.ribbon.RibbonStripContainer;
 import org.jebtk.modern.spinner.ModernCompactSpinner;
 import org.jebtk.modern.text.ModernAutoSizeLabel;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allows user to select a color map.
  *

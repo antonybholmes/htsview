@@ -21,7 +21,6 @@ import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.PlotStyle;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class FixedSubFigure.
  */

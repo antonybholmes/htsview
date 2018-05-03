@@ -44,7 +44,6 @@ import edu.columbia.rdf.htsview.tracks.TracksFigure;
 import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedGraphPlot;
 import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedGraphSubFigure;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SamplePlotTrack.
  */

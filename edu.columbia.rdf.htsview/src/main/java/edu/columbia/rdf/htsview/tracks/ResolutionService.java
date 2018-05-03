@@ -23,7 +23,6 @@ import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.core.text.TextUtils;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class ResolutionService.
  */

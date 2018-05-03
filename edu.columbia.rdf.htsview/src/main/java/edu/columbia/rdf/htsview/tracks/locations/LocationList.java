@@ -17,7 +17,6 @@ package edu.columbia.rdf.htsview.tracks.locations;
 
 import org.jebtk.modern.list.ModernList;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class LocationList.
  */

@@ -30,7 +30,6 @@ import edu.columbia.rdf.htsview.tracks.Track;
 import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedGraphPlotTrack;
 import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedPlotTrack;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SampleLoaderBedGraph.
  */

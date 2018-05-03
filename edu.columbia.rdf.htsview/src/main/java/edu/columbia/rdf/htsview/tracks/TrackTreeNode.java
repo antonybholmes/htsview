@@ -17,7 +17,6 @@ package edu.columbia.rdf.htsview.tracks;
 
 import org.jebtk.core.tree.TreeNode;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TrackTreeNode.
  */

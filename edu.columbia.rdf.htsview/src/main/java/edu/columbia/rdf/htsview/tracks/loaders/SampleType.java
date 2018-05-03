@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.htsview.tracks.loaders;
 
-// TODO: Auto-generated Javadoc
 /**
  * If a sample supports both sample and read data, determine which to show.
  * 

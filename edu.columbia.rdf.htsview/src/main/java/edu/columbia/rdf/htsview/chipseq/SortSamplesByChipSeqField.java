@@ -19,7 +19,6 @@ import org.jebtk.core.path.Path;
 
 import edu.columbia.rdf.edb.ui.sort.SortSamplesByTag;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SortSamplesByChipSeqField.
  */

@@ -20,7 +20,6 @@ import java.awt.Dimension;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.window.ModernWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class GraphPlotTrack.
  */

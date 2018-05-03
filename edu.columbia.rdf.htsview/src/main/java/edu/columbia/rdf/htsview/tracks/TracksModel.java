@@ -25,7 +25,6 @@ import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.model.ListModel;
 import org.jebtk.core.tree.TreeNode;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TracksModel.
  */

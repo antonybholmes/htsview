@@ -28,7 +28,6 @@ import org.slf4j.LoggerFactory;
 import edu.columbia.rdf.edb.Sample;
 import edu.columbia.rdf.htsview.tracks.SampleAssembly;
 
-// TODO: Auto-generated Javadoc
 /**
  * Caches counts around the region of interest.
  */

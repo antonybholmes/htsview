@@ -26,7 +26,6 @@ import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.graphplot.figure.series.XYSeries;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class BedGraphPlot.
  */

@@ -32,7 +32,6 @@ import java.io.FilenameFilter;
 
 import org.jebtk.modern.io.GuiFileExtFilter;
 
-// TODO: Auto-generated Javadoc
 /**
  * The class BedGuiFileFilter.
  */

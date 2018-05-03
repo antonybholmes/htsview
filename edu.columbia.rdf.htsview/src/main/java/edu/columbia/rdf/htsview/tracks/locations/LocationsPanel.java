@@ -59,7 +59,6 @@ import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarPolicy;
 import org.jebtk.modern.window.ModernRibbonWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class LocationsPanel.
  */

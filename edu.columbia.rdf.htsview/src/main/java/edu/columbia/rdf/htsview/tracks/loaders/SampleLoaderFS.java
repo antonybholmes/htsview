@@ -26,7 +26,6 @@ import edu.columbia.rdf.htsview.tracks.Track;
 import edu.columbia.rdf.htsview.tracks.sample.ReadsFsPlotTrack;
 import edu.columbia.rdf.htsview.tracks.sample.SampleFsPlotTrack;
 
-// TODO: Auto-generated Javadoc
 /**
  * Sample loader for streaming data directly from a file.
  * 

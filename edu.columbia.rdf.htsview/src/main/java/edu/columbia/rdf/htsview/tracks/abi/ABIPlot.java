@@ -24,7 +24,6 @@ import org.jebtk.graphplot.figure.series.XYSeries;
 
 import edu.columbia.rdf.htsview.ext.abi.ABITrace;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ABIPlot.
  */

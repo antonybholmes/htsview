@@ -25,7 +25,6 @@ import org.jebtk.modern.ribbon.Ribbon;
 import org.jebtk.modern.ribbon.RibbonLargeRadioButton;
 import org.jebtk.modern.ribbon.RibbonSection;
 
-// TODO: Auto-generated Javadoc
 /**
  * Allows user to select the resolution to view sequences.
  *
