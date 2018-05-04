@@ -77,7 +77,7 @@ public class TrackView {
       MarginModel mMarginModel,
       GenomeModel mGenomeModel,
       GenomicRegionModel mGenomicModel,
-      TitlePositionModel titleModel) throws ParseException, IOException {
+      TitlePositionModel titleModel) throws IOException {
     TreeRootNode<Track> root = new TreeRootNode<Track>();
     Deque<TreeNode<Track>> queue = new ArrayDeque<TreeNode<Track>>();
 

@@ -120,8 +120,11 @@ public abstract class SampleLoader implements NameProperty {
    */
   public static Track load(String name, Track track, TreeNode<Track> root)
       throws IOException {
-    root.addChild(new TreeNode<Track>(name, track));
-
+    
+    if (root != null) {
+      root.addChild(new TreeNode<Track>(name, track));
+    }
+    
     return track;
   }
 }

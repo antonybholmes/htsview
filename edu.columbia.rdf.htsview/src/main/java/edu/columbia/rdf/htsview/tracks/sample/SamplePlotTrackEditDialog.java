@@ -221,8 +221,6 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
           loadDbSample();
         } catch (IOException e1) {
           e1.printStackTrace();
-        } catch (ParseException e1) {
-          e1.printStackTrace();
         }
       }
     });
@@ -234,8 +232,6 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
         try {
           loadFsSample();
         } catch (IOException e1) {
-          e1.printStackTrace();
-        } catch (ParseException e1) {
           e1.printStackTrace();
         }
       }
@@ -346,7 +342,7 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
    * @throws IOException Signals that an I/O exception has occurred.
    * @throws ParseException the parse exception
    */
-  private void loadDbSample() throws IOException, ParseException {
+  private void loadDbSample() throws IOException {
     ChipSeqSamplesDialog dialog = new ChipSeqSamplesDialog(mParent);
 
     dialog.setVisible(true);
@@ -370,7 +366,7 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
    * @throws IOException Signals that an I/O exception has occurred.
    * @throws ParseException the parse exception
    */
-  private void loadFsSample() throws IOException, ParseException {
+  private void loadFsSample() throws IOException {
     browseForTrack();
   }
 
@@ -380,7 +376,7 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
    * @throws ParseException the parse exception
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  private void browseForTrack() throws ParseException, IOException {
+  private void browseForTrack() throws IOException {
     browseForTrack(RecentFilesService.getInstance().getPwd());
   }
 
@@ -391,7 +387,7 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
    * @throws ParseException the parse exception
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  private void browseForTrack(Path pwd) throws ParseException, IOException {
+  private void browseForTrack(Path pwd) throws IOException {
     openTrack(FileDialog.open(mParent)
         .filter(new AllSamplesGuiFileFilter(),
             new BamGuiFileFilter(),
@@ -403,20 +399,24 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
   /**
    * Open track.
    *
-   * @param dir the dir
+   * @param file the dir
    * @throws ParseException the parse exception
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  private void openTrack(Path dir) throws ParseException, IOException {
-    if (SampleTracks.isBRT2Track(dir)) {
-      openBRT2Track(dir);
-    } else if (SampleTracks.isBRTTrack(dir)) {
-      openBRTTrack(dir);
-    } else if (SampleTracks.isBVTTrack(dir)) {
-      openBVTTrack(dir);
+  private void openTrack(Path file) throws IOException {
+    if (SampleTracks.isBRT2Track(file)) {
+      openBRT2Track(file);
+    } else if (SampleTracks.isBRTTrack(file)) {
+      openBRTTrack(file);
+    } else if (SampleTracks.isBVTTrack(file)) {
+      openBVTTrack(file);
     } else {
-      open16bitTrack(dir);
+      open16bitTrack(file);
     }
+    
+    //Track track = SampleLoaderService.getInstance().openFile(mParent, file, null);
+    
+    //openTrack(sample, new SampleAssembly16bit(metaFile));
   }
 
   /**
@@ -426,8 +426,7 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
    * @throws ParseException the parse exception
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  private void open16bitTrack(Path metaFile)
-      throws ParseException, IOException {
+  private void open16bitTrack(Path metaFile) throws IOException {
     Json json = JsonParser.json(metaFile);
 
     Sample sample = SampleTracks.getSampleFromTrack(json);
@@ -442,7 +441,7 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
    * @throws ParseException the parse exception
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  private void openBRTTrack(Path metaFile) throws ParseException, IOException {
+  private void openBRTTrack(Path metaFile) throws IOException {
     Json json = JsonParser.json(metaFile);
 
     Sample sample = SampleTracks.getSampleFromTrack(json);
@@ -457,7 +456,7 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
    * @throws ParseException the parse exception
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  private void openBRT2Track(Path metaFile) throws ParseException, IOException {
+  private void openBRT2Track(Path metaFile) throws IOException {
     Json json = JsonParser.json(metaFile);
 
     Sample sample = SampleTracks.getSampleFromTrack(json);
@@ -472,7 +471,7 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
    * @throws ParseException the parse exception
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  private void openBVTTrack(Path metaFile) throws ParseException, IOException {
+  private void openBVTTrack(Path metaFile) throws IOException {
     Json json = JsonParser.json(metaFile);
 
     Sample sample = SampleTracks.getSampleFromTrack(json);
