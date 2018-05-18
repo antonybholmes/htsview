@@ -49,11 +49,11 @@ public class TrackNodeRenderer extends ModernTreeBranchNodeRenderer {
 
   /** The Constant LINE_COLOR. */
   public static final Color LINE_COLOR = ThemeService.getInstance().colors()
-      .getHighlight(2);
+      .getGray(2);
 
   /** The Constant COLOR. */
   public static final Color COLOR = ThemeService.getInstance().colors()
-      .getHighlight(6);
+      .getGray(6);
 
   /**
    * Instantiates a new track node renderer.

@@ -45,7 +45,7 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
 
   /** The Constant SELECTION_COLOR. */
   private static final Color SELECTION_COLOR = ThemeService.getInstance()
-      .colors().getColorHighlight(5);
+      .colors().getTheme(5);
 
   /** The Constant SELECTION_COLOR_TRANS. */
   private static final Color SELECTION_COLOR_TRANS = ColorUtils

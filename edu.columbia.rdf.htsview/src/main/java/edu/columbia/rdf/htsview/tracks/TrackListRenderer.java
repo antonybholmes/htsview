@@ -50,11 +50,11 @@ public class TrackListRenderer extends ModernListCellRenderer {
 
   /** The Constant LINE_COLOR. */
   public static final Color LINE_COLOR = ThemeService.getInstance().colors()
-      .getHighlight(2);
+      .getGray(2);
 
   /** The Constant COLOR. */
   public static final Color COLOR = ThemeService.getInstance().colors()
-      .getHighlight(6);
+      .getGray(6);
 
   /** The Constant NUM_WIDTH. */
   private static final int NUM_WIDTH = 20;
