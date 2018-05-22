@@ -29,7 +29,7 @@ import org.jebtk.core.json.JsonParser;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.modern.UI;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernButtonGroup;
 import org.jebtk.modern.button.ModernCheckSwitch;
@@ -132,11 +132,11 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
 
   /** The m sample db button. */
   private ModernButton mSampleDbButton = new ModernDialogFlatButton(
-      UIService.getInstance().loadIcon("database", 16));
+      AssetService.getInstance().loadIcon("database", 16));
 
   /** The m sample fs button. */
   private ModernButton mSampleFsButton = new ModernDialogFlatButton(
-      UIService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16));
+      AssetService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16));
 
   /** The m assembly. */
   private SampleAssembly mAssembly;
@@ -323,7 +323,7 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
     box2.add(mCheckSubtractInput);
     box2.add(new ModernTextBorderPanel(mSubtractField, 300));
 
-    if (SettingsService.getInstance().getAsBool("edb.modules.edbw.enabled")) {
+    if (SettingsService.getInstance().getBool("edb.modules.edbw.enabled")) {
       box2.add(UI.createHGap(5));
       box2.add(mSampleDbButton);
     }

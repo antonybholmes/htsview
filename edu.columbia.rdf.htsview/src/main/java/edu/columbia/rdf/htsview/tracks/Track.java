@@ -49,7 +49,7 @@ public abstract class Track extends ChangeListeners
 
   /** The Constant PLOT_WIDTH. */
   public static final int PLOT_WIDTH = SettingsService.getInstance()
-      .getAsInt("htsview.plot.width");
+      .getInt("htsview.plot.width");
 
   /** The Constant SMALL_MARGIN. */
   public static final int SMALL_MARGIN = 5;

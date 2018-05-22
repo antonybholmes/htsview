@@ -35,7 +35,7 @@ public class HeightModel extends ItemModel<Integer> {
    * Instantiates a new title position model.
    */
   public HeightModel() {
-    set(SettingsService.getInstance().getAsInt("htsview.plot.height"));
+    set(SettingsService.getInstance().getInt("htsview.plot.height"));
   }
 
   /*

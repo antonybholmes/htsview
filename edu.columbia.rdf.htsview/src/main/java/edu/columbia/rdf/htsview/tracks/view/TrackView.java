@@ -90,30 +90,30 @@ public class TrackView {
     String genome;
 
     if (viewJson.containsKey("genome")) {
-      genome = viewJson.getAsString("genome");
+      genome = viewJson.getString("genome");
     } else {
       genome = mGenomeModel.get();
     }
 
     GenomicRegion region = GenomicRegion.parse(genome,
-        viewJson.getAsString("location"));
+        viewJson.getString("location"));
 
     if (region == null) {
       return;
     }
 
     if (viewJson.containsKey("width-px")) {
-      mWidthModel.set(viewJson.getAsInt("width-px"));
+      mWidthModel.set(viewJson.getInt("width-px"));
     } else if (viewJson.containsKey("width")) {
-      mWidthModel.set(viewJson.getAsInt("width"));
+      mWidthModel.set(viewJson.getInt("width"));
     } else {
       // Do nothing
     }
 
     if (viewJson.containsKey("margin-px")) {
-      mMarginModel.set(viewJson.getAsInt("margin-px"));
+      mMarginModel.set(viewJson.getInt("margin-px"));
     } else if (viewJson.containsKey("margin")) {
-      mMarginModel.set(viewJson.getAsInt("margin"));
+      mMarginModel.set(viewJson.getInt("margin"));
     } else {
       // Do nothing
     }
@@ -124,13 +124,13 @@ public class TrackView {
       TitlePosition position = TitlePosition.TOP;
 
       if (titleJson.containsKey("position")) {
-        position = TitlePosition.parse(titleJson.getAsString("position"));
+        position = TitlePosition.parse(titleJson.getString("position"));
       }
 
       boolean visible = true;
 
       if (titleJson.containsKey("visible")) {
-        visible = titleJson.getAsBool("visible");
+        visible = titleJson.getBool("visible");
       }
 
       TitleProperties titleProperties = new TitleProperties(position, visible);
@@ -146,12 +146,12 @@ public class TrackView {
       TreeNode<Track> rootNode = queue.pop();
 
       for (Json trackJson : tracksJson) {
-        String type = trackJson.getAsString("type");
-        String name = trackJson.getAsString("name");
+        String type = trackJson.getString("type");
+        String name = trackJson.getString("name");
 
         System.err.println("Loading " + name + " " + type);
 
-        int id = trackJson.getAsInt("id");
+        int id = trackJson.getInt("id");
 
         // Determines if we can add child tracks to the current
         // track
@@ -196,13 +196,13 @@ public class TrackView {
    * @return the file
    */
   private static Path getFile(Json json) {
-    String path = json.getAsString("file");
+    String path = json.getString("file");
 
     if (path != null) {
       return PathUtils.getPath(path);
     }
 
-    path = json.getAsString("meta-file");
+    path = json.getString("meta-file");
 
     if (path != null) {
       return PathUtils.getPath(path);

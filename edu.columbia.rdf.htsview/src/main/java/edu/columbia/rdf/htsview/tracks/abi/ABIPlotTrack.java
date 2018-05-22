@@ -83,7 +83,7 @@ public class ABIPlotTrack extends GraphPlotTrack {
 
   /** The Constant DEFAULT_COLOR. */
   private static final Color DEFAULT_COLOR = SettingsService.getInstance()
-      .getAsColor("edb.reads.tracks.sample-plot.default-color");
+      .getColor("edb.reads.tracks.sample-plot.default-color");
 
   /**
    * Instantiates a new ABI plot track.

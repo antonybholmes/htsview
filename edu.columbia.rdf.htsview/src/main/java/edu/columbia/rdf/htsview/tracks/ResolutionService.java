@@ -67,7 +67,7 @@ public class ResolutionService implements Iterable<Integer> {
     try {
       mResolutions = CollectionUtils
           .sort(CollectionUtils.toInt(TextUtils.scSplit(SettingsService
-              .getInstance().getAsString("edb.reads.resolutions"))));
+              .getInstance().getString("edb.reads.resolutions"))));
     } catch (ParseException e) {
       e.printStackTrace();
     }

@@ -16,7 +16,7 @@
 package edu.columbia.rdf.htsview.tracks;
 
 import org.jebtk.modern.UI;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButtonGroup;
 import org.jebtk.modern.button.ModernCheckButton;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -42,13 +42,13 @@ public class TitlePositionRibbonSection extends RibbonSection
    * The m top button.
    */
   private ModernCheckButton mTopButton = new RibbonLargeRadioButton("Top",
-      UIService.getInstance().loadIcon("title_top", 32));
+      AssetService.getInstance().loadIcon("title_top", 32));
 
   /**
    * The m right button.
    */
   private ModernCheckButton mRightButton = new RibbonLargeRadioButton("Right",
-      UIService.getInstance().loadIcon("title_right", 32));
+      AssetService.getInstance().loadIcon("title_right", 32));
 
   /** The m check visible. */
   private ModernCheckButton mCheckVisible = new RibbonLargeRadioButton(

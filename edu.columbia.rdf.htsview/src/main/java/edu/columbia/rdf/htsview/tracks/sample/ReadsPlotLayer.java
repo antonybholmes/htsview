@@ -46,13 +46,13 @@ public class ReadsPlotLayer extends AxesClippedLayer {
    * The constant HEIGHT.
    */
   // public static final int HEIGHT =
-  // SettingsService.getInstance().getAsInt("edb.reads.tracks.reads-plot.height");
+  // SettingsService.getInstance().getInt("edb.reads.tracks.reads-plot.height");
 
   /**
    * The constant BLOCK.
    */
   // public static final int BLOCK =
-  // SettingsService.getInstance().getAsInt("edb.reads.tracks.reads-plot.block-height");
+  // SettingsService.getInstance().getInt("edb.reads.tracks.reads-plot.block-height");
 
   // private static final int BAR_HEIGHT = 20;
 

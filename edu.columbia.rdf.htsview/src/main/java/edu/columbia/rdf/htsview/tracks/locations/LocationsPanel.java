@@ -42,7 +42,7 @@ import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.external.microsoft.Excel;
 import org.jebtk.math.ui.external.microsoft.ExcelDialog;
 import org.jebtk.modern.ModernComponent;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.dialog.DialogEvent;
 import org.jebtk.modern.dialog.DialogEventListener;
@@ -76,11 +76,11 @@ public class LocationsPanel extends ModernComponent
 
   /** The m open button. */
   private ModernButton mOpenButton = new ModernDialogFlatButton(
-      UIService.getInstance().loadIcon(FolderBwVectorIcon.class, 16));
+      AssetService.getInstance().loadIcon(FolderBwVectorIcon.class, 16));
 
   /** The m delete button. */
   private ModernButton mDeleteButton = new ModernDialogFlatButton(
-      UIService.getInstance().loadIcon("trash_bw", 16));
+      AssetService.getInstance().loadIcon("trash_bw", 16));
 
   /** The m model. */
   private GenomicRegionModel mModel;
@@ -138,7 +138,7 @@ public class LocationsPanel extends ModernComponent
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-      loadLocations(TextUtils.tabSplit(UIService.getClipboardText()
+      loadLocations(TextUtils.tabSplit(AssetService.getClipboardText()
           .replaceAll("[\\r\\n]+", TextUtils.TAB_DELIMITER)));
     }
 
@@ -403,7 +403,7 @@ public class LocationsPanel extends ModernComponent
     if (text.matches("^chr(\\d+|[xymXYM])$")) {
       // use the whole chromosome
 
-      Chromosome chromosome = GenomeService.instance().chr(mGenomeModel.get(),
+      Chromosome chromosome = GenomeService.getInstance().chr(mGenomeModel.get(),
           text);
 
       int size = chromosome.getSize();

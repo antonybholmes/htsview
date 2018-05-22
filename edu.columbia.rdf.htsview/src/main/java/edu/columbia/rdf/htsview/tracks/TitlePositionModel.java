@@ -36,7 +36,7 @@ public class TitlePositionModel extends ItemModel<TitleProperties> {
    */
   public TitlePositionModel() {
     set(new TitleProperties(TitlePosition.parse(
-        SettingsService.getInstance().getAsString("edb.reads.title-position")),
+        SettingsService.getInstance().getString("edb.reads.title-position")),
         true));
   }
 

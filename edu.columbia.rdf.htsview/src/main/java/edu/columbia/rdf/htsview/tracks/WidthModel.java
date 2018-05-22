@@ -35,7 +35,7 @@ public class WidthModel extends ItemModel<Integer> {
    * Instantiates a new title position model.
    */
   public WidthModel() {
-    set(SettingsService.getInstance().getAsInt("htsview.plot.width"));
+    set(SettingsService.getInstance().getInt("htsview.plot.width"));
   }
 
   /*

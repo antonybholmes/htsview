@@ -48,11 +48,11 @@ public class TrackNodeRenderer extends ModernTreeBranchNodeRenderer {
   private Color mLineColor;
 
   /** The Constant LINE_COLOR. */
-  public static final Color LINE_COLOR = ThemeService.getInstance().colors()
+  public static final Color LINE_COLOR = ThemeService.getInstance().getColors()
       .getGray(2);
 
   /** The Constant COLOR. */
-  public static final Color COLOR = ThemeService.getInstance().colors()
+  public static final Color COLOR = ThemeService.getInstance().getColors()
       .getGray(6);
 
   /**

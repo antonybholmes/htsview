@@ -66,13 +66,13 @@ public abstract class TrackJsonParser implements NameProperty {
    * @return the file
    */
   protected static Path getFile(Json json) {
-    String path = json.getAsString("file");
+    String path = json.getString("file");
 
     if (path != null) {
       return PathUtils.getPath(path);
     }
 
-    path = json.getAsString("meta-file");
+    path = json.getString("meta-file");
 
     if (path != null) {
       return PathUtils.getPath(path);

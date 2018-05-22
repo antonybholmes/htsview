@@ -35,7 +35,7 @@ public class ResolutionModel extends ItemModel<Integer> {
    * Instantiates a new resolution model.
    */
   public ResolutionModel() {
-    set(SettingsService.getInstance().getAsInt("edb.reads.default-resolution"));
+    set(SettingsService.getInstance().getInt("edb.reads.default-resolution"));
   }
 
   /*

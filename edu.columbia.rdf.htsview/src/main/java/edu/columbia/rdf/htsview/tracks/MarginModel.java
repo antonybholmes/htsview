@@ -35,7 +35,7 @@ public class MarginModel extends ItemModel<Integer> {
    * Instantiates a new title position model.
    */
   public MarginModel() {
-    set(SettingsService.getInstance().getAsInt("htsview.plot.left-margin"));
+    set(SettingsService.getInstance().getInt("htsview.plot.left-margin"));
   }
 
   /*

@@ -45,36 +45,36 @@ public class ReadsPlotTrack extends SamplePlotTrack {
    * The constant MAX_BLOCK_DEPTH.
    */
   // private static final int MAX_BLOCK_DEPTH =
-  // SettingsService.getInstance().getAsInt("edb.reads.tracks.reads-plot.max-blocks");
+  // SettingsService.getInstance().getInt("edb.reads.tracks.reads-plot.max-blocks");
 
   private static final Color DEFAULT_LINE_COLOR = SettingsService.getInstance()
-      .getAsColor("edb.reads.tracks.reads-plot.strands.positive.line-color");
+      .getColor("edb.reads.tracks.reads-plot.strands.positive.line-color");
 
   /** The Constant DEFAULT_FILL_COLOR. */
   private static final Color DEFAULT_FILL_COLOR = SettingsService.getInstance()
-      .getAsColor("edb.reads.tracks.reads-plot.strands.positive.fill-color");
+      .getColor("edb.reads.tracks.reads-plot.strands.positive.fill-color");
 
   /** The Constant DEFAULT_NEG_STRAND_LINE_COLOR. */
   private static final Color DEFAULT_NEG_STRAND_LINE_COLOR = SettingsService
       .getInstance()
-      .getAsColor("edb.reads.tracks.reads-plot.strands.negative.line-color");
+      .getColor("edb.reads.tracks.reads-plot.strands.negative.line-color");
 
   /** The Constant DEFAULT_NEG_STRAND_FILL_COLOR. */
   private static final Color DEFAULT_NEG_STRAND_FILL_COLOR = SettingsService
       .getInstance()
-      .getAsColor("edb.reads.tracks.reads-plot.strands.negative.fill-color");
+      .getColor("edb.reads.tracks.reads-plot.strands.negative.fill-color");
 
   /** The Constant MAX_READS_DISPLAY. */
   private static final int MAX_READS_DISPLAY = SettingsService.getInstance()
-      .getAsInt("edb.reads.tracks.reads-plot.max-display-reads");
+      .getInt("edb.reads.tracks.reads-plot.max-display-reads");
 
   /** The Constant DEFAULT_READ_HEIGHT. */
   private static final int DEFAULT_READ_HEIGHT = SettingsService.getInstance()
-      .getAsInt("edb.reads.tracks.reads-plot.default-read-height");
+      .getInt("edb.reads.tracks.reads-plot.default-read-height");
 
   /** The Constant DEFAULT_GAP. */
   private static final int DEFAULT_GAP = SettingsService.getInstance()
-      .getAsInt("edb.reads.tracks.reads-plot.default-gap");
+      .getInt("edb.reads.tracks.reads-plot.default-gap");
 
   /**
    * The member read length.

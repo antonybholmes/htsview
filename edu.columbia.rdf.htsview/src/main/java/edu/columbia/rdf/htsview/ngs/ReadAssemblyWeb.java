@@ -114,7 +114,7 @@ public class ReadAssemblyWeb extends ReadAssembly {
     Json json = mParser.parse(mGroupsUrl);
 
     for (int i = 0; i < json.size(); ++i) {
-      groups.add(json.get(i).getAsString());
+      groups.add(json.get(i).getString());
     }
 
     return groups;
@@ -138,7 +138,7 @@ public class ReadAssemblyWeb extends ReadAssembly {
       Json json = mParser.parse(url);
 
       for (int i = 0; i < json.size(); ++i) {
-        samples.add(json.get(i).getAsString());
+        samples.add(json.get(i).getString());
       }
     } catch (MalformedURLException e) {
       e.printStackTrace();
@@ -166,7 +166,7 @@ public class ReadAssemblyWeb extends ReadAssembly {
       Json json = mParser.parse(url);
 
       for (int i = 0; i < json.size(); ++i) {
-        samples.add(json.get(i).getAsString());
+        samples.add(json.get(i).getString());
       }
     } catch (MalformedURLException e) {
       e.printStackTrace();
@@ -203,7 +203,7 @@ public class ReadAssemblyWeb extends ReadAssembly {
       Json scoresJson = json.get(0).get("counts");
 
       for (int i = 0; i < scoresJson.size(); ++i) {
-        ret.add(scoresJson.get(i).getAsInt());
+        ret.add(scoresJson.get(i).getInt());
       }
 
     } catch (MalformedURLException e) {
@@ -233,7 +233,7 @@ public class ReadAssemblyWeb extends ReadAssembly {
 
       Json json = mParser.parse(url);
 
-      ret = json.get(0).get("mapped_reads").getAsInt();
+      ret = json.get(0).get("mapped_reads").getInt();
     } catch (MalformedURLException e) {
       e.printStackTrace();
     }

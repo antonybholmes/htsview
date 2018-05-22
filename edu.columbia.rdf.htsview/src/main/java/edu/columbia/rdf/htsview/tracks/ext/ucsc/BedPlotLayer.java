@@ -37,7 +37,7 @@ import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.AxesClippedLayer;
 import org.jebtk.graphplot.figure.Figure;
 import org.jebtk.graphplot.figure.SubFigure;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.CanvasMouseEvent;
@@ -213,7 +213,7 @@ public class BedPlotLayer extends AxesClippedLayer
     mMenu.add(menuItem);
 
     menuItem = new ModernIconMenuItem("UCSC",
-        UIService.getInstance().loadIcon("ucsc", 16));
+        AssetService.getInstance().loadIcon("ucsc", 16));
     menuItem.addClickListener(this);
     mMenu.add(menuItem);
 

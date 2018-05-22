@@ -82,13 +82,13 @@ public class AxisLimitsModel extends ChangeListeners {
    * Instantiates a new axis limits model.
    */
   public AxisLimitsModel() {
-    mMax = SettingsService.getInstance().getAsDouble("edb.reads.scale.max-y");
+    mMax = SettingsService.getInstance().getDouble("edb.reads.scale.max-y");
     mAutoLimits = SettingsService.getInstance()
-        .getAsBool("edb.reads.scale.auto-y");
+        .getBool("edb.reads.scale.auto-y");
     mCommonScale = SettingsService.getInstance()
-        .getAsBool("edb.reads.scale.same-y");
+        .getBool("edb.reads.scale.same-y");
     mNormalize = SettingsService.getInstance()
-        .getAsBool("edb.reads.scale.normalize-y");
+        .getBool("edb.reads.scale.normalize-y");
 
     addChangeListener(new ChangeEvents());
   }

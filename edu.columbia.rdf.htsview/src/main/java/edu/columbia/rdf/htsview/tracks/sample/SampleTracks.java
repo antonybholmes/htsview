@@ -45,9 +45,9 @@ public class SampleTracks {
    * @throws IOException Signals that an I/O exception has occurred.
    */
   public static Sample getSampleFromTrack(Json json) throws IOException {
-    Sample sample = new Sample(-1, null, null, json.getAsString("Name"),
-        new Species(-1, json.getAsString("Organism"),
-            json.getAsString("Organism")),
+    Sample sample = new Sample(-1, null, null, json.getString("Name"),
+        new Species(-1, json.getString("Organism"),
+            json.getString("Organism")),
         null);
 
     return sample;

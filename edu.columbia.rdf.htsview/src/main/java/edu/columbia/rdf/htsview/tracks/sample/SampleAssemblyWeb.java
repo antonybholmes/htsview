@@ -85,7 +85,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * Json startsJson = json.get(0).get("starts");
    * 
    * for (int i = 0; i < startsJson.size(); ++i) {
-   * ret.add(startsJson.get(i).getAsInt()); }
+   * ret.add(startsJson.get(i).getInt()); }
    * 
    * return ret; }
    */
@@ -139,7 +139,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
     Json startsJson = json.get(0).get("s");
 
     for (int i = 0; i < startsJson.size(); ++i) {
-      ret.add(startsJson.getAsInt(i));
+      ret.add(startsJson.getInt(i));
     }
 
     return ret;
@@ -162,7 +162,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
         .resolve(region.getGenome()).resolve(region.getChr())
         .resolve(region.getStart()).resolve(region.getEnd()).resolve("b");
 
-    return BufferUtils.byteBuffer().wrap(URLUtils.read(url).bytes()).ints();
+    return BufferUtils.byteBuffer().wrap(URLUtils.read(url).bytes()).getInts();
   }
 
   /*
@@ -204,7 +204,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
     Json strandsJson = json.get(0).get("s");
 
     for (int i = 0; i < strandsJson.size(); ++i) {
-      ret.add(Strand.parse(strandsJson.getAsChar(i)));
+      ret.add(Strand.parse(strandsJson.getChar(i)));
     }
 
     return ret;
@@ -287,7 +287,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
     Json countsJson = json.get(0).get("c");
 
     for (int i = 0; i < countsJson.size(); ++i) {
-      ret.add(countsJson.get(i).getAsInt());
+      ret.add(countsJson.get(i).getInt());
     }
 
     return ret;
@@ -315,7 +315,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
     // LOG.info("Count url: {}", url);
 
-    return BufferUtils.byteBuffer().wrap(URLUtils.read(url).bytes()).ints();
+    return BufferUtils.byteBuffer().wrap(URLUtils.read(url).bytes()).getInts();
   }
 
   /*
@@ -339,7 +339,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
     Json json = new JsonParser().parse(mappedUrl.toURL());
 
-    ret = json.getAsInt(0);
+    ret = json.getInt(0);
 
     return ret;
   }
@@ -357,7 +357,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
     Json json = new JsonParser().parse(url.toURL());
 
-    return json.get(0).getAsString("genome");
+    return json.get(0).getString("genome");
   }
 
   /**
@@ -379,7 +379,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
     Json json = new JsonParser().parse(url.toURL());
 
-    System.err.println("track web " + json + " " + json.getAsString(0));
+    System.err.println("track web " + json + " " + json.getString(0));
 
     boolean isBRT = json.get(0).equals("brt");
 
@@ -409,7 +409,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
     Json json = new JsonParser().parse(url.toURL());
 
-    boolean isBVT = json.get(0).getAsString("type").equals("bvt");
+    boolean isBVT = json.get(0).getString("type").equals("bvt");
 
     // LOG.info("BRT type: {} {} {}", json.get(0).get("type"), isBRT);
 
@@ -433,6 +433,6 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
     Json json = new JsonParser().parse(url.toURL());
 
-    return json.get(0).getAsInt("length");
+    return json.get(0).getInt("length");
   }
 }

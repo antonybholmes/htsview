@@ -45,14 +45,14 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
 
   /** The Constant SELECTION_COLOR. */
   private static final Color SELECTION_COLOR = ThemeService.getInstance()
-      .colors().getTheme(5);
+      .getColors().getTheme(5);
 
   /** The Constant SELECTION_COLOR_TRANS. */
   private static final Color SELECTION_COLOR_TRANS = ColorUtils
       .getTransparentColor75(SELECTION_COLOR);
 
   private static final int X_GAP = SettingsService.getInstance()
-      .getAsInt("sequencing.tracks.mouse.drag.x-gap");
+      .getInt("sequencing.tracks.mouse.drag.x-gap");
 
   /** The m drag start. */
   private int mDragStart = -1;
