@@ -132,7 +132,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
         .resolve(region.getGenome()).resolve(region.getChr())
         .resolve(region.getStart()).resolve(region.getEnd());
 
-    // LOG.info("starts url: {}", url);
+    LOG.info("starts url: {}", url);
 
     Json json = new JsonParser().parse(url.toURL());
 
@@ -280,7 +280,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
         .resolve(region.getGenome()).resolve(region.getChr())
         .resolve(region.getStart()).resolve(region.getEnd()).resolve(window);
 
-    // LOG.info("Count url: {}", url);
+    LOG.info("Count url: {}", url);
 
     Json json = new JsonParser().parse(url.toURL());
 
@@ -329,11 +329,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
   public int getMappedReads(Sample sample) throws IOException {
     int ret = -1;
 
-    UrlBuilder mappedUrl;
-
-    mappedUrl = mAuthV1;
-
-    mappedUrl = mappedUrl.resolve("mapped").resolve(sample.getId());
+    UrlBuilder mappedUrl = mAuthV1.resolve("mapped").resolve(sample.getId());
 
     // LOG.info("Mapped url: {}", mappedUrl);
 

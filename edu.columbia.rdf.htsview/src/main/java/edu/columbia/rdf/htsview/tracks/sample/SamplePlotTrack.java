@@ -49,6 +49,11 @@ import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedGraphSubFigure;
  */
 public class SamplePlotTrack extends GraphPlotTrack {
 
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
+
   /** The m height. */
   private int mHeight = -1;
 
@@ -444,7 +449,7 @@ public class SamplePlotTrack extends GraphPlotTrack {
    *
    * @return the assembly
    */
-  public SampleAssembly getsembly() {
+  public SampleAssembly getAssembly() {
     return mAssembly;
   }
 
@@ -592,8 +597,8 @@ public class SamplePlotTrack extends GraphPlotTrack {
       List<Integer> mInputCounts = mInputAssembly
           .getCounts(mInputSample, displayRegion, resolution);
 
-      // System.err.println("w1 " + counts);
-      // System.err.println("w2 " + mInputCounts);
+      System.err.println("w1 " + counts);
+      System.err.println("w2 " + mInputCounts);
 
       for (int i = 0; i < counts.size(); ++i) {
         counts.set(i, Math.max(0, counts.get(i) - mInputCounts.get(i)));

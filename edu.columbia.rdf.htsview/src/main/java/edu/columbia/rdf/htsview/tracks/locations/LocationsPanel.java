@@ -149,21 +149,20 @@ public class LocationsPanel extends ModernComponent
    */
   private class SelectionEvents implements ModernSelectionListener {
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.abh.common.ui.event.ModernSelectionListener#selectionChanged(org.abh.
-     * common.event.ChangeEvent)
-     */
     @Override
-    public void selectionChanged(ChangeEvent e) {
+    public void selectionAdded(ChangeEvent e) {
       GenomicRegion region = parse(mGenomeModel.get(),
           mLocationList.getSelectedItem());
 
       if (region != null) {
         mModel.set(region);
       }
+    }
+
+    @Override
+    public void selectionRemoved(ChangeEvent e) {
+      // TODO Auto-generated method stub
+      
     }
   }
 
