@@ -163,7 +163,7 @@ public class TrackView {
           allowChildren = parser.parse(window,
               name,
               id,
-              mGenomeModel.get(),
+              genome,
               mAnnotationTree,
               trackJson,
               rootNode);

@@ -18,6 +18,7 @@ package edu.columbia.rdf.htsview.tracks.locations;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ import javax.swing.KeyStroke;
 
 import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.bioinformatics.genomic.GenesService;
+import org.jebtk.bioinformatics.genomic.GeneDb;
 import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegionModel;
@@ -398,11 +400,13 @@ public class LocationsPanel extends ModernComponent
     }
 
     GenomicRegion region = null;
+    
+    //String genome = mGenomeModel.get();
 
     if (text.matches("^chr(\\d+|[xymXYM])$")) {
       // use the whole chromosome
 
-      Chromosome chromosome = GenomeService.getInstance().chr(mGenomeModel.get(),
+      Chromosome chromosome = GenomeService.getInstance().chr(genome,
           text);
 
       int size = chromosome.getSize();
@@ -422,8 +426,16 @@ public class LocationsPanel extends ModernComponent
     } else {
       // assume its a gene
 
-      region = GenesService.getInstance().getGenes(mGenomeModel.get(), "refseq")
-          .getGene(text);
+      Iterable<GeneDb> dbs = GenesService.getInstance().getGeneDbs(genome);
+      
+      // Pick the first (essentially at random).
+      GeneDb g = dbs.iterator().next();
+      
+      try {
+        region = GenesService.getInstance().getGenes(g).getGene(g, text);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
 
     return region;

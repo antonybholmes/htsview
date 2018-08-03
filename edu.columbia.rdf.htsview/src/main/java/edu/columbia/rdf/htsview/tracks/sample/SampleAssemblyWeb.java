@@ -280,7 +280,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
         .resolve(region.getGenome()).resolve(region.getChr())
         .resolve(region.getStart()).resolve(region.getEnd()).resolve(window);
 
-    LOG.info("Count url: {}", url);
+    //LOG.info("Count url: {}", url);
 
     Json json = new JsonParser().parse(url.toURL());
 
