@@ -110,6 +110,8 @@ public class SamplePlotTrack extends GraphPlotTrack {
   /** The m resolution. */
   private int mResolution;
 
+  private UCSCTrack mBedGraph;
+
   /** The Constant DEFAULT_COLOR. */
   private static final Color DEFAULT_COLOR = SettingsService.getInstance()
       .getColor("edb.reads.tracks.sample-plot.default-color");
@@ -265,21 +267,22 @@ public class SamplePlotTrack extends GraphPlotTrack {
    * @return the double
    */
   private double autoY(boolean normalize) {
-    UCSCTrack bedGraph = null;
+    if (mBedGraph == null) {
+      try {
 
-    try {
-      bedGraph = getBedGraph(mRegion, mResolution, normalize);
-    } catch (IOException e) {
-      e.printStackTrace();
+        mBedGraph = getBedGraph(mRegion, mResolution, normalize);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
 
     // This track is not a bedgraph
-    if (bedGraph == null) {
+    if (mBedGraph == null) {
       return TracksFigure.MIN_MAX_Y;
     }
 
     List<UCSCTrackRegion> regions = UCSCTrackRegions
-        .getFixedGapSearch(bedGraph.getRegions()).getFeatureSet(mRegion);
+        .getFixedGapSearch(mBedGraph.getRegions()).getFeatureSet(mRegion);
 
     double y = 0;
 
@@ -532,9 +535,9 @@ public class SamplePlotTrack extends GraphPlotTrack {
     mRegion = displayRegion;
     mResolution = resolution;
 
-    UCSCTrack bedGraph = getBedGraph(displayRegion, resolution, mNormalize);
+    mBedGraph = getBedGraph(displayRegion, resolution, mNormalize);
 
-    mPlot.setBedGraph(bedGraph);
+    mPlot.setBedGraph(mBedGraph);
 
     if (!getCommonHeight()) {
       height = mHeight;
@@ -549,8 +552,6 @@ public class SamplePlotTrack extends GraphPlotTrack {
         mLineColor,
         mFillColor,
         mStyle);
-
-    // mSubFigure.getCurrentAxes().getTitle().setText(mName);
 
     return mSubFigure;
   }
@@ -596,9 +597,6 @@ public class SamplePlotTrack extends GraphPlotTrack {
     if (mSubtract && mInputSample != null) {
       List<Integer> mInputCounts = mInputAssembly
           .getCounts(mInputSample, displayRegion, resolution);
-
-      System.err.println("w1 " + counts);
-      System.err.println("w2 " + mInputCounts);
 
       for (int i = 0; i < counts.size(); ++i) {
         counts.set(i, Math.max(0, counts.get(i) - mInputCounts.get(i)));

@@ -264,7 +264,6 @@ public class TracksFigure extends Figure { // Figure { // PlotBoxColumn {
 
       // update the children of this plot
       for (TreeNode<Track> child : children) {
-
         TrackSubFigure cf = child.getValue()
             .updateGraph(displayRegion, resolution, width, height, margin);
 

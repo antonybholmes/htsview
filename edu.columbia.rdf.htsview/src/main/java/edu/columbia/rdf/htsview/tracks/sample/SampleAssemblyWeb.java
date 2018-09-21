@@ -276,18 +276,20 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
     UrlBuilder url = mAuthV1;
 
-    url = url.resolve("counts").resolve(sample.getId())
-        .resolve(region.getGenome()).resolve(region.getChr())
-        .resolve(region.getStart()).resolve(region.getEnd()).resolve(window);
+    url = url.resolve("counts")
+        .param("id", sample.getId())
+        .param("g", region.getGenome())
+        .param("loc", region)
+        .param("bw", window);
 
-    //LOG.info("Count url: {}", url);
+    LOG.info("Count url: {}", url);
 
     Json json = new JsonParser().parse(url.toURL());
 
     Json countsJson = json.get(0).get("c");
 
     for (int i = 0; i < countsJson.size(); ++i) {
-      ret.add(countsJson.get(i).getInt());
+      ret.add(countsJson.getInt(i));
     }
 
     return ret;
@@ -329,7 +331,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
   public int getMappedReads(Sample sample) throws IOException {
     int ret = -1;
 
-    UrlBuilder mappedUrl = mAuthV1.resolve("mapped").resolve(sample.getId());
+    UrlBuilder mappedUrl = mAuthV1.resolve("mapped").param("id", sample.getId());
 
     // LOG.info("Mapped url: {}", mappedUrl);
 
@@ -369,7 +371,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
       return mBRTMap.get(sample);
     }
 
-    UrlBuilder url = mAuthV1.resolve("type").resolve(sample.getId());
+    UrlBuilder url = mAuthV1.resolve("type").param("id", sample.getId());
 
     LOG.info("BRT url: {}", url);
 
