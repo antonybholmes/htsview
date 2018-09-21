@@ -35,6 +35,7 @@ public class ChipSeqSortModel extends SampleSortModel {
    * Instantiates a new chip seq sort model.
    */
   public ChipSeqSortModel() {
+    // Add some useful default sorters
     add(new SortSamplesByExperiment());
     add(new SortSamplesByName());
     add(new SortSamplesBySeqId());
