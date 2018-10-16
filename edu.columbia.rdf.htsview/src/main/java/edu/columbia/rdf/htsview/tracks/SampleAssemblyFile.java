@@ -16,7 +16,6 @@
 package edu.columbia.rdf.htsview.tracks;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.Strand;
@@ -31,9 +30,6 @@ import edu.columbia.rdf.edb.ngs.ReadCountsFile;
  */
 public abstract class SampleAssemblyFile extends SampleAssembly {
 
-  /** The m count. */
-  private int mCount = -1;
-
   /** The m counts. */
   private ReadCountsFile mCounts;
 
@@ -44,8 +40,6 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
    */
   public SampleAssemblyFile(ReadCountsFile counts) {
     mCounts = counts;
-
-    mCount = counts.getReadCount();
   }
 
   /*
@@ -56,7 +50,7 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
    * edb .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public List<Integer> getStarts(Sample sample,
+  public int[] getStarts(Sample sample,
       GenomicRegion region,
       int window) throws IOException {
 
@@ -71,9 +65,10 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
    * edb.Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public List<Strand> getStrands(Sample sample,
+  public Strand[] getStrands(Sample sample,
       GenomicRegion region,
       int window) throws IOException {
+
     return mCounts.getStrands(region, window);
   }
 
@@ -85,7 +80,7 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
    * edb .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public List<Integer> getCounts(Sample sample,
+  public int[] getCounts(Sample sample,
       GenomicRegion region,
       int window) throws IOException {
 
@@ -100,8 +95,8 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
    * rdf.edb.Sample)
    */
   @Override
-  public int getMappedReads(Sample sample) throws IOException {
-    return mCount;
+  public int getMappedReads(Sample sample, String genome, int window) throws IOException {
+    return mCounts.getReadCount(genome, window);
   }
 
   /*

@@ -16,14 +16,15 @@
 package edu.columbia.rdf.htsview.tracks;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.Strand;
 import org.jebtk.core.Mathematics;
+import org.jebtk.core.collections.ArrayUtils;
 
 import edu.columbia.rdf.edb.Sample;
+import edu.columbia.rdf.edb.ngs.CountAssembly;
 
 /**
  * Track assembly loads counts at a genomic location.
@@ -39,7 +40,7 @@ public abstract class SampleAssembly {
    * @return the starts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getStarts(Sample sample,
+  public int[] getStarts(Sample sample,
       String genome,
       String region,
       int window) throws IOException {
@@ -55,10 +56,10 @@ public abstract class SampleAssembly {
    * @return the starts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getStarts(Sample sample,
+  public int[] getStarts(Sample sample,
       GenomicRegion region,
       int window) throws IOException {
-    return null;
+    return ArrayUtils.EMPTY_INT_ARRAY;
   }
 
   /**
@@ -70,10 +71,10 @@ public abstract class SampleAssembly {
    * @return the strands
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Strand> getStrands(Sample sample,
+  public Strand[] getStrands(Sample sample,
       GenomicRegion region,
       int window) throws IOException {
-    return null;
+    return CountAssembly.EMPTY_STRAND_ARRAY;
   }
 
   /**
@@ -85,7 +86,7 @@ public abstract class SampleAssembly {
    * @return the counts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getCounts(Sample sample,
+  public int[] getCounts(Sample sample,
       String genome,
       String region,
       int window) throws IOException {
@@ -101,7 +102,7 @@ public abstract class SampleAssembly {
    * @return the counts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public abstract List<Integer> getCounts(Sample sample,
+  public abstract int[] getCounts(Sample sample,
       GenomicRegion region,
       int window) throws IOException;
 
@@ -114,7 +115,7 @@ public abstract class SampleAssembly {
    * @return the normalized counts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Double> getRPM(Sample sample, GenomicRegion region, int window)
+  public double[] getRPM(Sample sample, GenomicRegion region, int window)
       throws IOException {
     return getRPM(sample, this, region, window);
   }
@@ -128,7 +129,7 @@ public abstract class SampleAssembly {
    * @return the mapped reads
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public int getMappedReads(Sample sample) throws IOException {
+  public int getMappedReads(Sample sample, String genome, int window) throws IOException {
     return -1;
   }
 
@@ -187,13 +188,13 @@ public abstract class SampleAssembly {
     return Genome.HG19;
   }
 
-  public static List<Double> getRPM(Sample sample,
+  public static double[] getRPM(Sample sample,
       SampleAssembly assembly,
       GenomicRegion region,
       int window) throws IOException {
     double scaleFactor;
 
-    double mappedReads = assembly.getMappedReads(sample);
+    double mappedReads = assembly.getMappedReads(sample, region.getGenome(), window);
 
     // System.err.println("mapped reads " + mappedReads);
 

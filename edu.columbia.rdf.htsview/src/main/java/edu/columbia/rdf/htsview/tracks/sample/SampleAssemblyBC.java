@@ -17,7 +17,7 @@ package edu.columbia.rdf.htsview.tracks.sample;
 
 import java.nio.file.Path;
 
-import edu.columbia.rdf.edb.ngs.ReadCountsFileBRT3;
+import edu.columbia.rdf.edb.ngs.ReadCountsFileBC;
 import edu.columbia.rdf.htsview.tracks.SampleAssemblyFile;
 
 /**
@@ -25,14 +25,14 @@ import edu.columbia.rdf.htsview.tracks.SampleAssemblyFile;
  *
  * @author Antony Holmes Holmes
  */
-public class SampleAssemblyBRT3 extends SampleAssemblyFile {
+public class SampleAssemblyBC extends SampleAssemblyFile {
 
   /**
-   * Instantiates a new track assembly web.
+   * Instantiates a new sample assembly bam.
    *
-   * @param metaFile the meta file
+   * @param file the file
    */
-  public SampleAssemblyBRT3(Path metaFile) {
-    super(new ReadCountsFileBRT3(metaFile));
+  public SampleAssemblyBC(Path file) {
+    super(new ReadCountsFileBC(file));
   }
 }

@@ -153,8 +153,8 @@ public class ReadsPlotSubFigure extends TrackSubFigure {
    * @param readHeight the read height
    * @param gap the gap
    */
-  public void setStarts(List<Integer> starts,
-      List<Strand> strands,
+  public void setStarts(int[] starts,
+      Strand[] strands,
       boolean strandVisible,
       Color lineColor,
       Color fillColor,
@@ -169,9 +169,9 @@ public class ReadsPlotSubFigure extends TrackSubFigure {
 
     int w = -1;
 
-    for (int i = 0; i < starts.size(); ++i) {
-      int start = starts.get(i);
-      Strand strand = strands.get(i);
+    for (int i = 0; i < starts.length; ++i) {
+      int start = starts[i];
+      Strand strand = strands[i];
 
       if ((!strandVisible && strand == Strand.SENSE)
           || (!negStrandVisible && strand == Strand.ANTISENSE)) {

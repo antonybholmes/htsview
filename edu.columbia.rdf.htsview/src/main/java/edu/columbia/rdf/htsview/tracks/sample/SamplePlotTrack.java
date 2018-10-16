@@ -587,23 +587,23 @@ public class SamplePlotTrack extends GraphPlotTrack {
    * genome.GenomicRegion, int, boolean)
    */
   @Override
-  public UCSCTrack getBedGraph(GenomicRegion displayRegion,
-      int resolution,
+  public UCSCTrack getBedGraph(GenomicRegion region,
+      int window,
       boolean normalize) throws IOException {
-    List<Integer> counts = mAssembly
-        .getCounts(mSample, displayRegion, resolution);
+    int[] counts = mAssembly
+        .getCounts(mSample, region, window);
 
     // Subtract the input if desired
     if (mSubtract && mInputSample != null) {
-      List<Integer> mInputCounts = mInputAssembly
-          .getCounts(mInputSample, displayRegion, resolution);
+      int[] mInputCounts = mInputAssembly
+          .getCounts(mInputSample, region, window);
 
-      for (int i = 0; i < counts.size(); ++i) {
-        counts.set(i, Math.max(0, counts.get(i) - mInputCounts.get(i)));
+      for (int i = 0; i < counts.length; ++i) {
+        counts[i] = Math.max(0, counts[i] - mInputCounts[i]);
       }
     }
 
-    int mappedReads = mAssembly.getMappedReads(mSample);
+    int mappedReads = mAssembly.getMappedReads(mSample, region.getGenome(), window);
 
     // per million
     double scaleFactor;
@@ -614,23 +614,23 @@ public class SamplePlotTrack extends GraphPlotTrack {
       scaleFactor = 1;
     }
 
-    String id = mSample.getName() + " " + displayRegion.toString();
+    String id = mSample.getName() + " " + region.toString();
 
     BedGraph bedGraph = new BedGraph(id, id, mFillColor);
 
-    int start = displayRegion.getStart() / resolution * resolution;
+    int start = region.getStart() / window * window;
 
     double normalizedCount;
 
     for (int count : counts) {
       normalizedCount = count * scaleFactor;
 
-      BedGraphRegion br = new BedGraphRegion(displayRegion.getChr(), start,
-          start + resolution - 1, normalizedCount);
+      BedGraphRegion br = new BedGraphRegion(region.getChr(), start,
+          start + window - 1, normalizedCount);
 
       bedGraph.getRegions().add(br);
 
-      start += resolution;
+      start += window;
     }
 
     return bedGraph;

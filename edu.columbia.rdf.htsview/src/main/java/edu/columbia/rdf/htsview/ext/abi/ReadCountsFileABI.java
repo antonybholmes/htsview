@@ -29,8 +29,6 @@ package edu.columbia.rdf.htsview.ext.abi;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
@@ -75,7 +73,7 @@ public class ReadCountsFileABI extends ReadCountsFile {
    * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
    */
   @Override
-  public List<Integer> getCounts(GenomicRegion region, int window)
+  public int[] getCounts(GenomicRegion region, int window)
       throws IOException {
     return getCounts(region.getChr(),
         region.getStart(),
@@ -93,12 +91,14 @@ public class ReadCountsFileABI extends ReadCountsFile {
    * @return the counts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getCounts(Chromosome chr, int start, int end, int window)
+  public int[] getCounts(Chromosome chr, int start, int end, int window)
       throws IOException {
-    List<Integer> counts = new ArrayList<Integer>(end - start + 1);
-
-    for (int i = start; i <= end; ++i) {
-      counts.add((int) mTrace.getColor(mBase, i));
+    int[] counts = new int[end - start + 1];
+    
+    int i = 0;
+    
+    for (int v = start; v <= end; ++v) {
+      counts[i++] = (int) mTrace.getColor(mBase, v);
     }
 
     return counts;
@@ -111,7 +111,7 @@ public class ReadCountsFileABI extends ReadCountsFile {
    * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
    */
   @Override
-  public List<Integer> getStarts(GenomicRegion region, int window)
+  public int[] getStarts(GenomicRegion region, int window)
       throws IOException {
     return getStarts(region.getChr(),
         region.getStart(),
@@ -129,9 +129,9 @@ public class ReadCountsFileABI extends ReadCountsFile {
    * @return the starts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getStarts(Chromosome chr, int start, int end, int window)
+  public int[] getStarts(Chromosome chr, int start, int end, int window)
       throws IOException {
 
-    return Mathematics.sequence(start, end);
+    return Mathematics.seq(start, end);
   }
 }

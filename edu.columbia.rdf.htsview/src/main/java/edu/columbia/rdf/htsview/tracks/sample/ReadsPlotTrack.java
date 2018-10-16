@@ -17,12 +17,11 @@ package edu.columbia.rdf.htsview.tracks.sample;
 
 import java.awt.Color;
 import java.io.IOException;
-import java.util.List;
+import java.util.Arrays;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.Strand;
 import org.jebtk.core.ColorUtils;
-import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.json.JsonBuilder;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.graphplot.figure.Axes;
@@ -375,15 +374,15 @@ public class ReadsPlotTrack extends SamplePlotTrack {
       int height,
       int margin) throws IOException {
 
-    List<Integer> starts = mAssembly
+    int[] starts = mAssembly
         .getStarts(mSample, displayRegion, resolution);
 
-    List<Strand> strands = mAssembly
+    Strand[] strands = mAssembly
         .getStrands(mSample, displayRegion, resolution);
 
-    if (starts.size() > MAX_READS_DISPLAY) {
-      starts = CollectionUtils.subSample(starts, MAX_READS_DISPLAY);
-      strands = CollectionUtils.subSample(strands, MAX_READS_DISPLAY);
+    if (starts.length > MAX_READS_DISPLAY) {
+      starts = Arrays.copyOf(starts, MAX_READS_DISPLAY); //CollectionUtils.subSample(starts, MAX_READS_DISPLAY);
+      strands = Arrays.copyOf(strands, MAX_READS_DISPLAY); //CollectionUtils.subSample(strands, MAX_READS_DISPLAY);
     }
 
     mSubFigure.update(displayRegion, resolution, width, height, margin);

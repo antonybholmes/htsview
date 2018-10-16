@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import org.jebtk.core.collections.SubList;
+import org.jebtk.core.collections.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,7 +61,7 @@ public class SampleAssemblyTiled extends SampleAssembly {
     private int mCenterTile;
 
     /** The m counts. */
-    private List<Integer> mCounts = null;
+    private int[] mCounts = null;
 
     /**
      * Instantiates a new track tiles.
@@ -91,7 +91,7 @@ public class SampleAssemblyTiled extends SampleAssembly {
      * @return the counts
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    public List<Integer> getCounts(GenomicRegion region) throws IOException {
+    public int[] getCounts(GenomicRegion region) throws IOException {
 
       // Update the cache if we get a cache miss
       if (mCounts == null || !GenomicRegion.within(region, mRegion)) {
@@ -117,7 +117,7 @@ public class SampleAssemblyTiled extends SampleAssembly {
 
       int offset = (start - mRegion.getStart()) / mWindow;
 
-      return new SubList<Integer>(mCounts, offset, l);
+      return ArrayUtils.copyOf(mCounts, offset, l); //new SubList<Integer>(mCounts, offset, l);
     }
   }
 
@@ -158,7 +158,7 @@ public class SampleAssemblyTiled extends SampleAssembly {
    * edb .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public List<Integer> getCounts(Sample sample,
+  public int[] getCounts(Sample sample,
       GenomicRegion region,
       int window) throws IOException {
 
@@ -178,7 +178,7 @@ public class SampleAssemblyTiled extends SampleAssembly {
    * rdf.edb.Sample)
    */
   @Override
-  public int getMappedReads(Sample sample) throws IOException {
-    return mAssembly.getMappedReads(sample);
+  public int getMappedReads(Sample sample, String genome, int window) throws IOException {
+    return mAssembly.getMappedReads(sample, genome, window);
   }
 }
