@@ -23,10 +23,10 @@ import java.util.Map;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.Strand;
 import org.jebtk.core.BufferUtils;
+import org.jebtk.core.http.URLUtils;
+import org.jebtk.core.http.UrlBuilder;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.json.JsonParser;
-import org.jebtk.core.network.URLUtils;
-import org.jebtk.core.network.UrlBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,6 +50,8 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
   /** The m BVT map. */
   private Map<Sample, Boolean> mBVTMap = new HashMap<Sample, Boolean>();
+
+  private String mMode = "count";
 
   /**
    * Instantiates a new track assembly web.
@@ -286,11 +288,10 @@ public class SampleAssemblyWeb extends SampleAssembly {
         .param("chr", region.mChr)
         .param("s", region.mStart)
         .param("e", region.mEnd)
-        .param("bw", window);
+        .param("bw", window)
+        .param("m", mMode );
     
-    //        .param("loc", region)
-
-    LOG.info("Count url: {}", url);
+    //LOG.info("Count url: {}", url);
 
     Json json = new JsonParser().parse(url.toURL());
 
@@ -345,7 +346,8 @@ public class SampleAssemblyWeb extends SampleAssembly {
         .resolve("mapped")
         .param("id", sample.getId())
         .param("g", genome)
-        .param("bw", window);
+        .param("bw", window)
+        .param("m", mMode);
     
 
     // LOG.info("Mapped url: {}", mappedUrl);

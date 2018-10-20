@@ -32,7 +32,7 @@ import org.jebtk.bioinformatics.ext.ucsc.UCSCTrackRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.geom.IntRect;
-import org.jebtk.core.network.URLUtils;
+import org.jebtk.core.http.URLUtils;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.AxesClippedLayer;
 import org.jebtk.graphplot.figure.Figure;
