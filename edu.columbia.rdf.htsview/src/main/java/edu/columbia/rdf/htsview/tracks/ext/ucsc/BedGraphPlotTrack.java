@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.ColorUtils;
 import org.jebtk.core.io.PathUtils;
@@ -36,6 +37,11 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  * The Class BedGraphPlotTrack.
  */
 public class BedGraphPlotTrack extends GraphPlotTrack {
+
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
 
   /** The m bed graph. */
   private UCSCTrack mBedGraph;
@@ -148,7 +154,7 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome,
+  public TrackSubFigure createGraph(Genome genome,
       TitleProperties titlePosition) throws IOException {
     mSubFigure = BedGraphSubFigure
         .create(mBedGraph.getName(), mStyle, titlePosition);

@@ -17,6 +17,7 @@ package edu.columbia.rdf.htsview.test;
 
 import java.io.IOException;
 
+import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.core.io.PathUtils;
 import org.junit.Test;
 
@@ -29,7 +30,9 @@ public class Encode12BitTest {
     CountAssembly a = new ReadCountsFile32Bit(PathUtils.getPath(
         "/ifs/scratch/cancer/Lab_RDF/abh2138/ChIP_seq/data/samples/hg19/bradner/Bradner_HBL1_H3K27AC_BD015/reads_hg19"));
 
-    System.err
-        .println("12bit counts " + a.getCounts("hg19", "chr1:1-50000", 1000));
+    System.err.println("12bit counts "
+        + a.getCounts(GenomeService.getInstance().guessGenome("hg19"),
+            "chr1:1-50000",
+            1000));
   }
 }

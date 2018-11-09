@@ -17,8 +17,8 @@ package edu.columbia.rdf.htsview.tracks.ext.ucsc;
 
 import java.util.List;
 
-import org.jebtk.bioinformatics.ext.ucsc.BedGraphRegion;
-import org.jebtk.bioinformatics.ext.ucsc.UCSCTrackRegion;
+import org.jebtk.bioinformatics.ext.ucsc.BedGraphElement;
+import org.jebtk.bioinformatics.genomic.GenomicElement;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.EmptyMatrix;
 
@@ -31,7 +31,7 @@ public class BedGraphRegionMatrix extends DataFrame {
   private static final long serialVersionUID = 1L;
 
   /** The m regions. */
-  private List<UCSCTrackRegion> mRegions;
+  private List<GenomicElement> mRegions;
 
   /**
    * Instantiates a new bed graph region matrix. Each region forms two points,
@@ -40,7 +40,7 @@ public class BedGraphRegionMatrix extends DataFrame {
    *
    * @param regions the regions
    */
-  public BedGraphRegionMatrix(List<UCSCTrackRegion> regions) {
+  public BedGraphRegionMatrix(List<GenomicElement> regions) {
     super(new EmptyMatrix(regions.size() * 2, 2));
 
     setColumnNames("Points x", "Points y");
@@ -64,7 +64,7 @@ public class BedGraphRegionMatrix extends DataFrame {
         return mRegions.get(r2).getEnd();
       }
     } else {
-      return ((BedGraphRegion) mRegions.get(r2)).getValue();
+      return ((BedGraphElement) mRegions.get(r2)).getValue();
     }
   }
 }

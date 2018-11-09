@@ -18,6 +18,7 @@ package edu.columbia.rdf.htsview.tracks.measurement;
 import java.awt.Color;
 import java.io.IOException;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.Axes;
 
@@ -29,6 +30,11 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  * The Class RangePlotTrack.
  */
 public class RangePlotTrack extends AnnotationPlotTrack {
+
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
 
   /**
    * Instantiates a new range plot track.
@@ -54,7 +60,7 @@ public class RangePlotTrack extends AnnotationPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome,
+  public TrackSubFigure createGraph(Genome genome,
       TitleProperties titlePosition) throws IOException {
 
     //

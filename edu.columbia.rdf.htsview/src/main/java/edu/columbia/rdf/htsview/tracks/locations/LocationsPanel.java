@@ -32,7 +32,7 @@ import javax.swing.KeyStroke;
 
 import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.bioinformatics.genomic.GenesService;
-import org.jebtk.bioinformatics.genomic.GeneDb;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegionModel;
@@ -43,8 +43,8 @@ import org.jebtk.core.event.ChangeListener;
 import org.jebtk.core.text.TextUtils;
 import org.jebtk.math.external.microsoft.Excel;
 import org.jebtk.math.ui.external.microsoft.ExcelDialog;
-import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.AssetService;
+import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.dialog.DialogEvent;
 import org.jebtk.modern.dialog.DialogEventListener;
@@ -164,7 +164,7 @@ public class LocationsPanel extends ModernComponent
     @Override
     public void selectionRemoved(ChangeEvent e) {
       // TODO Auto-generated method stub
-      
+
     }
   }
 
@@ -394,20 +394,21 @@ public class LocationsPanel extends ModernComponent
    * @return the genomic region
    * @throws ParseException the parse exception
    */
-  private GenomicRegion parse(String genome, String text) {
+  private GenomicRegion parse(Genome genome, String text) {
     if (TextUtils.isNullOrEmpty(text)) {
       return null;
     }
 
     GenomicRegion region = null;
-    
-    //String genome = mGenomeModel.get();
+
+    // Genome genome = mGenomeModel.get();
 
     if (text.matches("^chr(\\d+|[xymXYM])$")) {
       // use the whole chromosome
 
-      Chromosome chromosome = GenomeService.getInstance().chr(genome,
-          text);
+      System.err.println("login pannel");
+
+      Chromosome chromosome = GenomeService.getInstance().chr(genome, text);
 
       int size = chromosome.getSize();
 
@@ -426,11 +427,12 @@ public class LocationsPanel extends ModernComponent
     } else {
       // assume its a gene
 
-      Iterable<GeneDb> dbs = GenesService.getInstance().getGeneDbs(genome);
-      
+      Iterable<Genome> dbs = GenesService.getInstance()
+          .getGeneDbs(genome.getAssembly());
+
       // Pick the first (essentially at random).
-      GeneDb g = dbs.iterator().next();
-      
+      Genome g = dbs.iterator().next();
+
       try {
         region = GenesService.getInstance().getGenes(g).getGene(g, text);
       } catch (IOException e) {

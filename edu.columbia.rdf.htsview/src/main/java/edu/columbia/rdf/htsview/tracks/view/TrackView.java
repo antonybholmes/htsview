@@ -21,6 +21,8 @@ import java.text.ParseException;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+import org.jebtk.bioinformatics.genomic.Genome;
+import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegionModel;
 import org.jebtk.bioinformatics.ui.GenomeModel;
@@ -87,10 +89,11 @@ public class TrackView {
 
     Json viewJson = new JsonParser().parse(jsonFile);
 
-    String genome;
+    Genome genome;
 
     if (viewJson.containsKey("genome")) {
-      genome = viewJson.getString("genome");
+      genome = GenomeService.getInstance()
+          .guessGenome(viewJson.getString("genome"));
     } else {
       genome = mGenomeModel.get();
     }
@@ -179,11 +182,9 @@ public class TrackView {
         }
       }
     }
-    
-    
 
     tracksPanel.setTracks(root);
-    
+
     System.err.println("Sdfsdf");
 
     mGenomicModel.set(region);
@@ -234,7 +235,7 @@ public class TrackView {
 
     JsonBuilder root = JsonBuilder.create().startObject();
 
-    root.add("genome", region.getChr().getGenome());
+    root.add("genome", region.getChr().getGenome().getAssembly());
     root.add("location", region.getLocation());
     root.add("width-px", width);
     root.add("margin-px", margin);

@@ -162,59 +162,42 @@ public class SampleLoaderService {
   }
 
   /*
-  public Track openSamples(ModernWindow parent,
-      List<Path> files,
-      TreeNode<Track> root) throws IOException {
-    if (CollectionUtils.isNullOrEmpty(files)) {
-      return null;
-    }
-
-    Track ret = null;
-
-    for (Path file : files) {
-      ret = openSample(parent, file, root);
-    }
-
-    return ret;
-  }
-  */
+   * public Track openSamples(ModernWindow parent, List<Path> files,
+   * TreeNode<Track> root) throws IOException { if
+   * (CollectionUtils.isNullOrEmpty(files)) { return null; }
+   * 
+   * Track ret = null;
+   * 
+   * for (Path file : files) { ret = openSample(parent, file, root); }
+   * 
+   * return ret; }
+   */
 
   /*
-  public Track openSample(ModernWindow parent, Path file, TreeNode<Track> root)
-      throws IOException {
-    // First try the normal file extension
-    String ext = PathUtils.getFileExt(file);
-
-    Track ret = null;
-
-    SampleLoader loader = get(ext);
-
-    if (loader != null) {
-      ret = loader.open(parent, file, root);// loader.openSample(parent, file, root);
-    } else {
-      // Try the longer extension
-      ext = PathUtils.getFileExtLong(file);
-
-      loader = get(ext);
-
-      if (loader != null) {
-        ret = loader.open(parent, file, root);
-      } else {
-        // As a last resort try the whole file name for file types
-        // such as bct.json
-        ext = PathUtils.getName(file);
-
-        loader = get(ext);
-
-        if (loader != null) {
-          ret = loader.open(parent, file, root);
-        }
-      }
-    }
-
-    return ret;
-  }
-  */
+   * public Track openSample(ModernWindow parent, Path file, TreeNode<Track>
+   * root) throws IOException { // First try the normal file extension String
+   * ext = PathUtils.getFileExt(file);
+   * 
+   * Track ret = null;
+   * 
+   * SampleLoader loader = get(ext);
+   * 
+   * if (loader != null) { ret = loader.open(parent, file, root);//
+   * loader.openSample(parent, file, root); } else { // Try the longer extension
+   * ext = PathUtils.getFileExtLong(file);
+   * 
+   * loader = get(ext);
+   * 
+   * if (loader != null) { ret = loader.open(parent, file, root); } else { // As
+   * a last resort try the whole file name for file types // such as bct.json
+   * ext = PathUtils.getName(file);
+   * 
+   * loader = get(ext);
+   * 
+   * if (loader != null) { ret = loader.open(parent, file, root); } } }
+   * 
+   * return ret; }
+   */
 
   /**
    * Open reads.

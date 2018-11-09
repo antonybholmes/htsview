@@ -24,11 +24,13 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import org.jebtk.bioinformatics.ext.ucsc.BedElement;
 import org.jebtk.bioinformatics.ext.ucsc.BedGraphGroupModel;
-import org.jebtk.bioinformatics.ext.ucsc.BedRegion;
 import org.jebtk.bioinformatics.ext.ucsc.TrackDisplayMode;
-import org.jebtk.bioinformatics.ext.ucsc.UCSCTrackRegion;
+import org.jebtk.bioinformatics.genomic.GenomicElement;
+import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.geom.IntRect;
@@ -41,8 +43,8 @@ import org.jebtk.modern.AssetService;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.graphics.CanvasMouseEvent;
-import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.graphics.CanvasMouseListener;
+import org.jebtk.modern.graphics.DrawingContext;
 import org.jebtk.modern.menu.ModernIconMenuItem;
 import org.jebtk.modern.menu.ModernMenuItem;
 import org.jebtk.modern.menu.ModernPopupMenu;
@@ -63,7 +65,7 @@ public class BedPlotLayer extends AxesClippedLayer
   protected BedGraphGroupModel mBedGraphGroup;
 
   /** The m regions. */
-  private List<UCSCTrackRegion> mRegions;
+  private List<GenomicElement> mRegions;
 
   /** The m color. */
   private Color mColor;
@@ -79,13 +81,13 @@ public class BedPlotLayer extends AxesClippedLayer
   private boolean mUpdate = false;
 
   /** The m dims. */
-  private Map<UCSCTrackRegion, IntRect> mDims = new HashMap<UCSCTrackRegion, IntRect>();
+  private Map<GenomicElement, IntRect> mDims = new HashMap<GenomicElement, IntRect>();
 
   /** The m menu. */
   private ModernPopupMenu mMenu;
 
   /** The m selected bed. */
-  private UCSCTrackRegion mSelectedBed;
+  private GenomicElement mSelectedBed;
 
   /**
    * The Class CanvasEvents.
@@ -138,8 +140,9 @@ public class BedPlotLayer extends AxesClippedLayer
     @Override
     public void canvasMousePressed(CanvasMouseEvent e) {
       if (e.isPopupTrigger()) {
-        for (UCSCTrackRegion bed : mDims.keySet()) {
-          IntRect rect = mDims.get(bed);
+        for (Entry<GenomicElement, IntRect> item : mDims.entrySet()) {
+          BedElement bed = (BedElement) item.getKey();
+          IntRect rect = item.getValue();
 
           // Allow some padding in case the region is small
           if (rect.contains(e.getScaledPos(), 5)) {
@@ -232,7 +235,7 @@ public class BedPlotLayer extends AxesClippedLayer
    * @param color the color
    * @param displayMode the display mode
    */
-  public void update(List<UCSCTrackRegion> regions,
+  public void update(List<GenomicElement> regions,
       Color color,
       TrackDisplayMode displayMode) {
     mRegions = regions;
@@ -275,7 +278,7 @@ public class BedPlotLayer extends AxesClippedLayer
     if (mUpdate) {
       mDims.clear();
 
-      for (UCSCTrackRegion bed : mRegions) {
+      for (GenomicElement bed : mRegions) {
         x1 = axes.toPlotX1(bed.getStart());
         x2 = axes.toPlotX1(bed.getEnd());
 
@@ -293,7 +296,7 @@ public class BedPlotLayer extends AxesClippedLayer
 
     IntRect rect;
 
-    for (UCSCTrackRegion region : mRegions) {
+    for (GenomicElement region : mRegions) {
       rect = mDims.get(region);
 
       x1 = rect.getX();
@@ -320,13 +323,13 @@ public class BedPlotLayer extends AxesClippedLayer
 
       yp = y; // + yDiff1;
 
-      if (region.getSubRegions().size() == 0) {
+      if (region.getChildCount(GenomicEntity.EXON) == 0) {
         // Default mode when there are no blocks is to draw a block
         // spanning the whole region
 
         // Must be a minimum of 1 pixel wide
         w = Math.max(1, x2 - x1 + 1);
-
+        
         if (w > 1) {
           g2.fillRect(x1, yp, w, BedPlotTrack.BAR_HEIGHT);
         } else {
@@ -342,7 +345,7 @@ public class BedPlotLayer extends AxesClippedLayer
             x2,
             yp + BedPlotTrack.HALF_BAR_HEIGHT);
 
-        for (GenomicRegion subRegion : region.getSubRegions()) {
+        for (GenomicRegion subRegion : region.getChildren(GenomicEntity.EXON)) {
           sx1 = axes.toPlotX1(subRegion.getStart());
           sx2 = axes.toPlotX1(subRegion.getEnd());
 
@@ -356,12 +359,7 @@ public class BedPlotLayer extends AxesClippedLayer
         }
       }
 
-      /*
-       * if (bed.getStrand() == '+') { GenesPlotCanvasLayer.drawForwardArrow(g2,
-       * x1, yp); } else if (bed.getStrand() == '-') {
-       * GenesPlotCanvasLayer.drawReverseArrow(g2, x2, yp); } else { // do
-       * nothing }
-       */
+      
 
       // In full mode, each feature is draw separately on its
       // own row
@@ -372,8 +370,8 @@ public class BedPlotLayer extends AxesClippedLayer
 
         String s;
 
-        if (region instanceof BedRegion) {
-          String name = ((BedRegion) region).getName();
+        if (region instanceof BedElement) {
+          String name = ((BedElement) region).getName();
 
           if (!name.contains("chr:")) {
             s = name + " (" + region.getLocation() + ")";

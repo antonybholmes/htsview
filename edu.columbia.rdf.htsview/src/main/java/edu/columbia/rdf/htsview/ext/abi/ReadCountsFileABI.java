@@ -73,8 +73,7 @@ public class ReadCountsFileABI extends ReadCountsFile {
    * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
    */
   @Override
-  public int[] getCounts(GenomicRegion region, int window)
-      throws IOException {
+  public int[] getCounts(GenomicRegion region, int window) throws IOException {
     return getCounts(region.getChr(),
         region.getStart(),
         region.getEnd(),
@@ -94,9 +93,9 @@ public class ReadCountsFileABI extends ReadCountsFile {
   public int[] getCounts(Chromosome chr, int start, int end, int window)
       throws IOException {
     int[] counts = new int[end - start + 1];
-    
+
     int i = 0;
-    
+
     for (int v = start; v <= end; ++v) {
       counts[i++] = (int) mTrace.getColor(mBase, v);
     }
@@ -111,8 +110,7 @@ public class ReadCountsFileABI extends ReadCountsFile {
    * columbia.rdf.lib.bioinformatics.genome.GenomicRegion)
    */
   @Override
-  public int[] getStarts(GenomicRegion region, int window)
-      throws IOException {
+  public int[] getStarts(GenomicRegion region, int window) throws IOException {
     return getStarts(region.getChr(),
         region.getStart(),
         region.getEnd(),

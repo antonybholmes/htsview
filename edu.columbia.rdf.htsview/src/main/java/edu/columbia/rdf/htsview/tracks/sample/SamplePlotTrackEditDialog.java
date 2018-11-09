@@ -28,8 +28,8 @@ import org.jebtk.core.json.Json;
 import org.jebtk.core.json.JsonParser;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.graphplot.figure.PlotStyle;
-import org.jebtk.modern.UI;
 import org.jebtk.modern.AssetService;
+import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernButtonGroup;
 import org.jebtk.modern.button.ModernCheckSwitch;
@@ -413,10 +413,11 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
     } else {
       open16bitTrack(file);
     }
-    
-    //Track track = SampleLoaderService.getInstance().openFile(mParent, file, null);
-    
-    //openTrack(sample, new SampleAssembly16bit(metaFile));
+
+    // Track track = SampleLoaderService.getInstance().openFile(mParent, file,
+    // null);
+
+    // openTrack(sample, new SampleAssembly16bit(metaFile));
   }
 
   /**

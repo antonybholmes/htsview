@@ -17,9 +17,9 @@ package edu.columbia.rdf.htsview.tracks.sample;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.collections.ArrayUtils;
 import org.slf4j.Logger;
@@ -117,7 +117,9 @@ public class SampleAssemblyTiled extends SampleAssembly {
 
       int offset = (start - mRegion.getStart()) / mWindow;
 
-      return ArrayUtils.copyOf(mCounts, offset, l); //new SubList<Integer>(mCounts, offset, l);
+      return ArrayUtils.copyOf(mCounts, offset, l); // new
+                                                    // SubList<Integer>(mCounts,
+                                                    // offset, l);
     }
   }
 
@@ -158,9 +160,8 @@ public class SampleAssemblyTiled extends SampleAssembly {
    * edb .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public int[] getCounts(Sample sample,
-      GenomicRegion region,
-      int window) throws IOException {
+  public int[] getCounts(Sample sample, GenomicRegion region, int window)
+      throws IOException {
 
     if (!mTileMap.containsKey(window)) {
       mTileMap.put(window,
@@ -178,7 +179,8 @@ public class SampleAssemblyTiled extends SampleAssembly {
    * rdf.edb.Sample)
    */
   @Override
-  public int getMappedReads(Sample sample, String genome, int window) throws IOException {
+  public int getMappedReads(Sample sample, Genome genome, int window)
+      throws IOException {
     return mAssembly.getMappedReads(sample, genome, window);
   }
 }

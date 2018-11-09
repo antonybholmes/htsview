@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.graphplot.figure.Axes;
@@ -84,7 +85,7 @@ public class TracksFigure extends Figure { // Figure { // PlotBoxColumn {
    * @throws Exception the exception
    */
   public void setTracks(TrackTree tracks,
-      String genome,
+      Genome genome,
       PlotStyle style,
       TitleProperties titlePosition) throws Exception {
     mTracks = tracks;
@@ -223,13 +224,16 @@ public class TracksFigure extends Figure { // Figure { // PlotBoxColumn {
    * @param margin the margin
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public void refresh(GenomicRegion displayRegion,
+  public void refresh(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       int width,
       int height,
       int margin) throws IOException {
 
-    update(displayRegion, resolution, width, height, margin);
+    GenomicRegion r = new GenomicRegion(genome, displayRegion);
+
+    update(r, resolution, width, height, margin);
 
     fireChanged();
   }

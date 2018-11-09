@@ -127,19 +127,19 @@ public abstract class TrackSubFigure extends SubFigure {
       Color lineColor,
       Color fillColor,
       PlotStyle style) {
-  
+
     // disable lots of event triggering
     currentAxes().setFireEvents(false);
-    
+
     currentAxes().setInternalSize(width, height);
 
     currentAxes().setLeftMargin(margin);
 
     currentAxes().getX1Axis().setLimits(displayRegion.getStart(),
         displayRegion.getEnd());
-    
+
     currentAxes().getY1Axis().setLimits(0, yMax);
-    
+
     currentAxes().setFireEvents(true);
   }
 }

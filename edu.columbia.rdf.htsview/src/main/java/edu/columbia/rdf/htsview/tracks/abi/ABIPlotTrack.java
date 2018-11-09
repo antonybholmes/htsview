@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.io.IOException;
 
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.ColorUtils;
 import org.jebtk.core.json.JsonBuilder;
@@ -391,7 +392,7 @@ public class ABIPlotTrack extends GraphPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome,
+  public TrackSubFigure createGraph(Genome genome,
       TitleProperties titlePosition) throws IOException {
     mSubFigure = ABISubFigure.create(getName(), mTrace, mStyle, titlePosition);
 

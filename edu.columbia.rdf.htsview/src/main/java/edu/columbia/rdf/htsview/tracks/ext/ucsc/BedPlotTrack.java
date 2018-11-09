@@ -32,6 +32,11 @@ import org.w3c.dom.Element;
  */
 public class BedPlotTrack extends UcscPlotTrack {
 
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
+
   /** The m file. */
   private Path mFile;
 

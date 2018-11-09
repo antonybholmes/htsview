@@ -19,9 +19,9 @@ import java.awt.Color;
 import java.util.List;
 
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
-import org.jebtk.bioinformatics.ext.ucsc.UCSCTrackRegion;
-import org.jebtk.bioinformatics.ext.ucsc.UCSCTrackRegions;
+import org.jebtk.bioinformatics.genomic.GenomicElement;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.bioinformatics.genomic.GenomicRegions;
 import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.graphplot.figure.series.XYSeries;
@@ -112,8 +112,9 @@ public class BedGraphPlot extends Plot {
     // series.addRegex("x");
     // series.addRegex("y");
 
-    List<UCSCTrackRegion> regions = UCSCTrackRegions
-        .getFixedGapSearch(mBedGraph.getRegions()).getFeatureSet(displayRegion);
+    List<GenomicElement> regions = GenomicRegions
+        .getFixedGapSearch(mBedGraph.getElements().toList())
+        .getFeatureSet(displayRegion);
 
     setMatrix(new BedGraphRegionMatrix(regions));
   }

@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jebtk.bioinformatics.genomic.Genome;
+import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.Strand;
 import org.jebtk.core.BufferUtils;
@@ -99,9 +101,8 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * edb .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public int[] getStarts(Sample sample,
-      GenomicRegion region,
-      int window) throws IOException {
+  public int[] getStarts(Sample sample, GenomicRegion region, int window)
+      throws IOException {
 
     // List<Integer> ret = getJsonStarts(sample, region);
 
@@ -124,10 +125,8 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * @return the json starts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public int[] getJsonStarts(Sample sample,
-      GenomicRegion region,
-      int window) throws IOException {
-    
+  public int[] getJsonStarts(Sample sample, GenomicRegion region, int window)
+      throws IOException {
 
     UrlBuilder url = mAuthV1.resolve("starts").resolve(sample.getId())
         .resolve(region.getGenome()).resolve(region.getChr())
@@ -140,7 +139,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
     Json startsJson = json.get(0).get("s");
 
     int[] ret = new int[startsJson.size()];
-    
+
     for (int i = 0; i < startsJson.size(); ++i) {
       ret[i] = startsJson.getInt(i);
     }
@@ -176,9 +175,8 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * edb.Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public Strand[] getStrands(Sample sample,
-      GenomicRegion region,
-      int window) throws IOException {
+  public Strand[] getStrands(Sample sample, GenomicRegion region, int window)
+      throws IOException {
     return getJsonStrands(sample, region, window); // getBinaryStrands(sample,
                                                    // region, window);
   }
@@ -194,7 +192,6 @@ public class SampleAssemblyWeb extends SampleAssembly {
   public Strand[] getJsonStrands(Sample sample,
       GenomicRegion region,
       int window) throws IOException {
-    
 
     UrlBuilder startsUrl = mAuthV1.resolve("strands").resolve(sample.getId())
         .resolve(region.getGenome()).resolve(region.getChr())
@@ -206,9 +203,8 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
     Json strandsJson = json.get(0).get("s");
 
-    
     Strand[] ret = new Strand[strandsJson.size()];
-    
+
     for (int i = 0; i < strandsJson.size(); ++i) {
       ret[i] = Strand.parse(strandsJson.getChar(i));
     }
@@ -254,9 +250,8 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * edb .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public int[] getCounts(Sample sample,
-      GenomicRegion region,
-      int window) throws IOException {
+  public int[] getCounts(Sample sample, GenomicRegion region, int window)
+      throws IOException {
 
     return getJsonCounts(sample, region, window);
 
@@ -275,30 +270,24 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * @return the json counts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public int[] getJsonCounts(Sample sample,
-      GenomicRegion region,
-      int window) throws IOException {
-    
+  public int[] getJsonCounts(Sample sample, GenomicRegion region, int window)
+      throws IOException {
 
     UrlBuilder url = mAuthV1;
 
-    url = url.resolve("counts")
-        .param("id", sample.getId())
-        .param("g", region.getGenome())
-        .param("chr", region.mChr)
-        .param("s", region.mStart)
-        .param("e", region.mEnd)
-        .param("bw", window)
-        .param("m", mMode );
-    
-    //LOG.info("Count url: {}", url);
+    url = url.resolve("counts").param("id", sample.getId())
+        .param("g", region.getGenome().getAssembly())
+        .param("chr", region.mChr.toString()).param("s", region.mStart)
+        .param("e", region.mEnd).param("bw", window).param("m", mMode);
+
+    LOG.info("Count url: {}", url);
 
     Json json = new JsonParser().parse(url.toURL());
 
     Json countsJson = json.get(0).get("c");
-    
+
     int[] ret = new int[countsJson.size()];
-    
+
     for (int i = 0; i < countsJson.size(); ++i) {
       ret[i] = countsJson.getInt(i);
     }
@@ -339,16 +328,12 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * rdf.edb.Sample)
    */
   @Override
-  public int getMappedReads(Sample sample, String genome, int window) throws IOException {
+  public int getMappedReads(Sample sample, Genome genome, int window)
+      throws IOException {
     int ret = -1;
 
-    UrlBuilder mappedUrl = mAuthV1
-        .resolve("mapped")
-        .param("id", sample.getId())
-        .param("g", genome)
-        .param("bw", window)
-        .param("m", mMode);
-    
+    UrlBuilder mappedUrl = mAuthV1.resolve("mapped").param("id", sample.getId())
+        .param("g", genome.getAssembly()).param("bw", window).param("m", mMode);
 
     // LOG.info("Mapped url: {}", mappedUrl);
 
@@ -367,12 +352,13 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * edb .Sample)
    */
   @Override
-  public String getGenome(Sample sample) throws IOException {
+  public Genome getGenome(Sample sample) throws IOException {
     UrlBuilder url = mAuthV1.resolve("genome").resolve(sample.getId());
 
     Json json = new JsonParser().parse(url.toURL());
 
-    return json.get(0).getString("genome");
+    return GenomeService.getInstance()
+        .guessGenome(json.get(0).getString("genome"));
   }
 
   /**

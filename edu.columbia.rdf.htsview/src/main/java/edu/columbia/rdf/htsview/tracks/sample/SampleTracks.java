@@ -46,8 +46,7 @@ public class SampleTracks {
    */
   public static Sample getSampleFromTrack(Json json) throws IOException {
     Sample sample = new Sample(-1, null, null, json.getString("Name"),
-        new Species(-1, json.getString("Organism"),
-            json.getString("Organism")),
+        new Species(-1, json.getString("Organism"), json.getString("Organism")),
         null);
 
     return sample;

@@ -19,6 +19,7 @@ import java.awt.Color;
 
 import org.jebtk.bioinformatics.ext.ucsc.TrackDisplayMode;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.ColorUtils;
 import org.jebtk.core.json.JsonBuilder;
@@ -35,6 +36,11 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  * The Class UcscPlotTrack.
  */
 public class UcscPlotTrack extends GraphPlotTrack {
+
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
 
   /** The m bed. */
   // private static final Dimension PLOT_SIZE = new Dimension(PLOT_WIDTH, 20);
@@ -159,7 +165,7 @@ public class UcscPlotTrack extends GraphPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome,
+  public TrackSubFigure createGraph(Genome genome,
       TitleProperties titlePosition) {
     mSubFigure = BedPlotSubFigure.create(mBed, titlePosition);
 

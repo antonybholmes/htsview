@@ -18,6 +18,7 @@ package edu.columbia.rdf.htsview.tracks.view;
 import java.io.IOException;
 import java.nio.file.Path;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.core.NameProperty;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.json.Json;
@@ -47,7 +48,7 @@ public abstract class TrackJsonParser implements NameProperty {
   public abstract boolean parse(ModernWindow window,
       String name,
       int id,
-      String genome,
+      Genome genome,
       ModernTree<Track> annotationTree,
       Json trackJson,
       TreeNode<Track> rootNode) throws IOException;

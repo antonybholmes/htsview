@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.io.IOException;
 import java.util.Arrays;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.Strand;
 import org.jebtk.core.ColorUtils;
@@ -39,6 +40,11 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  * The class ReadsPlotTrack.
  */
 public class ReadsPlotTrack extends SamplePlotTrack {
+
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
 
   /**
    * The constant MAX_BLOCK_DEPTH.
@@ -329,7 +335,7 @@ public class ReadsPlotTrack extends SamplePlotTrack {
    * edu.columbia.rdf.apps.edb.reads.TitlePosition)
    */
   @Override
-  public TrackSubFigure createGraph(String genome,
+  public TrackSubFigure createGraph(Genome genome,
       TitleProperties titlePosition) throws IOException {
     mSubFigure = ReadsPlotSubFigure
         .create(getName(), mReadLength, titlePosition);
@@ -374,15 +380,15 @@ public class ReadsPlotTrack extends SamplePlotTrack {
       int height,
       int margin) throws IOException {
 
-    int[] starts = mAssembly
-        .getStarts(mSample, displayRegion, resolution);
+    int[] starts = mAssembly.getStarts(mSample, displayRegion, resolution);
 
-    Strand[] strands = mAssembly
-        .getStrands(mSample, displayRegion, resolution);
+    Strand[] strands = mAssembly.getStrands(mSample, displayRegion, resolution);
 
     if (starts.length > MAX_READS_DISPLAY) {
-      starts = Arrays.copyOf(starts, MAX_READS_DISPLAY); //CollectionUtils.subSample(starts, MAX_READS_DISPLAY);
-      strands = Arrays.copyOf(strands, MAX_READS_DISPLAY); //CollectionUtils.subSample(strands, MAX_READS_DISPLAY);
+      starts = Arrays.copyOf(starts, MAX_READS_DISPLAY); // CollectionUtils.subSample(starts,
+                                                         // MAX_READS_DISPLAY);
+      strands = Arrays.copyOf(strands, MAX_READS_DISPLAY); // CollectionUtils.subSample(strands,
+                                                           // MAX_READS_DISPLAY);
     }
 
     mSubFigure.update(displayRegion, resolution, width, height, margin);

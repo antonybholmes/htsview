@@ -20,9 +20,9 @@ import java.util.List;
 
 import org.jebtk.bioinformatics.ext.ucsc.TrackDisplayMode;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
-import org.jebtk.bioinformatics.ext.ucsc.UCSCTrackRegion;
-import org.jebtk.bioinformatics.ext.ucsc.UCSCTrackRegions;
+import org.jebtk.bioinformatics.genomic.GenomicElement;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.bioinformatics.genomic.GenomicRegions;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.PlotStyle;
 
@@ -117,8 +117,9 @@ public class BedPlotSubFigure extends FixedSubFigure {
       Color fillColor,
       PlotStyle style) {
 
-    List<UCSCTrackRegion> regions = UCSCTrackRegions
-        .getFixedGapSearch(mBed.getRegions()).getFeatureSet(displayRegion);
+    List<GenomicElement> regions = GenomicRegions
+        .getFixedGapSearch(mBed.getElements().toList())
+        .getFeatureSet(displayRegion);
 
     int n = 1;
 

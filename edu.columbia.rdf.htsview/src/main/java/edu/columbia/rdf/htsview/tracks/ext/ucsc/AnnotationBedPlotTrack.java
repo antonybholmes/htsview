@@ -16,6 +16,7 @@
 package edu.columbia.rdf.htsview.tracks.ext.ucsc;
 
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 
 import edu.columbia.rdf.htsview.tracks.AnnotationPlotTrack;
@@ -27,6 +28,11 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
  * The Class AnnotationBedPlotTrack.
  */
 public class AnnotationBedPlotTrack extends AnnotationPlotTrack {
+
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
 
   /** The m bed. */
   private UCSCTrack mBed;
@@ -52,7 +58,7 @@ public class AnnotationBedPlotTrack extends AnnotationPlotTrack {
    * edu.columbia.rdf.htsview.tracks.TitleProperties)
    */
   @Override
-  public TrackSubFigure createGraph(String genome,
+  public TrackSubFigure createGraph(Genome genome,
       TitleProperties titlePosition) {
     mSubFigure = BedPlotSubFigure.create(mBed, titlePosition);
 

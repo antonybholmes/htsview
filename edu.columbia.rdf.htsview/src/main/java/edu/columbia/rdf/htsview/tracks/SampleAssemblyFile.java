@@ -17,6 +17,7 @@ package edu.columbia.rdf.htsview.tracks;
 
 import java.io.IOException;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.Strand;
 
@@ -50,9 +51,8 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
    * edb .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public int[] getStarts(Sample sample,
-      GenomicRegion region,
-      int window) throws IOException {
+  public int[] getStarts(Sample sample, GenomicRegion region, int window)
+      throws IOException {
 
     return mCounts.getStarts(region, window);
   }
@@ -65,9 +65,8 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
    * edb.Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public Strand[] getStrands(Sample sample,
-      GenomicRegion region,
-      int window) throws IOException {
+  public Strand[] getStrands(Sample sample, GenomicRegion region, int window)
+      throws IOException {
 
     return mCounts.getStrands(region, window);
   }
@@ -80,9 +79,8 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
    * edb .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public int[] getCounts(Sample sample,
-      GenomicRegion region,
-      int window) throws IOException {
+  public int[] getCounts(Sample sample, GenomicRegion region, int window)
+      throws IOException {
 
     return mCounts.getCounts(region, window);
   }
@@ -95,7 +93,8 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
    * rdf.edb.Sample)
    */
   @Override
-  public int getMappedReads(Sample sample, String genome, int window) throws IOException {
+  public int getMappedReads(Sample sample, Genome genome, int window)
+      throws IOException {
     return mCounts.getReadCount(genome, window);
   }
 
@@ -107,7 +106,7 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
    * edb .Sample)
    */
   @Override
-  public String getGenome(Sample sample) throws IOException {
+  public Genome getGenome(Sample sample) throws IOException {
     return mCounts.getGenome();
   }
 

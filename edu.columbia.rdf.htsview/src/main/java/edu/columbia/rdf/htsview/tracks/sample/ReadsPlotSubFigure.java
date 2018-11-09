@@ -16,7 +16,6 @@
 package edu.columbia.rdf.htsview.tracks.sample;
 
 import java.awt.Color;
-import java.util.List;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.Strand;

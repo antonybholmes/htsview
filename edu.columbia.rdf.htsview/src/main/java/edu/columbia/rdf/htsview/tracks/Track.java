@@ -22,6 +22,7 @@ import java.text.ParseException;
 
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.genomic.DNA;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.Mathematics;
 import org.jebtk.core.event.ChangeListeners;
@@ -303,7 +304,7 @@ public abstract class Track extends ChangeListeners
    * @return the track sub figure
    * @throws Exception the exception
    */
-  public abstract TrackSubFigure createGraph(String genome,
+  public abstract TrackSubFigure createGraph(Genome genome,
       TitleProperties titlePosition) throws Exception;
 
   /**

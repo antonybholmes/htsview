@@ -41,7 +41,7 @@ public abstract class SampleAssembly {
    * @throws IOException Signals that an I/O exception has occurred.
    */
   public int[] getStarts(Sample sample,
-      String genome,
+      Genome genome,
       String region,
       int window) throws IOException {
     return getStarts(sample, GenomicRegion.parse(genome, region), window);
@@ -56,9 +56,8 @@ public abstract class SampleAssembly {
    * @return the starts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public int[] getStarts(Sample sample,
-      GenomicRegion region,
-      int window) throws IOException {
+  public int[] getStarts(Sample sample, GenomicRegion region, int window)
+      throws IOException {
     return ArrayUtils.EMPTY_INT_ARRAY;
   }
 
@@ -71,9 +70,8 @@ public abstract class SampleAssembly {
    * @return the strands
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public Strand[] getStrands(Sample sample,
-      GenomicRegion region,
-      int window) throws IOException {
+  public Strand[] getStrands(Sample sample, GenomicRegion region, int window)
+      throws IOException {
     return CountAssembly.EMPTY_STRAND_ARRAY;
   }
 
@@ -87,7 +85,7 @@ public abstract class SampleAssembly {
    * @throws IOException Signals that an I/O exception has occurred.
    */
   public int[] getCounts(Sample sample,
-      String genome,
+      Genome genome,
       String region,
       int window) throws IOException {
     return getCounts(sample, GenomicRegion.parse(genome, region), window);
@@ -129,7 +127,8 @@ public abstract class SampleAssembly {
    * @return the mapped reads
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public int getMappedReads(Sample sample, String genome, int window) throws IOException {
+  public int getMappedReads(Sample sample, Genome genome, int window)
+      throws IOException {
     return -1;
   }
 
@@ -184,7 +183,7 @@ public abstract class SampleAssembly {
    * @return the genome
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public String getGenome(Sample sample) throws IOException {
+  public Genome getGenome(Sample sample) throws IOException {
     return Genome.HG19;
   }
 
@@ -194,7 +193,8 @@ public abstract class SampleAssembly {
       int window) throws IOException {
     double scaleFactor;
 
-    double mappedReads = assembly.getMappedReads(sample, region.getGenome(), window);
+    double mappedReads = assembly
+        .getMappedReads(sample, region.getGenome(), window);
 
     // System.err.println("mapped reads " + mappedReads);
 
