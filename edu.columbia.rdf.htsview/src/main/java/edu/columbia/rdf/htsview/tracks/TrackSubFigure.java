@@ -16,6 +16,7 @@
 package edu.columbia.rdf.htsview.tracks;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.PlotStyle;
@@ -37,12 +38,13 @@ public abstract class TrackSubFigure extends SubFigure {
    * @param width the width
    * @param height the height
    * @param margin the margin
+   * @throws IOException 
    */
   public void update(GenomicRegion displayRegion,
       int resolution,
       int width,
       int height,
-      int margin) {
+      int margin) throws IOException {
     update(displayRegion, resolution, -1, width, height, margin);
   }
 
@@ -55,13 +57,14 @@ public abstract class TrackSubFigure extends SubFigure {
    * @param width the width
    * @param height the height
    * @param margin the margin
+   * @throws IOException 
    */
   public void update(GenomicRegion displayRegion,
       int resolution,
       double yMax,
       int width,
       int height,
-      int margin) {
+      int margin) throws IOException {
     update(displayRegion,
         resolution,
         yMax,
@@ -81,6 +84,7 @@ public abstract class TrackSubFigure extends SubFigure {
    * @param height the height
    * @param margin the margin
    * @param style the style
+   * @throws IOException 
    */
   public void update(GenomicRegion displayRegion,
       int resolution,
@@ -88,7 +92,7 @@ public abstract class TrackSubFigure extends SubFigure {
       int width,
       int height,
       int margin,
-      PlotStyle style) {
+      PlotStyle style) throws IOException {
     update(displayRegion,
         resolution,
         yMax,
@@ -117,6 +121,7 @@ public abstract class TrackSubFigure extends SubFigure {
    * @param lineColor the line color
    * @param fillColor the fill color
    * @param style the style
+   * @throws IOException 
    */
   public void update(GenomicRegion displayRegion,
       int resolution,
@@ -126,7 +131,7 @@ public abstract class TrackSubFigure extends SubFigure {
       int margin,
       Color lineColor,
       Color fillColor,
-      PlotStyle style) {
+      PlotStyle style) throws IOException {
 
     // disable lots of event triggering
     currentAxes().setFireEvents(false);

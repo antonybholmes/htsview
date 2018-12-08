@@ -16,6 +16,7 @@
 package edu.columbia.rdf.htsview.tracks.sample;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.Strand;
@@ -113,7 +114,7 @@ public class ReadsPlotSubFigure extends TrackSubFigure {
       int margin,
       Color lineColor,
       Color fillColor,
-      PlotStyle style) {
+      PlotStyle style) throws IOException {
 
     // getCurrentAxes().setInternalPlotWidth(width);
 

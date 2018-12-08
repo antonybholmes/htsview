@@ -25,6 +25,11 @@ import org.jebtk.modern.window.ModernWindow;
  */
 public abstract class GraphPlotTrack extends Track {
 
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
+
   /** The Constant PLOT_SIZE. */
   public static final Dimension PLOT_SIZE = new Dimension(PLOT_WIDTH, 100);
 

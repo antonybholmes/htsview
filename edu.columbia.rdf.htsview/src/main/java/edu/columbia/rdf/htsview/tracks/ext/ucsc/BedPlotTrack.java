@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import org.jebtk.bioinformatics.ext.ucsc.Bed;
-import org.jebtk.bioinformatics.ext.ucsc.TrackDisplayMode;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.core.ColorUtils;
 import org.jebtk.core.io.PathUtils;
@@ -27,10 +26,13 @@ import org.jebtk.core.json.JsonBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import edu.columbia.rdf.htsview.tracks.TrackDisplayMode;
+import edu.columbia.rdf.htsview.tracks.genomic.GenomicElementsTrack;
+
 /**
  * The Class BedPlotTrack.
  */
-public class BedPlotTrack extends UcscPlotTrack {
+public class BedPlotTrack extends GenomicElementsTrack {
 
   /**
    * 
@@ -59,7 +61,7 @@ public class BedPlotTrack extends UcscPlotTrack {
    * @throws IOException Signals that an I/O exception has occurred.
    */
   public BedPlotTrack(Path file) throws IOException {
-    this(Bed.parseTracks(file).get(0), file);
+    this(Bed.parseTracks("bed", file).get(0), file);
   }
 
   /**
@@ -69,7 +71,7 @@ public class BedPlotTrack extends UcscPlotTrack {
    * @param file the file
    */
   public BedPlotTrack(UCSCTrack bed, Path file) {
-    this(bed, file, TrackDisplayMode.COMPACT);
+    this(file, bed, TrackDisplayMode.COMPACT);
   }
 
   /**
@@ -80,7 +82,7 @@ public class BedPlotTrack extends UcscPlotTrack {
    * @throws IOException Signals that an I/O exception has occurred.
    */
   public BedPlotTrack(Path file, TrackDisplayMode mode) throws IOException {
-    this(Bed.parseTracks(file).get(0), file, mode);
+    this(file, Bed.parseTracks("bed", file).get(0), mode);
   }
 
   /**
@@ -90,8 +92,8 @@ public class BedPlotTrack extends UcscPlotTrack {
    * @param file the file
    * @param mode the mode
    */
-  public BedPlotTrack(UCSCTrack bed, Path file, TrackDisplayMode mode) {
-    super(bed, mode);
+  public BedPlotTrack(Path file, UCSCTrack bed, TrackDisplayMode mode) {
+    super(bed.getName(), bed.getElements(), bed.getColor(), mode);
 
     mFile = file;
   }
@@ -105,7 +107,7 @@ public class BedPlotTrack extends UcscPlotTrack {
   public String getType() {
     return "BED";
   }
-
+  
   /*
    * (non-Javadoc)
    * 

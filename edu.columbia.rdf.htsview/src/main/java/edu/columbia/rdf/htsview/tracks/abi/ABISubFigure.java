@@ -16,6 +16,7 @@
 package edu.columbia.rdf.htsview.tracks.abi;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.List;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
@@ -116,7 +117,7 @@ public class ABISubFigure extends TrackSubFigure {
       int margin,
       Color lineColor,
       Color fillColor,
-      PlotStyle style) {
+      PlotStyle style) throws IOException {
 
     // int start = displayRegion.getStart();
 

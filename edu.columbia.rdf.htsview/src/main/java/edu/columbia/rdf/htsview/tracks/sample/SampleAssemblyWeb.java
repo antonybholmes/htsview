@@ -280,7 +280,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
         .param("chr", region.mChr.toString()).param("s", region.mStart)
         .param("e", region.mEnd).param("bw", window).param("m", mMode);
 
-    LOG.info("Count url: {}", url);
+    //LOG.info("Count url: {}", url);
 
     Json json = new JsonParser().parse(url.toURL());
 

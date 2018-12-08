@@ -42,14 +42,11 @@ import edu.columbia.rdf.htsview.tracks.TracksFigure;
  */
 public class ABIPlotTrack extends GraphPlotTrack {
 
-  /** The m height. */
-  private int mHeight = -1;
 
-  /** The m fill color. */
-  protected Color mFillColor;
-
-  /** The m line color. */
-  protected Color mLineColor;
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
 
   /** The m Y max. */
   private double mYMax = 1;
@@ -168,47 +165,7 @@ public class ABIPlotTrack extends GraphPlotTrack {
   public void setName(String name) {
     mName = name;
   }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see edu.columbia.rdf.htsview.tracks.Track#getFillColor()
-   */
-  @Override
-  public Color getFillColor() {
-    return mFillColor;
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see edu.columbia.rdf.htsview.tracks.Track#setFillColor(java.awt.Color)
-   */
-  @Override
-  public void setFillColor(Color color) {
-    mFillColor = color;
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see edu.columbia.rdf.htsview.tracks.Track#getLineColor()
-   */
-  @Override
-  public Color getLineColor() {
-    return mLineColor;
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see edu.columbia.rdf.htsview.tracks.Track#setLineColor(java.awt.Color)
-   */
-  @Override
-  public void setLineColor(Color color) {
-    mLineColor = color;
-  }
-
+  
   /*
    * (non-Javadoc)
    * 

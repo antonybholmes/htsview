@@ -78,7 +78,7 @@ public class SampleLoaderBedGraph extends SampleLoaderFS {
       return ret;
     } else {
       // Open as bed plot
-      return load(new BedPlotTrack(Bed.parseBedGraph(file), file), root);
+      return load(new BedPlotTrack(Bed.parseBedGraph("bedgraph", file), file), root);
     }
   }
 

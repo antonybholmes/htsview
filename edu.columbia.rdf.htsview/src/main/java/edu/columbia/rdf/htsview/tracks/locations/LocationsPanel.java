@@ -34,6 +34,7 @@ import org.jebtk.bioinformatics.genomic.Chromosome;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomeService;
+import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegionModel;
 import org.jebtk.bioinformatics.ui.GenomeModel;
@@ -434,7 +435,7 @@ public class LocationsPanel extends ModernComponent
       Genome g = dbs.iterator().next();
 
       try {
-        region = GenesService.getInstance().getGenes(g).getGene(g, text);
+        region = GenesService.getInstance().getGenes(g).getElement(g, text, GenomicEntity.TRANSCRIPT);
       } catch (IOException e) {
         e.printStackTrace();
       }

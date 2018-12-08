@@ -16,6 +16,7 @@
 package edu.columbia.rdf.htsview.tracks;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.Axes;
@@ -24,7 +25,7 @@ import org.jebtk.graphplot.figure.PlotStyle;
 /**
  * The Class FixedSubFigure.
  */
-public abstract class FixedSubFigure extends TrackSubFigure {
+public abstract class FixedYSubFigure extends TrackSubFigure {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
@@ -45,7 +46,7 @@ public abstract class FixedSubFigure extends TrackSubFigure {
       int margin,
       Color lineColor,
       Color fillColor,
-      PlotStyle style) {
+      PlotStyle style) throws IOException {
 
     super.update(displayRegion,
         resolution,

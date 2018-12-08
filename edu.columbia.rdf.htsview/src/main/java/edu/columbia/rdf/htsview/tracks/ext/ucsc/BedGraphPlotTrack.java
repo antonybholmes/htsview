@@ -15,7 +15,6 @@
  */
 package edu.columbia.rdf.htsview.tracks.ext.ucsc;
 
-import java.awt.Color;
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -43,9 +42,6 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
    */
   private static final long serialVersionUID = 1L;
 
-  /** The m bed graph. */
-  private UCSCTrack mBedGraph;
-
   /** The m file. */
   private Path mFile;
 
@@ -55,6 +51,8 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
   /** The m style. */
   private PlotStyle mStyle = PlotStyle.FILLED_SMOOTH;
 
+  private UCSCTrack mUcsc;
+
   /**
    * Instantiates a new bed graph plot track.
    *
@@ -62,7 +60,8 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
    * @param file the file
    */
   public BedGraphPlotTrack(UCSCTrack bedGraph, Path file) {
-    mBedGraph = bedGraph;
+    mUcsc = bedGraph;
+    
     mFile = file;
   }
 
@@ -73,7 +72,7 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
    */
   @Override
   public String getType() {
-    return "BedGraph";
+    return "Bedgraph";
   }
 
   /*
@@ -83,28 +82,9 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
    */
   @Override
   public String getName() {
-    return mBedGraph.getName();
+    return mUcsc.getName();
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see edu.columbia.rdf.htsview.tracks.Track#setFillColor(java.awt.Color)
-   */
-  @Override
-  public void setFillColor(Color color) {
-    mBedGraph.setColor(color);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see edu.columbia.rdf.htsview.tracks.Track#getFillColor()
-   */
-  @Override
-  public Color getFillColor() {
-    return mBedGraph.getColor();
-  }
 
   /*
    * (non-Javadoc)
@@ -157,10 +137,10 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
   public TrackSubFigure createGraph(Genome genome,
       TitleProperties titlePosition) throws IOException {
     mSubFigure = BedGraphSubFigure
-        .create(mBedGraph.getName(), mStyle, titlePosition);
+        .create(mUcsc.getName(), mStyle, titlePosition);
 
     ((BedGraphPlot) mSubFigure.currentAxes().currentPlot())
-        .setBedGraph(mBedGraph);
+        .setBedGraph(mUcsc);
 
     mSubFigure.currentAxes().setInternalSize(PLOT_SIZE);
 
@@ -221,7 +201,7 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
   public UCSCTrack getBedGraph(GenomicRegion displayRegion,
       int resolution,
       boolean normalize) {
-    return mBedGraph;
+    return mUcsc;
   }
 
   /*

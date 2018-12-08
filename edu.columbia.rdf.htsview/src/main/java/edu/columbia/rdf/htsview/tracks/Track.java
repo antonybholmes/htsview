@@ -25,6 +25,7 @@ import org.jebtk.bioinformatics.genomic.DNA;
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.Mathematics;
+import org.jebtk.core.NameProperty;
 import org.jebtk.core.event.ChangeListeners;
 import org.jebtk.core.json.JsonBuilder;
 import org.jebtk.core.json.ToJson;
@@ -44,7 +45,7 @@ import org.w3c.dom.Element;
  * The Class Track.
  */
 public abstract class Track extends ChangeListeners
-    implements Comparable<Track>, XmlRepresentation, ToJson {
+    implements Comparable<Track>, NameProperty, XmlRepresentation, ToJson {
 
   private static final long serialVersionUID = 1L;
 
@@ -90,6 +91,68 @@ public abstract class Track extends ChangeListeners
 
   /** The Constant END. */
   public static final int END = LEFT_MARGIN + PLOT_WIDTH;
+  
+  /**
+   * The constant DEFAULT_HEIGHT.
+   */
+  public static final int DEFAULT_HEIGHT = 128;
+
+  /**
+   * The member height.
+   */
+  protected int mHeight = DEFAULT_HEIGHT;
+
+  
+  /**
+   * The member display mode.
+   */
+  private TrackDisplayMode mDisplayMode = TrackDisplayMode.COMPACT;
+
+  protected Color mLineColor = Color.DARK_GRAY;
+
+  protected Color mFillColor = Color.GRAY;
+
+  private String mName;
+  
+  
+  /**
+   * Gets the height.
+   *
+   * @return the height
+   */
+  public int getHeight() {
+    return mHeight;
+  }
+  
+
+  /**
+   * Sets the height.
+   *
+   * @param height the new height
+   */
+  public void setHeight(int height) {
+    mHeight = height;
+
+    fireChanged();
+  }
+
+  /**
+   * Sets the display mode.
+   *
+   * @param mode the new display mode
+   */
+  public void setDisplayMode(TrackDisplayMode mode) {
+    mDisplayMode = mode;
+  }
+
+  /**
+   * Gets the display mode.
+   *
+   * @return the display mode
+   */
+  public TrackDisplayMode getDisplayMode() {
+    return mDisplayMode;
+  }
 
   /**
    * Gets the type.
@@ -104,7 +167,10 @@ public abstract class Track extends ChangeListeners
    *
    * @return the name
    */
-  public abstract String getName();
+  @Override
+  public String getName() {
+    return mName;
+  }
 
   /**
    * Sets the name.
@@ -112,7 +178,9 @@ public abstract class Track extends ChangeListeners
    * @param name the new name
    */
   public void setName(String name) {
-    // do nothing
+    mName = name;
+    
+    fireChanged();
   }
 
   /**
@@ -121,7 +189,9 @@ public abstract class Track extends ChangeListeners
    * @param color the new line color
    */
   public void setLineColor(Color color) {
-    // do nothing
+    mLineColor = color;
+    
+    fireChanged();
   }
 
   /**
@@ -130,7 +200,9 @@ public abstract class Track extends ChangeListeners
    * @param color the new fill color
    */
   public void setFillColor(Color color) {
-    // do nothing
+    mFillColor = color;
+    
+    fireChanged();
   }
 
   /**
@@ -139,7 +211,7 @@ public abstract class Track extends ChangeListeners
    * @return the fill color
    */
   public Color getFillColor() {
-    return Color.GRAY;
+    return mFillColor;
   }
 
   /**
@@ -148,25 +220,7 @@ public abstract class Track extends ChangeListeners
    * @return the line color
    */
   public Color getLineColor() {
-    return Color.GRAY;
-  }
-
-  /**
-   * Sets the height.
-   *
-   * @param height the new height
-   */
-  public void setHeight(int height) {
-    // do nothing
-  }
-
-  /**
-   * Get the track height.
-   *
-   * @return the height
-   */
-  public int getHeight() {
-    return -1;
+    return mLineColor;
   }
 
   /**

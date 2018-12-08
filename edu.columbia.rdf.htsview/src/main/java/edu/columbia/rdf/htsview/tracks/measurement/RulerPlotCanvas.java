@@ -16,6 +16,7 @@
 package edu.columbia.rdf.htsview.tracks.measurement;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.Axes;
@@ -102,7 +103,7 @@ public class RulerPlotCanvas extends MeasurementSubFigure {
       int margin,
       Color lineColor,
       Color fillColor,
-      PlotStyle style) {
+      PlotStyle style) throws IOException {
     super.update(displayRegion,
         resolution,
         yMax,
