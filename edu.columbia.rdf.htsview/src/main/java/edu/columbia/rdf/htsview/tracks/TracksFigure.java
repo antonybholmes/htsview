@@ -15,6 +15,8 @@
  */
 package edu.columbia.rdf.htsview.tracks;
 
+import java.awt.Dimension;
+import java.awt.Graphics2D;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,7 @@ import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.graphplot.figure.SubFigure;
 import org.jebtk.graphplot.plotbox.PlotBoxRowLayout;
+import org.jebtk.modern.graphics.DrawingContext;
 
 /**
  * The Class TracksFigure.
@@ -334,6 +337,16 @@ public class TracksFigure extends Figure { // Figure { // PlotBoxColumn {
 
       axes.getY1Axis().startEndTicksOnly();
     }
+  }
+  
+  @Override
+  public void plotContext(Graphics2D g2,
+      Dimension offset,
+      DrawingContext context,
+      Object... params) {
+    System.err.println("redraw");
+    
+    super.plotContext(g2, offset, context, params);
   }
 
   //

@@ -35,11 +35,11 @@ public class LocationListRenderer extends ModernListCellRenderer {
   /*
    * (non-Javadoc)
    * 
-   * @see org.abh.common.ui.widget.ModernWidget#drawForegroundAAText(java.awt.
+   * @see org.abh.common.ui.widget.ModernWidget#drawForegroundAA(java.awt.
    * Graphics2D)
    */
   @Override
-  public void drawForegroundAAText(Graphics2D g2) {
+  public void drawForegroundAA(Graphics2D g2) {
     int x = PADDING;
 
     // fill(g2, mFillColor);

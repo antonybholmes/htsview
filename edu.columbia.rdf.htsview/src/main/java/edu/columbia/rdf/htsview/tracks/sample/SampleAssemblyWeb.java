@@ -15,6 +15,7 @@
  */
 package edu.columbia.rdf.htsview.tracks.sample;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -29,8 +30,11 @@ import org.jebtk.core.http.URLUtils;
 import org.jebtk.core.http.UrlBuilder;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.json.JsonParser;
+import org.jebtk.core.text.TextUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.base.Splitter;
 
 import edu.columbia.rdf.edb.Sample;
 import edu.columbia.rdf.htsview.tracks.SampleAssembly;
@@ -156,7 +160,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * @return the binary starts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Integer> getBinaryStarts(Sample sample,
+  public int[] getBinaryStarts(Sample sample,
       GenomicRegion region,
       int window) throws IOException {
 
@@ -221,7 +225,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * @return the binary strands
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public List<Strand> getBinaryStrands(Sample sample,
+  public Strand[] getBinaryStrands(Sample sample,
       GenomicRegion region,
       int window) throws IOException {
     UrlBuilder url = mAuthV1.resolve("strands").resolve(sample.getId())
@@ -253,7 +257,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
   public int[] getCounts(Sample sample, GenomicRegion region, int window)
       throws IOException {
 
-    return getJsonCounts(sample, region, window);
+    //return getBinaryCounts(sample, region, window);
+    return getTextCounts(sample, region, window);
+    //return getJsonCounts(sample, region, window);
 
     /*
      * if (hasReadSupport(sample)) { return getBinaryCounts(sample, region,
@@ -294,30 +300,49 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
     return ret;
   }
-
-  /**
-   * Gets the binary counts.
-   *
-   * @param sample the sample
-   * @param region the region
-   * @param window the window
-   * @return the binary counts
-   * @throws IOException Signals that an I/O exception has occurred.
-   */
-  public List<Integer> getBinaryCounts(Sample sample,
-      GenomicRegion region,
-      int window) throws IOException {
+  
+  public int[] getBinaryCounts(Sample sample, GenomicRegion region, int window)
+      throws IOException {
 
     UrlBuilder url = mAuthV1;
 
-    url = url.resolve("counts").resolve(sample.getId())
-        .resolve(region.getGenome()).resolve(region.getChr())
-        .resolve(region.getStart()).resolve(region.getEnd()).resolve(window)
-        .resolve("b");
-
-    // LOG.info("Count url: {}", url);
+    url = url.resolve("counts").param("id", sample.getId())
+        .param("g", region.getGenome().getAssembly())
+        .param("chr", region.mChr.toString()).param("s", region.mStart)
+        .param("e", region.mEnd).param("bw", window).param("m", mMode).param("format", "binary");
 
     return BufferUtils.byteBuffer().wrap(URLUtils.read(url).bytes()).getInts();
+  }
+  
+  public int[] getTextCounts(Sample sample, GenomicRegion region, int window)
+      throws IOException {
+
+    UrlBuilder url = mAuthV1;
+
+    url = url.resolve("counts").param("id", sample.getId())
+        .param("g", region.getGenome().getAssembly())
+        .param("chr", region.mChr.toString()).param("s", region.mStart)
+        .param("e", region.mEnd).param("bw", window).param("m", mMode).param("format", "text");
+
+    //LOG.info("Count url: {}", url);
+    
+    BufferedReader reader = URLUtils.newBufferedReader(url);
+
+    List<String> tokens;
+    
+    try {
+      tokens = TextUtils.commaSplit(reader.readLine());
+    } finally {
+      reader.close();
+    }
+    
+    int[] ret = new int[tokens.size()];
+
+    for (int i = 0; i < tokens.size(); ++i) {
+      ret[i] = Integer.parseInt(tokens.get(i));
+    }
+
+    return ret;
   }
 
   /*

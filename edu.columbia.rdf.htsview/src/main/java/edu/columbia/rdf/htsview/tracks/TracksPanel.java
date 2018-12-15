@@ -217,9 +217,9 @@ public abstract class TracksPanel extends ModernWidget {
   /**
    * Delete tracks.
    */
-  protected void deleteTracks() {
+  protected void removeTracks() {
     ModernMessageDialog.createOkCancelWarningDialog(mParent,
-        "Are you sure you want to delete the selected tracks?",
+        "Are you sure you want to remove the selected tracks?",
         new DeleteEvents());
   }
 

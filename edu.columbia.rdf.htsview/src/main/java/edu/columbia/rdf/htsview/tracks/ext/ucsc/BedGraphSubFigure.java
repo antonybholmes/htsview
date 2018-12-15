@@ -25,6 +25,7 @@ import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.graphplot.figure.series.XYSeries;
 import org.jebtk.graphplot.plotbox.ApplyFunc;
 import org.jebtk.graphplot.plotbox.PlotBox;
+import org.jebtk.modern.graphics.AAMode;
 
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.Track;
@@ -122,14 +123,16 @@ public class BedGraphSubFigure extends TrackSubFigure {
     if (styleNotSet || mStyle != style) {
       setStyle(style);
 
+      /*
       // Find all lines and make them antialiased
       applyByName(new ApplyFunc() {
         @Override
         public void apply(PlotBox plot) {
-          plot.setAAMode(true);
+          plot.getAAModes().add(AAMode.AA);
         }
       }, "Spline Line", "Lines");
-
+      */
+      
       mStyle = style;
       styleNotSet = false;
     }

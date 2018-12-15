@@ -95,6 +95,8 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
 
       if (e.isControlDown()) {
         mSelectionStart = Math.max(Track.LEFT_MARGIN, Math.min(Track.END, x));
+        System.err.println("mp");
+        fireCanvasRedraw();
       } else {
         mDragStart = x;
 
@@ -103,7 +105,7 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
 
       // System.err.println(mSelectionX);
 
-      fireCanvasRedraw();
+      
     }
 
     /*
@@ -116,7 +118,9 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
     @Override
     public void canvasMouseReleased(CanvasMouseEvent e) {
       if (e.isControlDown()) {
+        System.err.println("mr");
         alterSelection();
+        fireCanvasRedraw();
       }
 
       mSelectionStart = -1;
@@ -125,7 +129,7 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
       mDragStart = -1;
       mDragEnd = -1;
 
-      fireCanvasRedraw();
+      
     }
 
     /*
@@ -139,11 +143,15 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
     public void canvasMouseDragged(CanvasMouseEvent e) {
 
       if (e.isControlDown()) {
+        System.err.println("dr1");
+        
         int x = e.getScaledPos().getX();
         mSelectionEnd = Math.max(Track.LEFT_MARGIN, Math.min(Track.END, x));
 
         fireCanvasRedraw();
       } else {
+        System.err.println("dr2");
+        
         mDragEnd = e.getScaledPos().getX();
 
         mDist = mDragEnd - mDragStart;

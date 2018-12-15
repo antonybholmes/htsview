@@ -62,11 +62,11 @@ public class TrackListRenderer extends ModernListCellRenderer {
   /*
    * (non-Javadoc)
    * 
-   * @see org.abh.common.ui.widget.ModernWidget#drawForegroundAAText(java.awt.
+   * @see org.abh.common.ui.widget.ModernWidget#drawForegroundAA(java.awt.
    * Graphics2D)
    */
   @Override
-  public void drawForegroundAAText(Graphics2D g2) {
+  public void drawForegroundAA(Graphics2D g2) {
     int x = DOUBLE_PADDING;
     int y = getHeight() / 2;
     int x2 = getWidth() - ORB_WIDTH - DOUBLE_PADDING;

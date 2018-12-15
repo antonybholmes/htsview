@@ -66,12 +66,12 @@ public class TrackNodeRenderer extends ModernTreeBranchNodeRenderer {
    * (non-Javadoc)
    * 
    * @see
-   * org.abh.common.ui.tree.ModernTreeNodeRenderer#drawForegroundAAText(java.
+   * org.abh.common.ui.tree.ModernTreeNodeRenderer#drawForegroundAA(java.
    * awt. Graphics2D)
    */
   @Override
-  public void drawForegroundAAText(Graphics2D g2) {
-    super.drawForegroundAAText(g2);
+  public void drawForegroundAA(Graphics2D g2) {
+    super.drawForegroundAA(g2);
 
     int x = getCumulativeXDepthOffset() + BRANCH_OPEN_ICON.getWidth() + PADDING;
 
