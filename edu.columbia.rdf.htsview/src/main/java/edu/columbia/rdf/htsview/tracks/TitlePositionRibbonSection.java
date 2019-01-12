@@ -28,7 +28,7 @@ import org.jebtk.modern.ribbon.RibbonSection;
 /**
  * Allows user to select the resolution to view sequences.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class TitlePositionRibbonSection extends RibbonSection
     implements ModernClickListener {

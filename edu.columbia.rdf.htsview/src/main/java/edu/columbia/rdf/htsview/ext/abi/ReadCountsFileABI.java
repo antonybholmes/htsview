@@ -39,7 +39,7 @@ import edu.columbia.rdf.edb.ngs.ReadCountsFile;
 /**
  * Decodes counts using a multi resolution file.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class ReadCountsFileABI extends ReadCountsFile {
 

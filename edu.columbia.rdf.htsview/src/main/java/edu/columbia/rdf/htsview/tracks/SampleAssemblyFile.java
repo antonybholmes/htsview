@@ -27,7 +27,7 @@ import edu.columbia.rdf.edb.ngs.ReadCountsFile;
 /**
  * Stream a track directly from a r tree binary file.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public abstract class SampleAssemblyFile extends SampleAssembly {
 

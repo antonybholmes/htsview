@@ -22,7 +22,7 @@ import edu.columbia.rdf.htsview.tracks.SampleAssemblyFile;
 /**
  * Stream a track directly from a r tree binary file.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class SampleAssemblyABI extends SampleAssemblyFile {
 

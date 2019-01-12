@@ -29,7 +29,7 @@ import edu.columbia.rdf.htsview.tracks.sample.SampleFsPlotTrack;
 /**
  * Sample loader for streaming data directly from a file.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public abstract class SampleLoaderFS extends SampleLoader {

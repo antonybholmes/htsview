@@ -18,7 +18,7 @@ package edu.columbia.rdf.htsview.tracks.loaders;
 /**
  * If a sample supports both sample and read data, determine which to show.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public enum SampleType {

@@ -33,7 +33,7 @@ import org.jebtk.modern.widget.ModernTwoStateWidget;
 /**
  * Allows user to select a color map.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class ScaleRibbonSection extends RibbonSection {

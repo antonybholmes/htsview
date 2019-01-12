@@ -32,7 +32,7 @@ import org.jebtk.modern.window.WindowWidgetFocusEvents;
 /**
  * Users can decide if they want bedgraph display as bed or graph.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class BedGraphStyleDialog extends ModernDialogTaskWindow

@@ -30,7 +30,7 @@ package edu.columbia.rdf.htsview.tracks;
 /**
  * Control how tracks are shown. Compact mode shows everything on one row.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public enum TrackDisplayMode {

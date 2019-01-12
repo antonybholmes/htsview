@@ -32,7 +32,7 @@ import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
 /**
  * Draw peaks.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class ReadsPlotSubFigure extends TrackSubFigure {

@@ -23,7 +23,7 @@ import edu.columbia.rdf.htsview.tracks.SampleAssemblyFile;
 /**
  * Stream a track directly from a file.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class SampleAssembly16bit extends SampleAssemblyFile {

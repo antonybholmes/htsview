@@ -33,7 +33,7 @@ import org.jebtk.modern.graphics.DrawingContext;
 /**
  * Draw peaks.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  */
 public class ReadsPlotLayer extends AxesClippedLayer {
 

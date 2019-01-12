@@ -27,7 +27,7 @@ import org.jebtk.modern.spinner.ModernCompactSpinner;
 /**
  * Allows user to select a color map.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class MarginRibbonSection extends RibbonSection {
