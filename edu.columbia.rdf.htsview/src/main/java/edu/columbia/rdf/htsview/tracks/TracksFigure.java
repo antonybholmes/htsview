@@ -344,7 +344,7 @@ public class TracksFigure extends Figure { // Figure { // PlotBoxColumn {
       Dimension offset,
       DrawingContext context,
       Object... params) {
-    System.err.println("redraw");
+    //System.err.println("redraw");
     
     super.plotContext(g2, offset, context, params);
   }

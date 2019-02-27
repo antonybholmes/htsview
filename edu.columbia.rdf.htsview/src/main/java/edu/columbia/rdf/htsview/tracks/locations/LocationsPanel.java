@@ -49,7 +49,6 @@ import org.jebtk.modern.ModernComponent;
 import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.dialog.DialogEvent;
 import org.jebtk.modern.dialog.DialogEventListener;
-import org.jebtk.modern.dialog.ModernDialogFlatButton;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernMessageDialog;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -58,6 +57,7 @@ import org.jebtk.modern.event.ModernSelectionListener;
 import org.jebtk.modern.graphics.icons.FolderBwVectorIcon;
 import org.jebtk.modern.io.RecentFilesService;
 import org.jebtk.modern.panel.HBox;
+import org.jebtk.modern.ribbon.RibbonButton;
 import org.jebtk.modern.scrollpane.ModernScrollPane;
 import org.jebtk.modern.scrollpane.ScrollBarPolicy;
 import org.jebtk.modern.window.ModernRibbonWindow;
@@ -78,11 +78,11 @@ public class LocationsPanel extends ModernComponent
   private LocationListModel mListModel = new LocationListModel();
 
   /** The m open button. */
-  private ModernButton mOpenButton = new ModernDialogFlatButton(
+  private ModernButton mOpenButton = new RibbonButton(
       AssetService.getInstance().loadIcon(FolderBwVectorIcon.class, 16));
 
   /** The m delete button. */
-  private ModernButton mDeleteButton = new ModernDialogFlatButton(
+  private ModernButton mDeleteButton = new RibbonButton(
       AssetService.getInstance().loadIcon("trash_bw", 16));
 
   /** The m model. */
@@ -141,8 +141,15 @@ public class LocationsPanel extends ModernComponent
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-      loadLocations(TextUtils.tabSplit(AssetService.getClipboardText()
-          .replaceAll("[\\r\\n]+", TextUtils.TAB_DELIMITER)));
+      
+      List<String> str = TextUtils.tabSplit(AssetService.getClipboardText()
+          .replaceAll("[\\r\\n]+", TextUtils.TAB_DELIMITER));
+      
+      String[] ret = new String[str.size()];
+      
+      str.toArray(ret);
+      
+      loadLocations(ret);
     }
 
   }
@@ -293,7 +300,7 @@ public class LocationsPanel extends ModernComponent
    *
    * @param entries the entries
    */
-  private void loadLocations(List<String> entries) {
+  private void loadLocations(String[] entries) {
 
     // for (String location : entries) {
     // GenomicRegion region = GenomicRegion.parse(location);
@@ -311,7 +318,7 @@ public class LocationsPanel extends ModernComponent
    *
    * @param locations the locations
    */
-  private void addValues(List<String> locations) {
+  private void addValues(String[] locations) {
     for (String l : locations) {
       addValue(l);
     }
@@ -370,7 +377,7 @@ public class LocationsPanel extends ModernComponent
     }
 
     for (Path file : files) {
-      List<String> lines = Excel.getTextFromFile(file, true);
+      String[] lines = Excel.getTextFromFile(file, true);
 
       addValues(lines);
 

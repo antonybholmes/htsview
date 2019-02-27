@@ -34,7 +34,6 @@ import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernButtonGroup;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.button.ModernRadioButton;
-import org.jebtk.modern.dialog.ModernDialogFlatButton;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -45,6 +44,7 @@ import org.jebtk.modern.io.FileDialog;
 import org.jebtk.modern.io.RecentFilesService;
 import org.jebtk.modern.panel.HBox;
 import org.jebtk.modern.panel.VBox;
+import org.jebtk.modern.ribbon.RibbonButton;
 import org.jebtk.modern.spinner.ModernCompactSpinner;
 import org.jebtk.modern.text.ModernAutoSizeLabel;
 import org.jebtk.modern.text.ModernClipboardTextField;
@@ -131,11 +131,11 @@ public class SamplePlotTrackEditDialog extends ModernDialogHelpWindow {
       FIELD_WIDTH);
 
   /** The m sample db button. */
-  private ModernButton mSampleDbButton = new ModernDialogFlatButton(
+  private ModernButton mSampleDbButton = new RibbonButton(
       AssetService.getInstance().loadIcon("database", 16));
 
   /** The m sample fs button. */
-  private ModernButton mSampleFsButton = new ModernDialogFlatButton(
+  private ModernButton mSampleFsButton = new RibbonButton(
       AssetService.getInstance().loadIcon(OpenFolderVectorIcon.class, 16));
 
   /** The m assembly. */

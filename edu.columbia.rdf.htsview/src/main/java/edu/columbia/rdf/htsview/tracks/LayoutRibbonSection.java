@@ -43,20 +43,20 @@ public class LayoutRibbonSection extends RibbonSection
    * The m top button.
    */
   private RibbonLargeRadioButton mTopButton = new RibbonLargeRadioButton(
-      "Titles Top", AssetService.getInstance().loadIcon("title_top", 32));
+      "Titles Top", AssetService.getInstance().loadIcon("title_top", 32, 24));
 
   /**
    * The m right button.
    */
   private RibbonLargeRadioButton mRightButton = new RibbonLargeRadioButton(
-      "Titles Right", AssetService.getInstance().loadIcon("title_right", 32));
+      "Titles Right", AssetService.getInstance().loadIcon("title_right", 32, 24));
 
   /**
    * The m compact right button.
    */
   private RibbonLargeRadioButton mCompactRightButton = new RibbonLargeRadioButton(
       "Compact Right Titles",
-      AssetService.getInstance().loadIcon("title_compact_right", 32));
+      AssetService.getInstance().loadIcon("title_compact_right", 32, 24));
 
   /** The m check visible. */
   private ModernTwoStateWidget mCheckVisible = new ModernCheckSwitch("Show");

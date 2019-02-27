@@ -23,9 +23,7 @@ import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Plot;
 import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.graphplot.figure.series.XYSeries;
-import org.jebtk.graphplot.plotbox.ApplyFunc;
 import org.jebtk.graphplot.plotbox.PlotBox;
-import org.jebtk.modern.graphics.AAMode;
 
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.Track;
