@@ -81,8 +81,8 @@ public class ScaleCanvasLayer extends AxesLayer {
 
     int y = axes.getInternalSize().getH() / 2;
 
-    int w = axes.toPlotX1(axes.getX1Axis().getMin() + mGap)
-        - axes.toPlotX1(axes.getX1Axis().getMin());
+    int w = axes.toPlotX1(axes.getX1Axis().getLimits().getMin() + mGap)
+        - axes.toPlotX1(axes.getX1Axis().getLimits().getMin());
 
     int x1 = (axes.getInternalSize().getW() - w) / 2;
 
