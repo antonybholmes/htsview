@@ -21,7 +21,7 @@ import org.jebtk.modern.window.ModernWindow;
 import edu.columbia.rdf.edb.ui.SamplesDialog;
 
 /**
- * The Class ChipSeqSamplesDialog.
+ * A Specialization of the SampleDialog for searching for ChIP-seq samples
  */
 public class ChipSeqSamplesDialog extends SamplesDialog {
 
