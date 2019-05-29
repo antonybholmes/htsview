@@ -22,6 +22,7 @@ import java.util.List;
 import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
+import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.window.ModernWindow;
@@ -78,7 +79,7 @@ public class SampleLoaderBedGraph extends SampleLoaderFS {
       return ret;
     } else {
       // Open as bed plot
-      return load(new BedPlotTrack(Bed.parseBedGraph("bedgraph", file), file), root);
+      return load(new BedPlotTrack(Bed.parseBedGraph(GenomicType.REGION, file), file), root);
     }
   }
 

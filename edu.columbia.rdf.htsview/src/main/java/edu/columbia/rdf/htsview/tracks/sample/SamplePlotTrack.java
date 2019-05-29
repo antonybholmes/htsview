@@ -26,6 +26,7 @@ import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicElement;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegions;
+import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.core.ColorUtils;
 import org.jebtk.core.json.JsonBuilder;
 import org.jebtk.core.settings.SettingsService;
@@ -626,7 +627,7 @@ public class SamplePlotTrack extends GraphPlotTrack {
     for (int count : counts) {
       normalizedCount = count * scaleFactor;
 
-      BedGraphElement br = new BedGraphElement(
+      BedGraphElement br = new BedGraphElement(GenomicType.REGION,
           new GenomicRegion(region.getChr(), start, start + window - 1),
           normalizedCount);
 

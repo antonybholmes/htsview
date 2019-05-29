@@ -20,6 +20,7 @@ import java.nio.file.Path;
 
 import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
+import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.core.ColorUtils;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.json.JsonBuilder;
@@ -61,7 +62,7 @@ public class BedPlotTrack extends GenomicElementsTrack {
    * @throws IOException Signals that an I/O exception has occurred.
    */
   public BedPlotTrack(Path file) throws IOException {
-    this(Bed.parseTracks("bed", file).get(0), file);
+    this(Bed.parseTracks(GenomicType.REGION, file).get(0), file);
   }
 
   /**
@@ -82,7 +83,7 @@ public class BedPlotTrack extends GenomicElementsTrack {
    * @throws IOException Signals that an I/O exception has occurred.
    */
   public BedPlotTrack(Path file, TrackDisplayMode mode) throws IOException {
-    this(file, Bed.parseTracks("bed", file).get(0), mode);
+    this(file, Bed.parseTracks(GenomicType.REGION, file).get(0), mode);
   }
 
   /**

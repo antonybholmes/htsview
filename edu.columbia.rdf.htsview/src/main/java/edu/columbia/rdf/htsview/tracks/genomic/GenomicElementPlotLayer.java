@@ -26,6 +26,7 @@ import org.jebtk.bioinformatics.ext.ucsc.BedGraphGroupModel;
 import org.jebtk.bioinformatics.genomic.GenomicElement;
 import org.jebtk.bioinformatics.genomic.GenomicEntity;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.core.collections.CollectionUtils;
 import org.jebtk.core.geom.IntRect;
 import org.jebtk.graphplot.figure.Axes;
@@ -177,7 +178,7 @@ public class GenomicElementPlotLayer extends AxesClippedLayer {
 
       yp = y; // + yDiff1;
 
-      if (element.getChildCount(GenomicEntity.EXON) == 0) {
+      if (element.getChildCount(GenomicType.EXON) == 0) {
         // Default mode when there are no blocks is to draw a block
         // spanning the whole region
 
@@ -199,7 +200,7 @@ public class GenomicElementPlotLayer extends AxesClippedLayer {
             x2,
             yp + BedPlotTrack.HALF_BAR_HEIGHT);
 
-        for (GenomicRegion subRegion : element.getChildren(GenomicEntity.EXON)) {
+        for (GenomicRegion subRegion : element.getChildren(GenomicType.EXON)) {
           sx1 = axes.toPlotX1(subRegion.getStart());
           sx2 = axes.toPlotX1(subRegion.getEnd());
 

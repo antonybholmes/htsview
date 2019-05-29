@@ -22,6 +22,7 @@ import java.util.List;
 import org.jebtk.bioinformatics.genomic.GenomicElement;
 import org.jebtk.bioinformatics.genomic.GenomicElementsDB;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.PlotStyle;
 
@@ -114,7 +115,7 @@ public class GenomicElementsSubFigure extends FixedYSubFigure {
     //   .getFixedGapSearch(mBed.getElements().toList())
     //   .getFeatureSet(displayRegion);
     
-    List<GenomicElement> elements = mBed.find(displayRegion, "bed");
+    List<GenomicElement> elements = mBed.find(displayRegion, GenomicType.REGION);
     
     for (GenomicElement e : elements) {
       e.setColor(fillColor);
