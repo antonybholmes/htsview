@@ -420,7 +420,7 @@ public class LocationsPanel extends ModernComponent
 
       int size = chromosome.getSize();
 
-      region = new GenomicRegion(chromosome, 1, size);
+      region = new GenomicRegion(genome, chromosome, 1, size);
 
     } else if (text.startsWith("chr")) { // remove commas
       region = GenomicRegion.parse(genome, text);
@@ -429,8 +429,8 @@ public class LocationsPanel extends ModernComponent
 
       int size = region.getChr().getSize();
 
-      region = new GenomicRegion(region.getChr(),
-          Math.max(1, region.getStart()), Math.min(region.getEnd(), size));
+      region = new GenomicRegion(region.mGenome, region.mChr,
+          Math.max(1, region.mStart), Math.min(region.mEnd, size));
 
     } else {
       // assume its a gene

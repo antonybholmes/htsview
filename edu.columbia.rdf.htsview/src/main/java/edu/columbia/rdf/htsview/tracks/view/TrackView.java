@@ -235,7 +235,7 @@ public class TrackView {
 
     JsonBuilder root = JsonBuilder.create().startObject();
 
-    root.add("genome", region.getChr().getGenome().getAssembly());
+    root.add("genome", region.mGenome.getAssembly());
     root.add("location", region.getLocation());
     root.add("width-px", width);
     root.add("margin-px", margin);

@@ -257,7 +257,7 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
 
     int end = region.getStart() + (int) (p * region.getLength());
 
-    GenomicRegion newRegion = new GenomicRegion(region.getChr(), start, end);
+    GenomicRegion newRegion = new GenomicRegion(region, start, end);
 
     mGenomicModel.set(newRegion);
   }

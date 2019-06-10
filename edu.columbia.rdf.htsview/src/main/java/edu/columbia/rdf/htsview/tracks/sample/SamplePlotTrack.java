@@ -628,7 +628,7 @@ public class SamplePlotTrack extends GraphPlotTrack {
       normalizedCount = count * scaleFactor;
 
       BedGraphElement br = new BedGraphElement(GenomicType.REGION,
-          new GenomicRegion(region.getChr(), start, start + window - 1),
+          new GenomicRegion(region.mGenome, region.mChr, start, start + window - 1),
           normalizedCount);
 
       bedGraph.getElements().add(br);
