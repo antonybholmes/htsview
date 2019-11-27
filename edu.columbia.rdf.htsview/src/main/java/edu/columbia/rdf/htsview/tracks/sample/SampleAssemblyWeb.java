@@ -380,8 +380,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
     Json json = new JsonParser().parse(url.toURL());
 
-    return GenomeService.getInstance()
-        .guessGenome(json.get(0).getString("genome"));
+    return GenomeService.getInstance().guessGenome(json.get(0).getString("genome"));
   }
 
   /**

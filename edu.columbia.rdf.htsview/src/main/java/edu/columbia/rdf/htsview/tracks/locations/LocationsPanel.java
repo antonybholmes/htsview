@@ -31,9 +31,9 @@ import javax.swing.Box;
 import javax.swing.KeyStroke;
 
 import org.jebtk.bioinformatics.genomic.Chromosome;
+import org.jebtk.bioinformatics.genomic.ChromosomeService;
 import org.jebtk.bioinformatics.genomic.GenesService;
 import org.jebtk.bioinformatics.genomic.Genome;
-import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegionModel;
 import org.jebtk.bioinformatics.genomic.GenomicType;
@@ -414,9 +414,9 @@ public class LocationsPanel extends ModernComponent
     if (text.matches("^chr(\\d+|[xymXYM])$")) {
       // use the whole chromosome
 
-      System.err.println("login pannel");
+      System.err.println("login panel");
 
-      Chromosome chromosome = GenomeService.getInstance().chr(genome, text);
+      Chromosome chromosome = ChromosomeService.getInstance().chr(genome, text);
 
       int size = chromosome.getSize();
 

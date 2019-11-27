@@ -92,8 +92,7 @@ public class TrackView {
     Genome genome;
 
     if (viewJson.containsKey("genome")) {
-      genome = GenomeService.getInstance()
-          .guessGenome(viewJson.getString("genome"));
+      genome = GenomeService.getInstance().guessGenome(viewJson.getString("genome"));
     } else {
       genome = mGenomeModel.get();
     }
