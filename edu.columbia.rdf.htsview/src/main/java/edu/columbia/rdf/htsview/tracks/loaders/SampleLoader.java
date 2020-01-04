@@ -18,7 +18,7 @@ package edu.columbia.rdf.htsview.tracks.loaders;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import org.jebtk.core.NameProperty;
+import org.jebtk.core.NameGetter;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.modern.window.ModernWindow;
 
@@ -28,7 +28,7 @@ import edu.columbia.rdf.htsview.tracks.Track;
 /**
  * The Class SampleLoader.
  */
-public abstract class SampleLoader implements NameProperty {
+public abstract class SampleLoader implements NameGetter {
 
   /**
    * Open.

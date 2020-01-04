@@ -19,12 +19,12 @@ import org.jebtk.modern.AssetService;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernButtonGroup;
 import org.jebtk.modern.button.ModernCheckSwitch;
+import org.jebtk.modern.button.ModernTwoStateWidget;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.Ribbon;
 import org.jebtk.modern.ribbon.RibbonLargeRadioButton;
 import org.jebtk.modern.ribbon.RibbonSection;
-import org.jebtk.modern.widget.ModernTwoStateWidget;
 
 /**
  * Allows user to select the resolution to view sequences.

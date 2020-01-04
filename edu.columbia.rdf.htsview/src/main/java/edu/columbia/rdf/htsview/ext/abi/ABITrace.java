@@ -20,7 +20,7 @@ import java.io.RandomAccessFile;
 import java.nio.file.Path;
 
 import org.jebtk.core.Mathematics;
-import org.jebtk.core.NameProperty;
+import org.jebtk.core.NameGetter;
 import org.jebtk.core.io.FileUtils;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.sys.SysUtils;
@@ -30,7 +30,7 @@ import org.jebtk.core.sys.SysUtils;
  * currently designed to extract the peak locations and color values for each
  * base at those locations.
  */
-public class ABITrace implements NameProperty {
+public class ABITrace implements NameGetter {
 
   /** The standard 4 bases a, c, g, t. */
   public static final char[] BASES = { 'A', 'C', 'G', 'T' };

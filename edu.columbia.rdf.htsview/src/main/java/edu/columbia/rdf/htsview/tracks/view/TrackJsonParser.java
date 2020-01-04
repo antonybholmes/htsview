@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import org.jebtk.bioinformatics.genomic.Genome;
-import org.jebtk.core.NameProperty;
+import org.jebtk.core.NameGetter;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.tree.TreeNode;
@@ -31,7 +31,7 @@ import edu.columbia.rdf.htsview.tracks.Track;
 /**
  * The Class TrackJsonParser.
  */
-public abstract class TrackJsonParser implements NameProperty {
+public abstract class TrackJsonParser implements NameGetter {
 
   /**
    * Creates a new track from the json.

@@ -22,12 +22,12 @@ import java.util.Map;
 
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.modern.button.ModernCheckSwitch;
+import org.jebtk.modern.button.ModernTwoStateWidget;
 import org.jebtk.modern.dialog.ModernDialogTaskWindow;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.panel.ModernPanel;
 import org.jebtk.modern.panel.VBox;
-import org.jebtk.modern.widget.ModernTwoStateWidget;
 
 /**
  * The Class AnnotationTracksBox.

@@ -23,12 +23,12 @@ import org.jebtk.core.event.ChangeListener;
 import org.jebtk.core.text.Formatter;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.ModernCheckSwitch;
+import org.jebtk.modern.button.ModernTwoStateWidget;
 import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.Ribbon;
 import org.jebtk.modern.ribbon.RibbonSection;
 import org.jebtk.modern.spinner.ModernCompactSpinner;
-import org.jebtk.modern.widget.ModernTwoStateWidget;
 
 /**
  * Allows user to select a color map.

@@ -27,7 +27,7 @@ import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.Strand;
 import org.jebtk.core.BufferUtils;
 import org.jebtk.core.http.URLUtils;
-import org.jebtk.core.http.UrlBuilder;
+import org.jebtk.core.http.URLPath;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.json.JsonParser;
 import org.jebtk.core.text.TextUtils;
@@ -47,7 +47,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
       .getLogger(SampleAssemblyWeb.class);
 
   /** The m auth V 1. */
-  private UrlBuilder mAuthV1;
+  private URLPath mAuthV1;
 
   /** The m BRT map. */
   private Map<Sample, Boolean> mBRTMap = new HashMap<Sample, Boolean>();
@@ -64,7 +64,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * @param url the url
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public SampleAssemblyWeb(UrlBuilder login) throws IOException {
+  public SampleAssemblyWeb(URLPath login) throws IOException {
     mAuthV1 = login; // new SeqUrlBuilder(login);
 
     // mAuthV1 = new OTKAuthUrl(new
@@ -130,9 +130,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
   public int[] getJsonStarts(Sample sample, GenomicRegion region, int window)
       throws IOException {
 
-    UrlBuilder url = mAuthV1.resolve("starts").resolve(sample.getId())
-        .resolve(region.getGenome()).resolve(region.getChr())
-        .resolve(region.getStart()).resolve(region.getEnd());
+    URLPath url = mAuthV1.join("starts").join(sample.getId())
+        .join(region.getGenome()).join(region.getChr())
+        .join(region.getStart()).join(region.getEnd());
 
     LOG.info("starts url: {}", url);
 
@@ -162,9 +162,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
       GenomicRegion region,
       int window) throws IOException {
 
-    UrlBuilder url = mAuthV1.resolve("starts").resolve(sample.getId())
-        .resolve(region.getGenome()).resolve(region.getChr())
-        .resolve(region.getStart()).resolve(region.getEnd()).resolve("b");
+    URLPath url = mAuthV1.join("starts").join(sample.getId())
+        .join(region.getGenome()).join(region.getChr())
+        .join(region.getStart()).join(region.getEnd()).join("b");
 
     return BufferUtils.byteBuffer().wrap(URLUtils.read(url).bytes()).getInts();
   }
@@ -195,9 +195,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
       GenomicRegion region,
       int window) throws IOException {
 
-    UrlBuilder startsUrl = mAuthV1.resolve("strands").resolve(sample.getId())
-        .resolve(region.getGenome()).resolve(region.getChr())
-        .resolve(region.getStart()).resolve(region.getEnd());
+    URLPath startsUrl = mAuthV1.join("strands").join(sample.getId())
+        .join(region.getGenome()).join(region.getChr())
+        .join(region.getStart()).join(region.getEnd());
 
     // LOG.info("starts url: {}", startsUrl);
 
@@ -226,9 +226,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
   public Strand[] getBinaryStrands(Sample sample,
       GenomicRegion region,
       int window) throws IOException {
-    UrlBuilder url = mAuthV1.resolve("strands").resolve(sample.getId())
-        .resolve(region.getGenome()).resolve(region.getChr())
-        .resolve(region.getStart()).resolve(region.getEnd()).resolve("b");
+    URLPath url = mAuthV1.join("strands").join(sample.getId())
+        .join(region.getGenome()).join(region.getChr())
+        .join(region.getStart()).join(region.getEnd()).join("b");
 
     /*
      * byte[] bytes = Network.read(url).bytes();
@@ -277,9 +277,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
   public int[] getJsonCounts(Sample sample, GenomicRegion region, int window)
       throws IOException {
 
-    UrlBuilder url = mAuthV1;
+    URLPath url = mAuthV1;
 
-    url = url.resolve("counts").param("id", sample.getId())
+    url = url.join("counts").param("id", sample.getId())
         .param("g", region.getGenome().getAssembly())
         .param("chr", region.mChr.toString()).param("s", region.mStart)
         .param("e", region.mEnd).param("bw", window).param("m", mMode);
@@ -302,9 +302,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
   public int[] getBinaryCounts(Sample sample, GenomicRegion region, int window)
       throws IOException {
 
-    UrlBuilder url = mAuthV1;
+    URLPath url = mAuthV1;
 
-    url = url.resolve("counts").param("id", sample.getId())
+    url = url.join("counts").param("id", sample.getId())
         .param("g", region.getGenome().getAssembly())
         .param("chr", region.mChr.toString()).param("s", region.mStart)
         .param("e", region.mEnd).param("bw", window).param("m", mMode).param("format", "binary");
@@ -315,9 +315,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
   public int[] getTextCounts(Sample sample, GenomicRegion region, int window)
       throws IOException {
 
-    UrlBuilder url = mAuthV1;
+    URLPath url = mAuthV1;
 
-    url = url.resolve("counts").param("id", sample.getId())
+    url = url.join("counts").param("id", sample.getId())
         .param("g", region.getGenome().getAssembly())
         .param("chr", region.mChr.toString()).param("s", region.mStart)
         .param("e", region.mEnd).param("bw", window).param("m", mMode).param("format", "text");
@@ -355,7 +355,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
       throws IOException {
     int ret = -1;
 
-    UrlBuilder mappedUrl = mAuthV1.resolve("mapped").param("id", sample.getId())
+    URLPath mappedUrl = mAuthV1.join("mapped").param("id", sample.getId())
         .param("g", genome.getAssembly()).param("bw", window).param("m", mMode);
 
     // LOG.info("Mapped url: {}", mappedUrl);
@@ -376,7 +376,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
    */
   @Override
   public Genome getGenome(Sample sample) throws IOException {
-    UrlBuilder url = mAuthV1.resolve("genome").resolve(sample.getId());
+    URLPath url = mAuthV1.join("genome").join(sample.getId());
 
     Json json = new JsonParser().parse(url.toURL());
 
@@ -396,7 +396,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
       return mBRTMap.get(sample);
     }
 
-    UrlBuilder url = mAuthV1.resolve("type").param("id", sample.getId());
+    URLPath url = mAuthV1.join("type").param("id", sample.getId());
 
     LOG.info("BRT url: {}", url);
 
@@ -426,7 +426,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
       return mBVTMap.get(sample);
     }
 
-    UrlBuilder url = mAuthV1.resolve("type").resolve(sample.getId());
+    URLPath url = mAuthV1.join("type").join(sample.getId());
 
     // LOG.info("BRT url: {}", url);
 
@@ -450,7 +450,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
    */
   @Override
   public int getReadLength(Sample sample) throws IOException {
-    UrlBuilder url = mAuthV1.resolve("length").resolve(sample.getId());
+    URLPath url = mAuthV1.join("length").join(sample.getId());
 
     // LOG.info("Read length url: {}", url);
 

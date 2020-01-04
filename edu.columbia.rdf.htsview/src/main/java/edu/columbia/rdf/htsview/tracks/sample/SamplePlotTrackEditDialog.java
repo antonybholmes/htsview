@@ -34,6 +34,7 @@ import org.jebtk.modern.button.ModernButton;
 import org.jebtk.modern.button.ModernButtonGroup;
 import org.jebtk.modern.button.ModernCheckSwitch;
 import org.jebtk.modern.button.ModernRadioButton;
+import org.jebtk.modern.button.ModernTwoStateWidget;
 import org.jebtk.modern.dialog.ModernDialogHelpWindow;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -50,7 +51,6 @@ import org.jebtk.modern.text.ModernAutoSizeLabel;
 import org.jebtk.modern.text.ModernClipboardTextField;
 import org.jebtk.modern.text.ModernTextBorderPanel;
 import org.jebtk.modern.text.ModernTextField;
-import org.jebtk.modern.widget.ModernTwoStateWidget;
 import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.edb.Sample;

@@ -25,7 +25,7 @@ import org.jebtk.bioinformatics.genomic.DNA;
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.Mathematics;
-import org.jebtk.core.NameProperty;
+import org.jebtk.core.NameGetter;
 import org.jebtk.core.event.ChangeListeners;
 import org.jebtk.core.json.JsonBuilder;
 import org.jebtk.core.json.ToJson;
@@ -45,7 +45,7 @@ import org.w3c.dom.Element;
  * The Class Track.
  */
 public abstract class Track extends ChangeListeners
-    implements Comparable<Track>, NameProperty, XmlRepresentation, ToJson {
+    implements Comparable<Track>, NameGetter, XmlRepresentation, ToJson {
 
   private static final long serialVersionUID = 1L;
 
