@@ -131,8 +131,8 @@ public class SampleAssemblyWeb extends SampleAssembly {
       throws IOException {
 
     URLPath url = mAuthV1.join("starts").join(sample.getId())
-        .join(region.getGenome()).join(region.getChr())
-        .join(region.getStart()).join(region.getEnd());
+        .join(region.getGenome()).join(region.getChr()).join(region.getStart())
+        .join(region.getEnd());
 
     LOG.info("starts url: {}", url);
 
@@ -158,13 +158,12 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * @return the binary starts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public int[] getBinaryStarts(Sample sample,
-      GenomicRegion region,
-      int window) throws IOException {
+  public int[] getBinaryStarts(Sample sample, GenomicRegion region, int window)
+      throws IOException {
 
     URLPath url = mAuthV1.join("starts").join(sample.getId())
-        .join(region.getGenome()).join(region.getChr())
-        .join(region.getStart()).join(region.getEnd()).join("b");
+        .join(region.getGenome()).join(region.getChr()).join(region.getStart())
+        .join(region.getEnd()).join("b");
 
     return BufferUtils.byteBuffer().wrap(URLUtils.read(url).bytes()).getInts();
   }
@@ -196,8 +195,8 @@ public class SampleAssemblyWeb extends SampleAssembly {
       int window) throws IOException {
 
     URLPath startsUrl = mAuthV1.join("strands").join(sample.getId())
-        .join(region.getGenome()).join(region.getChr())
-        .join(region.getStart()).join(region.getEnd());
+        .join(region.getGenome()).join(region.getChr()).join(region.getStart())
+        .join(region.getEnd());
 
     // LOG.info("starts url: {}", startsUrl);
 
@@ -227,8 +226,8 @@ public class SampleAssemblyWeb extends SampleAssembly {
       GenomicRegion region,
       int window) throws IOException {
     URLPath url = mAuthV1.join("strands").join(sample.getId())
-        .join(region.getGenome()).join(region.getChr())
-        .join(region.getStart()).join(region.getEnd()).join("b");
+        .join(region.getGenome()).join(region.getChr()).join(region.getStart())
+        .join(region.getEnd()).join("b");
 
     /*
      * byte[] bytes = Network.read(url).bytes();
@@ -255,9 +254,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
   public int[] getCounts(Sample sample, GenomicRegion region, int window)
       throws IOException {
 
-    //return getBinaryCounts(sample, region, window);
-    return getTextCounts(sample, region, window);
-    //return getJsonCounts(sample, region, window);
+    // return getBinaryCounts(sample, region, window);
+    // return getTextCounts(sample, region, window);
+    return getJsonCounts(sample, region, window);
 
     /*
      * if (hasReadSupport(sample)) { return getBinaryCounts(sample, region,
@@ -284,9 +283,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
         .param("chr", region.mChr.toString()).param("s", region.mStart)
         .param("e", region.mEnd).param("bw", window).param("m", mMode);
 
-    //LOG.info("Count url: {}", url);
+    LOG.info("Count url: {}", url);
 
-    Json json = new JsonParser().parse(url.toURL());
+    Json json = new JsonParser().parse(url);
 
     Json countsJson = json.get(0).get("c");
 
@@ -296,9 +295,11 @@ public class SampleAssemblyWeb extends SampleAssembly {
       ret[i] = countsJson.getInt(i);
     }
 
+    LOG.info("size url: {}", ret);
+
     return ret;
   }
-  
+
   public int[] getBinaryCounts(Sample sample, GenomicRegion region, int window)
       throws IOException {
 
@@ -307,11 +308,12 @@ public class SampleAssemblyWeb extends SampleAssembly {
     url = url.join("counts").param("id", sample.getId())
         .param("g", region.getGenome().getAssembly())
         .param("chr", region.mChr.toString()).param("s", region.mStart)
-        .param("e", region.mEnd).param("bw", window).param("m", mMode).param("format", "binary");
+        .param("e", region.mEnd).param("bw", window).param("m", mMode)
+        .param("format", "binary");
 
     return BufferUtils.byteBuffer().wrap(URLUtils.read(url).bytes()).getInts();
   }
-  
+
   public int[] getTextCounts(Sample sample, GenomicRegion region, int window)
       throws IOException {
 
@@ -320,20 +322,21 @@ public class SampleAssemblyWeb extends SampleAssembly {
     url = url.join("counts").param("id", sample.getId())
         .param("g", region.getGenome().getAssembly())
         .param("chr", region.mChr.toString()).param("s", region.mStart)
-        .param("e", region.mEnd).param("bw", window).param("m", mMode).param("format", "text");
+        .param("e", region.mEnd).param("bw", window).param("m", mMode)
+        .param("format", "text");
 
-    //LOG.info("Count url: {}", url);
-    
+    // LOG.info("Count url: {}", url);
+
     BufferedReader reader = URLUtils.newBufferedReader(url);
 
     List<String> tokens;
-    
+
     try {
       tokens = TextUtils.commaSplit(reader.readLine());
     } finally {
       reader.close();
     }
-    
+
     int[] ret = new int[tokens.size()];
 
     for (int i = 0; i < tokens.size(); ++i) {
@@ -358,9 +361,9 @@ public class SampleAssemblyWeb extends SampleAssembly {
     URLPath mappedUrl = mAuthV1.join("mapped").param("id", sample.getId())
         .param("g", genome.getAssembly()).param("bw", window).param("m", mMode);
 
-    // LOG.info("Mapped url: {}", mappedUrl);
+    LOG.info("Mapped url: {}", mappedUrl);
 
-    Json json = new JsonParser().parse(mappedUrl.toURL());
+    Json json = new JsonParser().parse(mappedUrl);
 
     ret = json.getInt(0);
 
@@ -378,9 +381,10 @@ public class SampleAssemblyWeb extends SampleAssembly {
   public Genome getGenome(Sample sample) throws IOException {
     URLPath url = mAuthV1.join("genome").join(sample.getId());
 
-    Json json = new JsonParser().parse(url.toURL());
+    Json json = new JsonParser().parse(url);
 
-    return GenomeService.getInstance().guessGenome(json.get(0).getString("genome"));
+    return GenomeService.getInstance()
+        .guessGenome(json.get(0).getString("genome"));
   }
 
   /**
@@ -400,7 +404,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
     LOG.info("BRT url: {}", url);
 
-    Json json = new JsonParser().parse(url.toURL());
+    Json json = new JsonParser().parse(url);
 
     System.err.println("track web " + json + " " + json.getString(0));
 

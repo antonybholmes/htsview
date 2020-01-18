@@ -284,7 +284,8 @@ public class SamplePlotTrack extends GraphPlotTrack {
     }
 
     List<GenomicElement> regions = GenomicRegions
-        .getFixedGapSearch(mBedGraph.getElements().toList()).getFeatureSet(mRegion);
+        .getFixedGapSearch(mBedGraph.getElements().toList())
+        .getFeatureSet(mRegion);
 
     double y = 0;
 
@@ -594,6 +595,8 @@ public class SamplePlotTrack extends GraphPlotTrack {
       boolean normalize) throws IOException {
     int[] counts = mAssembly.getCounts(mSample, region, window);
 
+    System.err.println("aha " + counts);
+
     // Subtract the input if desired
     if (mSubtract && mInputSample != null) {
       int[] mInputCounts = mInputAssembly
@@ -606,6 +609,8 @@ public class SamplePlotTrack extends GraphPlotTrack {
 
     int mappedReads = mAssembly
         .getMappedReads(mSample, region.getGenome(), window);
+
+    System.err.println("aha " + mappedReads);
 
     // per million
     double scaleFactor;
@@ -628,13 +633,16 @@ public class SamplePlotTrack extends GraphPlotTrack {
       normalizedCount = count * scaleFactor;
 
       BedGraphElement br = new BedGraphElement(GenomicType.REGION,
-          new GenomicRegion(region.mGenome, region.mChr, start, start + window - 1),
+          new GenomicRegion(region.mGenome, region.mChr, start,
+              start + window - 1),
           normalizedCount);
 
       bedGraph.getElements().add(br);
 
       start += window;
     }
+
+    System.err.println("bed " + mappedReads);
 
     return bedGraph;
   }

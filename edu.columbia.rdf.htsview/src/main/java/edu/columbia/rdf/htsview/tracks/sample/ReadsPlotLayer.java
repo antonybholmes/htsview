@@ -232,8 +232,10 @@ public class ReadsPlotLayer extends AxesClippedLayer {
      * mUpdate = false; mCurrentId = id;
      */
 
-    // System.err.println("coord " + axes.getXAxis().getLimits().getMax() + " " +
-    // axes.getY1Axis().getLimits().getMax() + " " + axes.getY1Axis().getLimits().getMin());
+    // System.err.println("coord " + axes.getXAxis().getLimits().getMax() + " "
+    // +
+    // axes.getY1Axis().getLimits().getMax() + " " +
+    // axes.getY1Axis().getLimits().getMin());
 
     if (context == DrawingContext.UI) {
       BufferedImage bis = new BufferedImage(mWidth, mReadHeight,

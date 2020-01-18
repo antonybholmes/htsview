@@ -97,8 +97,7 @@ public class SampleAssemblyTiled extends SampleAssembly {
       if (mCounts == null || !GenomicRegion.within(region, mRegion)) {
         int w = region.getLength() * mCenterTile;
 
-        mRegion = new GenomicRegion(region.mGenome,
-            region.mChr,
+        mRegion = new GenomicRegion(region.mGenome, region.mChr,
             Math.max(1, region.mStart - w),
             Math.min(region.mChr.getSize(), region.mEnd + w));
 
