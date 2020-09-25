@@ -29,6 +29,11 @@
 			<version>1.0.0</version>
 		</dependency>
 		<dependency>
+      <groupId>org.jebtk</groupId>
+      <artifactId>org.jebtk.database</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+		<dependency>
 			<groupId>org.jebtk</groupId>
 			<artifactId>org.jebtk.bioinformatics</artifactId>
 			<version>1.0.0</version>

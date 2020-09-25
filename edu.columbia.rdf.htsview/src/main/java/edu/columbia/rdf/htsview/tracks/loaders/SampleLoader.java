@@ -76,7 +76,9 @@ public abstract class SampleLoader implements NameGetter {
    *
    * @return the ext
    */
-  public abstract String getExt();
+  public String getExt() {
+    return getName().toLowerCase();
+  }
 
   //
   // Static methods

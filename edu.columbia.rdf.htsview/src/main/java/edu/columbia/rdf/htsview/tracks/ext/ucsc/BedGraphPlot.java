@@ -112,11 +112,7 @@ public class BedGraphPlot extends Plot {
     // series.addRegex("x");
     // series.addRegex("y");
 
-    List<GenomicElement> regions = GenomicRegions
-        .getFixedGapSearch(mBedGraph.getElements().toList())
-        .getFeatureSet(displayRegion);
-
-    setMatrix(new BedGraphRegionMatrix(regions));
+    setMatrix(new BedGraphRegionMatrix(mBedGraph.find(displayRegion)));
   }
 
   /*

@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.io.IOException;
 import java.util.List;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.GridLocation;
@@ -109,7 +110,8 @@ public class ABISubFigure extends TrackSubFigure {
    * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion,
+  public void update(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       double yMax,
       int width,
@@ -132,7 +134,8 @@ public class ABISubFigure extends TrackSubFigure {
     // getCurrentAxes().getXAxis().setLimits(start, end);
     // getCurrentAxes().getXAxis().startEndTicksOnly();
 
-    super.update(displayRegion,
+    super.update(genome,
+        displayRegion,
         resolution,
         yMax,
         width,

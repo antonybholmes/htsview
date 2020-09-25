@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
+import org.jebtk.core.Props;
 import org.jebtk.core.tree.TreeNode;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.Axis;
@@ -234,9 +235,7 @@ public class TracksFigure extends Figure { // Figure { // PlotBoxColumn {
       int height,
       int margin) throws IOException {
 
-    GenomicRegion r = new GenomicRegion(genome, displayRegion);
-
-    update(r, resolution, width, height, margin);
+    update(genome, displayRegion, resolution, width, height, margin);
 
     fireChanged();
   }
@@ -251,7 +250,8 @@ public class TracksFigure extends Figure { // Figure { // PlotBoxColumn {
    * @param margin the margin
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public void update(GenomicRegion displayRegion,
+  public void update(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       int width,
       int height,
@@ -265,14 +265,14 @@ public class TracksFigure extends Figure { // Figure { // PlotBoxColumn {
       Track track = node.getValue();
 
       // Update a new plot
-      track.updateGraph(displayRegion, resolution, width, height, margin);
+      track.updateGraph(genome, displayRegion, resolution, width, height, margin);
 
       List<TreeNode<Track>> children = node.getChildrenAsList();
 
       // update the children of this plot
       for (TreeNode<Track> child : children) {
         TrackSubFigure cf = child.getValue()
-            .updateGraph(displayRegion, resolution, width, height, margin);
+            .updateGraph(genome, displayRegion, resolution, width, height, margin);
 
         cf.currentAxes().getTitle().setVisible(false);
       }
@@ -324,7 +324,7 @@ public class TracksFigure extends Figure { // Figure { // PlotBoxColumn {
       // update the children of this plot
       for (TreeNode<Track> child : children) {
         TrackSubFigure cf = child.getValue()
-            .updateGraph(displayRegion, resolution, width, height, margin);
+            .updateGraph(genome, displayRegion, resolution, width, height, margin);
 
         cf.currentAxes().getTitle().getFontStyle().setVisible(false);
       }
@@ -343,10 +343,10 @@ public class TracksFigure extends Figure { // Figure { // PlotBoxColumn {
   public void plotContext(Graphics2D g2,
       Dimension offset,
       DrawingContext context,
-      Object... params) {
+      Props props) {
     //System.err.println("redraw");
     
-    super.plotContext(g2, offset, context, params);
+    super.plotContext(g2, offset, context, props);
   }
 
   //

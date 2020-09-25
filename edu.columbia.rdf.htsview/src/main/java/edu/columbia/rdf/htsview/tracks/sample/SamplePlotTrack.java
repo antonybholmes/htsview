@@ -25,7 +25,6 @@ import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicElement;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import org.jebtk.bioinformatics.genomic.GenomicRegions;
 import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.core.ColorUtils;
 import org.jebtk.core.json.JsonBuilder;
@@ -113,6 +112,8 @@ public class SamplePlotTrack extends GraphPlotTrack {
   private int mResolution;
 
   private UCSCTrack mBedGraph;
+
+  private Genome mGenome;
 
   /** The Constant DEFAULT_COLOR. */
   private static final Color DEFAULT_COLOR = SettingsService.getInstance()
@@ -271,8 +272,7 @@ public class SamplePlotTrack extends GraphPlotTrack {
   private double autoY(boolean normalize) {
     if (mBedGraph == null) {
       try {
-
-        mBedGraph = getBedGraph(mRegion, mResolution, normalize);
+        mBedGraph = getBedGraph(mGenome, mRegion, mResolution, normalize);
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -283,9 +283,9 @@ public class SamplePlotTrack extends GraphPlotTrack {
       return TracksFigure.MIN_MAX_Y;
     }
 
-    List<GenomicElement> regions = GenomicRegions
-        .getFixedGapSearch(mBedGraph.getElements().toList())
-        .getFeatureSet(mRegion);
+    List<GenomicElement> regions = mBedGraph.find(mRegion); //GenomicRegions
+        //.getFixedGapSearch(mBedGraph.getElements().toList())
+        //.getValues(mRegion);
 
     double y = 0;
 
@@ -530,15 +530,17 @@ public class SamplePlotTrack extends GraphPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+  public TrackSubFigure updateGraph(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       int width,
       int height,
       int margin) throws IOException {
+    mGenome = genome;
     mRegion = displayRegion;
     mResolution = resolution;
 
-    mBedGraph = getBedGraph(displayRegion, resolution, mNormalize);
+    mBedGraph = getBedGraph(genome, displayRegion, resolution, mNormalize);
 
     mPlot.setBedGraph(mBedGraph);
 
@@ -546,7 +548,8 @@ public class SamplePlotTrack extends GraphPlotTrack {
       height = mHeight;
     }
 
-    mSubFigure.update(displayRegion,
+    mSubFigure.update(genome,
+        displayRegion,
         resolution,
         getYMax(getNormalizeY()),
         width,
@@ -577,9 +580,10 @@ public class SamplePlotTrack extends GraphPlotTrack {
    * genome.GenomicRegion, int)
    */
   @Override
-  public UCSCTrack getBedGraph(GenomicRegion displayRegion, int resolution)
+  public UCSCTrack getBedGraph(Genome genome,
+      GenomicRegion displayRegion, int resolution)
       throws IOException {
-    return getBedGraph(displayRegion, resolution, mNormalize);
+    return getBedGraph(genome, displayRegion, resolution, mNormalize);
   }
 
   /*
@@ -590,17 +594,16 @@ public class SamplePlotTrack extends GraphPlotTrack {
    * genome.GenomicRegion, int, boolean)
    */
   @Override
-  public UCSCTrack getBedGraph(GenomicRegion region,
+  public UCSCTrack getBedGraph(Genome genome,
+      GenomicRegion region,
       int window,
       boolean normalize) throws IOException {
-    int[] counts = mAssembly.getCounts(mSample, region, window);
-
-    System.err.println("aha " + counts);
+    int[] counts = mAssembly.getCounts(mSample, genome, region, window);
 
     // Subtract the input if desired
     if (mSubtract && mInputSample != null) {
       int[] mInputCounts = mInputAssembly
-          .getCounts(mInputSample, region, window);
+          .getCounts(mInputSample, genome, region, window);
 
       for (int i = 0; i < counts.length; ++i) {
         counts[i] = Math.max(0, counts[i] - mInputCounts[i]);
@@ -608,9 +611,7 @@ public class SamplePlotTrack extends GraphPlotTrack {
     }
 
     int mappedReads = mAssembly
-        .getMappedReads(mSample, region.getGenome(), window);
-
-    System.err.println("aha " + mappedReads);
+        .getMappedReads(mSample, genome, window);
 
     // per million
     double scaleFactor;
@@ -633,11 +634,11 @@ public class SamplePlotTrack extends GraphPlotTrack {
       normalizedCount = count * scaleFactor;
 
       BedGraphElement br = new BedGraphElement(GenomicType.REGION,
-          new GenomicRegion(region.mGenome, region.mChr, start,
+          new GenomicRegion(region.mChr, start,
               start + window - 1),
           normalizedCount);
 
-      bedGraph.getElements().add(br);
+      bedGraph.add(br);
 
       start += window;
     }

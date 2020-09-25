@@ -18,6 +18,7 @@ package edu.columbia.rdf.htsview.tracks;
 import java.awt.Color;
 import java.io.IOException;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.PlotStyle;
@@ -38,7 +39,8 @@ public abstract class FixedYSubFigure extends TrackSubFigure {
    * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion,
+  public void update(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       double yMax,
       int width,
@@ -48,7 +50,8 @@ public abstract class FixedYSubFigure extends TrackSubFigure {
       Color fillColor,
       PlotStyle style) throws IOException {
 
-    super.update(displayRegion,
+    super.update(genome,
+        displayRegion,
         resolution,
         1,
         width,

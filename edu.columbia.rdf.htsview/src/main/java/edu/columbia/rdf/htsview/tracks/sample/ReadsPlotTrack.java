@@ -374,15 +374,16 @@ public class ReadsPlotTrack extends SamplePlotTrack {
    * columbia.rdf.lib.bioinformatics.genome.GenomicRegion, int, boolean)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+  public TrackSubFigure updateGraph(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       int width,
       int height,
       int margin) throws IOException {
 
-    int[] starts = mAssembly.getStarts(mSample, displayRegion, resolution);
+    int[] starts = mAssembly.getStarts(mSample, genome, displayRegion, resolution);
 
-    Strand[] strands = mAssembly.getStrands(mSample, displayRegion, resolution);
+    Strand[] strands = mAssembly.getStrands(mSample, genome, displayRegion, resolution);
 
     if (starts.length > MAX_READS_DISPLAY) {
       starts = Arrays.copyOf(starts, MAX_READS_DISPLAY); // CollectionUtils.subSample(starts,
@@ -391,7 +392,7 @@ public class ReadsPlotTrack extends SamplePlotTrack {
                                                            // MAX_READS_DISPLAY);
     }
 
-    mSubFigure.update(displayRegion, resolution, width, height, margin);
+    mSubFigure.update(genome, displayRegion, resolution, width, height, margin);
 
     ((ReadsPlotSubFigure) mSubFigure).setStarts(starts,
         strands,

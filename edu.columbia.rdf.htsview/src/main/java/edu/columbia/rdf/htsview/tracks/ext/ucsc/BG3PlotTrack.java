@@ -16,10 +16,8 @@
 package edu.columbia.rdf.htsview.tracks.ext.ucsc;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
 
-import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
 import org.jebtk.bioinformatics.ext.ucsc.BedGraphElement;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
 import org.jebtk.bioinformatics.genomic.Genome;
@@ -37,15 +35,12 @@ import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
 import edu.columbia.rdf.htsview.tracks.TracksFigure;
 
-public class BedGraphPlotTrack extends GraphPlotTrack {
+public class BG3PlotTrack extends GraphPlotTrack {
 
   /**
    * 
    */
   private static final long serialVersionUID = 1L;
-
-  /** The m file. */
-  private Path mFile;
 
   /** The m Y max. */
   private int mYMax = 1;
@@ -53,11 +48,11 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
   /** The m style. */
   private PlotStyle mStyle = PlotStyle.FILLED_SMOOTH;
 
-  private BedGraph mBedGraph;
-
   private GenomicRegion mRegion;
 
   private boolean mAutoY = true;
+
+  private BG3 mBg3;
 
   /**
    * Instantiates a new bed graph plot track.
@@ -65,10 +60,8 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
    * @param bedGraph the bed graph
    * @param file the file
    */
-  public BedGraphPlotTrack(BedGraph bedGraph, Path file) {
-    mBedGraph = bedGraph;
-    
-    mFile = file;
+  public BG3PlotTrack(BG3 bg3) {
+    mBg3 = bg3;
   }
 
   /*
@@ -78,7 +71,7 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
    */
   @Override
   public String getType() {
-    return "Bedgraph";
+    return "BG3";
   }
 
   /*
@@ -88,7 +81,7 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
    */
   @Override
   public String getName() {
-    return mBedGraph.getName();
+    return mBg3.getName();
   }
 
   /*
@@ -117,7 +110,11 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
    * @return the double
    */
   private double autoY(boolean normalize) {
-    List<GenomicElement> regions = mBedGraph.find(mRegion);
+    List<GenomicElement> regions = mBg3.getElements(mRegion);
+    
+    //GenomicRegions
+    ///    .getFixedGapSearch(mBedGraph.getElements().toList())
+     //   .getFeatureSet(mRegion);
 
     double y = 0;
 
@@ -183,10 +180,10 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
   public TrackSubFigure createGraph(Genome genome,
       TitleProperties titlePosition) throws IOException {
     mSubFigure = BedGraphSubFigure
-        .create(mBedGraph.getName(), mStyle, titlePosition);
+        .create(mBg3.getName(), mStyle, titlePosition);
 
     ((BedGraphPlot) mSubFigure.currentAxes().currentPlot())
-        .setBedGraph(mBedGraph);
+        .setBedGraph(mBg3);
 
     mSubFigure.currentAxes().setInternalSize(PLOT_SIZE);
 
@@ -253,7 +250,7 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
       GenomicRegion displayRegion,
       int resolution,
       boolean normalize) {
-    return mBedGraph.getBedGraph(displayRegion);
+    return mBg3.getBedGraph(displayRegion);
   }
 
   /*
@@ -265,9 +262,9 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
   public Element toXml(Document doc) {
     Element trackElement = doc.createElement("track");
 
-    trackElement.setAttribute("type", "bedgraph");
+    trackElement.setAttribute("type", "bg3");
     trackElement.setAttribute("name", getName());
-    trackElement.setAttribute("file", PathUtils.toString(mFile));
+    trackElement.setAttribute("file", PathUtils.toString(mBg3.file));
     trackElement.setAttribute("color", ColorUtils.toHtml(getLineColor()));
     trackElement.setAttribute("fill-color", ColorUtils.toHtml(getFillColor()));
 
@@ -284,9 +281,9 @@ public class BedGraphPlotTrack extends GraphPlotTrack {
   public void toJson(JsonBuilder json) {
     json.startObject();
 
-    json.add("type", "bedgraph");
+    json.add("type", "bg3");
     json.add("name", getName());
-    json.add("file", PathUtils.toString(mFile));
+    json.add("file", PathUtils.toString(mBg3.file));
     json.add("color", ColorUtils.toHtml(getLineColor()));
     json.add("fill-color", ColorUtils.toHtml(getFillColor()));
 

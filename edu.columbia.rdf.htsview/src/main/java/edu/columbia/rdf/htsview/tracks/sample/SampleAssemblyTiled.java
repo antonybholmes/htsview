@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jebtk.bioinformatics.genomic.ChromosomeService;
 import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.core.collections.ArrayUtils;
@@ -91,17 +92,17 @@ public class SampleAssemblyTiled extends SampleAssembly {
      * @return the counts
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    public int[] getCounts(GenomicRegion region) throws IOException {
+    public int[] getCounts(Genome genome, GenomicRegion region) throws IOException {
 
       // Update the cache if we get a cache miss
       if (mCounts == null || !GenomicRegion.within(region, mRegion)) {
         int w = region.getLength() * mCenterTile;
 
-        mRegion = new GenomicRegion(region.mGenome, region.mChr,
+        mRegion = new GenomicRegion(region.mChr,
             Math.max(1, region.mStart - w),
-            Math.min(region.mChr.getSize(), region.mEnd + w));
+            Math.min(ChromosomeService.getInstance().size(genome, region.mChr), region.mEnd + w));
 
-        mCounts = mAssembly.getCounts(mSample, mRegion, mWindow);
+        mCounts = mAssembly.getCounts(mSample, genome, mRegion, mWindow);
 
         // LOG.info("Cache miss in sample {} at {} window {}",
         // mSample.getName(),
@@ -160,7 +161,9 @@ public class SampleAssemblyTiled extends SampleAssembly {
    * edb .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public int[] getCounts(Sample sample, GenomicRegion region, int window)
+  public int[] getCounts(Sample sample, Genome genome,
+      GenomicRegion region, 
+      int window)
       throws IOException {
 
     if (!mTileMap.containsKey(window)) {
@@ -168,7 +171,7 @@ public class SampleAssemblyTiled extends SampleAssembly {
           new TrackTiles(mAssembly, mNumTiles, sample, window));
     }
 
-    return mTileMap.get(window).getCounts(region);
+    return mTileMap.get(window).getCounts(genome, region);
   }
 
   /*

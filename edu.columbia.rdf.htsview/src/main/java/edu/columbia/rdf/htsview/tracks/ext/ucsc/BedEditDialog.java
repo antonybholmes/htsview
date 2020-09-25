@@ -36,7 +36,6 @@ import org.jebtk.modern.text.ModernTextField;
 import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.htsview.tracks.TrackDisplayMode;
-import edu.columbia.rdf.htsview.tracks.genomic.GenomicElementsTrack;
 
 /**
  * The Class BedEditDialog.
@@ -60,7 +59,7 @@ public class BedEditDialog extends ModernDialogTaskWindow {
       true);
 
   /** The m track. */
-  private GenomicElementsTrack mTrack;
+  private BedPlotTrack mTrack;
 
   /**
    * Instantiates a new bed edit dialog.
@@ -68,7 +67,7 @@ public class BedEditDialog extends ModernDialogTaskWindow {
    * @param parent the parent
    * @param track the track
    */
-  public BedEditDialog(ModernWindow parent, GenomicElementsTrack track) {
+  public BedEditDialog(ModernWindow parent, BedPlotTrack track) {
     super(parent);
 
     mTrack = track;

@@ -18,6 +18,7 @@ package edu.columbia.rdf.htsview.tracks.sample;
 import java.awt.Color;
 import java.io.IOException;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.Strand;
 import org.jebtk.core.collections.ArrayListMultiMap;
@@ -106,7 +107,8 @@ public class ReadsPlotSubFigure extends TrackSubFigure {
    * java.awt.Color)
    */
   @Override
-  public void update(GenomicRegion displayRegion,
+  public void update(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       double yMax,
       int width,
@@ -123,7 +125,8 @@ public class ReadsPlotSubFigure extends TrackSubFigure {
     // getCurrentAxes().getXAxis().setLimits(displayRegion.getStart(),
     // displayRegion.getEnd());
 
-    super.update(displayRegion,
+    super.update(genome,
+        displayRegion,
         resolution,
         yMax,
         width,

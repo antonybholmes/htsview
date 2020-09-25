@@ -13,35 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.columbia.rdf.htsview.tracks.loaders;
+package edu.columbia.rdf.htsview.tracks.ext.ucsc;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
-import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.BedGraph;
-import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
-import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.core.tree.TreeNode;
-import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.window.ModernWindow;
 
 import edu.columbia.rdf.htsview.tracks.Track;
-import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedGraphPlotTrack;
-import edu.columbia.rdf.htsview.tracks.ext.ucsc.BedPlotTrack;
+import edu.columbia.rdf.htsview.tracks.loaders.SampleLoader;
 
 /**
  * The Class SampleLoaderBedGraph.
  */
-public class SampleLoaderBedGraph extends SampleLoaderFS {
-
-  /** The m apply to all. */
-  private boolean mApplyToAll = false;
-
-  /** The m open as bed graph. */
-  private boolean mOpenAsBedGraph = false;
-
+public class SampleLoaderBedGraph extends SampleLoader {
   /*
    * (non-Javadoc)
    * 
@@ -53,6 +41,7 @@ public class SampleLoaderBedGraph extends SampleLoaderFS {
   @Override
   public Track openSample(ModernWindow parent, Path file, TreeNode<Track> root)
       throws IOException {
+    /*
     if (!mApplyToAll) {
       BedGraphStyleDialog dialog = new BedGraphStyleDialog(parent);
 
@@ -66,21 +55,18 @@ public class SampleLoaderBedGraph extends SampleLoaderFS {
         return null;
       }
     }
+     */
+    
+    List<BedGraph> bedGraphs = BedGraph.parse(file);
 
-    if (mOpenAsBedGraph) {
-      List<UCSCTrack> bedGraphs = BedGraph.parse(file);
+    Track ret = null;
 
-      Track ret = null;
-
-      for (UCSCTrack bedGraph : bedGraphs) {
-        ret = load(new BedGraphPlotTrack(bedGraph, file), root);
-      }
-
-      return ret;
-    } else {
-      // Open as bed plot
-      return load(new BedPlotTrack(Bed.parseBedGraph(GenomicType.REGION, file), file), root);
+    for (BedGraph bedGraph : bedGraphs) {
+      System.err.println("bedgraph");
+      ret = load(new BedGraphPlotTrack(bedGraph, file), root);
     }
+
+    return ret;
   }
 
   /*
@@ -90,7 +76,7 @@ public class SampleLoaderBedGraph extends SampleLoaderFS {
    */
   @Override
   public String getName() {
-    return "Bedgraph";
+    return "BedGraph";
   }
 
   /*

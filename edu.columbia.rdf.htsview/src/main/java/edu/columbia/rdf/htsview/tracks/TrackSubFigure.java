@@ -18,6 +18,7 @@ package edu.columbia.rdf.htsview.tracks;
 import java.awt.Color;
 import java.io.IOException;
 
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.graphplot.figure.SubFigure;
@@ -40,12 +41,13 @@ public abstract class TrackSubFigure extends SubFigure {
    * @param margin the margin
    * @throws IOException 
    */
-  public void update(GenomicRegion displayRegion,
+  public void update(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       int width,
       int height,
       int margin) throws IOException {
-    update(displayRegion, resolution, -1, width, height, margin);
+    update(genome, displayRegion, resolution, -1, width, height, margin);
   }
 
   /**
@@ -59,13 +61,15 @@ public abstract class TrackSubFigure extends SubFigure {
    * @param margin the margin
    * @throws IOException 
    */
-  public void update(GenomicRegion displayRegion,
+  public void update(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       double yMax,
       int width,
       int height,
       int margin) throws IOException {
-    update(displayRegion,
+    update(genome,
+        displayRegion,
         resolution,
         yMax,
         width,
@@ -86,14 +90,16 @@ public abstract class TrackSubFigure extends SubFigure {
    * @param style the style
    * @throws IOException 
    */
-  public void update(GenomicRegion displayRegion,
+  public void update(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       double yMax,
       int width,
       int height,
       int margin,
       PlotStyle style) throws IOException {
-    update(displayRegion,
+    update(genome,
+        displayRegion,
         resolution,
         yMax,
         width,
@@ -123,7 +129,8 @@ public abstract class TrackSubFigure extends SubFigure {
    * @param style the style
    * @throws IOException 
    */
-  public void update(GenomicRegion displayRegion,
+  public void update(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       double yMax,
       int width,

@@ -224,6 +224,7 @@ public class TrackView {
    */
   public static void saveJsonView(Path file,
       TrackTree trackList,
+      Genome genome,
       GenomicRegion region,
       TitleProperties titleProperties,
       int width,
@@ -234,7 +235,7 @@ public class TrackView {
 
     JsonBuilder root = JsonBuilder.create().startObject();
 
-    root.add("genome", region.mGenome.getAssembly());
+    root.add("genome", genome.getAssembly());
     root.add("location", region.getLocation());
     root.add("width-px", width);
     root.add("margin-px", margin);

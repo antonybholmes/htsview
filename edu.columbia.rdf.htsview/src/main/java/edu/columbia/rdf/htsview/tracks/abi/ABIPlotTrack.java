@@ -384,7 +384,8 @@ public class ABIPlotTrack extends GraphPlotTrack {
    * genome.GenomicRegion, int, int, int, int)
    */
   @Override
-  public TrackSubFigure updateGraph(GenomicRegion displayRegion,
+  public TrackSubFigure updateGraph(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       int width,
       int height,
@@ -395,7 +396,8 @@ public class ABIPlotTrack extends GraphPlotTrack {
       height = mHeight;
     }
 
-    mSubFigure.update(displayRegion,
+    mSubFigure.update(genome,
+        displayRegion,
         resolution,
         mYMax,
         width,
@@ -428,9 +430,9 @@ public class ABIPlotTrack extends GraphPlotTrack {
    * genome.GenomicRegion, int)
    */
   @Override
-  public UCSCTrack getBedGraph(GenomicRegion displayRegion, int resolution)
+  public UCSCTrack getBedGraph(Genome genome,GenomicRegion displayRegion, int resolution)
       throws IOException {
-    return getBedGraph(displayRegion, resolution, mNormalize);
+    return getBedGraph(genome, displayRegion, resolution, mNormalize);
   }
 
   /*

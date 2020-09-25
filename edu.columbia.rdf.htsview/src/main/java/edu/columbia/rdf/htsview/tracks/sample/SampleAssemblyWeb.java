@@ -26,8 +26,8 @@ import org.jebtk.bioinformatics.genomic.GenomeService;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.Strand;
 import org.jebtk.core.BufferUtils;
-import org.jebtk.core.http.URLUtils;
 import org.jebtk.core.http.URLPath;
+import org.jebtk.core.http.URLUtils;
 import org.jebtk.core.json.Json;
 import org.jebtk.core.json.JsonParser;
 import org.jebtk.core.text.TextUtils;
@@ -103,7 +103,10 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * edb .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public int[] getStarts(Sample sample, GenomicRegion region, int window)
+  public int[] getStarts(Sample sample, 
+      Genome genome,
+      GenomicRegion region, 
+      int window)
       throws IOException {
 
     // List<Integer> ret = getJsonStarts(sample, region);
@@ -115,7 +118,7 @@ public class SampleAssemblyWeb extends SampleAssembly {
 
     // return ret;
 
-    return getJsonStarts(sample, region, window); // getBinaryStarts(sample,
+    return getJsonStarts(sample, genome, region, window); // getBinaryStarts(sample,
                                                   // region, window);
   }
 
@@ -127,11 +130,13 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * @return the json starts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public int[] getJsonStarts(Sample sample, GenomicRegion region, int window)
+  public int[] getJsonStarts(Sample sample, 
+      Genome genome,
+      GenomicRegion region, int window)
       throws IOException {
 
     URLPath url = mAuthV1.join("starts").join(sample.getId())
-        .join(region.getGenome()).join(region.getChr()).join(region.getStart())
+        .join(genome).join(region.getChr()).join(region.getStart())
         .join(region.getEnd());
 
     LOG.info("starts url: {}", url);
@@ -158,11 +163,13 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * @return the binary starts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public int[] getBinaryStarts(Sample sample, GenomicRegion region, int window)
+  public int[] getBinaryStarts(Sample sample, 
+      Genome genome,
+      GenomicRegion region, int window)
       throws IOException {
 
     URLPath url = mAuthV1.join("starts").join(sample.getId())
-        .join(region.getGenome()).join(region.getChr()).join(region.getStart())
+        .join(genome).join(region.getChr()).join(region.getStart())
         .join(region.getEnd()).join("b");
 
     return BufferUtils.byteBuffer().wrap(URLUtils.read(url).bytes()).getInts();
@@ -176,9 +183,10 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * edb.Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public Strand[] getStrands(Sample sample, GenomicRegion region, int window)
+  public Strand[] getStrands(Sample sample, Genome genome,
+      GenomicRegion region, int window)
       throws IOException {
-    return getJsonStrands(sample, region, window); // getBinaryStrands(sample,
+    return getJsonStrands(sample, genome, region, window); // getBinaryStrands(sample,
                                                    // region, window);
   }
 
@@ -191,11 +199,12 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * @throws IOException Signals that an I/O exception has occurred.
    */
   public Strand[] getJsonStrands(Sample sample,
+      Genome genome,
       GenomicRegion region,
       int window) throws IOException {
 
     URLPath startsUrl = mAuthV1.join("strands").join(sample.getId())
-        .join(region.getGenome()).join(region.getChr()).join(region.getStart())
+        .join(genome).join(region.getChr()).join(region.getStart())
         .join(region.getEnd());
 
     // LOG.info("starts url: {}", startsUrl);
@@ -223,10 +232,11 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * @throws IOException Signals that an I/O exception has occurred.
    */
   public Strand[] getBinaryStrands(Sample sample,
+      Genome genome,
       GenomicRegion region,
       int window) throws IOException {
     URLPath url = mAuthV1.join("strands").join(sample.getId())
-        .join(region.getGenome()).join(region.getChr()).join(region.getStart())
+        .join(genome).join(region.getChr()).join(region.getStart())
         .join(region.getEnd()).join("b");
 
     /*
@@ -251,12 +261,15 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * edb .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public int[] getCounts(Sample sample, GenomicRegion region, int window)
+  public int[] getCounts(Sample sample, 
+      Genome genome,
+      GenomicRegion region, 
+      int window)
       throws IOException {
 
     // return getBinaryCounts(sample, region, window);
     // return getTextCounts(sample, region, window);
-    return getJsonCounts(sample, region, window);
+    return getJsonCounts(sample, genome, region, window);
 
     /*
      * if (hasReadSupport(sample)) { return getBinaryCounts(sample, region,
@@ -273,13 +286,16 @@ public class SampleAssemblyWeb extends SampleAssembly {
    * @return the json counts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public int[] getJsonCounts(Sample sample, GenomicRegion region, int window)
+  public int[] getJsonCounts(Sample sample, 
+      Genome genome,
+      GenomicRegion region, 
+      int window)
       throws IOException {
 
     URLPath url = mAuthV1;
 
     url = url.join("counts").param("id", sample.getId())
-        .param("g", region.getGenome().getAssembly())
+        .param("g", genome.getAssembly())
         .param("chr", region.mChr.toString()).param("s", region.mStart)
         .param("e", region.mEnd).param("bw", window).param("m", mMode);
 
@@ -300,13 +316,16 @@ public class SampleAssemblyWeb extends SampleAssembly {
     return ret;
   }
 
-  public int[] getBinaryCounts(Sample sample, GenomicRegion region, int window)
+  public int[] getBinaryCounts(Sample sample, 
+      Genome genome,
+      GenomicRegion region, 
+      int window)
       throws IOException {
 
     URLPath url = mAuthV1;
 
     url = url.join("counts").param("id", sample.getId())
-        .param("g", region.getGenome().getAssembly())
+        .param("g", genome.getAssembly())
         .param("chr", region.mChr.toString()).param("s", region.mStart)
         .param("e", region.mEnd).param("bw", window).param("m", mMode)
         .param("format", "binary");
@@ -314,13 +333,14 @@ public class SampleAssemblyWeb extends SampleAssembly {
     return BufferUtils.byteBuffer().wrap(URLUtils.read(url).bytes()).getInts();
   }
 
-  public int[] getTextCounts(Sample sample, GenomicRegion region, int window)
+  public int[] getTextCounts(Sample sample, Genome genome,
+      GenomicRegion region, int window)
       throws IOException {
 
     URLPath url = mAuthV1;
 
     url = url.join("counts").param("id", sample.getId())
-        .param("g", region.getGenome().getAssembly())
+        .param("g", genome.getAssembly())
         .param("chr", region.mChr.toString()).param("s", region.mStart)
         .param("e", region.mEnd).param("bw", window).param("m", mMode)
         .param("format", "text");

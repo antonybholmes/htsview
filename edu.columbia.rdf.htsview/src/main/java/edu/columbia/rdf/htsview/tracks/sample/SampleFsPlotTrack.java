@@ -32,6 +32,8 @@ import edu.columbia.rdf.htsview.tracks.SampleAssembly;
  */
 public class SampleFsPlotTrack extends SamplePlotTrack {
 
+  private static final long serialVersionUID = 1L;
+  
   /** The m meta file. */
   private Path mMetaFile;
 

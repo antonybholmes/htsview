@@ -51,7 +51,9 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
    * edb .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public int[] getStarts(Sample sample, GenomicRegion region, int window)
+  public int[] getStarts(Sample sample, 
+      Genome genome,
+      GenomicRegion region, int window)
       throws IOException {
 
     return mCounts.getStarts(region, window);
@@ -65,7 +67,10 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
    * edb.Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public Strand[] getStrands(Sample sample, GenomicRegion region, int window)
+  public Strand[] getStrands(Sample sample, 
+      Genome genome,
+      GenomicRegion region, 
+      int window)
       throws IOException {
 
     return mCounts.getStrands(region, window);
@@ -79,7 +84,10 @@ public abstract class SampleAssemblyFile extends SampleAssembly {
    * edb .Sample, org.jebtk.bioinformatics.genome.GenomicRegion, int)
    */
   @Override
-  public int[] getCounts(Sample sample, GenomicRegion region, int window)
+  public int[] getCounts(Sample sample, 
+      Genome genome,
+      GenomicRegion region, 
+      int window)
       throws IOException {
 
     return mCounts.getCounts(region, window);

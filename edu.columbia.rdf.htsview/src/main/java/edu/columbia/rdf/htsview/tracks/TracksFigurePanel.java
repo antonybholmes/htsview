@@ -20,7 +20,9 @@ import java.awt.Graphics2D;
 
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicRegionModel;
+import org.jebtk.bioinformatics.ui.GenomeModel;
 import org.jebtk.core.ColorUtils;
+import org.jebtk.core.Props;
 import org.jebtk.core.settings.SettingsService;
 import org.jebtk.graphplot.plotbox.PlotBoxPanel;
 import org.jebtk.modern.graphics.CanvasMouseAdapter;
@@ -76,6 +78,8 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
   private int mDragBin = Integer.MIN_VALUE;
 
   private TracksFigure mFigure;
+
+  private GenomeModel mGenomeModel;
 
   /**
    * The Class CanvasMouseEvents.
@@ -170,10 +174,12 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
    * @param sizes the sizes
    */
   public TracksFigurePanel(TracksFigure figure,
+      GenomeModel genomeModel,
       GenomicRegionModel genomicModel) {
     super(figure);
 
     mFigure = figure;
+    mGenomeModel = genomeModel;
     mGenomicModel = genomicModel;
 
     // setLayout(new FigureLayoutVBox());
@@ -199,15 +205,15 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
   @Override
   public final void plot(Graphics2D g2,
       DrawingContext context,
-      Object... params) {
-    super.plot(g2, context, params);
+      Props props) {
+    super.plot(g2, context, props);
 
-    plotSelection(g2, context, params);
+    plotSelection(g2, context, props);
   }
 
   public void plotSelection(Graphics2D g2,
       DrawingContext context,
-      Object... params) {
+      Props props) {
 
     int h = getParent().getHeight();
 
@@ -236,7 +242,7 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
   /**
    * Alter selection.
    *
-   * @param x the x
+   * @param r the x
    */
   private void alterSelection() {
     if (mSelectionStart == -1 || mSelectionEnd == -1) {
@@ -285,7 +291,7 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
 
     int shift = (int) (p * mDragStartRegion.getLength());
 
-    GenomicRegion newRegion = GenomicRegion.shift(mDragStartRegion, shift, 10);
+    GenomicRegion newRegion = GenomicRegion.shift(mGenomeModel.get(), mDragStartRegion, shift, 10);
 
     // System.err.println("new " + mDragStartRegion + " " + newRegion + " " +
     // mDragStartRegion.getLength() + " " + p);

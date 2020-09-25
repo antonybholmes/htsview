@@ -44,7 +44,7 @@ public abstract class SampleAssembly {
       Genome genome,
       String region,
       int window) throws IOException {
-    return getStarts(sample, GenomicRegion.parse(genome, region), window);
+    return getStarts(sample, genome, GenomicRegion.parse(genome, region), window);
   }
 
   /**
@@ -56,7 +56,9 @@ public abstract class SampleAssembly {
    * @return the starts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public int[] getStarts(Sample sample, GenomicRegion region, int window)
+  public int[] getStarts(Sample sample, 
+      Genome genome,
+      GenomicRegion region, int window)
       throws IOException {
     return ArrayUtils.EMPTY_INT_ARRAY;
   }
@@ -70,7 +72,8 @@ public abstract class SampleAssembly {
    * @return the strands
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public Strand[] getStrands(Sample sample, GenomicRegion region, int window)
+  public Strand[] getStrands(Sample sample, Genome genome,
+      GenomicRegion region, int window)
       throws IOException {
     return CountAssembly.EMPTY_STRAND_ARRAY;
   }
@@ -88,7 +91,7 @@ public abstract class SampleAssembly {
       Genome genome,
       String region,
       int window) throws IOException {
-    return getCounts(sample, GenomicRegion.parse(genome, region), window);
+    return getCounts(sample, genome, GenomicRegion.parse(genome, region), window);
   }
 
   /**
@@ -101,6 +104,7 @@ public abstract class SampleAssembly {
    * @throws IOException Signals that an I/O exception has occurred.
    */
   public abstract int[] getCounts(Sample sample,
+      Genome genome,
       GenomicRegion region,
       int window) throws IOException;
 
@@ -113,9 +117,9 @@ public abstract class SampleAssembly {
    * @return the normalized counts
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public double[] getRPM(Sample sample, GenomicRegion region, int window)
+  public double[] getRPM(Sample sample, Genome genome, GenomicRegion region, int window)
       throws IOException {
-    return getRPM(sample, this, region, window);
+    return getRPM(sample, this, genome, region, window);
   }
 
   /**
@@ -189,12 +193,13 @@ public abstract class SampleAssembly {
 
   public static double[] getRPM(Sample sample,
       SampleAssembly assembly,
+      Genome genome,
       GenomicRegion region,
       int window) throws IOException {
     double scaleFactor;
 
     double mappedReads = assembly
-        .getMappedReads(sample, region.getGenome(), window);
+        .getMappedReads(sample, genome, window);
 
     // System.err.println("mapped reads " + mappedReads);
 
@@ -204,7 +209,7 @@ public abstract class SampleAssembly {
       scaleFactor = 1;
     }
 
-    return Mathematics.multiply(assembly.getCounts(sample, region, window),
+    return Mathematics.multiply(assembly.getCounts(sample, genome, region, window),
         scaleFactor);
   }
 }

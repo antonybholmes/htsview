@@ -416,20 +416,20 @@ public class LocationsPanel extends ModernComponent
 
       System.err.println("login panel");
 
-      Chromosome chromosome = ChromosomeService.getInstance().chr(genome, text);
+      Chromosome chr = ChromosomeService.getInstance().chr(genome, text);
 
-      int size = chromosome.getSize();
+      int size = ChromosomeService.getInstance().size(genome, chr);
 
-      region = new GenomicRegion(genome, chromosome, 1, size);
+      region = new GenomicRegion(chr, 1, size);
 
     } else if (text.startsWith("chr")) { // remove commas
       region = GenomicRegion.parse(genome, text);
 
       // Make sure region is within the bounds of the chromosome
 
-      int size = region.getChr().getSize();
+      int size = ChromosomeService.getInstance().size(genome, region.mChr);
 
-      region = new GenomicRegion(region.mGenome, region.mChr,
+      region = new GenomicRegion(region.mChr,
           Math.max(1, region.mStart), Math.min(region.mEnd, size));
 
     } else {

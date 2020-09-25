@@ -20,20 +20,27 @@ import java.nio.file.Path;
 
 import org.jebtk.bioinformatics.ext.ucsc.Bed;
 import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
+import org.jebtk.bioinformatics.genomic.Genome;
+import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.core.ColorUtils;
 import org.jebtk.core.io.PathUtils;
 import org.jebtk.core.json.JsonBuilder;
+import org.jebtk.modern.dialog.ModernDialogStatus;
+import org.jebtk.modern.window.ModernWindow;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import edu.columbia.rdf.htsview.tracks.GraphPlotTrack;
+import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.TrackDisplayMode;
-import edu.columbia.rdf.htsview.tracks.genomic.GenomicElementsTrack;
+import edu.columbia.rdf.htsview.tracks.TrackSubFigure;
+import edu.columbia.rdf.htsview.tracks.genomic.GenomicElementsSubFigure;
 
 /**
  * The Class BedPlotTrack.
  */
-public class BedPlotTrack extends GenomicElementsTrack {
+public class BedPlotTrack extends GraphPlotTrack {
 
   /**
    * 
@@ -42,6 +49,8 @@ public class BedPlotTrack extends GenomicElementsTrack {
 
   /** The m file. */
   private Path mFile;
+
+  private UCSCTrack mUcsc;
 
   /** The Constant BAR_HEIGHT. */
   public static final int BAR_HEIGHT = 20;
@@ -94,7 +103,7 @@ public class BedPlotTrack extends GenomicElementsTrack {
    * @param mode the mode
    */
   public BedPlotTrack(Path file, UCSCTrack bed, TrackDisplayMode mode) {
-    super(bed.getName(), bed.getElements(), bed.getColor(), mode);
+    mUcsc = bed;
 
     mFile = file;
   }
@@ -144,5 +153,68 @@ public class BedPlotTrack extends GenomicElementsTrack {
     json.add("color", ColorUtils.toHtml(getFillColor()));
 
     json.endObject();
+  }
+  
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.Track#createGraph(java.lang.String,
+   * edu.columbia.rdf.htsview.tracks.TitleProperties)
+   */
+  @Override
+  public TrackSubFigure createGraph(Genome genome,
+      TitleProperties titlePosition) throws IOException {
+    mSubFigure = GenomicElementsSubFigure.create(this, mUcsc, titlePosition);
+
+    // mPlot.getGraphSpace().setPlotSize(PLOT_SIZE);
+
+    setMargins(getName(), titlePosition, mSubFigure);
+
+    mSubFigure.currentAxes().getX1Axis().getTitle().setText(null);
+    mSubFigure.currentAxes().getY1Axis().setLimits(0, 1);
+
+    return mSubFigure;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * edu.columbia.rdf.htsview.tracks.Track#updateGraph(org.jebtk.bioinformatics.
+   * genome.GenomicRegion, int, int, int, int)
+   */
+  @Override
+  public TrackSubFigure updateGraph(Genome genome,
+      GenomicRegion displayRegion,
+      int resolution,
+      int width,
+      int height,
+      int margin) throws IOException {
+    // mPlot.setForwardCanvasEventsEnabled(false);
+    mSubFigure.update(genome, displayRegion, resolution, width, height, margin);
+    // mPlot.setForwardCanvasEventsEnabled(true);
+
+    return mSubFigure;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see edu.columbia.rdf.htsview.tracks.GraphPlotTrack#edit(org.abh.common.ui.
+   * window. ModernWindow)
+   */
+  @Override
+  public void edit(ModernWindow parent) {
+    BedEditDialog dialog = new BedEditDialog(parent, this);
+
+    dialog.setVisible(true);
+
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
+
+    setName(dialog.getName());
+    setFillColor(dialog.getLineColor());
+    setDisplayMode(dialog.getMode());
   }
 }

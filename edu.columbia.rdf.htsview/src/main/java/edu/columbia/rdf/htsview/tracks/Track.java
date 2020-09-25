@@ -372,7 +372,8 @@ public abstract class Track extends ChangeListeners
    * @return the track sub figure
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public abstract TrackSubFigure updateGraph(GenomicRegion displayRegion,
+  public abstract TrackSubFigure updateGraph(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       int width,
       int height,
@@ -394,9 +395,10 @@ public abstract class Track extends ChangeListeners
    * @throws IOException Signals that an I/O exception has occurred.
    * @throws ParseException the parse exception
    */
-  public UCSCTrack getBedGraph(GenomicRegion displayRegion, int resolution)
+  public UCSCTrack getBedGraph(Genome genome,
+      GenomicRegion displayRegion, int resolution)
       throws IOException {
-    return getBedGraph(displayRegion, resolution, true);
+    return getBedGraph(genome, displayRegion, resolution, true);
   }
 
   /**
@@ -408,7 +410,8 @@ public abstract class Track extends ChangeListeners
    * @return the bed graph
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  public UCSCTrack getBedGraph(GenomicRegion displayRegion,
+  public UCSCTrack getBedGraph(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       boolean normalize) throws IOException {
     return null;

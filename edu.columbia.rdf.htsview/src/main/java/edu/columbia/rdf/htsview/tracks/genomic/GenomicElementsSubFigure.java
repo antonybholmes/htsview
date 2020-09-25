@@ -19,10 +19,10 @@ import java.awt.Color;
 import java.io.IOException;
 import java.util.List;
 
+import org.jebtk.bioinformatics.ext.ucsc.UCSCTrack;
+import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicElement;
-import org.jebtk.bioinformatics.genomic.GenomicElementsDB;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
-import org.jebtk.bioinformatics.genomic.GenomicType;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.PlotStyle;
 
@@ -44,7 +44,7 @@ public class GenomicElementsSubFigure extends FixedYSubFigure {
   private GenomicElementPlotLayer mLayer;
 
   /** The m bed. */
-  private GenomicElementsDB mBed;
+  private UCSCTrack mBed;
 
   private Track mTrack;
 
@@ -60,7 +60,7 @@ public class GenomicElementsSubFigure extends FixedYSubFigure {
    * @param titlePosition the title position
    */
   public GenomicElementsSubFigure(Track track,
-      GenomicElementsDB bed,
+      UCSCTrack bed,
       TitleProperties titlePosition) {
     mTrack = track;
     mBed = bed;
@@ -83,7 +83,7 @@ public class GenomicElementsSubFigure extends FixedYSubFigure {
    * @return the bed plot sub figure
    */
   public static GenomicElementsSubFigure create(Track track,
-      GenomicElementsDB bed,
+      UCSCTrack bed,
       TitleProperties titlePosition) {
 
     // Now lets create a plot
@@ -101,7 +101,8 @@ public class GenomicElementsSubFigure extends FixedYSubFigure {
    * java.awt.Color, java.awt.Color, org.graphplot.figure.PlotStyle)
    */
   @Override
-  public void update(GenomicRegion displayRegion,
+  public void update(Genome genome,
+      GenomicRegion displayRegion,
       int resolution,
       double yMax,
       int width,
@@ -115,7 +116,7 @@ public class GenomicElementsSubFigure extends FixedYSubFigure {
     //   .getFixedGapSearch(mBed.getElements().toList())
     //   .getFeatureSet(displayRegion);
     
-    List<GenomicElement> elements = mBed.find(displayRegion, GenomicType.REGION);
+    List<GenomicElement> elements = mBed.find(displayRegion); //, GenomicType.REGION, 1);
     
     for (GenomicElement e : elements) {
       e.setColor(fillColor);
@@ -131,7 +132,8 @@ public class GenomicElementsSubFigure extends FixedYSubFigure {
 
     height = BedPlotTrack.BLOCK_HEIGHT * n;
 
-    super.update(displayRegion,
+    super.update(genome,
+        displayRegion,
         resolution,
         yMax,
         width,
