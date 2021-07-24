@@ -22,7 +22,7 @@ import org.jebtk.bioinformatics.genomic.Genome;
 import org.jebtk.bioinformatics.genomic.GenomicRegion;
 import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.PlotStyle;
-import org.jebtk.graphplot.figure.properties.MarginProperties;
+import org.jebtk.graphplot.figure.props.MarginProps;
 
 import edu.columbia.rdf.htsview.tracks.TitleProperties;
 import edu.columbia.rdf.htsview.tracks.Track;
@@ -36,7 +36,7 @@ public class RangePlotCanvas extends MeasurementSubFigure {
   private static final long serialVersionUID = 1L;
 
   /** The Constant MARGINS. */
-  public static final MarginProperties MARGINS = new MarginProperties(
+  public static final MarginProps MARGINS = new MarginProps(
       Track.MARGINS.getTop(), Track.MARGINS.getLeft(), Track.MEDIUM_MARGIN,
       Track.SMALL_MARGIN);
 

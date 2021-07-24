@@ -206,6 +206,7 @@ public class TracksFigurePanel extends PlotBoxPanel { // Figure { //
   public final void plot(Graphics2D g2,
       DrawingContext context,
       Props props) {
+    System.err.println("here");
     super.plot(g2, context, props);
 
     plotSelection(g2, context, props);

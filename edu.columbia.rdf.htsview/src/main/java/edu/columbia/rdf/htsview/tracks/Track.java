@@ -36,7 +36,7 @@ import org.jebtk.graphplot.figure.Axes;
 import org.jebtk.graphplot.figure.GridLocation;
 import org.jebtk.graphplot.figure.PlotStyle;
 import org.jebtk.graphplot.figure.TitleRightPlotLayer;
-import org.jebtk.graphplot.figure.properties.MarginProperties;
+import org.jebtk.graphplot.figure.props.MarginProps;
 import org.jebtk.modern.window.ModernWindow;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -78,7 +78,7 @@ public abstract class Track extends ChangeListeners
   public static final int RIGHT_MARGIN = EXTRA_LARGE_MARGIN;
 
   /** The Constant MARGINS. */
-  public static final MarginProperties MARGINS = new MarginProperties(
+  public static final MarginProps MARGINS = new MarginProps(
       MEDIUM_MARGIN, LEFT_MARGIN, MEDIUM_MARGIN, RIGHT_MARGIN);
 
   /** The Constant SMALL_TRACK_SIZE. */
